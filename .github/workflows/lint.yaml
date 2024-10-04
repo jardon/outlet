@@ -1,0 +1,35 @@
+name: Lint
+on:
+  push:
+    branches: [latest]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  dart-analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install flutter dependencies
+        run: |
+          sudo apt-get update -y && sudo apt-get upgrade -y;
+          sudo apt-get install -y curl git unzip xz-utils zip libglu1-mesa
+      - name: Setup Flutter SDK
+        uses: flutter-actions/setup-flutter@v3
+        with:
+          channel: stable
+          version: latest
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Analyze project source
+        run: dart analyze
+  yamllint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -y && sudo apt-get upgrade -y;
+          sudo apt-get install -y yamllint
+      - name: Run yamllint
+        run: yamllint -d relaxed --no-warnings .
+

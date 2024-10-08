@@ -1,0 +1,31 @@
+name: Flatpack package
+on:
+  push:
+    branches: [latest]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install flutter dependencies
+        run: |
+          sudo apt-get update -y && sudo apt-get upgrade -y;
+          sudo apt-get install -y curl git unzip xz-utils zip libglu1-mesa \
+            clang cmake git \
+            ninja-build pkg-config \
+            libgtk-3-dev liblzma-dev \
+            libstdc++-12-dev \
+            flatpak flatpak-builder
+      - name: Setup Flutter SDK
+        uses: flutter-actions/setup-flutter@v3
+        with:
+          channel: stable
+          version: latest
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Add flathub
+        run: flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+      - name: Build flatpak
+        run: flatpak-builder --force-clean --user --install-deps-from=flathub --repo=repo --install builddir org.jardon.Bazaar

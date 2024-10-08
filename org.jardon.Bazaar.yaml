@@ -1,0 +1,15 @@
+id: org.jardon.Bazaar
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+command: bazaar
+modules:
+  - name: bazaar
+    buildsystem: simple
+    build-commands:
+      - flutter build linux
+    sources:
+      - type: script
+        dest-filename: hello.sh
+        commands:
+          - echo "Hello world, from a sandbox"

@@ -9,6 +9,7 @@ class AppCard extends StatelessWidget {
     final bool featured;
     final bool verified;
     final bool installed;
+    final bool details;
     final String name;
     final String iconUrl;
     final String description;
@@ -18,6 +19,7 @@ class AppCard extends StatelessWidget {
         required this.featured,
         required this.verified,
         required this.installed,
+        this.details = true,
         required this.name,
         required this.iconUrl,
         required this.description,
@@ -58,10 +60,10 @@ class AppCard extends StatelessWidget {
                                 name: this.name,
                                 iconUrl: this.iconUrl,
                             ),
-                            Details(
+                            this.details ? Details(
                                 name: this.name,
                                 description: this.description,
-                            ),
+                            ) : Center(),
                         ],
                     ),
                 ),
@@ -150,7 +152,7 @@ class Listing extends StatelessWidget {
                                     Container(
                                         width: cardWidth * .6,
                                         alignment: Alignment.centerLeft,
-                                        padding: EdgeInsets.fromLTRB(30, 20, 20, 20),
+                                        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                                         child: Text(
                                             this.name,
                                             style: TextStyle(

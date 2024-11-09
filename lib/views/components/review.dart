@@ -22,7 +22,7 @@ class ReviewScore extends StatelessWidget {
                 icons.add(
                     Icon(
                         Icons.star,
-                        color: Colors.black,
+                        color: Colors.amberAccent[400],
                         size: this.size / 2,
                     )
                 );
@@ -31,7 +31,7 @@ class ReviewScore extends StatelessWidget {
                 icons.add(
                     Icon(
                         Icons.star_half,
-                        color: Colors.black,
+                        color: Colors.amberAccent[400],
                         size: this.size / 2,
                     )
                 );
@@ -40,7 +40,7 @@ class ReviewScore extends StatelessWidget {
                 icons.add(
                     Icon(
                         Icons.star_border,
-                        color: Colors.black,
+                        color: Colors.amberAccent[400],
                         size: this.size / 2,
                     )
                 );

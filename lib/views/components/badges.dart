@@ -93,7 +93,15 @@ class InstalledBadge extends StatelessWidget {
             width: size * 2.25,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                color: Colors.grey[400]!,
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment(0.8, 1),
+                    colors: <Color>[
+                        Colors.grey[100]!,
+                        Colors.grey[300]!,
+                    ],
+                    tileMode: TileMode.mirror,
+                ),
                 borderRadius: BorderRadius.circular(45.0),
             ),
             child: Text(

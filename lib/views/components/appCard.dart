@@ -150,7 +150,7 @@ class Listing extends StatelessWidget {
                                     Container(
                                         width: cardWidth * .6,
                                         alignment: Alignment.centerLeft,
-                                        padding: EdgeInsets.fromLTRB(30, 20, 20, 20),
+                                        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                                         child: Text(
                                             this.name,
                                             style: TextStyle(

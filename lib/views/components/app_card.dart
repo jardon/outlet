@@ -15,6 +15,7 @@ class AppCard extends StatelessWidget {
         required this.name,
         required this.iconUrl,
         required this.description,
+        required this.categories,
     });
     
     final bool featured;
@@ -27,6 +28,7 @@ class AppCard extends StatelessWidget {
     final borderRadius = 45.0;
     final cardWidth = 300.0;
     final cardHeight = 400.0;
+    final List<String> categories;
 
     @override
     Widget build(BuildContext context) {
@@ -58,6 +60,7 @@ class AppCard extends StatelessWidget {
                                 installed: installed,
                                 name: name,
                                 iconUrl: iconUrl,
+                                categories: categories,
                             ),
                             details ? Details(
                                 name: name,
@@ -80,6 +83,7 @@ class Listing extends StatelessWidget {
         required this.installed,
         required this.name,
         required this.iconUrl,
+        required this.categories,
     });
     
     final bool featured;
@@ -89,6 +93,7 @@ class Listing extends StatelessWidget {
     final String iconUrl;
     final cardWidth = 300.0;
     final cardHeight = 400.0;
+    final List<String> categories;
 
     @override
     Widget build(BuildContext context) {
@@ -122,7 +127,7 @@ class Listing extends StatelessWidget {
                                     width: 130.0,
                                     alignment: Alignment.centerRight,
                                     padding: EdgeInsets.all(20),
-                                    child: !installed ? Center() : InstalledBadge(
+                                    child: !this.installed ? CategoryList(size:40.0, categories: this.categories) : InstalledBadge(
                                         size: 40.0
                                     ),
                                 ),

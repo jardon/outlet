@@ -6,14 +6,6 @@ import 'badges.dart';
 
 class AppCard extends StatelessWidget {
 
-    final bool featured;
-    final bool verified;
-    final bool installed;
-    final bool details;
-    final String name;
-    final String iconUrl;
-    final String description;
-
     AppCard({
         super.key,
         required this.featured,
@@ -25,6 +17,13 @@ class AppCard extends StatelessWidget {
         required this.description,
     });
     
+    final bool featured;
+    final bool verified;
+    final bool installed;
+    final bool details;
+    final String name;
+    final String iconUrl;
+    final String description;
     final borderRadius = 45.0;
     final cardWidth = 300.0;
     final cardHeight = 400.0;
@@ -54,15 +53,15 @@ class AppCard extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         children: <Widget>[
                             Listing(
-                                featured: this.featured,
-                                verified: this.verified,
-                                installed: this.installed,
-                                name: this.name,
-                                iconUrl: this.iconUrl,
+                                featured: featured,
+                                verified: verified,
+                                installed: installed,
+                                name: name,
+                                iconUrl: iconUrl,
                             ),
-                            this.details ? Details(
-                                name: this.name,
-                                description: this.description,
+                            details ? Details(
+                                name: name,
+                                description: description,
                             ) : Center(),
                         ],
                     ),
@@ -74,12 +73,6 @@ class AppCard extends StatelessWidget {
 
 class Listing extends StatelessWidget {
 
-    final bool featured;
-    final bool verified;
-    final bool installed;
-    final String name;
-    final String iconUrl;
-
     Listing({
         super.key,
         required this.featured,
@@ -89,6 +82,11 @@ class Listing extends StatelessWidget {
         required this.iconUrl,
     });
     
+    final bool featured;
+    final bool verified;
+    final bool installed;
+    final String name;
+    final String iconUrl;
     final cardWidth = 300.0;
     final cardHeight = 400.0;
 
@@ -111,10 +109,10 @@ class Listing extends StatelessWidget {
                                     padding: EdgeInsets.all(20),
                                     child: Row(
                                         children: <Widget>[
-                                            !this.featured ? Center() : FeaturedBadge(
+                                            !featured ? Center() : FeaturedBadge(
                                                 size: 40.0,
                                             ),
-                                            !this.verified ? Center() : VerifiedBadge(
+                                            !verified ? Center() : VerifiedBadge(
                                                 size: 40.0
                                             ),
                                         ]
@@ -124,7 +122,7 @@ class Listing extends StatelessWidget {
                                     width: 130.0,
                                     alignment: Alignment.centerRight,
                                     padding: EdgeInsets.all(20),
-                                    child: !this.installed ? Center() : InstalledBadge(
+                                    child: !installed ? Center() : InstalledBadge(
                                         size: 40.0
                                     ),
                                 ),
@@ -135,7 +133,7 @@ class Listing extends StatelessWidget {
                         height: cardHeight * .6 ,
                         width: cardWidth,
                         child: SvgPicture.network(
-                                    this.iconUrl,
+                                    iconUrl,
                                     semanticsLabel: 'App Icon',
                                     placeholderBuilder: (BuildContext context) => Container(
                                         padding: const EdgeInsets.all(30.0),
@@ -146,32 +144,30 @@ class Listing extends StatelessWidget {
                     Container(
                         height: cardHeight * .2,
                         width: cardWidth,
-                        child: Container(
-                            child: Row(
-                                children: <Widget>[
-                                    Container(
-                                        width: cardWidth * .6,
-                                        alignment: Alignment.centerLeft,
-                                        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                                        child: Text(
-                                            this.name,
-                                            style: TextStyle(
-                                                fontSize: 24,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                            ),
-                                        )
-                                    ),
-                                    Container(
-                                        width: cardWidth * .4,
-                                        height: cardHeight * .2,
-                                        child: ReviewScore(
-                                            score: 4.0,
-                                            size: 40.0,
-                                            )
+                        child: Row(
+                            children: <Widget>[
+                                Container(
+                                    width: cardWidth * .6,
+                                    alignment: Alignment.centerLeft,
+                                    padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                                    child: Text(
+                                        name,
+                                        style: TextStyle(
+                                            fontSize: 24,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                        ),
                                     )
-                                ]
-                            )
+                                ),
+                                Container(
+                                    width: cardWidth * .4,
+                                    height: cardHeight * .2,
+                                    child: ReviewScore(
+                                        score: 4.0,
+                                        size: 40.0,
+                                        )
+                                )
+                            ]
                         )
                     ),
                 ],
@@ -182,15 +178,14 @@ class Listing extends StatelessWidget {
 
 class Details extends StatelessWidget {
 
-    final String name;
-    final String description;
-
     Details({
         super.key,
         required this.name,
         required this.description,
     });
     
+    final String name;
+    final String description;
     final cardWidth = 300.0;
     final cardHeight = 400.0;
 
@@ -210,7 +205,7 @@ class Details extends StatelessWidget {
                         padding: EdgeInsets.only(left: 40, right: 40, top: 40),
                         alignment: Alignment.topLeft,
                         child: Text(
-                            this.name,
+                            name,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,
@@ -223,7 +218,7 @@ class Details extends StatelessWidget {
                         padding: EdgeInsets.only(left: 40, right: 40, bottom: 40),
                         alignment: Alignment.topLeft,
                         child: Text(
-                            this.description,
+                            description,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12,

@@ -2,28 +2,28 @@ import 'package:flutter/material.dart';
 
 class ReviewScore extends StatelessWidget {
 
-    final double score;
-    final double size;
-
-    ReviewScore({
+    const ReviewScore({
         required this.score,
         required this.size,
     });
+
+    final double score;
+    final double size;
 
     @override
     Widget build(BuildContext context) {
         List<Widget> icons = [];
 
-        int rounded = (this.score).round();
-        int rounded_down = (this.score).floor();
+        int rounded = (score).round();
+        int roundedDown = (score).floor();
 
         for (int i = 0; i < 5; i++) {
-            if (i + 1 <= rounded_down) {
+            if (i + 1 <= roundedDown) {
                 icons.add(
                     Icon(
                         Icons.star,
                         color: Colors.amberAccent[400],
-                        size: this.size / 2,
+                        size: size / 2,
                     )
                 );
             }
@@ -32,7 +32,7 @@ class ReviewScore extends StatelessWidget {
                     Icon(
                         Icons.star_half,
                         color: Colors.amberAccent[400],
-                        size: this.size / 2,
+                        size: size / 2,
                     )
                 );
             }
@@ -41,15 +41,15 @@ class ReviewScore extends StatelessWidget {
                     Icon(
                         Icons.star_border,
                         color: Colors.amberAccent[400],
-                        size: this.size / 2,
+                        size: size / 2,
                     )
                 );
             }
         }
 
         return Container(
-            height: this.size,
-            width: this.size * 5,
+            height: size,
+            width: size * 5,
             child: Row(
                 children: icons,
             )

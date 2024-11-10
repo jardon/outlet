@@ -3,12 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class FeaturedBadge extends StatelessWidget {
 
-    final double size;
-
-    FeaturedBadge({
+    const FeaturedBadge({
         super.key,
         required this.size,
     });
+
+    final double size;
 
     @override
     Widget build(BuildContext context) {
@@ -45,12 +45,12 @@ class FeaturedBadge extends StatelessWidget {
 
 class VerifiedBadge extends StatelessWidget {
 
-    final double size;
-
-    VerifiedBadge({
+    const VerifiedBadge({
         super.key,
         required this.size,
     });
+
+    final double size;
 
     @override
     Widget build(BuildContext context) {
@@ -79,12 +79,12 @@ class VerifiedBadge extends StatelessWidget {
 
 class InstalledBadge extends StatelessWidget {
 
-    final double size;
-
-    InstalledBadge({
+    const InstalledBadge({
         super.key,
         required this.size,
     });
+
+    final double size;
 
     @override
     Widget build(BuildContext context) {
@@ -116,12 +116,12 @@ class InstalledBadge extends StatelessWidget {
 
 class VideoBadge extends StatelessWidget {
 
-    final double size;
-
-    VideoBadge({
+    const VideoBadge({
         super.key,
         required this.size,
     });
+
+    final double size;
 
     @override
     Widget build(BuildContext context) {
@@ -158,12 +158,12 @@ class VideoBadge extends StatelessWidget {
 
 class AudioBadge extends StatelessWidget {
 
-    final double size;
-
-    AudioBadge({
+    const AudioBadge({
         super.key,
         required this.size,
     });
+
+    final double size;
 
     @override
     Widget build(BuildContext context) {
@@ -200,12 +200,12 @@ class AudioBadge extends StatelessWidget {
 
 class DevelopmentBadge extends StatelessWidget {
 
-    final double size;
-
-    DevelopmentBadge({
+    const DevelopmentBadge({
         super.key,
         required this.size,
     });
+
+    final double size;
 
     @override
     Widget build(BuildContext context) {
@@ -243,12 +243,12 @@ class DevelopmentBadge extends StatelessWidget {
 
 class GameBadge extends StatelessWidget {
 
-    final double size;
-
-    GameBadge({
+    const GameBadge({
         super.key,
         required this.size,
     });
+
+    final double size;
 
     @override
     Widget build(BuildContext context) {
@@ -285,12 +285,12 @@ class GameBadge extends StatelessWidget {
 
 class GraphicsBadge extends StatelessWidget {
 
-    final double size;
-
-    GraphicsBadge({
+    const GraphicsBadge({
         super.key,
         required this.size,
     });
+
+    final double size;
 
     @override
     Widget build(BuildContext context) {
@@ -327,12 +327,12 @@ class GraphicsBadge extends StatelessWidget {
 
 class NetworkBadge extends StatelessWidget {
 
-    final double size;
-
-    NetworkBadge({
+    const NetworkBadge({
         super.key,
         required this.size,
     });
+
+    final double size;
 
     @override
     Widget build(BuildContext context) {
@@ -376,15 +376,14 @@ class NetworkBadge extends StatelessWidget {
 
 class CategoryList extends StatelessWidget {
 
-    final double size;
-    final List<String> categories;
-
     CategoryList({
         super.key,
         required this.size,
         required this.categories,
     });
 
+    final double size;
+    final List<String> categories;
     final List<Widget> badges = [];
 
     @override

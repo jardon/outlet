@@ -16,6 +16,54 @@ class AppCard extends StatelessWidget {
         required this.iconUrl,
         required this.description,
         required this.categories,
+        this.size = 300,
+    });
+    
+    final bool featured;
+    final bool verified;
+    final bool installed;
+    final bool details;
+    final String name;
+    final String iconUrl;
+    final String description;
+    final borderRadius = 45.0;
+    final double size;
+    final List<String> categories;
+
+    @override
+    Widget build(BuildContext context) {
+        return Container(
+            width: size,
+            height: size * 1.3333,
+            child: FittedBox(
+                child: InfoCard(
+                featured: featured,
+                verified: verified,
+                installed: installed,
+                details: details,
+                name: name,
+                iconUrl: iconUrl,
+                description: description,
+                categories: categories,
+            )
+            )
+        );
+    }
+
+}
+
+class InfoCard extends StatelessWidget {
+
+    InfoCard({
+        super.key,
+        required this.featured,
+        required this.verified,
+        required this.installed,
+        this.details = true,
+        required this.name,
+        required this.iconUrl,
+        required this.description,
+        required this.categories,
     });
     
     final bool featured;
@@ -35,6 +83,7 @@ class AppCard extends StatelessWidget {
         return Container(
             width: cardWidth,
             height: cardHeight,
+            margin: EdgeInsets.all(20.0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(borderRadius),
                 boxShadow: [

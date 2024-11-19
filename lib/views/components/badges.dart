@@ -405,6 +405,7 @@ class CategoryList extends StatelessWidget {
             }
         }
         return Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: badges,
         );
     }

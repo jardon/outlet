@@ -32,11 +32,8 @@ class AppCard extends StatelessWidget {
 
     @override
     Widget build(BuildContext context) {
-        return Container(
-            width: size,
-            height: size * 1.3333,
-            child: FittedBox(
-                child: InfoCard(
+        return FittedBox(
+            child: InfoCard(
                 featured: featured,
                 verified: verified,
                 installed: installed,
@@ -45,7 +42,6 @@ class AppCard extends StatelessWidget {
                 iconUrl: iconUrl,
                 description: description,
                 categories: categories,
-            )
             )
         );
     }

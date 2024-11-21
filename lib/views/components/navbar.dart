@@ -55,7 +55,9 @@ class Navbar extends StatelessWidget {
                                 ),
                                 Container(
                                     width: 200,
+                                    height: double.infinity,
                                     margin: EdgeInsets.only(right: 40),
+                                    padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                                     decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(45.0),
@@ -66,7 +68,16 @@ class Navbar extends StatelessWidget {
                                             )
                                         ]
                                     ),
-                                    child: Center(child: Text('Search', style: TextStyle(color: Colors.black))),
+                                    child: Center(
+                                        child: TextField(
+                                            decoration: InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: 'Search apps',
+                                                icon: Icon(Icons.search),
+                                                contentPadding: EdgeInsets.only(bottom: 10)
+                                            ),
+                                        ),
+                                    ),
                                 ),
                                 const WindowButtons(),
                             ],

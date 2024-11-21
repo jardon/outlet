@@ -22,11 +22,13 @@ class Navbar extends StatelessWidget {
                                     // color: Colors.purple,
                                     child: Align(
                                         alignment: Alignment.center,
-                                        child: Icon(
-                                            Icons.arrow_back,
-                                            color: Colors.black12,
-                                            size: 40,
-                                        )
+                                        child: IconButton(
+                                            icon: Icon(
+                                                Icons.arrow_back,
+                                                color: Colors.black12,
+                                            ),
+                                            onPressed: () {},
+                                        ),
                                     ),
                                 ),
                                 Container(

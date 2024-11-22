@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../views/app_list.dart';
 
 Map<String, Map<String, Object>> views = {
       "bazaar": {
-            "widget": Container(),
+            "widget": AppList(),
             "title": "Bazaar",
         },
       "play": {

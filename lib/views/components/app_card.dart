@@ -84,7 +84,7 @@ class InfoCard extends StatelessWidget {
         return Container(
             width: cardWidth,
             height: cardHeight,
-            margin: EdgeInsets.all(20.0),
+            margin: EdgeInsets.all(15.0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(borderRadius),
                 boxShadow: [

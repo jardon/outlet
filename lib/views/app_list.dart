@@ -28,6 +28,7 @@ class AppList extends ConsumerWidget {
                 ),
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 itemCount: apps.length,
+                physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                 itemBuilder: (context, index) {
                     return AppCard(
                         featured: apps[index]["featured"],

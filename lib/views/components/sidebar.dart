@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import './download_queue.dart';
+import '../../providers/page_provider.dart';
 
-class Sidebar extends StatelessWidget {
+class Sidebar extends ConsumerWidget {
   final List<String> entries = [
-    'Your Device',
-    'Bazaar',
-    'Play',
-    'Work',
-    'Build',
-    'Socialize',
-    'Relax',
+    'device',
+    'bazaar',
+    'play',
+    'work',
+    'build',
+    'socialize',
+    'relax',
   ];
 
-  void _onItemTap(BuildContext context, String entry) {
-    
-  }
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       width: 350.0,
       decoration: BoxDecoration(
@@ -42,8 +40,8 @@ class Sidebar extends StatelessWidget {
                       itemCount: entries.length,
                       itemBuilder: (context, index) {
                           return ListTile(
-                          title: Text(entries[index]),
-                          onTap: () => _onItemTap(context, entries[index]),
+                          title: Text(views[entries[index]]?["title"] as String),
+                          onTap: () { ref.read(pageNotifierProvider.notifier).changePage(entries[index]);},
                           );
                       },
                   ),

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'views/components/sidebar.dart';
 import 'views/components/view_box.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ProviderScope(child: MyApp()));
 
   doWhenWindowReady(() {
     const initialSize = Size(600, 450);

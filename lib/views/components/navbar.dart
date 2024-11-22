@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../providers/page_provider.dart';
 
-class Navbar extends StatelessWidget {
+class Navbar extends ConsumerWidget {
     @override
-    Widget build(BuildContext context) {
+    Widget build(BuildContext context, WidgetRef ref) {
         return Container(
             height: 60,
             // color: Colors.orange,
@@ -35,7 +37,7 @@ class Navbar extends StatelessWidget {
                                     // color: Colors.blue,
                                     padding: EdgeInsets.only(left: 20.0),
                                     child: Text(
-                                        "Page Name",
+                                        ref.watch(pageNotifierProvider)["title"] as String,
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 24,

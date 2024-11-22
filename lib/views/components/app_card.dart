@@ -17,6 +17,7 @@ class AppCard extends StatelessWidget {
         required this.description,
         required this.categories,
         this.size = 300,
+        required this.rating,
     });
     
     final bool featured;
@@ -29,6 +30,7 @@ class AppCard extends StatelessWidget {
     final borderRadius = 45.0;
     final double size;
     final List<String> categories;
+    final double rating;
 
     @override
     Widget build(BuildContext context) {
@@ -42,6 +44,7 @@ class AppCard extends StatelessWidget {
                 iconUrl: iconUrl,
                 description: description,
                 categories: categories,
+                rating: rating,
             )
         );
     }
@@ -60,6 +63,7 @@ class InfoCard extends StatelessWidget {
         required this.iconUrl,
         required this.description,
         required this.categories,
+        required this.rating,
     });
     
     final bool featured;
@@ -73,6 +77,7 @@ class InfoCard extends StatelessWidget {
     final cardWidth = 300.0;
     final cardHeight = 400.0;
     final List<String> categories;
+    final double rating;
 
     @override
     Widget build(BuildContext context) {
@@ -106,6 +111,7 @@ class InfoCard extends StatelessWidget {
                                 name: name,
                                 iconUrl: iconUrl,
                                 categories: categories,
+                                rating: rating,
                             ),
                             details ? Details(
                                 name: name,
@@ -129,6 +135,7 @@ class Listing extends StatelessWidget {
         required this.name,
         required this.iconUrl,
         required this.categories,
+        required this.rating,
     });
     
     final bool featured;
@@ -139,6 +146,7 @@ class Listing extends StatelessWidget {
     final cardWidth = 300.0;
     final cardHeight = 400.0;
     final List<String> categories;
+    final double rating;
 
     @override
     Widget build(BuildContext context) {
@@ -213,7 +221,7 @@ class Listing extends StatelessWidget {
                                     width: cardWidth * .4,
                                     height: cardHeight * .2,
                                     child: ReviewScore(
-                                        score: 4.0,
+                                        score: rating,
                                         size: 40.0,
                                         )
                                 )

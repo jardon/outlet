@@ -18,7 +18,7 @@ class Sidebar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      width: 350.0,
+      width: 300.0,
       decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,

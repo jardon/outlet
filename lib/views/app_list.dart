@@ -14,7 +14,7 @@ class AppList extends ConsumerWidget {
         builder: (context, constraints) {
             // Calculate how many columns based on the available width
             double width = constraints.maxWidth;
-            int crossAxisCount = (width / 150).floor(); // Each grid item is 300px wide
+            int crossAxisCount = (width / 160).floor(); // Each grid item is 300px wide
 
             // Ensure at least 1 column
             crossAxisCount = crossAxisCount < 1 ? 1 : crossAxisCount;

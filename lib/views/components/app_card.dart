@@ -279,7 +279,7 @@ class Details extends StatelessWidget {
                             description,
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 12,
+                                fontSize: 20,
                             ),
                         )
                     )

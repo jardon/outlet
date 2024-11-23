@@ -42,6 +42,8 @@ class DownloadQueue extends StatelessWidget {
                 // color: Colors.green,
                 child: Text(
                   "Install an application to add it to the queue.",
+                  softWrap: true,
+                  overflow: TextOverflow.visible,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 12,

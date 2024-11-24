@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../views/app_list.dart';
+import '../views/app_info.dart';
 
 Map<String, Map<String, Object>> views = {
       "outlet": {
@@ -39,6 +40,10 @@ Map<String, Map<String, Object>> views = {
             "widget": Container(),
             "title": "Downloads",
         },
+        "app_info": {
+            "widget": AppInfo(),
+            "title": "App Info",
+        }
     };
 
 class PageNotifier extends Notifier<Map<String, Object>> {

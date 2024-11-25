@@ -23,7 +23,7 @@ class DownloadQueue extends StatelessWidget {
           children: <Widget>[
             Container(
                 height: 50.0,
-                padding: EdgeInsets.only(left: 40, right: 40, top: 20),
+                padding: EdgeInsets.only(left: 30, right: 30, top: 20),
                 alignment: Alignment.topLeft,
                 // color: Colors.pink,
                 child: Text(
@@ -37,7 +37,7 @@ class DownloadQueue extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.only(left: 40, right: 40, bottom: 40),
+                padding: EdgeInsets.only(left: 30, right: 30, bottom: 40),
                 alignment: Alignment.topLeft,
                 // color: Colors.green,
                 child: Text(

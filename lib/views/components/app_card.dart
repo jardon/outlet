@@ -101,8 +101,7 @@ class InfoCard extends StatelessWidget {
                 ),
                 child: Container(
                     height: cardHeight,
-                    child: ListView(
-                        scrollDirection: Axis.horizontal,
+                    child: Stack(
                         children: <Widget>[
                             Listing(
                                 featured: featured,
@@ -113,11 +112,20 @@ class InfoCard extends StatelessWidget {
                                 categories: categories,
                                 rating: rating,
                             ),
-                            details ? Details(
-                                name: name,
-                                description: description,
-                            ) : Center(),
-                        ],
+                            ListView(
+                                scrollDirection: Axis.horizontal,
+                                children: <Widget>[
+                                    Container(
+                                        width: cardWidth,
+                                        height: cardHeight,
+                                    ),
+                                    details ? Details(
+                                        name: name,
+                                        description: description,
+                                    ) : Center(),
+                                ],
+                            )
+                        ]
                     ),
                 ),
             ),

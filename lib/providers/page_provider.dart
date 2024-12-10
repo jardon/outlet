@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../views/app_list.dart';
+import '../views/downloads.dart';
 
 Map<String, Map<String, Object>> views = {
       "bazaar": {
@@ -36,7 +37,7 @@ Map<String, Map<String, Object>> views = {
             "title": "Search",
         },
       "downloads": {
-            "widget": Container(),
+            "widget": Downloads(),
             "title": "Downloads",
         },
     };

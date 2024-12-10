@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-class AppList extends StatelessWidget {
+class Downloads extends StatelessWidget {
 
     @override
     Widget build(BuildContext context) {

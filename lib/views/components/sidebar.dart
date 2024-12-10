@@ -50,7 +50,10 @@ class Sidebar extends ConsumerWidget {
           Container(
               height: 150,
               // color: Colors.yellow,
-              child: DownloadQueue(),
+              child: GestureDetector(
+                child: DownloadQueue(),
+                onTap: () { ref.read(pageNotifierProvider.notifier).changePage("downloads");},
+              ),
           ),
         ]
       )

@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bazaar',
+      title: 'Outlet',
       theme: ThemeData(
         useMaterial3: true,
       ),

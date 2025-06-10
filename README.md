@@ -1,8 +1,8 @@
-# Bazaar
+# Outlet
 
 Linux application GUI storefront.
 
-## Build Bazaar
+## Build Outlet
 
 ### Install Dependencies
 

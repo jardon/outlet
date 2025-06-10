@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../views/app_list.dart';
 
 Map<String, Map<String, Object>> views = {
-      "bazaar": {
+      "outlet": {
             "widget": AppList(),
-            "title": "Bazaar",
+            "title": "Outlet",
         },
       "play": {
             "widget": Container(),
@@ -45,7 +45,7 @@ class PageNotifier extends Notifier<Map<String, Object>> {
 
     @override
     Map<String, Object> build() {
-        return views["bazaar"] ?? {};
+        return views["outlet"] ?? {};
     }
 
     void changePage(String page) {

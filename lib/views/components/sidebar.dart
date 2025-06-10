@@ -7,7 +7,7 @@ import '../../providers/page_provider.dart';
 class Sidebar extends ConsumerWidget {
   final List<String> entries = [
     'device',
-    'bazaar',
+    'outlet',
     'play',
     'work',
     'build',

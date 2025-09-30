@@ -19,16 +19,19 @@ class Sidebar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       width: 300.0,
+      margin: const EdgeInsets.symmetric(vertical: 20.0),
       decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment(0.8, 1),
-                    colors: <Color>[
-                        Colors.grey[300]!,
-                        Colors.white,
-                    ],
-                    tileMode: TileMode.mirror,
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(45.0),
+                    bottomRight: Radius.circular(45.0),
                 ),
+                boxShadow: [
+                    BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 20.0
+                    )
+                ]
             ),
       child: Column(
         children: <Widget>[

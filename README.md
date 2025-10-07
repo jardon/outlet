@@ -7,7 +7,8 @@ Linux application GUI storefront.
 ### Install Dependencies
 
 #### Debian-based distros
-> **NOTE:** Package names may change depending on the distro version
+> [!NOTE]
+> Package names may change depending on the distro version
 ```bash
 sudo apt-get update -y && sudo apt-get upgrade -y;
 sudo apt-get install -y curl git unzip xz-utils zip libglu1-mesa \

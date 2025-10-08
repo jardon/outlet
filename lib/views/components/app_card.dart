@@ -83,8 +83,45 @@ class InfoCard extends StatefulWidget {
     _InfoCardState createState() => _InfoCardState();
 }
 
-class _InfoCardState extends State<InfoCard> {
-  bool _isHovering = false;
+class _InfoCardState extends State<InfoCard> with SingleTickerProviderStateMixin {
+    late AnimationController _controller;
+    late Animation<Offset> _slideAnimation;
+    late Animation<double> _fadeAnimation;
+
+    @override
+    void initState() {
+        super.initState();
+        _controller = AnimationController(
+            duration: const Duration(milliseconds: 100),
+            vsync: this,
+        );
+
+        _slideAnimation = Tween<Offset>(
+            begin: const Offset(1.0, 0.0),
+            end: Offset.zero,
+        ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+
+        _fadeAnimation = Tween<double>(
+            begin: 0.0,
+            end: 1.0,
+        ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+    }
+
+    @override
+    void dispose() {
+        _controller.dispose();
+        super.dispose();
+    }
+
+    void _onHoverChanged(bool hovering) {
+        if (!widget.details) return;
+
+        if (hovering) {
+            _controller.forward();
+        } else {
+            _controller.reverse();
+        }
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -102,8 +139,8 @@ class _InfoCardState extends State<InfoCard> {
                 ]
             ),
             child: MouseRegion(
-                onEnter: (_) => setState(() => _isHovering = true),
-                onExit: (_) => setState(() => _isHovering = false),
+                onEnter: (_) => _onHoverChanged(true),
+                onExit: (_) => _onHoverChanged(false),
                 child: Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -122,9 +159,18 @@ class _InfoCardState extends State<InfoCard> {
                                     categories: widget.categories,
                                     rating: widget.rating,
                                 ),
-                                (widget.details && _isHovering) ? Details(
-                                    name: widget.name,
-                                    description: widget.description,
+                                widget.details ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(widget.borderRadius),
+                                    child: SlideTransition(
+                                        position: _slideAnimation,
+                                        child: FadeTransition(
+                                            opacity: _fadeAnimation,
+                                            child: Details(
+                                                name: widget.name,
+                                                description: widget.description,
+                                            ),
+                                        ),
+                                    )
                                 ) : Center(),
                             ]
                         ),

@@ -51,7 +51,7 @@ class AppCard extends StatelessWidget {
 
 }
 
-class InfoCard extends StatelessWidget {
+class InfoCard extends StatefulWidget {
 
     InfoCard({
         super.key,
@@ -80,13 +80,20 @@ class InfoCard extends StatelessWidget {
     final double rating;
 
     @override
-    Widget build(BuildContext context) {
+    _InfoCardState createState() => _InfoCardState();
+}
+
+class _InfoCardState extends State<InfoCard> {
+  bool _isHovering = false;
+
+  @override
+  Widget build(BuildContext context) {
         return Container(
-            width: cardWidth,
-            height: cardHeight,
+            width: widget.cardWidth,
+            height: widget.cardHeight,
             margin: EdgeInsets.all(15.0),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(borderRadius),
+                borderRadius: BorderRadius.circular(widget.borderRadius),
                 boxShadow: [
                     BoxShadow(
                         color: Colors.black12,
@@ -94,41 +101,36 @@ class InfoCard extends StatelessWidget {
                     )
                 ]
             ),
-            child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(borderRadius),
-                ),
+            child: MouseRegion(
+                onEnter: (_) => setState(() => _isHovering = true),
+                onExit: (_) => setState(() => _isHovering = false),
                 child: Container(
-                    height: cardHeight,
-                    child: Stack(
-                        children: <Widget>[
-                            Listing(
-                                featured: featured,
-                                verified: verified,
-                                installed: installed,
-                                name: name,
-                                iconUrl: iconUrl,
-                                categories: categories,
-                                rating: rating,
-                            ),
-                            ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: <Widget>[
-                                    Container(
-                                        width: cardWidth,
-                                        height: cardHeight,
-                                    ),
-                                    details ? Details(
-                                        name: name,
-                                        description: description,
-                                    ) : Center(),
-                                ],
-                            )
-                        ]
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(widget.borderRadius),
+                    ),
+                    child: Container(
+                        height: widget.cardHeight,
+                        child: Stack(
+                            children: <Widget>[
+                                Listing(
+                                    featured: widget.featured,
+                                    verified: widget.verified,
+                                    installed: widget.installed,
+                                    name: widget.name,
+                                    iconUrl: widget.iconUrl,
+                                    categories: widget.categories,
+                                    rating: widget.rating,
+                                ),
+                                (widget.details && _isHovering) ? Details(
+                                    name: widget.name,
+                                    description: widget.description,
+                                ) : Center(),
+                            ]
+                        ),
                     ),
                 ),
-            ),
+            )
         );
     }
 }

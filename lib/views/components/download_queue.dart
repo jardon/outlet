@@ -17,7 +17,7 @@ class DownloadQueue extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: Colors.black,
-            borderRadius: BorderRadius.circular(45.0),
+            borderRadius: BorderRadius.circular(25.0),
         ),
         child: Column(
           children: <Widget>[

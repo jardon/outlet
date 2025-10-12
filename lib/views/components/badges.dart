@@ -383,17 +383,17 @@ class CategoryList extends StatelessWidget {
         for (String cat in categories) {
             switch (cat) {
             case "audio":
-                badges.add(AudioBadge(size: 40.0));
+                badges.add(AudioBadge(size: size));
             case 'video':
-                badges.add(VideoBadge(size: 40.0));
+                badges.add(VideoBadge(size: size));
             case 'graphics':
-                badges.add(GraphicsBadge(size: 40.0));
+                badges.add(GraphicsBadge(size: size));
             case 'network':
-                badges.add(NetworkBadge(size: 40.0));
+                badges.add(NetworkBadge(size: size));
             case 'game':
-                badges.add(GameBadge(size: 40.0));
+                badges.add(GameBadge(size: size));
             case 'development':
-                badges.add(DevelopmentBadge(size: 40.0));
+                badges.add(DevelopmentBadge(size: size));
             }
         }
         return Row(

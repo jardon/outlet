@@ -34,8 +34,8 @@ class FeaturedBadge extends StatelessWidget {
                     'lib/views/assets/star-icon.svg',
                     semanticsLabel: 'Featured Application',
                     colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                    height: 20,
-                    width: 20,
+                    height: size / 2,
+                    width: size / 2,
                 ),
             )
         );
@@ -139,8 +139,8 @@ class VideoBadge extends StatelessWidget {
                     'lib/views/assets/beads-icon.svg',
                     semanticsLabel: 'Video',
                     colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                    height: 30,
-                    width: 30,
+                    height: size / 1.333,
+                    width: size / 1.333,
                 ),
             )
         );
@@ -181,8 +181,8 @@ class AudioBadge extends StatelessWidget {
                     'lib/views/assets/layered-circles-icon.svg',
                     semanticsLabel: 'Audio',
                     colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                    height: 30,
-                    width: 30,
+                    height: size / 1.333,
+                    width: size / 1.333,
                 ),
             )
         );
@@ -223,8 +223,8 @@ class DevelopmentBadge extends StatelessWidget {
                     'lib/views/assets/bug-icon.svg',
                     semanticsLabel: 'Audio/Video',
                     colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                    height: 25,
-                    width: 25,
+                    height: size / 1.6,
+                    width: size / 1.6,
                 ),
             )
         );
@@ -266,8 +266,8 @@ class GameBadge extends StatelessWidget {
                     'lib/views/assets/dpad-icon.svg',
                     semanticsLabel: 'Audio/Video',
                     colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                    height: 30,
-                    width: 30,
+                    height: size / 1.333,
+                    width: size / 1.333,
                 ),
             )
         );
@@ -308,8 +308,8 @@ class GraphicsBadge extends StatelessWidget {
                     'lib/views/assets/checkered-icon.svg',
                     semanticsLabel: 'Audio/Video',
                     colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                    height: 20,
-                    width: 20,
+                    height: size / 2,
+                    width: size / 2,
                 ),
             )
         );
@@ -350,8 +350,8 @@ class NetworkBadge extends StatelessWidget {
                     'lib/views/assets/connected-icon.svg',
                     semanticsLabel: 'Audio/Video',
                     colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                    height: 30,
-                    width: 30,
+                    height: size / 1.333,
+                    width: size / 1.333,
                 ),
             )
         );

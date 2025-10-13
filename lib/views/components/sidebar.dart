@@ -3,6 +3,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import './download_queue.dart';
 import '../../providers/page_provider.dart';
+import 'badges.dart';
 
 class Sidebar extends ConsumerWidget {
   final List<String> entries = [
@@ -14,6 +15,16 @@ class Sidebar extends ConsumerWidget {
     'socialize',
     'relax',
   ];
+
+  final Map<String, List<String>> categories = {
+    'device': [],
+    'outlet': ['featured'],
+    'play': ['audio', 'video', 'game'],
+    'work': ['development', 'network', 'graphics'],
+    'build': ['development', 'graphics'],
+    'socialize': ['game'],
+    'relax': ['audio', 'video'],
+  };
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -42,9 +53,28 @@ class Sidebar extends ConsumerWidget {
                   child: ListView.builder(
                       itemCount: entries.length,
                       itemBuilder: (context, index) {
-                          return ListTile(
-                          title: Text(views[entries[index]]?["title"] as String),
-                          onTap: () { ref.read(pageNotifierProvider.notifier).changePage(entries[index]);},
+                          return Material(
+                            color: Colors.white,
+                            child: ListTile(
+                              title: Row(
+                                children: [
+                                  const SizedBox(width: 10.0),
+                                  Text(
+                                    views[entries[index]]?["title"] as String,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    )
+                                  ),
+                                ],
+                              ),
+                              onTap: () { ref.read(pageNotifierProvider.notifier).changePage(entries[index]);},
+                              trailing: IntrinsicWidth(
+                                child: CategoryList(
+                                  size: 30,
+                                  categories: categories[entries[index]] ?? [],
+                                )
+                              ),
+                            )
                           );
                       },
                   ),

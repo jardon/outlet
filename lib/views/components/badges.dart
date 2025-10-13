@@ -15,7 +15,7 @@ class FeaturedBadge extends StatelessWidget {
         return Container(
             height: size,
             width: size,
-            margin: EdgeInsets.symmetric(horizontal: 5),
+            margin: EdgeInsets.symmetric(horizontal: 2.5),
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,

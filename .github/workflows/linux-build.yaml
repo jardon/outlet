@@ -1,7 +1,7 @@
 name: Linux build
 on:
   push:
-    branches: [latest]
+    branches: [main]
   pull_request:
   workflow_dispatch:
 jobs:

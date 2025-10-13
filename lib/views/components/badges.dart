@@ -394,6 +394,8 @@ class CategoryList extends StatelessWidget {
                 badges.add(GameBadge(size: size));
             case 'development':
                 badges.add(DevelopmentBadge(size: size));
+            case 'featured':
+                badges.add(FeaturedBadge(size: size));
             }
         }
         return Row(

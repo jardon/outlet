@@ -19,25 +19,58 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Outlet',
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
+      theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Row(
-          children: [
-            Sidebar(),
-            Expanded(
-              child: ViewBox(),
+      home: LayoutBuilder(
+        builder: (context, constraints) {
+          const double breakpoint = 800.0;
+          final bool isWide = constraints.maxWidth > breakpoint;
+
+          return Scaffold(
+            drawer: isWide ? 
+              null : 
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(45.0),
+                  bottomRight: Radius.circular(45.0),
+                ),
+                child: Drawer(child: Sidebar())
+              ),
+            body: isWide ? 
+              Row(
+                  children: [
+                    SizedBox(
+                      width: 250, 
+                      child: Container(
+                        child: Sidebar(),
+                        margin: const EdgeInsets.symmetric(vertical: 20.0),
+                      ),
+                    ),
+                    Expanded(
+                      child: ViewBox(),
+                    ),
+                  ],
+                )
+              : 
+              ViewBox(),
+            floatingActionButton: isWide ?
+              null :
+              Builder(
+                builder: (context) => FloatingActionButton(
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  backgroundColor: Colors.black,
+                  child: const Icon(Icons.menu, color: Colors.white),
+                ),
             ),
-          ],
-        ),
-      )
+          );
+        },
+      ),
     );
   }
 }

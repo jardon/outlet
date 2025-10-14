@@ -28,6 +28,8 @@ class DownloadQueue extends StatelessWidget {
                 // color: Colors.pink,
                 child: Text(
                     "No downloads queued.",
+                    overflow: TextOverflow.fade,
+                    softWrap: false,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,

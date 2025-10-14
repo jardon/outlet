@@ -30,7 +30,6 @@ class Sidebar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       width: 300.0,
-      margin: const EdgeInsets.symmetric(vertical: 20.0),
       decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../views/app_list.dart';
+import '../views/components/app_list.dart';
 
 Map<String, Map<String, Object>> views = {
   "outlet": {

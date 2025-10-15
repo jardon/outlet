@@ -46,8 +46,16 @@ class MyApp extends StatelessWidget {
                     SizedBox(
                       width: 250, 
                       child: Container(
-                        child: Sidebar(),
-                        margin: const EdgeInsets.symmetric(vertical: 20.0),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 20,
+                              child: WindowTitleBarBox(child: MoveWindow()),
+                            ),
+                            Expanded(child: Sidebar()),
+                          ],
+                        ),
+                        margin: const EdgeInsets.only(bottom: 20.0),
                       ),
                     ),
                     Expanded(

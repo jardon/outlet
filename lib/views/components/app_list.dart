@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import './components/app_card.dart';
+import './app_card.dart';
 import '../../providers/application_provider.dart';
 
 class AppList extends ConsumerWidget {

@@ -29,63 +29,53 @@ class Sidebar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      width: 300.0,
-      decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(45.0),
-                    bottomRight: Radius.circular(45.0),
-                ),
-                boxShadow: [
-                    BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 20.0
-                    )
-                ]
+        width: 300.0,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(45.0),
+              bottomRight: Radius.circular(45.0),
             ),
-      child: Column(
-        children: <Widget>[
+            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 20.0)]),
+        child: Column(children: <Widget>[
           WindowTitleBarBox(child: MoveWindow()),
           Expanded(
               child: Container(
-                  // color: Colors.red,
-                  child: ListView.builder(
-                      itemCount: entries.length,
-                      itemBuilder: (context, index) {
-                          return Material(
-                            color: Colors.white,
-                            child: ListTile(
-                              title: Row(
-                                children: [
-                                  const SizedBox(width: 10.0),
-                                  Text(
-                                    views[entries[index]]?["title"] as String,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                    )
-                                  ),
-                                ],
-                              ),
-                              onTap: () { ref.read(pageNotifierProvider.notifier).changePage(entries[index]);},
-                              trailing: IntrinsicWidth(
-                                child: CategoryList(
-                                  size: 30,
-                                  categories: categories[entries[index]] ?? [],
-                                )
-                              ),
-                            )
-                          );
+            // color: Colors.red,
+            child: ListView.builder(
+              itemCount: entries.length,
+              itemBuilder: (context, index) {
+                return Material(
+                    color: Colors.white,
+                    child: ListTile(
+                      title: Row(
+                        children: [
+                          const SizedBox(width: 10.0),
+                          Text(views[entries[index]]?["title"] as String,
+                              style: TextStyle(
+                                fontSize: 20,
+                              )),
+                        ],
+                      ),
+                      onTap: () {
+                        ref
+                            .read(pageNotifierProvider.notifier)
+                            .changePage(entries[index]);
                       },
-                  ),
-              )
-          ),
+                      trailing: IntrinsicWidth(
+                          child: CategoryList(
+                        size: 30,
+                        categories: categories[entries[index]] ?? [],
+                      )),
+                    ));
+              },
+            ),
+          )),
           Container(
-              height: 150,
-              // color: Colors.yellow,
-              child: DownloadQueue(),
+            height: 150,
+            // color: Colors.yellow,
+            child: DownloadQueue(),
           ),
-        ]
-      )
-    );
+        ]));
   }
 }

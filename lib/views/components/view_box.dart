@@ -7,15 +7,15 @@ class ViewBox extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-            // color: Colors.green,
-            child: Column(
-                children: <Widget>[
-                    Navbar(),
-                    Expanded(
-                        child: ref.watch(pageNotifierProvider)["widget"] as Widget,
-                    ),
-                ],
-            ),
-        );
-    }
+      // color: Colors.green,
+      child: Column(
+        children: <Widget>[
+          Navbar(),
+          Expanded(
+            child: ref.watch(pageNotifierProvider)["widget"] as Widget,
+          ),
+        ],
+      ),
+    );
+  }
 }

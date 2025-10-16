@@ -2,8 +2,48 @@ import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import './download_queue.dart';
-import '../../providers/page_provider.dart';
+import 'app_list.dart';
+import '../navigation.dart';
 import 'badges.dart';
+
+final Map<String, Map<String, Object>> views = {
+  "outlet": {
+    "widget": AppList(),
+    "title": "Outlet",
+  },
+  "play": {
+    "widget": Container(),
+    "title": "Play",
+  },
+  "work": {
+    "widget": Container(),
+    "title": "Work",
+  },
+  "build": {
+    "widget": Container(),
+    "title": "Build",
+  },
+  "socialize": {
+    "widget": Container(),
+    "title": "Socialize",
+  },
+  "relax": {
+    "widget": Container(),
+    "title": "Relax",
+  },
+  "device": {
+    "widget": Container(),
+    "title": "This Device",
+  },
+  "search": {
+    "widget": Container(),
+    "title": "Search",
+  },
+  "downloads": {
+    "widget": Container(),
+    "title": "Downloads",
+  },
+};
 
 class Sidebar extends ConsumerWidget {
   final List<String> entries = [
@@ -58,9 +98,17 @@ class Sidebar extends ConsumerWidget {
                         ],
                       ),
                       onTap: () {
-                        ref
-                            .read(pageNotifierProvider.notifier)
-                            .changePage(entries[index]);
+                        Scaffold.of(context).closeDrawer();
+                        Navigator.push(
+                          context,
+                          NoAnimationPageRoute(
+                            pageBuilder: (context, animation1, animation2) =>
+                                Navigation(
+                              child: views[entries[index]]?["widget"] as Widget,
+                              title: views[entries[index]]?["title"] as String,
+                            ),
+                          ),
+                        );
                       },
                       trailing: IntrinsicWidth(
                           child: CategoryList(

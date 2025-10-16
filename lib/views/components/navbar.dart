@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../providers/page_provider.dart';
 
-class Navbar extends ConsumerWidget {
+class Navbar extends StatelessWidget {
+  const Navbar({
+    super.key,
+    required this.title,
+  });
+
+  final String title;
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Container(
       height: 60,
       // color: Colors.orange,
@@ -26,9 +31,15 @@ class Navbar extends ConsumerWidget {
                     child: IconButton(
                       icon: Icon(
                         Icons.arrow_back,
-                        color: Colors.black12,
+                        color: Navigator.canPop(context)
+                            ? Colors.black
+                            : Colors.black12,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        if (Navigator.canPop(context)) {
+                          Navigator.of(context).pop();
+                        }
+                      },
                     ),
                   ),
                 ),
@@ -36,7 +47,7 @@ class Navbar extends ConsumerWidget {
                     // color: Colors.blue,
                     padding: EdgeInsets.only(left: 20.0),
                     child: Text(
-                      ref.watch(pageNotifierProvider)["title"] as String,
+                      title,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 24,

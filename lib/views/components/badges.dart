@@ -338,6 +338,45 @@ class NetworkBadge extends StatelessWidget {
 // System	System application, "System Tools" such as say a log viewer or network monitor
 // Utility	Small utility application, "Accessories"
 
+class FlatpakBadge extends StatelessWidget {
+  const FlatpakBadge({
+    super.key,
+    required this.size,
+  });
+
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: size,
+        width: size,
+        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment(0.8, 1),
+            colors: <Color>[
+              Colors.grey.shade600,
+              Colors.grey,
+            ],
+            tileMode: TileMode.mirror,
+          ),
+          borderRadius: BorderRadius.circular(45.0),
+        ),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: SvgPicture.asset(
+            'lib/views/assets/flatpak-icon.svg',
+            semanticsLabel: 'Flatpak',
+            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            height: size / 1.5,
+            width: size / 1.5,
+          ),
+        ));
+  }
+}
+
 class CategoryList extends StatelessWidget {
   CategoryList({
     super.key,
@@ -367,6 +406,8 @@ class CategoryList extends StatelessWidget {
           badges.add(DevelopmentBadge(size: size));
         case 'featured':
           badges.add(FeaturedBadge(size: size));
+        case 'flatpak':
+          badges.add(FlatpakBadge(size: size));
       }
     }
     return Row(

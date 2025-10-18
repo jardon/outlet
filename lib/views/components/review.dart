@@ -40,7 +40,7 @@ class ReviewScore extends StatelessWidget {
 
     return Container(
         height: size,
-        width: size * 5,
+        width: (size * 5) / 2,
         child: Row(
           children: icons,
         ));

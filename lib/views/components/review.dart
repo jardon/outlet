@@ -21,26 +21,26 @@ class ReviewScore extends StatelessWidget {
         icons.add(Icon(
           Icons.star,
           color: Colors.amberAccent[400],
-          size: size / 2,
+          size: size,
         ));
       } else if (i + 1 == rounded) {
         icons.add(Icon(
           Icons.star_half,
           color: Colors.amberAccent[400],
-          size: size / 2,
+          size: size,
         ));
       } else {
         icons.add(Icon(
           Icons.star_border,
           color: Colors.amberAccent[400],
-          size: size / 2,
+          size: size,
         ));
       }
     }
 
     return Container(
         height: size,
-        width: (size * 5) / 2,
+        width: size * 5,
         child: Row(
           children: icons,
         ));

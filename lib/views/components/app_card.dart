@@ -259,7 +259,7 @@ class Listing extends StatelessWidget {
                       padding: EdgeInsets.only(right: 30),
                       child: ReviewScore(
                         score: rating,
-                        size: 40.0,
+                        size: 20.0,
                       ))
                 ])),
           ],

@@ -240,9 +240,9 @@ class Listing extends StatelessWidget {
                 width: cardWidth,
                 child: Row(children: <Widget>[
                   Container(
-                      width: cardWidth * .6,
+                      width: cardWidth * .55,
                       alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                      padding: EdgeInsets.only(left: 30, right: 10),
                       child: Text(
                         name,
                         style: TextStyle(
@@ -252,8 +252,10 @@ class Listing extends StatelessWidget {
                         ),
                       )),
                   Container(
-                      width: cardWidth * .4,
+                      width: cardWidth * .45,
                       height: cardHeight * .2,
+                      alignment: Alignment.centerRight,
+                      padding: EdgeInsets.only(right: 30),
                       child: ReviewScore(
                         score: rating,
                         size: 40.0,

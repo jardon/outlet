@@ -43,7 +43,7 @@ class AppList extends ConsumerWidget {
               installed: apps[index]["installed"],
               details: details,
               name: apps[index]["name"],
-              iconUrl: apps[index]["icon"],
+              icon: apps[index]["icon"],
               description: apps[index]["description"],
               categories: apps[index]["categories"],
               rating: apps[index]["rating"],

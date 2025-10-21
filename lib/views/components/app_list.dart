@@ -8,10 +8,12 @@ class AppList extends ConsumerWidget {
     super.key,
     this.details = false,
     this.showFeaturedBadge = true,
+    this.showInstalledBadge = true,
   });
 
   final bool details;
   final bool showFeaturedBadge;
+  final bool showInstalledBadge;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -42,7 +44,7 @@ class AppList extends ConsumerWidget {
             return AppCard(
               featured: showFeaturedBadge || apps[index]["featured"],
               verified: apps[index]["verified"],
-              installed: apps[index]["installed"],
+              installed: showInstalledBadge || apps[index]["installed"],
               details: details,
               name: apps[index]["name"],
               icon: apps[index]["icon"],

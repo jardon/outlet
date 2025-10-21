@@ -4,6 +4,13 @@ import './app_card.dart';
 import '../../providers/application_provider.dart';
 
 class AppList extends ConsumerWidget {
+  AppList({
+    super.key,
+    this.details = false,
+  });
+
+  final bool details;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apps = ref.watch(appListProvider);
@@ -34,7 +41,7 @@ class AppList extends ConsumerWidget {
               featured: apps[index]["featured"],
               verified: apps[index]["verified"],
               installed: apps[index]["installed"],
-              details: true,
+              details: details,
               name: apps[index]["name"],
               iconUrl: apps[index]["icon"],
               description: apps[index]["description"],

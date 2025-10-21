@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import './download_queue.dart';
+import 'app_list.dart';
 import '../navigation.dart';
 import 'badges.dart';
 
@@ -31,7 +32,7 @@ final Map<String, Map<String, Object>> views = {
     "title": "Relax",
   },
   "device": {
-    "widget": Container(),
+    "widget": AppList(details: false),
     "title": "This Device",
   },
   "search": {

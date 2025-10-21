@@ -11,7 +11,7 @@ class AppCard extends StatelessWidget {
     required this.installed,
     this.details = true,
     required this.name,
-    required this.iconUrl,
+    required this.icon,
     required this.description,
     required this.categories,
     this.size = 300,
@@ -23,7 +23,7 @@ class AppCard extends StatelessWidget {
   final bool installed;
   final bool details;
   final String name;
-  final String iconUrl;
+  final String icon;
   final String description;
   final borderRadius = 45.0;
   final double size;
@@ -39,7 +39,7 @@ class AppCard extends StatelessWidget {
       installed: installed,
       details: details,
       name: name,
-      iconUrl: iconUrl,
+      icon: icon,
       description: description,
       categories: categories,
       rating: rating,
@@ -55,7 +55,7 @@ class InfoCard extends StatefulWidget {
     required this.installed,
     this.details = true,
     required this.name,
-    required this.iconUrl,
+    required this.icon,
     required this.description,
     required this.categories,
     required this.rating,
@@ -66,7 +66,7 @@ class InfoCard extends StatefulWidget {
   final bool installed;
   final bool details;
   final String name;
-  final String iconUrl;
+  final String icon;
   final String description;
   final borderRadius = 45.0;
   final cardWidth = 300.0;
@@ -144,7 +144,7 @@ class _InfoCardState extends State<InfoCard>
                   verified: widget.verified,
                   installed: widget.installed,
                   name: widget.name,
-                  iconUrl: widget.iconUrl,
+                  icon: widget.icon,
                   categories: widget.categories,
                   rating: widget.rating,
                 ),
@@ -177,7 +177,7 @@ class Listing extends StatelessWidget {
     required this.verified,
     required this.installed,
     required this.name,
-    required this.iconUrl,
+    required this.icon,
     required this.categories,
     required this.rating,
   });
@@ -186,7 +186,7 @@ class Listing extends StatelessWidget {
   final bool verified;
   final bool installed;
   final String name;
-  final String iconUrl;
+  final String icon;
   final cardWidth = 300.0;
   final cardHeight = 400.0;
   final List<String> categories;
@@ -229,7 +229,7 @@ class Listing extends StatelessWidget {
                 height: cardHeight * .6,
                 width: cardWidth,
                 child: SvgPicture.asset(
-                  iconUrl,
+                  icon,
                   semanticsLabel: 'App Icon',
                   colorFilter:
                       ColorFilter.mode(Colors.black12, BlendMode.srcIn),

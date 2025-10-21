@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import './download_queue.dart';
-import 'app_list.dart';
 import '../navigation.dart';
 import 'badges.dart';
 
 final Map<String, Map<String, Object>> views = {
   "outlet": {
-    "widget": AppList(),
+    "widget": Container(),
     "title": "Outlet",
   },
   "play": {
@@ -57,7 +56,7 @@ class Sidebar extends ConsumerWidget {
   ];
 
   final Map<String, List<String>> categories = {
-    'device': [],
+    'device': ['flatpak'],
     'outlet': ['featured'],
     'play': ['audio', 'video', 'game'],
     'work': ['development', 'network', 'graphics'],

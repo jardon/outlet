@@ -32,7 +32,7 @@ final Map<String, Map<String, Object>> views = {
     "title": "Relax",
   },
   "device": {
-    "widget": AppList(details: false),
+    "widget": AppList(details: false, showFeaturedBadge: false),
     "title": "This Device",
   },
   "search": {

@@ -7,9 +7,11 @@ class AppList extends ConsumerWidget {
   AppList({
     super.key,
     this.details = false,
+    this.showFeaturedBadge = true,
   });
 
   final bool details;
+  final bool showFeaturedBadge;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -38,7 +40,7 @@ class AppList extends ConsumerWidget {
               BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           itemBuilder: (context, index) {
             return AppCard(
-              featured: apps[index]["featured"],
+              featured: showFeaturedBadge || apps[index]["featured"],
               verified: apps[index]["verified"],
               installed: apps[index]["installed"],
               details: details,

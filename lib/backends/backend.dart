@@ -1,26 +1,26 @@
 import "dart:math";
 
-abstract class Backend {
-  Backend({required this.data});
-
-  Map<String, Map<String, dynamic>> data;
+interface class Backend {
+  Map<String, Map<String, dynamic>> getInstalledPackages() {
+    return {};
+  }
 }
 
 class TestBackend implements Backend {
-  @override
   Map<String, Map<String, dynamic>> data;
-  Random random = Random();
-
-  List<String> categoriesList = [
-    "audio",
-    "video",
-    "game",
-    "development",
-    "network",
-    "graphics"
-  ];
 
   TestBackend() : data = {} {
+    Random random = Random();
+
+    List<String> categoriesList = [
+      "audio",
+      "video",
+      "game",
+      "development",
+      "network",
+      "graphics"
+    ];
+
     for (int i = 1; i <= 50; i++) {
       String appId = "app-$i";
 
@@ -52,5 +52,9 @@ class TestBackend implements Backend {
       List<String> categoriesList, int count, Random random) {
     categoriesList.shuffle(random);
     return categoriesList.take(count).toList();
+  }
+
+  Map<String, Map<String, dynamic>> getInstalledPackages() {
+    return this.data;
   }
 }

@@ -29,8 +29,7 @@ class TestBackend implements Backend {
 
       data[appId] = {
         "name": "App $i",
-        "icon":
-            "https://www.svgrepo.com/show/451998/application-x-executable.svg", // Use the provided icon URL
+        "icon": "lib/views/assets/flatpak-icon.svg",
         "description": "Description for App $i",
         "rating": 1 + random.nextDouble() * 4, // Random rating between 1 and 5
         "categories": pickedCategories, // Randomly picked categories

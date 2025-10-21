@@ -228,12 +228,11 @@ class Listing extends StatelessWidget {
             Container(
                 height: cardHeight * .6,
                 width: cardWidth,
-                child: SvgPicture.network(
+                child: SvgPicture.asset(
                   iconUrl,
                   semanticsLabel: 'App Icon',
-                  placeholderBuilder: (BuildContext context) => Container(
-                      padding: const EdgeInsets.all(30.0),
-                      child: const CircularProgressIndicator()),
+                  colorFilter:
+                      ColorFilter.mode(Colors.black12, BlendMode.srcIn),
                 )),
             Container(
                 height: cardHeight * .2,

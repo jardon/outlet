@@ -52,32 +52,6 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
-  ffigen: ^14.0.1
-
-ffigen:
-  output: 'lib/backends/flatpak/flatpak-bindings.dart'
-  headers:
-    entry-points:
-      - "/usr/include/flatpak/flatpak.h"
-  functions:
-    exclude:
-      - "_g*" # Exclude all functions starting with _g.
-      - "_G*"
-      - "G*"
-    include:
-      - "flatpak.*" # Include all functions starting with flatpak.
-  macros:
-    exclude:
-      - "_G*"
-      - "G*"
-  structs:
-    exclude:
-      - "_G*"
-      - "G*"
-  typedefs:
-    exclude:
-      - "_G*"
-      - "G*"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

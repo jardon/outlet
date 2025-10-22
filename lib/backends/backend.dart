@@ -57,4 +57,6 @@ class TestBackend implements Backend {
   Map<String, Map<String, dynamic>> getInstalledPackages() {
     return this.data;
   }
+
+  void destroy() {}
 }

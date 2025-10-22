@@ -15,7 +15,7 @@ class AppCard extends StatelessWidget {
     required this.description,
     required this.categories,
     this.size = 300,
-    required this.rating,
+    this.rating,
   });
 
   final bool featured;
@@ -28,7 +28,7 @@ class AppCard extends StatelessWidget {
   final borderRadius = 45.0;
   final double size;
   final List<String> categories;
-  final double rating;
+  final double? rating;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class InfoCard extends StatefulWidget {
     required this.icon,
     required this.description,
     required this.categories,
-    required this.rating,
+    this.rating,
   });
 
   final bool featured;
@@ -72,7 +72,7 @@ class InfoCard extends StatefulWidget {
   final cardWidth = 300.0;
   final cardHeight = 400.0;
   final List<String> categories;
-  final double rating;
+  final double? rating;
 
   @override
   _InfoCardState createState() => _InfoCardState();
@@ -179,7 +179,7 @@ class Listing extends StatelessWidget {
     required this.name,
     required this.icon,
     required this.categories,
-    required this.rating,
+    this.rating,
   });
 
   final bool featured;
@@ -190,7 +190,7 @@ class Listing extends StatelessWidget {
   final cardWidth = 300.0;
   final cardHeight = 400.0;
   final List<String> categories;
-  final double rating;
+  final double? rating;
 
   @override
   Widget build(BuildContext context) {
@@ -238,28 +238,29 @@ class Listing extends StatelessWidget {
                 height: cardHeight * .2,
                 width: cardWidth,
                 child: Row(children: <Widget>[
-                  Container(
-                      width: cardWidth - 130,
-                      alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.only(left: 30, right: 10),
-                      child: Text(
-                        name,
-                        overflow: TextOverflow.fade,
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )),
-                  Container(
-                      width: 130,
-                      height: cardHeight * .2,
-                      alignment: Alignment.centerRight,
-                      padding: EdgeInsets.only(right: 30),
-                      child: ReviewScore(
-                        score: rating,
-                        size: 20.0,
-                      ))
+                  Expanded(
+                      child: Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: 30, right: 10),
+                          child: Text(
+                            name,
+                            overflow: TextOverflow.fade,
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ))),
+                  if (rating != null)
+                    Container(
+                        width: 130,
+                        height: cardHeight * .2,
+                        alignment: Alignment.centerRight,
+                        padding: EdgeInsets.only(right: 30),
+                        child: ReviewScore(
+                          score: rating ?? 0.0,
+                          size: 20.0,
+                        ))
                 ])),
           ],
         ));

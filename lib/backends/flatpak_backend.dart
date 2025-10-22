@@ -55,7 +55,7 @@ class FlatpakBackend implements Backend {
           "name": appId,
           "icon": "lib/views/assets/flatpak-icon.svg",
           "description": "Description for App $appId",
-          "rating": 3.0,
+          "rating": null,
           "categories": <String>[],
           "installed": true,
           "verified": false,

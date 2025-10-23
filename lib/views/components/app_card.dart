@@ -246,6 +246,7 @@ class Listing extends StatelessWidget {
                             name,
                             maxLines: 1,
                             overflow: TextOverflow.fade,
+                            softWrap: false,
                             style: TextStyle(
                               fontSize: 24,
                               color: Colors.black,

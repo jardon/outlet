@@ -120,11 +120,25 @@ class Sidebar extends ConsumerWidget {
               },
             ),
           )),
-          Container(
-            height: 150,
-            // color: Colors.yellow,
-            child: DownloadQueue(),
-          ),
+          GestureDetector(
+              onTap: () {
+                Scaffold.of(context).closeDrawer();
+                Navigator.push(
+                  context,
+                  NoAnimationPageRoute(
+                    pageBuilder: (context, animation1, animation2) =>
+                        Navigation(
+                      child: views["downloads"]?["widget"] as Widget,
+                      title: views["downloads"]?["title"] as String,
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+                height: 150,
+                // color: Colors.yellow,
+                child: DownloadQueue(),
+              )),
         ]));
   }
 }

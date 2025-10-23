@@ -9,8 +9,7 @@ class FlatpakBackend implements Backend {
   late ffi.Pointer<FlatpakInstallation> installationPtr;
 
   FlatpakBackend()
-      : bindings = FlatpakBindings(
-            ffi.DynamicLibrary.open('/usr/lib/x86_64-linux-gnu/libflatpak.so')),
+      : bindings = FlatpakBindings(ffi.DynamicLibrary.open('libflatpak.so')),
         error = pkg_ffi.calloc<ffi.Pointer<GError>>() {
     this.installationPtr =
         this.bindings.flatpak_installation_new_system(ffi.nullptr, this.error);

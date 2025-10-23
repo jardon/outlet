@@ -244,6 +244,7 @@ class Listing extends StatelessWidget {
                           padding: EdgeInsets.only(left: 30, right: 10),
                           child: Text(
                             name,
+                            maxLines: 1,
                             overflow: TextOverflow.fade,
                             style: TextStyle(
                               fontSize: 24,

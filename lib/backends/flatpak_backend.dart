@@ -62,9 +62,6 @@ class FlatpakBackend implements Backend {
           "featured": false,
           "reviews": [],
         };
-        pkg_ffi.calloc.free(namePtr);
-        pkg_ffi.calloc.free(refPtr);
-        pkg_ffi.calloc.free(refVoidPtr);
       }
       pkg_ffi.calloc.free(pdataPtr);
     }

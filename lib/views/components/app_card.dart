@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'review.dart';
 import 'badges.dart';
+import 'app_icon_loader.dart';
 
 class AppCard extends StatelessWidget {
   AppCard({
@@ -228,11 +228,8 @@ class Listing extends StatelessWidget {
             Container(
                 height: cardHeight * .6,
                 width: cardWidth,
-                child: SvgPicture.asset(
-                  icon,
-                  semanticsLabel: 'App Icon',
-                  colorFilter:
-                      ColorFilter.mode(Colors.black12, BlendMode.srcIn),
+                child: AppIconLoader(
+                  icon: icon,
                 )),
             Container(
                 height: cardHeight * .2,

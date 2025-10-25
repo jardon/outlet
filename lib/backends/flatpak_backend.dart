@@ -216,6 +216,17 @@ class FlatpakBackend implements Backend {
         }
       }
     }
+
+    bool verified = false;
+    final customParent = document.findAllElements('custom').firstOrNull;
+    if (customParent != null) {
+      for (var value in customParent.findElements('value')) {
+        if (value.getAttribute('key') == 'flathub::verification::verified') {
+          verified = bool.parse(value.innerText);
+        }
+      }
+    }
+
     return FlatpakApplication(
       id: id,
       name: name,
@@ -235,6 +246,7 @@ class FlatpakBackend implements Backend {
       keywords: keywords,
       releases: releases,
       content: content,
+      verified: verified,
     );
   }
 }

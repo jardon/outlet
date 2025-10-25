@@ -1,15 +1,18 @@
 import "dart:math";
+import "dart:core";
+import "../core/application.dart";
+import "../core/flatpak_application.dart";
 
 interface class Backend {
-  Map<String, Map<String, dynamic>> getInstalledPackages() {
-    return {};
+  List<Application> getInstalledPackages() {
+    return [];
   }
 }
 
 class TestBackend implements Backend {
-  Map<String, Map<String, dynamic>> data;
+  List<Application> apps;
 
-  TestBackend() : data = {} {
+  TestBackend() : apps = [] {
     Random random = Random();
 
     List<String> categoriesList = [
@@ -27,16 +30,16 @@ class TestBackend implements Backend {
       List<String> pickedCategories =
           _pickRandomCategories(categoriesList, 2, random);
 
-      data[appId] = {
-        "name": "App $i",
-        "icon": "lib/views/assets/flatpak-icon.svg",
-        "description": "Description for App $i",
-        "rating": 1 + random.nextDouble() * 4, // Random rating between 1 and 5
-        "categories": pickedCategories, // Randomly picked categories
-        "installed": random.nextBool(),
-        "verified": random.nextBool(),
-        "featured": random.nextBool(),
-        "reviews": [
+      apps.add(new FlatpakApplication(
+        name: "App $i",
+        id: appId,
+        icon: "lib/views/assets/flatpak-icon.svg",
+        description: "Description for App $i",
+        categories: pickedCategories, // Randomly picked categories
+        installed: random.nextBool(),
+        verified: random.nextBool(),
+        featured: random.nextBool(),
+        reviews: [
           {
             "title": "Review for App $i",
             "rating": random.nextInt(5) +
@@ -44,7 +47,7 @@ class TestBackend implements Backend {
             "message": "This is a review message for App $i.",
           }
         ],
-      };
+      ));
     }
   }
 
@@ -54,8 +57,8 @@ class TestBackend implements Backend {
     return categoriesList.take(count).toList();
   }
 
-  Map<String, Map<String, dynamic>> getInstalledPackages() {
-    return this.data;
+  List<Application> getInstalledPackages() {
+    return this.apps;
   }
 
   void destroy() {}

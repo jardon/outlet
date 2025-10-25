@@ -42,6 +42,8 @@ dependencies:
   riverpod: ^2.6.1
   flutter_riverpod: ^2.6.1
   libflatpak: ^1.16.1-2
+  xml: ^6.6.1
+  convert: ^3.1.2
 
 dev_dependencies:
   flutter_test:

@@ -42,15 +42,15 @@ class AppList extends ConsumerWidget {
               BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           itemBuilder: (context, index) {
             return AppCard(
-              featured: showFeaturedBadge && apps[index]["featured"],
-              verified: apps[index]["verified"],
-              installed: showInstalledBadge && apps[index]["installed"],
+              featured: showFeaturedBadge && apps[index].featured,
+              verified: apps[index].verified,
+              installed: showInstalledBadge && apps[index].installed,
               details: details,
-              name: apps[index]["name"],
-              icon: apps[index]["icon"],
-              description: apps[index]["description"],
-              categories: apps[index]["categories"],
-              rating: apps[index]["rating"],
+              name: apps[index].name ?? apps[index].id,
+              icon: apps[index].icon,
+              description: apps[index].description ?? "description",
+              categories: apps[index].categories,
+              rating: apps[index].rating,
             );
           },
         );

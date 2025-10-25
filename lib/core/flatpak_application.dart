@@ -64,6 +64,9 @@ class FlatpakApplication extends Application {
           break;
         case 'TextEditor' || 'IDE' || 'Developement':
           categoryBadges.add('development');
+        case 'Game':
+          categoryBadges.add('game');
+          break;
       }
     }
     return categoryBadges.toList();

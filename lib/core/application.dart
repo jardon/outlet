@@ -91,6 +91,8 @@ abstract class Application {
 
   List<String> get screenshots => _screenshots;
 
+  List<String> get keywords => _keywords;
+
   Map<String, dynamic> get releases => _releases;
 
   Map<String, String> get content => _content;

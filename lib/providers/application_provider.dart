@@ -4,7 +4,6 @@ import 'dart:core';
 import '../backends/backend.dart';
 import '../backends/flatpak_backend.dart';
 import '../core/application.dart';
-import '../core/flatpak_application.dart';
 
 final appListProvider = Provider((ref) {
   Map<String, String> env = Platform.environment;

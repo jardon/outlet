@@ -12,7 +12,6 @@ import '../core/application.dart';
 import '../core/flatpak_application.dart';
 
 class FlatpakBackend implements Backend {
-  final defaultIcon = "lib/views/assets/flatpak-icon.svg";
   late FlatpakBindings bindings;
   late ffi.Pointer<ffi.Pointer<GError>> error;
   late ffi.Pointer<FlatpakInstallation> installationPtr;
@@ -89,7 +88,9 @@ class FlatpakBackend implements Backend {
           final ffi.Pointer<ffi.Char> namePtr =
               bindings.flatpak_ref_get_name(refPtr);
           final String id = namePtr.cast<pkg_ffi.Utf8>().toDartString();
-          apps.add(new FlatpakApplication(id: id, icon: defaultIcon));
+          apps.add(new FlatpakApplication(
+            id: id,
+          ));
         }
       }
       pkg_ffi.calloc.free(pdataPtr);
@@ -235,8 +236,7 @@ class FlatpakBackend implements Backend {
       description: description,
       developer: developer,
       icon: icons.firstWhereOrNull(
-              (path) => path.startsWith('http') && path.endsWith('.png')) ??
-          defaultIcon,
+          (path) => path.startsWith('http') && path.endsWith('.png')),
       homepage: homepage,
       help: help,
       translate: translate,

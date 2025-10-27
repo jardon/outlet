@@ -78,8 +78,14 @@ class FlatpakBackend implements Backend {
           final List<int> decompressedBytes = gzipCodec.decode(compressedBytes);
           final String xmlString = utf8.decode(decompressedBytes);
           try {
-            final document = XmlDocument.parse(xmlString);
-            apps.add(appFromXML(document, deployDir));
+            final XmlDocument document = XmlDocument.parse(xmlString);
+            final XmlElement? componentElement =
+                document.findAllElements('component').firstOrNull;
+            if (componentElement == null) {
+              throw XmlParserException(
+                  "Error: Could not find the main <component> tag.");
+            }
+            apps.add(appFromXML(componentElement, deployDir));
           } on XmlParserException catch (e) {
             print('Error parsing XML: $e');
           }
@@ -106,14 +112,7 @@ class FlatpakBackend implements Backend {
     return apps;
   }
 
-  Application appFromXML(XmlDocument document, String deployDir) {
-    final componentElement = document.findAllElements('component').firstOrNull;
-
-    if (componentElement == null) {
-      throw XmlParserException(
-          "Error: Could not find the main <component> tag.");
-    }
-
+  Application appFromXML(XmlElement componentElement, String? deployDir) {
     final id = componentElement.findElements('id').firstOrNull?.text.trim();
     if (id == null) {
       throw XmlParserException("Error: Could not find <id> tag.");
@@ -139,7 +138,9 @@ class FlatpakBackend implements Backend {
     for (var iconXML in componentElement.findAllElements('icon')) {
       String? heightAttr = iconXML.getAttribute('height');
       int height = (heightAttr != null) ? int.parse(heightAttr) : 0;
-      if (iconXML.getAttribute('type') == 'cached' && height > iconHeight) {
+      if (iconXML.getAttribute('type') == 'cached' &&
+          height > iconHeight &&
+          deployDir != null) {
         icon =
             "${deployDir}/files/share/app-info/icons/flatpak/${height}x${height}/${iconXML.innerText}";
         iconHeight = height;
@@ -203,7 +204,8 @@ class FlatpakBackend implements Backend {
     }
 
     Map<String, dynamic> releases = {};
-    final releasesParent = document.findAllElements('releases').firstOrNull;
+    final releasesParent =
+        componentElement.findAllElements('releases').firstOrNull;
     if (releasesParent != null) {
       for (final release in releasesParent.findElements('release')) {
         final version = release.getAttribute('version');
@@ -224,7 +226,7 @@ class FlatpakBackend implements Backend {
 
     final Map<String, String> content = {};
     final contentRatingElement =
-        document.findAllElements('content_rating').firstOrNull;
+        componentElement.findAllElements('content_rating').firstOrNull;
 
     if (contentRatingElement != null) {
       final attributeElements =
@@ -244,7 +246,7 @@ class FlatpakBackend implements Backend {
     }
 
     bool verified = false;
-    final customParent = document.findAllElements('custom').firstOrNull;
+    final customParent = componentElement.findAllElements('custom').firstOrNull;
     if (customParent != null) {
       for (var value in customParent.findElements('value')) {
         if (value.getAttribute('key') == 'flathub::verification::verified') {

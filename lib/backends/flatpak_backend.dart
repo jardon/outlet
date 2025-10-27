@@ -292,40 +292,39 @@ class FlatpakBackend implements Backend {
         final ffi.Pointer<ffi.Void> refVoidPtr = pdataPtr.elementAt(i).value;
         final ffi.Pointer<FlatpakRemote> remotePtr =
             refVoidPtr.cast<FlatpakRemote>();
-        final ffi.Pointer<GFile> appstreamDirPtr = bindings.flatpak_remote_get_appstream_dir(remotePtr, archPtr);
-        final ffi.Pointer<ffi.Char> appstreamFileNamePtr = 'appstream.xml'.toNativeUtf8().cast();
-        final ffi.Pointer<GFile> appstreamFilePtr = bindings.g_file_get_child(appstreamDirPtr, appstreamFileNamePtr);
+        final ffi.Pointer<GFile> appstreamDirPtr =
+            bindings.flatpak_remote_get_appstream_dir(remotePtr, archPtr);
+        final ffi.Pointer<ffi.Char> appstreamFileNamePtr =
+            'appstream.xml'.toNativeUtf8().cast();
+        final ffi.Pointer<GFile> appstreamFilePtr =
+            bindings.g_file_get_child(appstreamDirPtr, appstreamFileNamePtr);
 
         ffi.Pointer<ffi.Char>? fileContentsPtr;
-        ffi.Pointer<ffi.Pointer<ffi.Char>> fileContentsPtrPtr = pkg_ffi.calloc<ffi.Pointer<ffi.Char>>();
-        ffi.Pointer<ffi.Pointer<ffi.Char>> etagPtrPtr = pkg_ffi.calloc<ffi.Pointer<ffi.Char>>();
+        ffi.Pointer<ffi.Pointer<ffi.Char>> fileContentsPtrPtr =
+            pkg_ffi.calloc<ffi.Pointer<ffi.Char>>();
+        ffi.Pointer<ffi.Pointer<ffi.Char>> etagPtrPtr =
+            pkg_ffi.calloc<ffi.Pointer<ffi.Char>>();
         ffi.Pointer<gsize>? sizeP;
         sizeP = pkg_ffi.calloc<gsize>();
-        final int success = bindings.g_file_load_contents(
-          appstreamFilePtr,
-          ffi.nullptr,
-          fileContentsPtrPtr,
-          sizeP,
-          etagPtrPtr,
-          error
-        );
+        final int success = bindings.g_file_load_contents(appstreamFilePtr,
+            ffi.nullptr, fileContentsPtrPtr, sizeP, etagPtrPtr, error);
         if (error.value == ffi.nullptr && success == 1) {
           fileContentsPtr = fileContentsPtrPtr.value;
-          
+
           final int size = sizeP.value;
-          
+
           if (size > 0) {
             final ffi.Pointer<ffi.Uint8> uint8Ptr = fileContentsPtr.cast();
             final Uint8List metaDataBytes = uint8Ptr.asTypedList(size);
-            
-            appstreamXmlContent = utf8.decode(metaDataBytes, allowMalformed: true);
+
+            appstreamXmlContent =
+                utf8.decode(metaDataBytes, allowMalformed: true);
 
             try {
-              final XmlDocument document = XmlDocument.parse(appstreamXmlContent);
-              for (var componentElement in document.findAllElements('component')) {
-                if (componentElement == null) {
-                  continue;
-                }
+              final XmlDocument document =
+                  XmlDocument.parse(appstreamXmlContent);
+              for (var componentElement
+                  in document.findAllElements('component')) {
                 apps.add(appFromXML(componentElement, null));
               }
             } on XmlParserException catch (e) {

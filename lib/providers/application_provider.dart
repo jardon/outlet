@@ -13,7 +13,7 @@ final appListProvider = Provider((ref) {
   }
 
   if (env['FLATPAK_ENABLED'] != null) {
-    apps.addAll(FlatpakBackend().getAllRemotePackages());
+    apps.addAll(FlatpakBackend().getInstalledPackages());
   }
   return apps;
 });

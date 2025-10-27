@@ -296,33 +296,41 @@ class FlatpakBackend implements Backend {
         final ffi.Pointer<ffi.Char> appstreamFileNamePtr = 'appstream.xml'.toNativeUtf8().cast();
         final ffi.Pointer<GFile> appstreamFilePtr = bindings.g_file_get_child(appstreamDirPtr, appstreamFileNamePtr);
 
-        ffi.Pointer<GBytes>? fileContentsPtr;
-        ffi.Pointer<ffi.Pointer<GBytes>> fileContentsPtrPtr = pkg_ffi.calloc<ffi.Pointer<GBytes>>();
+        ffi.Pointer<ffi.Char>? fileContentsPtr;
+        ffi.Pointer<ffi.Pointer<ffi.Char>> fileContentsPtrPtr = pkg_ffi.calloc<ffi.Pointer<ffi.Char>>();
         ffi.Pointer<ffi.Pointer<ffi.Char>> etagPtrPtr = pkg_ffi.calloc<ffi.Pointer<ffi.Char>>();
         ffi.Pointer<gsize>? sizeP;
-        final bool success = bindings.g_file_load_contents(
+        sizeP = pkg_ffi.calloc<gsize>();
+        final int success = bindings.g_file_load_contents(
           appstreamFilePtr,
+          ffi.nullptr,
           fileContentsPtrPtr,
+          sizeP,
           etagPtrPtr,
           error
         );
-        if (error.value == ffi.nullptr && success) {
+        if (error.value == ffi.nullptr && success == 1) {
           fileContentsPtr = fileContentsPtrPtr.value;
-          sizeP = pkg_ffi.calloc<gsize>();
-          
-          final ffi.Pointer<ffi.Void> metaDataPtr =
-              bindings.g_bytes_get_data(fileContentsPtr!, sizeP);
           
           final int size = sizeP.value;
           
           if (size > 0) {
-            final ffi.Pointer<ffi.Uint8> uint8Ptr = metaDataPtr.cast();
+            final ffi.Pointer<ffi.Uint8> uint8Ptr = fileContentsPtr.cast();
             final Uint8List metaDataBytes = uint8Ptr.asTypedList(size);
             
             appstreamXmlContent = utf8.decode(metaDataBytes, allowMalformed: true);
 
-            final document = XmlDocument.parse(appstreamXmlContent);
-            apps.add(appFromXML(document));
+            try {
+              final XmlDocument document = XmlDocument.parse(appstreamXmlContent);
+              for (var componentElement in document.findAllElements('component')) {
+                if (componentElement == null) {
+                  continue;
+                }
+                apps.add(appFromXML(componentElement, null));
+              }
+            } on XmlParserException catch (e) {
+              print('Error parsing XML: $e');
+            }
           }
         } else {
           print("Error occurred.");

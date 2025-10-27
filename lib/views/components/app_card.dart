@@ -12,7 +12,7 @@ class AppCard extends StatelessWidget {
     this.details = true,
     required this.name,
     required this.icon,
-    required this.description,
+    required this.summary,
     required this.categories,
     this.size = 300,
     this.rating,
@@ -24,7 +24,7 @@ class AppCard extends StatelessWidget {
   final bool details;
   final String name;
   final String icon;
-  final String description;
+  final String summary;
   final borderRadius = 45.0;
   final double size;
   final List<String> categories;
@@ -40,7 +40,7 @@ class AppCard extends StatelessWidget {
       details: details,
       name: name,
       icon: icon,
-      description: description,
+      description: summary,
       categories: categories,
       rating: rating,
     ));

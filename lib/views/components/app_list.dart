@@ -48,7 +48,7 @@ class AppList extends ConsumerWidget {
               details: details,
               name: apps[index].name ?? apps[index].id,
               icon: apps[index].icon,
-              description: apps[index].description ?? "description",
+              summary: apps[index].summary ?? "No summary available.",
               categories: apps[index].categories,
               rating: apps[index].rating,
             );

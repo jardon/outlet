@@ -281,60 +281,51 @@ class FlatpakBackend implements Backend {
     ffi.Pointer<GPtrArray> remotesPtr = bindings
         .flatpak_installation_list_remotes(installationPtr, ffi.nullptr, error);
     if (error.value == ffi.nullptr) {
+      String? appstreamXmlContent;
       final GPtrArray remotesRefs = remotesPtr.ref;
       final int length = remotesRefs.len;
       print('Found $length remote references (apps and runtimes).');
       final ffi.Pointer<gpointer> pdataPtr = remotesRefs.pdata;
+      final ffi.Pointer<ffi.Char> archPtr = bindings.flatpak_get_default_arch();
 
       for (int i = 0; i < length; i++) {
         final ffi.Pointer<ffi.Void> refVoidPtr = pdataPtr.elementAt(i).value;
         final ffi.Pointer<FlatpakRemote> remotePtr =
             refVoidPtr.cast<FlatpakRemote>();
-        final ffi.Pointer<ffi.Char> namePtr =
-            bindings.flatpak_remote_get_name(remotePtr);
-        // print("HERE YOU FOOL: ${namePtr.cast<pkg_ffi.Utf8>().toDartString()}");
-        final ffi.Pointer<GPtrArray> remotesRefSyncPtr =
-            bindings.flatpak_installation_list_remote_refs_sync(
-                installationPtr, namePtr, ffi.nullptr, error);
-        if (error.value == ffi.nullptr) {
-          final GPtrArray remotesRefSyncRef = remotesRefSyncPtr.ref;
-          // final int remotesLength = remotesRefSyncRef.len;
-          final ffi.Pointer<gpointer> remotesPdataPtr = remotesRefSyncRef.pdata;
-          for (int j = 0; j < 50; j++) {
-            final ffi.Pointer<ffi.Void> refRemoteVoidPtr =
-                remotesPdataPtr.elementAt(j).value;
-            final ffi.Pointer<FlatpakRemoteRef> remoteRefPtr =
-                refRemoteVoidPtr.cast<FlatpakRemoteRef>();
-            // final ffi.Pointer<ffi.Char> remoteName =
-            //     bindings.flatpak_remote_ref_get_remote_name(remoteRefPtr);
-            // print(
-            //     "Remote name: ${remoteName.cast<pkg_ffi.Utf8>().toDartString()}");
-            final ffi.Pointer<GBytes> remoteRefMetadata =
-                bindings.flatpak_remote_ref_get_metadata(remoteRefPtr);
-            if (error.value == ffi.nullptr) {
-              final int refRemoteSize =
-                  bindings.g_bytes_get_size(remoteRefMetadata);
-              final sizeP = pkg_ffi.malloc<gsize>();
-              sizeP.value = refRemoteSize;
-              final gconstpointer metaDataPtr =
-                  bindings.g_bytes_get_data(remoteRefMetadata, sizeP);
-              final ffi.Pointer<ffi.Void> void_ptr = metaDataPtr;
-              final String metaDataString = utf8.decode(voidptr.value);
-              print(metaDataString);
-            } else {
-              print("Error occurred.");
-              error.value = ffi.nullptr;
-            }
+        final ffi.Pointer<GFile> appstreamDirPtr = bindings.flatpak_remote_get_appstream_dir(remotePtr, archPtr);
+        final ffi.Pointer<ffi.Char> appstreamFileNamePtr = 'appstream.xml'.toNativeUtf8().cast();
+        final ffi.Pointer<GFile> appstreamFilePtr = bindings.g_file_get_child(appstreamDirPtr, appstreamFileNamePtr);
+
+        ffi.Pointer<GBytes>? fileContentsPtr;
+        ffi.Pointer<ffi.Pointer<GBytes>> fileContentsPtrPtr = pkg_ffi.calloc<ffi.Pointer<GBytes>>();
+        ffi.Pointer<ffi.Pointer<ffi.Char>> etagPtrPtr = pkg_ffi.calloc<ffi.Pointer<ffi.Char>>();
+        ffi.Pointer<gsize>? sizeP;
+        final bool success = bindings.g_file_load_contents(
+          appstreamFilePtr,
+          fileContentsPtrPtr,
+          etagPtrPtr,
+          error
+        );
+        if (error.value == ffi.nullptr && success) {
+          fileContentsPtr = fileContentsPtrPtr.value;
+          sizeP = pkg_ffi.calloc<gsize>();
+          
+          final ffi.Pointer<ffi.Void> metaDataPtr =
+              bindings.g_bytes_get_data(fileContentsPtr!, sizeP);
+          
+          final int size = sizeP.value;
+          
+          if (size > 0) {
+            final ffi.Pointer<ffi.Uint8> uint8Ptr = metaDataPtr.cast();
+            final Uint8List metaDataBytes = uint8Ptr.asTypedList(size);
+            
+            appstreamXmlContent = utf8.decode(metaDataBytes, allowMalformed: true);
+
+            final document = XmlDocument.parse(appstreamXmlContent);
+            apps.add(appFromXML(document));
           }
         } else {
-          // final ffi.Pointer<GError> gError = error.value;
-
-          // // // Get the message pointer from the struct
-          // final ffi.Pointer<ffi.Char> cMessage = gError.ref.message;
-
-          // // // Convert the C string (Pointer<Char>) to a Dart String
-          // final String errorMessage = cMessage.cast<pkg_ffi.Utf8>().toDartString();
-          print("Error syncing flatpak remotes.");
+          print("Error occurred.");
           error.value = ffi.nullptr;
         }
       }

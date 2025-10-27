@@ -112,7 +112,7 @@ class FlatpakBackend implements Backend {
     return apps;
   }
 
-  Application appFromXML(XmlElement componentElement, String? deployDir) {
+  Application appFromXML(XmlElement componentElement, String deployDir) {
     final id = componentElement.findElements('id').firstOrNull?.text.trim();
     if (id == null) {
       throw XmlParserException("Error: Could not find <id> tag.");
@@ -138,13 +138,13 @@ class FlatpakBackend implements Backend {
     for (var iconXML in componentElement.findAllElements('icon')) {
       String? heightAttr = iconXML.getAttribute('height');
       int height = (heightAttr != null) ? int.parse(heightAttr) : 0;
-      if (iconXML.getAttribute('type') == 'cached' &&
-          height > iconHeight &&
-          deployDir != null) {
-        icon =
-            "${deployDir}/files/share/app-info/icons/flatpak/${height}x${height}/${iconXML.innerText}";
+      if (iconXML.getAttribute('type') == 'cached' && height > iconHeight) {
+        icon = (deployDir.startsWith("/var/lib/flatpak/appstream"))
+            ? "${deployDir}/icons/${height}x${height}/${iconXML.innerText}"
+            : "${deployDir}/files/share/app-info/icons/flatpak/${height}x${height}/${iconXML.innerText}";
         iconHeight = height;
-      } else if (height > remoteIconHeight) {
+      } else if (iconXML.getAttribute('type') == 'remote' &&
+          height > remoteIconHeight) {
         remoteIcon = iconXML.innerText;
         remoteIconHeight = height;
       }
@@ -294,6 +294,10 @@ class FlatpakBackend implements Backend {
             refVoidPtr.cast<FlatpakRemote>();
         final ffi.Pointer<GFile> appstreamDirPtr =
             bindings.flatpak_remote_get_appstream_dir(remotePtr, archPtr);
+        final ffi.Pointer<ffi.Char> appstreamDirCharPtr =
+            bindings.g_file_get_path(appstreamDirPtr);
+        final String appstreamDir =
+            appstreamDirCharPtr.cast<pkg_ffi.Utf8>().toDartString();
         final ffi.Pointer<ffi.Char> appstreamFileNamePtr =
             'appstream.xml'.toNativeUtf8().cast();
         final ffi.Pointer<GFile> appstreamFilePtr =
@@ -325,7 +329,7 @@ class FlatpakBackend implements Backend {
                   XmlDocument.parse(appstreamXmlContent);
               for (var componentElement
                   in document.findAllElements('component')) {
-                apps.add(appFromXML(componentElement, null));
+                apps.add(appFromXML(componentElement, appstreamDir));
               }
             } on XmlParserException catch (e) {
               print('Error parsing XML: $e');

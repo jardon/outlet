@@ -55,6 +55,10 @@ class FlatpakBackend implements Backend {
         final ffi.Pointer<FlatpakInstalledRef> refPtr =
             refVoidPtr.cast<FlatpakInstalledRef>();
 
+        final ffi.Pointer<ffi.Char> dirPtr =
+            bindings.flatpak_installed_ref_get_deploy_dir(refPtr);
+        final deployDir = dirPtr.cast<pkg_ffi.Utf8>().toDartString();
+
         final ffi.Pointer<GBytes> refAppPtr =
             bindings.flatpak_installed_ref_load_appdata(
           refPtr,
@@ -75,7 +79,7 @@ class FlatpakBackend implements Backend {
           final String xmlString = utf8.decode(decompressedBytes);
           try {
             final document = XmlDocument.parse(xmlString);
-            apps.add(appFromXML(document));
+            apps.add(appFromXML(document, deployDir));
           } on XmlParserException catch (e) {
             print('Error parsing XML: $e');
           }
@@ -102,7 +106,7 @@ class FlatpakBackend implements Backend {
     return apps;
   }
 
-  Application appFromXML(XmlDocument document) {
+  Application appFromXML(XmlDocument document, String deployDir) {
     final componentElement = document.findAllElements('component').firstOrNull;
 
     if (componentElement == null) {
@@ -127,8 +131,29 @@ class FlatpakBackend implements Backend {
         componentElement.findElements('description').firstOrNull?.text.trim();
     final developer =
         componentElement.findElements('developer').firstOrNull?.text.trim();
-    final icons =
-        componentElement.findAllElements('icon').map((icon) => icon.innerText);
+
+    String? icon = null;
+    String? remoteIcon = null;
+    int iconHeight = 0;
+    int remoteIconHeight = 0;
+    for (var iconXML in componentElement.findAllElements('icon')) {
+      String? heightAttr = iconXML.getAttribute('height');
+      int height = (heightAttr != null) ? int.parse(heightAttr) : 0;
+      if (iconXML.getAttribute('type') == 'cached' && height > iconHeight) {
+        icon =
+            "${deployDir}/files/share/app-info/icons/flatpak/${height}x${height}/${iconXML.innerText}";
+        iconHeight = height;
+      } else if (height > remoteIconHeight) {
+        remoteIcon = iconXML.innerText;
+        remoteIconHeight = height;
+      }
+    }
+    if (icon != null) {
+      File file = File(icon);
+      if (!file.existsSync()) {
+        icon = null;
+      }
+    }
 
     String? homepage;
     String? help;
@@ -235,8 +260,7 @@ class FlatpakBackend implements Backend {
       license: license,
       description: description,
       developer: developer,
-      icon: icons.firstWhereOrNull(
-          (path) => path.startsWith('http') && path.endsWith('.png')),
+      icon: icon ?? remoteIcon,
       homepage: homepage,
       help: help,
       translate: translate,

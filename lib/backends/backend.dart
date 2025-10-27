@@ -7,6 +7,10 @@ interface class Backend {
   List<Application> getInstalledPackages() {
     return [];
   }
+
+  List<Application> getAllRemotePackages() {
+    return [];
+  }
 }
 
 class TestBackend implements Backend {
@@ -58,6 +62,10 @@ class TestBackend implements Backend {
   }
 
   List<Application> getInstalledPackages() {
+    return this.apps;
+  }
+
+  List<Application> getAllRemotePackages() {
     return this.apps;
   }
 

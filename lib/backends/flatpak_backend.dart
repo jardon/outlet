@@ -89,6 +89,7 @@ class FlatpakBackend implements Backend {
           } on XmlParserException catch (e) {
             print('Error parsing XML: $e');
           }
+          pkg_ffi.malloc.free(sizeP);
         } else {
           print(
               'Failed to load appdata. GError pointer received: ${this.error.value}');

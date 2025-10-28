@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:io';
 import './download_queue.dart';
 import 'app_list.dart';
 import '../navigation.dart';
 import 'badges.dart';
+
+Map<String, String> env = Platform.environment;
 
 final Map<String, Map<String, Object>> views = {
   "outlet": {
@@ -46,6 +49,14 @@ final Map<String, Map<String, Object>> views = {
   },
 };
 
+final List<String> appSupport = (() {
+  List<String> supportList = [];
+  if (env['FLATPAK_ENABLED'] != null) {
+    supportList.add('flatpak');
+  }
+  return supportList;
+})();
+
 class Sidebar extends ConsumerWidget {
   final List<String> entries = [
     'device',
@@ -58,7 +69,7 @@ class Sidebar extends ConsumerWidget {
   ];
 
   final Map<String, List<String>> categories = {
-    'device': ['flatpak'],
+    'device': appSupport,
     'outlet': ['featured'],
     'play': ['audio', 'video', 'game'],
     'work': ['development', 'network', 'graphics'],

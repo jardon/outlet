@@ -2,47 +2,34 @@ import 'package:flutter/material.dart';
 import 'review.dart';
 import 'badges.dart';
 import 'app_icon_loader.dart';
+import '../../core/application.dart';
 
 class AppCard extends StatelessWidget {
   AppCard({
     super.key,
-    required this.featured,
-    required this.verified,
-    required this.installed,
+    required this.app,
     this.details = true,
-    required this.name,
-    required this.icon,
-    required this.summary,
-    required this.categories,
     this.size = 300,
-    this.rating,
   });
 
-  final bool featured;
-  final bool verified;
-  final bool installed;
-  final bool details;
-  final String name;
-  final String icon;
-  final String summary;
+  final Application app;
   final borderRadius = 45.0;
+  final bool details;
   final double size;
-  final List<String> categories;
-  final double? rating;
 
   @override
   Widget build(BuildContext context) {
     return FittedBox(
         child: InfoCard(
-      featured: featured,
-      verified: verified,
-      installed: installed,
+      featured: app.featured,
+      verified: app.verified,
+      installed: app.installed,
       details: details,
-      name: name,
-      icon: icon,
-      description: summary,
-      categories: categories,
-      rating: rating,
+      name: app.name ?? app.id,
+      icon: app.icon,
+      description: app.summary ?? "No summary available.",
+      categories: app.categories,
+      rating: app.rating,
     ));
   }
 }

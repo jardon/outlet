@@ -119,9 +119,24 @@ class FlatpakBackend implements Backend {
       throw XmlParserException("Error: Could not find <id> tag.");
     }
 
-    final name = componentElement.findElements('name').firstOrNull?.text.trim();
-    final summary =
-        componentElement.findElements('summary').firstOrNull?.text.trim();
+    String? name;
+    for (var nameElement in componentElement.findAllElements('name').where(
+      (element) {
+        return element.parentElement?.name.local != 'developer';
+      },
+    )) {
+      if (nameElement.getAttribute('xml:lang') == null) {
+        name = nameElement.text.trim();
+      }
+    }
+
+    String? summary;
+    for (var summaryElement in componentElement.findAllElements('summary')) {
+      if (summaryElement.getAttribute('xml:lang') == null) {
+        summary = summaryElement.text.trim();
+      }
+    }
+
     final license = componentElement
         .findElements('project_license')
         .firstOrNull

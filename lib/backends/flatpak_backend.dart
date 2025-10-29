@@ -142,8 +142,15 @@ class FlatpakBackend implements Backend {
         .firstOrNull
         ?.text
         .trim();
-    final description =
-        componentElement.findElements('description').firstOrNull?.text.trim();
+
+    String? description;
+    for (var descriptionElement
+        in componentElement.findAllElements('description')) {
+      if (descriptionElement.getAttribute('xml:lang') == null) {
+        description = descriptionElement.text.trim();
+      }
+    }
+
     final developer =
         componentElement.findElements('developer').firstOrNull?.text.trim();
 

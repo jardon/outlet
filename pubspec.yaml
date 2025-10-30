@@ -44,6 +44,7 @@ dependencies:
   libflatpak: ^1.16.1-2
   xml: ^6.6.1
   convert: ^3.1.2
+  flutter_html: ^3.0.0
 
 dev_dependencies:
   flutter_test:

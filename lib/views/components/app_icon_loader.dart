@@ -18,28 +18,32 @@ class AppIconLoader extends StatelessWidget {
       if (isSvg) {
         return SvgPicture.network(
           icon,
-          fit: BoxFit.contain,
+          height: 120,
+          width: null,
+          fit: BoxFit.fitHeight,
           semanticsLabel: 'App Icon',
           colorFilter: ColorFilter.mode(Colors.black12, BlendMode.srcIn),
         );
       } else {
         return Image.network(
           icon,
-          fit: BoxFit.contain,
+          fit: BoxFit.fitHeight,
         );
       }
     } else {
       if (isSvg) {
         return SvgPicture.asset(
           icon,
-          fit: BoxFit.contain,
+          height: 120,
+          width: null,
+          fit: BoxFit.fitHeight,
           semanticsLabel: 'App Icon',
           colorFilter: ColorFilter.mode(Colors.black12, BlendMode.srcIn),
         );
       } else {
         return Image.asset(
           icon,
-          fit: BoxFit.contain,
+          fit: BoxFit.fitHeight,
         );
       }
     }

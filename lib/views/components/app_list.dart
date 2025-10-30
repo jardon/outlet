@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import './app_card.dart';
+import '../app_view.dart';
+import '../navigation.dart';
 import '../../providers/application_provider.dart';
 
 class AppList extends ConsumerWidget {
@@ -30,22 +32,36 @@ class AppList extends ConsumerWidget {
         crossAxisCount = crossAxisCount < 1 ? 1 : crossAxisCount;
 
         return GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: crossAxisCount,
-            childAspectRatio: 3 / 4,
-            crossAxisSpacing: 0.0,
-            mainAxisSpacing: 0.0,
-          ),
-          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-          itemCount: apps.length,
-          physics:
-              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-          itemBuilder: (context, index) {
-            return AppCard(
-              app: apps[index],
-            );
-          },
-        );
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossAxisCount,
+              childAspectRatio: 3 / 4,
+              crossAxisSpacing: 0.0,
+              mainAxisSpacing: 0.0,
+            ),
+            padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+            itemCount: apps.length,
+            physics:
+                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  Scaffold.of(context).closeDrawer();
+                  Navigator.push(
+                    context,
+                    NoAnimationPageRoute(
+                      pageBuilder: (context, animation1, animation2) =>
+                          Navigation(
+                        child: AppView(app: apps[index]) as Widget,
+                        title: "App Info",
+                      ),
+                    ),
+                  );
+                },
+                child: AppCard(
+                  app: apps[index],
+                ),
+              );
+            });
       },
     );
   }

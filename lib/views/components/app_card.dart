@@ -258,12 +258,14 @@ class Details extends StatelessWidget {
     super.key,
     required this.name,
     required this.description,
+    this.cardWidth = 300.0,
+    this.cardHeight = 400.0,
   });
 
   final String name;
   final String description;
-  final cardWidth = 300.0;
-  final cardHeight = 400.0;
+  final double cardWidth;
+  final double cardHeight;
 
   @override
   Widget build(BuildContext context) {

@@ -151,8 +151,16 @@ class FlatpakBackend implements Backend {
       }
     }
 
-    final developer =
-        componentElement.findElements('developer').firstOrNull?.text.trim();
+    String? developer;
+    for (var devElement in componentElement.findAllElements('name').where(
+      (element) {
+        return element.parentElement?.name.local == 'developer';
+      },
+    )) {
+      if (devElement.getAttribute('xml:lang') == null) {
+        developer = devElement.text.trim();
+      }
+    }
 
     String? icon = null;
     String? remoteIcon = null;

@@ -53,6 +53,8 @@ class AppInfo extends StatelessWidget {
                   app.summary ?? "No summary.",
                   style: const TextStyle(fontSize: 16),
                   softWrap: true,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ))),
                 Row(children: [
                   Expanded(child: Container()),

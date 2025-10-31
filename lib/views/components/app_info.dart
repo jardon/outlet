@@ -45,7 +45,6 @@ class AppInfo extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   )),
-                  VerifiedBadge(size: 20),
                 ]),
                 Expanded(
                     child: Container(
@@ -56,9 +55,9 @@ class AppInfo extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ))),
-                Row(children: [
-                  Expanded(child: Container()),
-                  CategoryList(size: 25, categories: app.categories),
+                Row(spacing: 10, children: [
+                  Text((app.developer != null ? "by ${app.developer}" : "")),
+                  app.verified ? VerifiedBadge(size: 20) : Container(),
                 ]),
               ],
             )),

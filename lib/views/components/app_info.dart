@@ -55,7 +55,7 @@ class AppInfo extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ))),
-                Row(spacing: 10, children: [
+                Row(spacing: 5, children: [
                   Text((app.developer != null ? "by ${app.developer}" : "")),
                   app.verified ? VerifiedBadge(size: 20) : Container(),
                 ]),

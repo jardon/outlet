@@ -49,7 +49,7 @@ class AppInfo extends StatelessWidget {
                 Expanded(
                     child: Container(
                         child: Text(
-                  app.summary ?? "No summary.",
+                  app.summary ?? "No summary available.",
                   style: const TextStyle(fontSize: 16),
                   softWrap: true,
                   maxLines: 2,

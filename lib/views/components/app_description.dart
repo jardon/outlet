@@ -33,7 +33,7 @@ class AppDescription extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            Html(data: app.description ?? "no description", style: {
+            Html(data: app.description ?? "No description available.", style: {
               "h1": Style(
                 fontSize: FontSize.xxLarge,
                 textAlign: TextAlign.center,

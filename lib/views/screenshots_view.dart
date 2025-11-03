@@ -33,14 +33,19 @@ class ScreenshotsView extends StatelessWidget {
       Positioned(
         top: 30,
         left: 30,
-        child: CloseButton(
-          color: Colors.white,
-          onPressed: () {
-            if (Navigator.canPop(context)) {
-              Navigator.of(context).pop();
-            }
-          },
-        ),
+        child: Container(
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(45.0),
+            ),
+            child: CloseButton(
+              color: Colors.white,
+              onPressed: () {
+                if (Navigator.canPop(context)) {
+                  Navigator.of(context).pop();
+                }
+              },
+            )),
       ),
     ]);
   }

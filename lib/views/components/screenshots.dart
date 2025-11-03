@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screenshots_view.dart';
 
 class Screenshots extends StatelessWidget {
   final List<dynamic> screenshots;
@@ -10,7 +11,7 @@ class Screenshots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fullSizedScreenshots =
+    final List<dynamic> fullSizedScreenshots =
         screenshots.where((image) => image.contains('orig')).toList();
     return Container(
       width: 400,
@@ -32,25 +33,39 @@ class Screenshots extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(20.0),
-                        child: Image.network(
-                          fullSizedScreenshots[index],
-                          fit: BoxFit.cover,
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return Center(
-                              child: CircularProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes !=
-                                        null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes!
-                                    : null,
-                              ),
-                            );
-                          },
-                          errorBuilder: (context, error, stackTrace) {
-                            return const Text('Error loading image');
-                          },
-                        )),
+                        child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ScreenshotsView(
+                                    screenshot: fullSizedScreenshots[index],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Center(
+                                child: Image.network(
+                              fullSizedScreenshots[index],
+                              fit: BoxFit.cover,
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                .cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!
+                                        : null,
+                                  ),
+                                );
+                              },
+                              errorBuilder: (context, error, stackTrace) {
+                                return const Text('Error loading image');
+                              },
+                            )))),
                   );
                 },
               ),

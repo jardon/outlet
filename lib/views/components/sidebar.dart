@@ -12,7 +12,7 @@ Map<String, String> env = Platform.environment;
 final Map<String, Map<String, Object>> views = {
   "outlet": {
     "widget": Container(),
-    "title": "Outlet",
+    "title": "Featured",
   },
   "play": {
     "widget": Container(),
@@ -89,67 +89,75 @@ class Sidebar extends ConsumerWidget {
               bottomRight: Radius.circular(45.0),
             ),
             boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 20.0)]),
-        child: Column(children: <Widget>[
-          WindowTitleBarBox(child: MoveWindow()),
-          Expanded(
-              child: Container(
-            // color: Colors.red,
-            child: ListView.builder(
-              itemCount: entries.length,
-              itemBuilder: (context, index) {
-                return Material(
-                    color: Colors.white,
-                    child: ListTile(
-                      title: Row(
-                        children: [
-                          const SizedBox(width: 10.0),
-                          Text(views[entries[index]]?["title"] as String,
-                              style: TextStyle(
-                                fontSize: 20,
-                              )),
-                        ],
-                      ),
-                      onTap: () {
-                        Scaffold.of(context).closeDrawer();
-                        Navigator.push(
-                          context,
-                          NoAnimationPageRoute(
-                            pageBuilder: (context, animation1, animation2) =>
-                                Navigation(
-                              child: views[entries[index]]?["widget"] as Widget,
-                              title: views[entries[index]]?["title"] as String,
-                            ),
-                          ),
-                        );
-                      },
-                      trailing: IntrinsicWidth(
-                          child: CategoryList(
-                        size: 30,
-                        categories: categories[entries[index]] ?? [],
-                      )),
-                    ));
-              },
+        child: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(45.0),
+              bottomRight: Radius.circular(45.0),
             ),
-          )),
-          GestureDetector(
-              onTap: () {
-                Scaffold.of(context).closeDrawer();
-                Navigator.push(
-                  context,
-                  NoAnimationPageRoute(
-                    pageBuilder: (context, animation1, animation2) =>
-                        Navigation(
-                      child: views["downloads"]?["widget"] as Widget,
-                      title: views["downloads"]?["title"] as String,
-                    ),
-                  ),
-                );
-              },
-              child: Container(
-                height: 150,
-                // color: Colors.yellow,
-                child: DownloadQueue(),
+            child: Column(children: <Widget>[
+              WindowTitleBarBox(child: MoveWindow()),
+              Expanded(
+                  child: Container(
+                // color: Colors.red,
+                child: ListView.builder(
+                  itemCount: entries.length,
+                  itemBuilder: (context, index) {
+                    return Material(
+                        color: Colors.white,
+                        child: ListTile(
+                          title: Row(
+                            children: [
+                              const SizedBox(width: 10.0),
+                              Text(views[entries[index]]?["title"] as String,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  )),
+                            ],
+                          ),
+                          onTap: () {
+                            Scaffold.of(context).closeDrawer();
+                            Navigator.push(
+                              context,
+                              NoAnimationPageRoute(
+                                pageBuilder:
+                                    (context, animation1, animation2) =>
+                                        Navigation(
+                                  child: views[entries[index]]?["widget"]
+                                      as Widget,
+                                  title:
+                                      views[entries[index]]?["title"] as String,
+                                ),
+                              ),
+                            );
+                          },
+                          trailing: IntrinsicWidth(
+                              child: CategoryList(
+                            size: 30,
+                            categories: categories[entries[index]] ?? [],
+                          )),
+                        ));
+                  },
+                ),
               )),
-        ]));
+              GestureDetector(
+                  onTap: () {
+                    Scaffold.of(context).closeDrawer();
+                    Navigator.push(
+                      context,
+                      NoAnimationPageRoute(
+                        pageBuilder: (context, animation1, animation2) =>
+                            Navigation(
+                          child: views["downloads"]?["widget"] as Widget,
+                          title: views["downloads"]?["title"] as String,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    height: 150,
+                    // color: Colors.yellow,
+                    child: DownloadQueue(),
+                  )),
+            ])));
   }
 }

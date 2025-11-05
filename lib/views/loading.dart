@@ -1,0 +1,28 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../providers/application_provider.dart';
+import '../core/application.dart';
+import 'components/app_list.dart';
+import 'navigation.dart';
+
+class Loading extends ConsumerWidget {
+  const Loading({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    AsyncValue<List<Application>> apps = ref.watch(appListProvider);
+
+    return apps.when(
+      loading: () => const Center(
+        child: Text(
+          'LOADING',
+          style: TextStyle(fontSize: 32, color: Colors.black),
+        ),
+      ),
+      error: (err, stack) => Center(child: Text('Error: $err')),
+      data: (apps) => Navigation(child: AppList(apps: apps), title: "Featured"),
+    );
+  }
+}

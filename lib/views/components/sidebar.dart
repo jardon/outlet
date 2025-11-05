@@ -5,49 +5,13 @@ import 'dart:io';
 import './download_queue.dart';
 import 'app_list.dart';
 import '../navigation.dart';
+import '../../core/application.dart';
+import '../../providers/application_provider.dart';
 import 'badges.dart';
 
 Map<String, String> env = Platform.environment;
 
-final Map<String, Map<String, Object>> views = {
-  "outlet": {
-    "widget": Container(),
-    "title": "Featured",
-  },
-  "play": {
-    "widget": Container(),
-    "title": "Play",
-  },
-  "work": {
-    "widget": Container(),
-    "title": "Work",
-  },
-  "build": {
-    "widget": Container(),
-    "title": "Build",
-  },
-  "socialize": {
-    "widget": Container(),
-    "title": "Socialize",
-  },
-  "relax": {
-    "widget": Container(),
-    "title": "Relax",
-  },
-  "device": {
-    "widget": AppList(
-        details: false, showFeaturedBadge: false, showInstalledBadge: false),
-    "title": "This Device",
-  },
-  "search": {
-    "widget": Container(),
-    "title": "Search",
-  },
-  "downloads": {
-    "widget": Container(),
-    "title": "Downloads",
-  },
-};
+late Map<String, Map<String, Object>> views;
 
 final List<String> appSupport = (() {
   List<String> supportList = [];
@@ -80,6 +44,52 @@ class Sidebar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    List<Application> installed = ref.watch(installedAppListProvider);
+    AsyncValue<List<Application>> apps = ref.watch(appListProvider);
+    views = {
+      "outlet": {
+        "widget": AppList(
+          apps: apps.value ?? [],
+        ),
+        "title": "Featured",
+      },
+      "play": {
+        "widget": Container(),
+        "title": "Play",
+      },
+      "work": {
+        "widget": Container(),
+        "title": "Work",
+      },
+      "build": {
+        "widget": Container(),
+        "title": "Build",
+      },
+      "socialize": {
+        "widget": Container(),
+        "title": "Socialize",
+      },
+      "relax": {
+        "widget": Container(),
+        "title": "Relax",
+      },
+      "device": {
+        "widget": AppList(
+            apps: installed,
+            details: false,
+            showFeaturedBadge: false,
+            showInstalledBadge: false),
+        "title": "This Device",
+      },
+      "search": {
+        "widget": Container(),
+        "title": "Search",
+      },
+      "downloads": {
+        "widget": Container(),
+        "title": "Downloads",
+      },
+    };
     return Container(
         width: 300.0,
         decoration: BoxDecoration(

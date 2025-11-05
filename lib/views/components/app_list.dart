@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import './app_card.dart';
 import '../app_view.dart';
 import '../navigation.dart';
-import '../../providers/application_provider.dart';
+import '../../../core/application.dart';
 
-class AppList extends ConsumerWidget {
+class AppList extends StatelessWidget {
   AppList({
     super.key,
+    required this.apps,
     this.details = false,
     this.showFeaturedBadge = true,
     this.showInstalledBadge = true,
   });
 
+  final List<Application> apps;
   final bool details;
   final bool showFeaturedBadge;
   final bool showInstalledBadge;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final apps = ref.watch(appListProvider);
+  Widget build(BuildContext context) {
     // return Container(
     return LayoutBuilder(
       builder: (context, constraints) {

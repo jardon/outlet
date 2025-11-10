@@ -1,8 +1,8 @@
+import '../../core/application.dart';
+import 'app_icon_loader.dart';
+import 'badges.dart';
 import 'package:flutter/material.dart';
 import 'review.dart';
-import 'badges.dart';
-import 'app_icon_loader.dart';
-import '../../core/application.dart';
 
 class AppCard extends StatelessWidget {
   AppCard({

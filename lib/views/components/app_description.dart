@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import '../../core/application.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter/material.dart';
 
 class AppDescription extends StatelessWidget {
   final Application app;

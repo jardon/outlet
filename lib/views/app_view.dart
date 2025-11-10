@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+import '../core/application.dart';
 import 'components/app_description.dart';
 import 'components/app_info.dart';
 import 'components/review_info.dart';
 import 'components/screenshots.dart';
 import 'components/screenshots_expanded.dart';
-import '../core/application.dart';
+import 'package:flutter/material.dart';
 
 class AppView extends StatelessWidget {
   AppView({

@@ -1,13 +1,13 @@
+import '../../core/application.dart';
+import '../../providers/application_provider.dart';
+import '../navigation.dart';
+import 'app_list.dart';
+import 'badges.dart';
+import 'dart:io';
+import 'download_queue.dart';
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'dart:io';
-import './download_queue.dart';
-import 'app_list.dart';
-import '../navigation.dart';
-import '../../core/application.dart';
-import '../../providers/application_provider.dart';
-import 'badges.dart';
 
 Map<String, String> env = Platform.environment;
 

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import '../screenshots_view.dart';
+import 'package:flutter/material.dart';
 
 class ScreenshotsExpanded extends StatelessWidget {
   final List<dynamic> screenshots;

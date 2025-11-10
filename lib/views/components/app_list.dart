@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import './app_card.dart';
+import '../../../core/application.dart';
 import '../app_view.dart';
 import '../navigation.dart';
-import '../../../core/application.dart';
+import 'app_card.dart';
+import 'package:flutter/material.dart';
 
 class AppList extends StatelessWidget {
   AppList({

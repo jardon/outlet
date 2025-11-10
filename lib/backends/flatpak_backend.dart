@@ -1,15 +1,15 @@
-import 'dart:ffi' as ffi;
+import '../core/application.dart';
+import '../core/flatpak_application.dart';
+import 'backend.dart';
 import 'dart:convert';
 import 'dart:core';
+import 'dart:ffi' as ffi;
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:collection/collection.dart';
 import 'package:ffi/ffi.dart' as pkg_ffi;
 import 'package:libflatpak/libflatpak.dart';
 import 'package:xml/xml.dart';
-import 'backend.dart';
-import '../core/application.dart';
-import '../core/flatpak_application.dart';
 
 class FlatpakBackend implements Backend {
   late FlatpakBindings bindings;

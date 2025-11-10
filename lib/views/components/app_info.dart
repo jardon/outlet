@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import '../../core/application.dart';
 import 'app_icon_loader.dart';
 import 'badges.dart';
+import 'package:flutter/material.dart';
 
 class AppInfo extends StatelessWidget {
   final Application app;

@@ -394,20 +394,28 @@ class CategoryList extends StatelessWidget {
       switch (cat) {
         case "audio":
           badges.add(AudioBadge(size: size));
+          break;
         case 'video':
           badges.add(VideoBadge(size: size));
+          break;
         case 'graphics':
           badges.add(GraphicsBadge(size: size));
+          break;
         case 'network':
           badges.add(NetworkBadge(size: size));
+          break;
         case 'game':
           badges.add(GameBadge(size: size));
+          break;
         case 'development':
           badges.add(DevelopmentBadge(size: size));
+          break;
         case 'featured':
           badges.add(FeaturedBadge(size: size));
+          break;
         case 'flatpak':
           badges.add(FlatpakBadge(size: size));
+          break;
       }
     }
     return Row(

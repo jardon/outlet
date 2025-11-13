@@ -61,10 +61,12 @@ class TestBackend implements Backend {
     return categoriesList.take(count).toList();
   }
 
+  @override
   List<Application> getInstalledPackages() {
     return this.apps;
   }
 
+  @override
   List<Application> getAllRemotePackages() {
     return this.apps;
   }

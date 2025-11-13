@@ -4,10 +4,12 @@ class DownloadQueue extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(45.0),
-          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 15.0)]),
+          boxShadow: [
+            const BoxShadow(color: Colors.black12, blurRadius: 15.0)
+          ]),
       child: Container(
           decoration: BoxDecoration(
             color: Colors.black,
@@ -16,14 +18,14 @@ class DownloadQueue extends StatelessWidget {
           child: Column(children: <Widget>[
             Container(
                 height: 50.0,
-                padding: EdgeInsets.only(left: 30, right: 30, top: 20),
+                padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
                 alignment: Alignment.topLeft,
                 // color: Colors.pink,
-                child: Text(
+                child: const Text(
                   "No downloads queued.",
                   overflow: TextOverflow.fade,
                   softWrap: false,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -31,14 +33,15 @@ class DownloadQueue extends StatelessWidget {
                 )),
             Expanded(
                 child: Container(
-                    padding: EdgeInsets.only(left: 30, right: 30, bottom: 40),
+                    padding:
+                        const EdgeInsets.only(left: 30, right: 30, bottom: 40),
                     alignment: Alignment.topLeft,
                     // color: Colors.green,
-                    child: Text(
+                    child: const Text(
                       "Install an application to add it to the queue.",
                       softWrap: true,
                       overflow: TextOverflow.visible,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 12,
                       ),

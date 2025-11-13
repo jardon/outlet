@@ -19,7 +19,9 @@ class AppInfo extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(45),
-          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 20.0)]),
+          boxShadow: [
+            const BoxShadow(color: Colors.black12, blurRadius: 20.0)
+          ]),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Row(
@@ -56,7 +58,7 @@ class AppInfo extends StatelessWidget {
                 )),
                 Row(spacing: 5, children: [
                   Text((app.developer != null ? "by ${app.developer}" : "")),
-                  app.verified ? VerifiedBadge(size: 20) : Container(),
+                  app.verified ? const VerifiedBadge(size: 20) : Container(),
                 ]),
               ],
             )),

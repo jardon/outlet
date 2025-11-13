@@ -7,7 +7,7 @@ import 'components/screenshots_expanded.dart';
 import 'package:flutter/material.dart';
 
 class AppView extends StatelessWidget {
-  AppView({
+  const AppView({
     super.key,
     required this.app,
   });
@@ -29,7 +29,7 @@ class AppView extends StatelessWidget {
               return isWide
                   ? Container(
                       constraints: BoxConstraints(minHeight: viewportHeight),
-                      padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
                       alignment: Alignment.topCenter,
                       child: Row(
                           spacing: 16.0,
@@ -39,19 +39,19 @@ class AppView extends StatelessWidget {
                             Column(spacing: 16.0, children: [
                               AppInfo(app: app),
                               AppDescription(app: app),
-                              ReviewInfo(reviews: []),
+                              const ReviewInfo(reviews: []),
                             ]),
                             ScreenshotsExpanded(screenshots: app.screenshots),
                           ]))
                   : Container(
                       width: availableWidth,
                       constraints: BoxConstraints(minHeight: viewportHeight),
-                      padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
                       child: Column(spacing: 16.0, children: [
                         AppInfo(app: app),
                         AppDescription(app: app),
                         Screenshots(screenshots: app.screenshots),
-                        ReviewInfo(reviews: []),
+                        const ReviewInfo(reviews: []),
                       ]));
             })));
   }

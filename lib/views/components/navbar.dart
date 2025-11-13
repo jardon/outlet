@@ -17,7 +17,7 @@ class Navbar extends StatelessWidget {
       child: Stack(children: <Widget>[
         WindowTitleBarBox(child: MoveWindow()),
         Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Row(
               children: <Widget>[
                 SizedBox(
@@ -42,10 +42,10 @@ class Navbar extends StatelessWidget {
                 ),
                 Container(
                     // color: Colors.blue,
-                    padding: EdgeInsets.only(left: 20.0),
+                    padding: const EdgeInsets.only(left: 20.0),
                     child: Text(
                       title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -62,21 +62,21 @@ class Navbar extends StatelessWidget {
                 Container(
                   width: 200,
                   height: double.infinity,
-                  margin: EdgeInsets.only(right: 40),
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  margin: const EdgeInsets.only(right: 40),
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(45.0),
                       boxShadow: [
-                        BoxShadow(color: Colors.black12, blurRadius: 15.0)
+                        const BoxShadow(color: Colors.black12, blurRadius: 15.0)
                       ]),
-                  child: Center(
-                    child: TextField(
-                      decoration: InputDecoration(
+                  child: const Center(
+                    child: const TextField(
+                      decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Search apps',
-                          icon: Icon(Icons.search),
-                          contentPadding: EdgeInsets.only(bottom: 10)),
+                          icon: const Icon(Icons.search),
+                          contentPadding: const EdgeInsets.only(bottom: 10)),
                     ),
                   ),
                 ),

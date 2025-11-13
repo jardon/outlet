@@ -14,9 +14,9 @@ class FeaturedBadge extends StatelessWidget {
     return Container(
         height: size,
         width: size,
-        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment(0.8, 1),
             colors: <Color>[
@@ -32,7 +32,7 @@ class FeaturedBadge extends StatelessWidget {
           child: SvgPicture.asset(
             'lib/views/assets/star-icon.svg',
             semanticsLabel: 'Featured Application',
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 2,
             width: size / 2,
           ),
@@ -54,7 +54,7 @@ class VerifiedBadge extends StatelessWidget {
       SvgPicture.asset(
         'lib/views/assets/verified-icon.svg',
         semanticsLabel: 'Verified Application',
-        colorFilter: ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+        colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
         height: size,
         width: size,
       ),
@@ -87,9 +87,9 @@ class InstalledBadge extends StatelessWidget {
           color: Colors.grey[300]!,
           borderRadius: BorderRadius.circular(45.0),
         ),
-        child: Text(
+        child: const Text(
           "Installed",
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
           ),
         ));
@@ -109,9 +109,9 @@ class VideoBadge extends StatelessWidget {
     return Container(
         height: size,
         width: size,
-        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment(0.8, 1),
             colors: <Color>[
@@ -127,7 +127,7 @@ class VideoBadge extends StatelessWidget {
           child: SvgPicture.asset(
             'lib/views/assets/beads-icon.svg',
             semanticsLabel: 'Video',
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
             width: size / 1.333,
           ),
@@ -148,9 +148,9 @@ class AudioBadge extends StatelessWidget {
     return Container(
         height: size,
         width: size,
-        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment(0.8, 1),
             colors: <Color>[
@@ -166,7 +166,7 @@ class AudioBadge extends StatelessWidget {
           child: SvgPicture.asset(
             'lib/views/assets/layered-circles-icon.svg',
             semanticsLabel: 'Audio',
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
             width: size / 1.333,
           ),
@@ -187,9 +187,9 @@ class DevelopmentBadge extends StatelessWidget {
     return Container(
         height: size,
         width: size,
-        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment(0.8, 1),
             colors: <Color>[
@@ -205,7 +205,7 @@ class DevelopmentBadge extends StatelessWidget {
           child: SvgPicture.asset(
             'lib/views/assets/bug-icon.svg',
             semanticsLabel: 'Audio/Video',
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.6,
             width: size / 1.6,
           ),
@@ -228,9 +228,9 @@ class GameBadge extends StatelessWidget {
     return Container(
         height: size,
         width: size,
-        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment(0.8, 1),
             colors: <Color>[
@@ -246,7 +246,7 @@ class GameBadge extends StatelessWidget {
           child: SvgPicture.asset(
             'lib/views/assets/dpad-icon.svg',
             semanticsLabel: 'Audio/Video',
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
             width: size / 1.333,
           ),
@@ -267,9 +267,9 @@ class GraphicsBadge extends StatelessWidget {
     return Container(
         height: size,
         width: size,
-        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment(0.8, 1),
             colors: <Color>[
@@ -285,7 +285,7 @@ class GraphicsBadge extends StatelessWidget {
           child: SvgPicture.asset(
             'lib/views/assets/checkered-icon.svg',
             semanticsLabel: 'Audio/Video',
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 2,
             width: size / 2,
           ),
@@ -306,9 +306,9 @@ class NetworkBadge extends StatelessWidget {
     return Container(
         height: size,
         width: size,
-        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment(0.8, 1),
             colors: <Color>[
@@ -324,7 +324,7 @@ class NetworkBadge extends StatelessWidget {
           child: SvgPicture.asset(
             'lib/views/assets/connected-icon.svg',
             semanticsLabel: 'Audio/Video',
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
             width: size / 1.333,
           ),
@@ -345,9 +345,9 @@ class UtilityBadge extends StatelessWidget {
     return Container(
         height: size,
         width: size,
-        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment(0.8, 1),
             colors: <Color>[
@@ -363,7 +363,7 @@ class UtilityBadge extends StatelessWidget {
           child: SvgPicture.asset(
             'lib/views/assets/cross-circle-bloat-icon.svg',
             semanticsLabel: 'Utility',
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
             width: size / 1.333,
           ),
@@ -384,9 +384,9 @@ class EducationBadge extends StatelessWidget {
     return Container(
         height: size,
         width: size,
-        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment(0.8, 1),
             colors: <Color>[
@@ -402,7 +402,7 @@ class EducationBadge extends StatelessWidget {
           child: SvgPicture.asset(
             'lib/views/assets/circle-quarter-leaf-icon.svg',
             semanticsLabel: 'Education',
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
             width: size / 1.333,
           ),
@@ -423,9 +423,9 @@ class OfficeBadge extends StatelessWidget {
     return Container(
         height: size,
         width: size,
-        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment(0.8, 1),
             colors: <Color>[
@@ -441,7 +441,7 @@ class OfficeBadge extends StatelessWidget {
           child: SvgPicture.asset(
             'lib/views/assets/shape-circle-halves-icon.svg',
             semanticsLabel: 'Productivity',
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
             width: size / 1.333,
           ),
@@ -468,11 +468,11 @@ class FlatpakBadge extends StatelessWidget {
     return Container(
         height: size,
         width: size,
-        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
-            end: Alignment(0.8, 1),
+            end: const Alignment(0.8, 1),
             colors: <Color>[
               Colors.grey.shade600,
               Colors.grey,
@@ -486,7 +486,7 @@ class FlatpakBadge extends StatelessWidget {
           child: SvgPicture.asset(
             'lib/views/assets/flatpak-icon.svg',
             semanticsLabel: 'Flatpak',
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.5,
             width: size / 1.5,
           ),

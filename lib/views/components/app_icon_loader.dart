@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Requires flutter_svg dependency
 
 class AppIconLoader extends StatelessWidget {
-  AppIconLoader({
+  const AppIconLoader({
     super.key,
     required this.icon,
   });
@@ -22,7 +22,7 @@ class AppIconLoader extends StatelessWidget {
           width: null,
           fit: BoxFit.fitHeight,
           semanticsLabel: 'App Icon',
-          colorFilter: ColorFilter.mode(Colors.black12, BlendMode.srcIn),
+          colorFilter: const ColorFilter.mode(Colors.black12, BlendMode.srcIn),
         );
       } else {
         return Image.network(
@@ -38,7 +38,7 @@ class AppIconLoader extends StatelessWidget {
           width: null,
           fit: BoxFit.fitHeight,
           semanticsLabel: 'App Icon',
-          colorFilter: ColorFilter.mode(Colors.black12, BlendMode.srcIn),
+          colorFilter: const ColorFilter.mode(Colors.black12, BlendMode.srcIn),
         );
       } else {
         return Image.asset(

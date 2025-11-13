@@ -19,11 +19,13 @@ class ScreenshotsExpanded extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(45),
-          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 20.0)]),
+          boxShadow: [
+            const BoxShadow(color: Colors.black12, blurRadius: 20.0)
+          ]),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: (fullSizedScreenshots.length == 0)
-            ? Center(child: Text("No screenshots available."))
+            ? const Center(child: const Text("No screenshots available."))
             : ListView.builder(
                 primary: false,
                 shrinkWrap: true,

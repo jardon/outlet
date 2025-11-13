@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'views/loading.dart';
 
 void main() {
-  runApp(const ProviderScope(child: const MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 
   doWhenWindowReady(() {
     const initialSize = Size(600, 450);
@@ -24,8 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Outlet',
       theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
-      home:
-          const Scaffold(backgroundColor: Colors.white, body: const Loading()),
+      home: const Scaffold(backgroundColor: Colors.white, body: Loading()),
     );
   }
 }

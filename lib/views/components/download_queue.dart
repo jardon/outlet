@@ -25,7 +25,7 @@ class DownloadQueue extends StatelessWidget {
                   "No downloads queued.",
                   overflow: TextOverflow.fade,
                   softWrap: false,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -41,7 +41,7 @@ class DownloadQueue extends StatelessWidget {
                       "Install an application to add it to the queue.",
                       softWrap: true,
                       overflow: TextOverflow.visible,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontSize: 12,
                       ),

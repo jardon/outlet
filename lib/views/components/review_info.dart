@@ -20,8 +20,8 @@ class ReviewInfo extends StatelessWidget {
             const BoxShadow(color: Colors.black12, blurRadius: 20.0)
           ]),
       child: const Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: const Center(child: const Text("No reviews available.")),
+        padding: EdgeInsets.all(20.0),
+        child: Center(child: Text("No reviews available.")),
       ),
     );
   }

@@ -94,13 +94,11 @@ class Sidebar extends ConsumerWidget {
         width: 300.0,
         decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: const BorderRadius.only(
-              topRight: const Radius.circular(45.0),
-              bottomRight: const Radius.circular(45.0),
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(45.0),
+              bottomRight: Radius.circular(45.0),
             ),
-            boxShadow: [
-              const BoxShadow(color: Colors.black12, blurRadius: 20.0)
-            ]),
+            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 20.0)]),
         child: ClipRRect(
             borderRadius: const BorderRadius.only(
               topRight: Radius.circular(45.0),

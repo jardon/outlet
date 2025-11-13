@@ -71,12 +71,12 @@ class Navbar extends StatelessWidget {
                         const BoxShadow(color: Colors.black12, blurRadius: 15.0)
                       ]),
                   child: const Center(
-                    child: const TextField(
-                      decoration: const InputDecoration(
+                    child: TextField(
+                      decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Search apps',
-                          icon: const Icon(Icons.search),
-                          contentPadding: const EdgeInsets.only(bottom: 10)),
+                          icon: Icon(Icons.search),
+                          contentPadding: EdgeInsets.only(bottom: 10)),
                     ),
                   ),
                 ),

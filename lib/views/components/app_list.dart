@@ -41,7 +41,7 @@ class AppList extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
             itemCount: apps.length,
             physics: const BouncingScrollPhysics(
-                parent: const AlwaysScrollableScrollPhysics()),
+                parent: AlwaysScrollableScrollPhysics()),
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {

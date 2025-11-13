@@ -89,7 +89,7 @@ class InstalledBadge extends StatelessWidget {
         ),
         child: const Text(
           "Installed",
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.black,
           ),
         ));

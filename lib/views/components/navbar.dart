@@ -15,10 +15,7 @@ class Navbar extends StatelessWidget {
       height: 60,
       // color: Colors.orange,
       child: Stack(children: <Widget>[
-        Container(
-          // color: Colors.pink,
-          child: WindowTitleBarBox(child: MoveWindow()),
-        ),
+        WindowTitleBarBox(child: MoveWindow()),
         Container(
             padding: EdgeInsets.all(10),
             child: Row(
@@ -56,13 +53,10 @@ class Navbar extends StatelessWidget {
                     )),
                 WindowTitleBarBox(child: MoveWindow()),
                 Expanded(
-                  child: Container(
-                    // color: Colors.yellow,
-                    child: Align(
-                      alignment: Alignment
-                          .centerRight, // Align the container to the right
-                      child: WindowTitleBarBox(child: MoveWindow()),
-                    ),
+                  child: Align(
+                    alignment: Alignment
+                        .centerRight, // Align the container to the right
+                    child: WindowTitleBarBox(child: MoveWindow()),
                   ),
                 ),
                 Container(

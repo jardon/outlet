@@ -107,8 +107,6 @@ class Sidebar extends ConsumerWidget {
             child: Column(children: <Widget>[
               WindowTitleBarBox(child: MoveWindow()),
               Expanded(
-                  child: Container(
-                // color: Colors.red,
                 child: ListView.builder(
                   itemCount: entries.length,
                   itemBuilder: (context, index) {
@@ -148,7 +146,7 @@ class Sidebar extends ConsumerWidget {
                         ));
                   },
                 ),
-              )),
+              ),
               GestureDetector(
                   onTap: () {
                     Scaffold.of(context).closeDrawer();

@@ -190,21 +190,20 @@ class Listing extends StatelessWidget {
                 height: cardHeight * .2,
                 width: cardWidth,
                 child: Row(children: <Widget>[
+                  Expanded(
+                      child: Container(
+                          height: cardHeight * .2,
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.all(20),
+                          child: Row(children: <Widget>[
+                            !featured
+                                ? Center()
+                                : FeaturedBadge(
+                                    size: 40.0,
+                                  ),
+                            !verified ? Center() : VerifiedBadge(size: 40.0),
+                          ]))),
                   Container(
-                      width: cardWidth - 130.0,
-                      height: cardHeight * .2,
-                      alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.all(20),
-                      child: Row(children: <Widget>[
-                        !featured
-                            ? Center()
-                            : FeaturedBadge(
-                                size: 40.0,
-                              ),
-                        !verified ? Center() : VerifiedBadge(size: 40.0),
-                      ])),
-                  Container(
-                    width: 130.0,
                     alignment: Alignment.centerRight,
                     padding: EdgeInsets.all(20),
                     child: !this.installed

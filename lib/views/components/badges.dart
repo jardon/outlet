@@ -332,6 +332,123 @@ class NetworkBadge extends StatelessWidget {
   }
 }
 
+class UtilityBadge extends StatelessWidget {
+  const UtilityBadge({
+    super.key,
+    required this.size,
+  });
+
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: size,
+        width: size,
+        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment(0.8, 1),
+            colors: <Color>[
+              Colors.pink,
+              Colors.purple,
+            ],
+            tileMode: TileMode.mirror,
+          ),
+          borderRadius: BorderRadius.circular(45.0),
+        ),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: SvgPicture.asset(
+            'lib/views/assets/cross-circle-bloat-icon.svg',
+            semanticsLabel: 'Utility',
+            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            height: size / 1.333,
+            width: size / 1.333,
+          ),
+        ));
+  }
+}
+
+class EducationBadge extends StatelessWidget {
+  const EducationBadge({
+    super.key,
+    required this.size,
+  });
+
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: size,
+        width: size,
+        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment(0.8, 1),
+            colors: <Color>[
+              Colors.blue,
+              Colors.purple,
+            ],
+            tileMode: TileMode.mirror,
+          ),
+          borderRadius: BorderRadius.circular(45.0),
+        ),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: SvgPicture.asset(
+            'lib/views/assets/circle-quarter-leaf-icon.svg',
+            semanticsLabel: 'Education',
+            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            height: size / 1.333,
+            width: size / 1.333,
+          ),
+        ));
+  }
+}
+
+class OfficeBadge extends StatelessWidget {
+  const OfficeBadge({
+    super.key,
+    required this.size,
+  });
+
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: size,
+        width: size,
+        margin: EdgeInsets.symmetric(horizontal: 2.5),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment(0.8, 1),
+            colors: <Color>[
+              Colors.blue,
+              Colors.yellow,
+            ],
+            tileMode: TileMode.mirror,
+          ),
+          borderRadius: BorderRadius.circular(45.0),
+        ),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: SvgPicture.asset(
+            'lib/views/assets/shape-circle-halves-icon.svg',
+            semanticsLabel: 'Productivity',
+            colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            height: size / 1.333,
+            width: size / 1.333,
+          ),
+        ));
+  }
+}
+
 // Office	An office type application
 // Science	Scientific software
 // Settings	Settings applications	Entries may appear in a separate menu or as part of a "Control Center"
@@ -409,6 +526,15 @@ class CategoryList extends StatelessWidget {
           break;
         case 'development':
           badges.add(DevelopmentBadge(size: size));
+          break;
+        case 'utility':
+          badges.add(UtilityBadge(size: size));
+          break;
+        case 'eduction':
+          badges.add(EducationBadge(size: size));
+          break;
+        case 'productivity':
+          badges.add(OfficeBadge(size: size));
           break;
         case 'featured':
           badges.add(FeaturedBadge(size: size));

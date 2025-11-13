@@ -56,7 +56,7 @@ class FlatpakApplication extends Application {
     Set<String> categoryBadges = {};
     for (var category in super.categories) {
       switch (category) {
-        case 'Network':
+        case 'Network' || 'P2P':
           categoryBadges.add('network');
           break;
         case 'InstantMessaging' || 'Chat' || 'VideoConference':
@@ -65,8 +65,31 @@ class FlatpakApplication extends Application {
         case 'TextEditor' || 'IDE' || 'Developement':
           categoryBadges.add('development');
           break;
-        case 'Game':
+        case 'Game' || 'ActionGame' || 'Shooter' || 'Sports':
           categoryBadges.add('game');
+          break;
+        case 'Audio' || 'Music':
+          categoryBadges.add('audio');
+          break;
+        case 'Video':
+          categoryBadges.add('video');
+          break;
+        case 'AudioVideo':
+          categoryBadges.add('audio');
+          categoryBadges.add('video');
+          break;
+        case 'Utility' ||
+              'System' ||
+              'Settings' ||
+              'Archiving' ||
+              'Monitorying':
+          categoryBadges.add('utility');
+          break;
+        case 'Literature' || 'Astronomy' || 'Science':
+          categoryBadges.add('education');
+          break;
+        case 'Office':
+          categoryBadges.add('productivity');
           break;
       }
     }

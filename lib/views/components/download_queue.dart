@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class DownloadQueue extends StatelessWidget {
+  const DownloadQueue({
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(

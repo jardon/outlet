@@ -99,7 +99,7 @@ class FlatpakBackend implements Backend {
           final ffi.Pointer<ffi.Char> namePtr =
               bindings.flatpak_ref_get_name(refPtr);
           final String id = namePtr.cast<pkg_ffi.Utf8>().toDartString();
-          apps.add(new FlatpakApplication(
+          apps.add(FlatpakApplication(
             id: id,
           ));
         }

@@ -1,5 +1,6 @@
 import '../core/application.dart';
 import '../core/flatpak_application.dart';
+import '../core/logger.dart';
 import 'backend.dart';
 import 'dart:convert';
 import 'dart:core';
@@ -24,14 +25,14 @@ class FlatpakBackend implements Backend {
 
     if (installationPtr == ffi.nullptr) {
       if (error.value != ffi.nullptr) {
-        print(
+        logger.e(
             'Failed to get FlatpakInstallation. GError pointer received: ${error.value}');
       } else {
-        print(
+        logger.e(
             'Failed to get FlatpakInstallation, but no explicit GError was returned.');
       }
     } else {
-      print(
+      logger.i(
           'Successfully created FlatpakInstallation object at address: ${installationPtr}');
     }
     error.value = ffi.nullptr;
@@ -47,7 +48,7 @@ class FlatpakBackend implements Backend {
       error.value = ffi.nullptr;
       final GPtrArray installedRefs = installed_refs.ref;
       final int length = installedRefs.len;
-      print('Found $length installed references (apps and runtimes).');
+      logger.i('Found $length installed references (apps and runtimes).');
       final ffi.Pointer<gpointer> pdataPtr = installedRefs.pdata;
 
       for (int i = 0; i < length; i++) {
@@ -88,11 +89,11 @@ class FlatpakBackend implements Backend {
             }
             apps.add(appFromXML(componentElement, deployDir));
           } on XmlParserException catch (e) {
-            print('Error parsing XML: $e');
+            logger.e('Error parsing XML: $e');
           }
           pkg_ffi.malloc.free(sizeP);
         } else {
-          print(
+          logger.w(
               'Failed to load appdata. GError pointer received: ${error.value}');
           error.value = ffi.nullptr;
           final ffi.Pointer<ffi.Void> refVoidPtr = pdataPtr.elementAt(i).value;
@@ -107,7 +108,7 @@ class FlatpakBackend implements Backend {
       }
       pkg_ffi.calloc.free(pdataPtr);
     } else {
-      print(
+      logger.e(
           'Failed to load installed flatpaks. GError pointer received: ${error.value}');
       pkg_ffi.calloc.free(error);
     }
@@ -251,7 +252,7 @@ class FlatpakBackend implements Backend {
           };
           releases[version] = releaseDetails;
         } else {
-          print('  -> WARNING: Skipping malformed release tag.');
+          logger.w('  -> WARNING: Skipping malformed release tag.');
         }
       }
     }
@@ -271,7 +272,7 @@ class FlatpakBackend implements Backend {
         if (id != null) {
           content[id] = value;
         } else {
-          print(
+          logger.w(
               '  -> WARNING: Skipping content_attribute tag with missing id.');
         }
       }
@@ -317,7 +318,7 @@ class FlatpakBackend implements Backend {
       String? appstreamXmlContent;
       final GPtrArray remotesRefs = remotesPtr.ref;
       final int length = remotesRefs.len;
-      print('Found $length remote references (apps and runtimes).');
+      logger.i('Found $length remote references (apps and runtimes).');
       final ffi.Pointer<gpointer> pdataPtr = remotesRefs.pdata;
       final ffi.Pointer<ffi.Char> archPtr = bindings.flatpak_get_default_arch();
 
@@ -365,16 +366,16 @@ class FlatpakBackend implements Backend {
                 apps.add(appFromXML(componentElement, appstreamDir));
               }
             } on XmlParserException catch (e) {
-              print('Error parsing XML: $e');
+              logger.w('Error parsing XML: $e');
             }
           }
         } else {
-          print("Error occurred.");
+          logger.e("Error occurred.");
           error.value = ffi.nullptr;
         }
       }
     } else {
-      print("Error getting flatpak remotes: ${error.value}");
+      logger.e("Error getting flatpak remotes: ${error.value}");
       error.value = ffi.nullptr;
     }
     return apps;

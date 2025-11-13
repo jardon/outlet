@@ -19,20 +19,20 @@ class FlatpakBackend implements Backend {
   FlatpakBackend()
       : bindings = FlatpakBindings(ffi.DynamicLibrary.open('libflatpak.so')),
         error = pkg_ffi.calloc<ffi.Pointer<GError>>() {
-    this.installationPtr =
-        this.bindings.flatpak_installation_new_system(ffi.nullptr, this.error);
+    installationPtr =
+        bindings.flatpak_installation_new_system(ffi.nullptr, error);
 
-    if (this.installationPtr == ffi.nullptr) {
-      if (this.error.value != ffi.nullptr) {
+    if (installationPtr == ffi.nullptr) {
+      if (error.value != ffi.nullptr) {
         print(
-            'Failed to get FlatpakInstallation. GError pointer received: ${this.error.value}');
+            'Failed to get FlatpakInstallation. GError pointer received: ${error.value}');
       } else {
         print(
             'Failed to get FlatpakInstallation, but no explicit GError was returned.');
       }
     } else {
       print(
-          'Successfully created FlatpakInstallation object at address: ${this.installationPtr}');
+          'Successfully created FlatpakInstallation object at address: ${installationPtr}');
     }
     error.value = ffi.nullptr;
   }
@@ -93,7 +93,7 @@ class FlatpakBackend implements Backend {
           pkg_ffi.malloc.free(sizeP);
         } else {
           print(
-              'Failed to load appdata. GError pointer received: ${this.error.value}');
+              'Failed to load appdata. GError pointer received: ${error.value}');
           error.value = ffi.nullptr;
           final ffi.Pointer<ffi.Void> refVoidPtr = pdataPtr.elementAt(i).value;
           final ffi.Pointer<FlatpakRef> refPtr = refVoidPtr.cast<FlatpakRef>();
@@ -108,7 +108,7 @@ class FlatpakBackend implements Backend {
       pkg_ffi.calloc.free(pdataPtr);
     } else {
       print(
-          'Failed to load installed flatpaks. GError pointer received: ${this.error.value}');
+          'Failed to load installed flatpaks. GError pointer received: ${error.value}');
       pkg_ffi.calloc.free(error);
     }
     return apps;
@@ -374,7 +374,7 @@ class FlatpakBackend implements Backend {
         }
       }
     } else {
-      print("Error getting flatpak remotes: ${this.error.value}");
+      print("Error getting flatpak remotes: ${error.value}");
       error.value = ffi.nullptr;
     }
     return apps;

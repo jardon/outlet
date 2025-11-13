@@ -22,7 +22,7 @@ class Loading extends ConsumerWidget {
         ),
       ),
       error: (err, stack) => Center(child: Text('Error: $err')),
-      data: (apps) => Navigation(child: AppList(apps: apps), title: "Featured"),
+      data: (apps) => Navigation(title: "Featured", child: AppList(apps: apps)),
     );
   }
 }

@@ -16,10 +16,12 @@ class ReviewInfo extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(45),
-          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 20.0)]),
-      child: Padding(
+          boxShadow: [
+            const BoxShadow(color: Colors.black12, blurRadius: 20.0)
+          ]),
+      child: const Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Center(child: Text("No reviews available.")),
+        child: const Center(child: const Text("No reviews available.")),
       ),
     );
   }

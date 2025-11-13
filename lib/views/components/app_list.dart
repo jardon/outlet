@@ -5,7 +5,7 @@ import 'app_card.dart';
 import 'package:flutter/material.dart';
 
 class AppList extends StatelessWidget {
-  AppList({
+  const AppList({
     super.key,
     required this.apps,
     this.details = false,
@@ -38,10 +38,10 @@ class AppList extends StatelessWidget {
               crossAxisSpacing: 0.0,
               mainAxisSpacing: 0.0,
             ),
-            padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
             itemCount: apps.length,
-            physics:
-                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            physics: const BouncingScrollPhysics(
+                parent: const AlwaysScrollableScrollPhysics()),
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'review.dart';
 
 class AppCard extends StatelessWidget {
-  AppCard({
+  const AppCard({
     super.key,
     required this.app,
     this.details = true,
@@ -35,7 +35,7 @@ class AppCard extends StatelessWidget {
 }
 
 class InfoCard extends StatefulWidget {
-  InfoCard({
+  const InfoCard({
     super.key,
     required this.featured,
     required this.verified,
@@ -111,10 +111,12 @@ class _InfoCardState extends State<InfoCard>
     return Container(
         width: widget.cardWidth,
         height: widget.cardHeight,
-        margin: EdgeInsets.all(15.0),
+        margin: const EdgeInsets.all(15.0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(widget.borderRadius),
-            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 20.0)]),
+            boxShadow: [
+              const BoxShadow(color: Colors.black12, blurRadius: 20.0)
+            ]),
         child: MouseRegion(
           onEnter: (_) => _onHoverChanged(true),
           onExit: (_) => _onHoverChanged(false),
@@ -149,7 +151,7 @@ class _InfoCardState extends State<InfoCard>
                             ),
                           ),
                         ))
-                    : Center(),
+                    : const Center(),
               ]),
             ),
           ),
@@ -158,7 +160,7 @@ class _InfoCardState extends State<InfoCard>
 }
 
 class Listing extends StatelessWidget {
-  Listing({
+  const Listing({
     super.key,
     required this.featured,
     required this.verified,
@@ -194,21 +196,23 @@ class Listing extends StatelessWidget {
                       child: Container(
                           height: cardHeight * .2,
                           alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           child: Row(children: <Widget>[
                             !featured
-                                ? Center()
-                                : FeaturedBadge(
+                                ? const Center()
+                                : const FeaturedBadge(
                                     size: 40.0,
                                   ),
-                            !verified ? Center() : VerifiedBadge(size: 40.0),
+                            !verified
+                                ? const Center()
+                                : const VerifiedBadge(size: 40.0),
                           ]))),
                   Container(
                     alignment: Alignment.centerRight,
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: !installed
                         ? CategoryList(size: 40.0, categories: categories)
-                        : InstalledBadge(size: 40.0),
+                        : const InstalledBadge(size: 40.0),
                   ),
                 ])),
             SizedBox(
@@ -224,13 +228,13 @@ class Listing extends StatelessWidget {
                   Expanded(
                       child: Container(
                           alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.only(left: 30, right: 10),
+                          padding: const EdgeInsets.only(left: 30, right: 10),
                           child: Text(
                             name,
                             maxLines: 1,
                             overflow: TextOverflow.fade,
                             softWrap: false,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 24,
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
@@ -241,7 +245,7 @@ class Listing extends StatelessWidget {
                         width: 130,
                         height: cardHeight * .2,
                         alignment: Alignment.centerRight,
-                        padding: EdgeInsets.only(right: 30),
+                        padding: const EdgeInsets.only(right: 30),
                         child: ReviewScore(
                           score: rating ?? 0.0,
                           size: 20.0,
@@ -253,7 +257,7 @@ class Listing extends StatelessWidget {
 }
 
 class Details extends StatelessWidget {
-  Details({
+  const Details({
     super.key,
     required this.name,
     required this.description,
@@ -278,11 +282,11 @@ class Details extends StatelessWidget {
         child: Column(children: <Widget>[
           Container(
               height: cardHeight * .2,
-              padding: EdgeInsets.only(left: 40, right: 40, top: 40),
+              padding: const EdgeInsets.only(left: 40, right: 40, top: 40),
               alignment: Alignment.topLeft,
               child: Text(
                 name,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -290,11 +294,11 @@ class Details extends StatelessWidget {
               )),
           Container(
               height: cardHeight * .8,
-              padding: EdgeInsets.only(left: 40, right: 40, bottom: 40),
+              padding: const EdgeInsets.only(left: 40, right: 40, bottom: 40),
               alignment: Alignment.topLeft,
               child: Text(
                 description,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                 ),

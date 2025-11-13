@@ -92,13 +92,15 @@ class Sidebar extends ConsumerWidget {
     };
     return Container(
         width: 300.0,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(45.0),
-              bottomRight: Radius.circular(45.0),
+            borderRadius: const BorderRadius.only(
+              topRight: const Radius.circular(45.0),
+              bottomRight: const Radius.circular(45.0),
             ),
-            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 20.0)]),
+            boxShadow: [
+              const BoxShadow(color: Colors.black12, blurRadius: 20.0)
+            ]),
         child: ClipRRect(
             borderRadius: const BorderRadius.only(
               topRight: Radius.circular(45.0),
@@ -117,7 +119,7 @@ class Sidebar extends ConsumerWidget {
                             children: [
                               const SizedBox(width: 10.0),
                               Text(views[entries[index]]?["title"] as String,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 20,
                                   )),
                             ],

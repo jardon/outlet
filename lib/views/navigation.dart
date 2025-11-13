@@ -89,16 +89,13 @@ class ViewBox extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      // color: Colors.green,
-      child: Column(
-        children: <Widget>[
-          Navbar(title: title),
-          Expanded(
-            child: child,
-          ),
-        ],
-      ),
+    return Column(
+      children: <Widget>[
+        Navbar(title: title),
+        Expanded(
+          child: child,
+        ),
+      ],
     );
   }
 }

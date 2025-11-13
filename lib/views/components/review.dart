@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ReviewScore extends StatelessWidget {
   const ReviewScore({
+    super.key,
     required this.score,
     required this.size,
   });

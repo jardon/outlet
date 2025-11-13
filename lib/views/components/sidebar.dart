@@ -22,6 +22,10 @@ final List<String> appSupport = (() {
 })();
 
 class Sidebar extends ConsumerWidget {
+  const Sidebar({
+    super.key,
+  });
+
   final List<String> entries = [
     'device',
     'outlet',

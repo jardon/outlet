@@ -34,7 +34,7 @@ class TestBackend implements Backend {
       List<String> pickedCategories =
           _pickRandomCategories(categoriesList, 2, random);
 
-      apps.add(new FlatpakApplication(
+      apps.add(FlatpakApplication(
         name: "App $i",
         id: appId,
         icon: "lib/views/assets/flatpak-icon.svg",

@@ -37,6 +37,7 @@ class FlatpakBackend implements Backend {
     error.value = ffi.nullptr;
   }
 
+  @override
   List<Application> getInstalledPackages() {
     List<Application> apps = [];
     final ffi.Pointer<GPtrArray> installed_refs =
@@ -307,6 +308,7 @@ class FlatpakBackend implements Backend {
     );
   }
 
+  @override
   List<Application> getAllRemotePackages() {
     List<Application> apps = [];
     ffi.Pointer<GPtrArray> remotesPtr = bindings

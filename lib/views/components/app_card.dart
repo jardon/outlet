@@ -123,7 +123,7 @@ class _InfoCardState extends State<InfoCard>
               color: Colors.white,
               borderRadius: BorderRadius.circular(widget.borderRadius),
             ),
-            child: Container(
+            child: SizedBox(
               height: widget.cardHeight,
               child: Stack(children: <Widget>[
                 Listing(
@@ -181,12 +181,12 @@ class Listing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         width: cardWidth,
         height: cardHeight,
         child: Column(
           children: <Widget>[
-            Container(
+            SizedBox(
                 height: cardHeight * .2,
                 width: cardWidth,
                 child: Row(children: <Widget>[
@@ -211,13 +211,13 @@ class Listing extends StatelessWidget {
                         : InstalledBadge(size: 40.0),
                   ),
                 ])),
-            Container(
+            SizedBox(
                 height: cardHeight * .6,
                 width: cardWidth,
                 child: AppIconLoader(
                   icon: icon,
                 )),
-            Container(
+            SizedBox(
                 height: cardHeight * .2,
                 width: cardWidth,
                 child: Row(children: <Widget>[

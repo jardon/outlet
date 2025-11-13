@@ -39,7 +39,7 @@ class Navigation extends StatelessWidget {
                         margin: const EdgeInsets.only(bottom: 20.0),
                         child: Column(
                           children: [
-                            Container(
+                            SizedBox(
                               height: 20,
                               child: WindowTitleBarBox(child: MoveWindow()),
                             ),

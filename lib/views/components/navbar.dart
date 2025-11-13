@@ -11,7 +11,7 @@ class Navbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 60,
       // color: Colors.orange,
       child: Stack(children: <Widget>[
@@ -20,7 +20,7 @@ class Navbar extends StatelessWidget {
             padding: EdgeInsets.all(10),
             child: Row(
               children: <Widget>[
-                Container(
+                SizedBox(
                   width: 40,
                   // color: Colors.purple,
                   child: Align(

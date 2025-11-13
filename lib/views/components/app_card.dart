@@ -206,8 +206,8 @@ class Listing extends StatelessWidget {
                   Container(
                     alignment: Alignment.centerRight,
                     padding: EdgeInsets.all(20),
-                    child: !this.installed
-                        ? CategoryList(size: 40.0, categories: this.categories)
+                    child: !installed
+                        ? CategoryList(size: 40.0, categories: categories)
                         : InstalledBadge(size: 40.0),
                   ),
                 ])),

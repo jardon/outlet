@@ -63,12 +63,12 @@ class TestBackend implements Backend {
 
   @override
   List<Application> getInstalledPackages() {
-    return this.apps;
+    return apps;
   }
 
   @override
   List<Application> getAllRemotePackages() {
-    return this.apps;
+    return apps;
   }
 
   void destroy() {}

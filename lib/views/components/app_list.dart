@@ -51,8 +51,8 @@ class AppList extends StatelessWidget {
                     NoAnimationPageRoute(
                       pageBuilder: (context, animation1, animation2) =>
                           Navigation(
-                        child: AppView(app: apps[index]) as Widget,
                         title: "App Info",
+                        child: AppView(app: apps[index]) as Widget,
                       ),
                     ),
                   );

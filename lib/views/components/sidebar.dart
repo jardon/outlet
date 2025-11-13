@@ -130,10 +130,10 @@ class Sidebar extends ConsumerWidget {
                                 pageBuilder:
                                     (context, animation1, animation2) =>
                                         Navigation(
-                                  child: views[entries[index]]?["widget"]
-                                      as Widget,
                                   title:
                                       views[entries[index]]?["title"] as String,
+                                  child: views[entries[index]]?["widget"]
+                                      as Widget,
                                 ),
                               ),
                             );
@@ -155,8 +155,8 @@ class Sidebar extends ConsumerWidget {
                       NoAnimationPageRoute(
                         pageBuilder: (context, animation1, animation2) =>
                             Navigation(
-                          child: views["downloads"]?["widget"] as Widget,
                           title: views["downloads"]?["title"] as String,
+                          child: views["downloads"]?["widget"] as Widget,
                         ),
                       ),
                     );

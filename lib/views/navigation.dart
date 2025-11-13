@@ -36,6 +36,7 @@ class Navigation extends StatelessWidget {
                     SizedBox(
                       width: 250,
                       child: Container(
+                        margin: const EdgeInsets.only(bottom: 20.0),
                         child: Column(
                           children: [
                             Container(
@@ -45,20 +46,19 @@ class Navigation extends StatelessWidget {
                             Expanded(child: Sidebar()),
                           ],
                         ),
-                        margin: const EdgeInsets.only(bottom: 20.0),
                       ),
                     ),
                     Expanded(
                       child: ViewBox(
-                        child: child,
                         title: title,
+                        child: child,
                       ),
                     ),
                   ],
                 )
               : ViewBox(
-                  child: child,
                   title: title,
+                  child: child,
                 ),
           floatingActionButton: isWide
               ? null

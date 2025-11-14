@@ -24,7 +24,7 @@ class Screenshots extends StatelessWidget {
           ]),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: (fullSizedScreenshots.length == 0)
+        child: (fullSizedScreenshots.isEmpty)
             ? const Center(child: Text("No screenshots available."))
             : ListView.builder(
                 physics: const BouncingScrollPhysics(),

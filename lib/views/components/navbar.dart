@@ -67,8 +67,8 @@ class Navbar extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(45.0),
-                      boxShadow: [
-                        const BoxShadow(color: Colors.black12, blurRadius: 15.0)
+                      boxShadow: const [
+                        BoxShadow(color: Colors.black12, blurRadius: 15.0)
                       ]),
                   child: const Center(
                     child: TextField(

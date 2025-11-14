@@ -11,8 +11,8 @@ class DownloadQueue extends StatelessWidget {
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(45.0),
-          boxShadow: [
-            const BoxShadow(color: Colors.black12, blurRadius: 15.0)
+          boxShadow: const [
+            BoxShadow(color: Colors.black12, blurRadius: 15.0)
           ]),
       child: Container(
           decoration: BoxDecoration(

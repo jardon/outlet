@@ -15,7 +15,7 @@ class ScreenshotsExpanded extends StatelessWidget {
         screenshots.where((image) => image.contains('orig')).toList();
     return Container(
       width: 400,
-      height: (fullSizedScreenshots.length == 0) ? 600.0 : null,
+      height: (fullSizedScreenshots.isEmpty) ? 600.0 : null,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(45),
@@ -24,7 +24,7 @@ class ScreenshotsExpanded extends StatelessWidget {
           ]),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: (fullSizedScreenshots.length == 0)
+        child: (fullSizedScreenshots.isEmpty)
             ? const Center(child: Text("No screenshots available."))
             : ListView.builder(
                 primary: false,

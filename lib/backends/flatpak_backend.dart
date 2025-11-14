@@ -33,7 +33,7 @@ class FlatpakBackend implements Backend {
       }
     } else {
       logger.i(
-          'Successfully created FlatpakInstallation object at address: ${installationPtr}');
+          'Successfully created FlatpakInstallation object at address: $installationPtr');
     }
     error.value = ffi.nullptr;
   }
@@ -170,8 +170,8 @@ class FlatpakBackend implements Backend {
       int height = (heightAttr != null) ? int.parse(heightAttr) : 0;
       if (iconXML.getAttribute('type') == 'cached' && height > iconHeight) {
         icon = (deployDir.startsWith("/var/lib/flatpak/appstream"))
-            ? "${deployDir}/icons/${height}x${height}/${iconXML.innerText}"
-            : "${deployDir}/files/share/app-info/icons/flatpak/${height}x${height}/${iconXML.innerText}";
+            ? "$deployDir/icons/${height}x$height/${iconXML.innerText}"
+            : "$deployDir/files/share/app-info/icons/flatpak/${height}x$height/${iconXML.innerText}";
         iconHeight = height;
       } else if (iconXML.getAttribute('type') == 'remote' &&
           height > remoteIconHeight) {

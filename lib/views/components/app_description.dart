@@ -1,4 +1,5 @@
 import '../../core/application.dart';
+import 'badges.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter/material.dart';
 
@@ -27,12 +28,16 @@ class AppDescription extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             const SizedBox(height: 8),
-            const Text(
-              'Description',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              children: [
+                const Expanded(
+                    child: Text('Description',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ))),
+                CategoryList(categories: app.categories, size: 30),
+              ],
             ),
             const SizedBox(height: 8),
             Html(data: app.description ?? "No description available.", style: {

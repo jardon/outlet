@@ -114,8 +114,8 @@ class _InfoCardState extends State<InfoCard>
         margin: const EdgeInsets.all(15.0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(widget.borderRadius),
-            boxShadow: [
-              const BoxShadow(color: Colors.black12, blurRadius: 20.0)
+            boxShadow: const [
+              BoxShadow(color: Colors.black12, blurRadius: 20.0)
             ]),
         child: MouseRegion(
           onEnter: (_) => _onHoverChanged(true),

@@ -19,8 +19,8 @@ class Screenshots extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(45),
-          boxShadow: [
-            const BoxShadow(color: Colors.black12, blurRadius: 20.0)
+          boxShadow: const [
+            BoxShadow(color: Colors.black12, blurRadius: 20.0)
           ]),
       child: Padding(
         padding: const EdgeInsets.all(20.0),

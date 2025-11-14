@@ -22,11 +22,11 @@ final List<String> appSupport = (() {
 })();
 
 class Sidebar extends ConsumerWidget {
-  const Sidebar({
+  Sidebar({
     super.key,
   });
 
-  final List<String> entries = [
+  final List<String> entries = const [
     'device',
     'outlet',
     'play',
@@ -38,12 +38,12 @@ class Sidebar extends ConsumerWidget {
 
   final Map<String, List<String>> categories = {
     'device': appSupport,
-    'outlet': ['featured'],
-    'play': ['audio', 'video', 'game'],
-    'work': ['development', 'network', 'graphics'],
-    'build': ['development', 'graphics'],
-    'socialize': ['game'],
-    'relax': ['audio', 'video'],
+    'outlet': const ['featured'],
+    'play': const ['audio', 'video', 'game'],
+    'work': const ['development', 'network', 'graphics'],
+    'build': const ['development', 'graphics'],
+    'socialize': const ['game'],
+    'relax': const ['audio', 'video'],
   };
 
   @override
@@ -165,7 +165,7 @@ class Sidebar extends ConsumerWidget {
                       ),
                     );
                   },
-                  child: SizedBox(
+                  child: const SizedBox(
                     height: 150,
                     // color: Colors.yellow,
                     child: DownloadQueue(),

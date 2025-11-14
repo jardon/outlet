@@ -161,8 +161,8 @@ class FlatpakBackend implements Backend {
       }
     }
 
-    String? icon = null;
-    String? remoteIcon = null;
+    String? icon;
+    String? remoteIcon;
     int iconHeight = 0;
     int remoteIconHeight = 0;
     for (var iconXML in componentElement.findAllElements('icon')) {

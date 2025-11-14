@@ -41,12 +41,12 @@ class FlatpakBackend implements Backend {
   @override
   List<Application> getInstalledPackages() {
     List<Application> apps = [];
-    final ffi.Pointer<GPtrArray> installed_refs =
+    final ffi.Pointer<GPtrArray> installedRefsPtr =
         bindings.flatpak_installation_list_installed_refs(
             installationPtr, ffi.nullptr, error);
     if (error.value == ffi.nullptr) {
       error.value = ffi.nullptr;
-      final GPtrArray installedRefs = installed_refs.ref;
+      final GPtrArray installedRefs = installedRefsPtr.ref;
       final int length = installedRefs.len;
       logger.i('Found $length installed references (apps and runtimes).');
       final ffi.Pointer<gpointer> pdataPtr = installedRefs.pdata;
@@ -73,9 +73,9 @@ class FlatpakBackend implements Backend {
           sizeP.value = refAppSize;
           final gconstpointer dataPtr =
               bindings.g_bytes_get_data(refAppPtr, sizeP);
-          final ffi.Pointer<ffi.Void> void_ptr = dataPtr;
+          final ffi.Pointer<ffi.Void> voidPtr = dataPtr;
           final Uint8List compressedBytes =
-              void_ptr.cast<ffi.Uint8>().asTypedList(sizeP.value);
+              voidPtr.cast<ffi.Uint8>().asTypedList(sizeP.value);
           final GZipCodec gzipCodec = GZipCodec();
           final List<int> decompressedBytes = gzipCodec.decode(compressedBytes);
           final String xmlString = utf8.decode(decompressedBytes);

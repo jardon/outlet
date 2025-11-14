@@ -52,7 +52,7 @@ class FlatpakBackend implements Backend {
       final ffi.Pointer<gpointer> pdataPtr = installedRefs.pdata;
 
       for (int i = 0; i < length; i++) {
-        final ffi.Pointer<ffi.Void> refVoidPtr = pdataPtr.elementAt(i).value;
+        final ffi.Pointer<ffi.Void> refVoidPtr = pdataPtr[i];
 
         final ffi.Pointer<FlatpakInstalledRef> refPtr =
             refVoidPtr.cast<FlatpakInstalledRef>();
@@ -96,7 +96,7 @@ class FlatpakBackend implements Backend {
           logger.w(
               'Failed to load appdata. GError pointer received: ${error.value}');
           error.value = ffi.nullptr;
-          final ffi.Pointer<ffi.Void> refVoidPtr = pdataPtr.elementAt(i).value;
+          final ffi.Pointer<ffi.Void> refVoidPtr = pdataPtr[i];
           final ffi.Pointer<FlatpakRef> refPtr = refVoidPtr.cast<FlatpakRef>();
           final ffi.Pointer<ffi.Char> namePtr =
               bindings.flatpak_ref_get_name(refPtr);
@@ -116,7 +116,7 @@ class FlatpakBackend implements Backend {
   }
 
   Application appFromXML(XmlElement componentElement, String deployDir) {
-    final id = componentElement.findElements('id').firstOrNull?.text.trim();
+    final id = componentElement.findElements('id').firstOrNull?.innerText;
     if (id == null) {
       throw XmlParserException("Error: Could not find <id> tag.");
     }
@@ -128,28 +128,25 @@ class FlatpakBackend implements Backend {
       },
     )) {
       if (nameElement.getAttribute('xml:lang') == null) {
-        name = nameElement.text.trim();
+        name = nameElement.innerText;
       }
     }
 
     String? summary;
     for (var summaryElement in componentElement.findAllElements('summary')) {
       if (summaryElement.getAttribute('xml:lang') == null) {
-        summary = summaryElement.text.trim();
+        summary = summaryElement.innerText;
       }
     }
 
-    final license = componentElement
-        .findElements('project_license')
-        .firstOrNull
-        ?.text
-        .trim();
+    final license =
+        componentElement.findElements('project_license').firstOrNull?.innerText;
 
     String? description;
     for (var descriptionElement
         in componentElement.findAllElements('description')) {
       if (descriptionElement.getAttribute('xml:lang') == null) {
-        description = descriptionElement.text.trim();
+        description = descriptionElement.innerText;
       }
     }
 
@@ -160,7 +157,7 @@ class FlatpakBackend implements Backend {
       },
     )) {
       if (devElement.getAttribute('xml:lang') == null) {
-        developer = devElement.text.trim();
+        developer = devElement.innerText;
       }
     }
 
@@ -323,7 +320,7 @@ class FlatpakBackend implements Backend {
       final ffi.Pointer<ffi.Char> archPtr = bindings.flatpak_get_default_arch();
 
       for (int i = 0; i < length; i++) {
-        final ffi.Pointer<ffi.Void> refVoidPtr = pdataPtr.elementAt(i).value;
+        final ffi.Pointer<ffi.Void> refVoidPtr = pdataPtr[i];
         final ffi.Pointer<FlatpakRemote> remotePtr =
             refVoidPtr.cast<FlatpakRemote>();
         final ffi.Pointer<GFile> appstreamDirPtr =

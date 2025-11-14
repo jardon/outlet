@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
       - name: Analyze project source
-        run: dart analyze
+        run: dart analyze --fatal-infos
   dart-format:
     runs-on: ubuntu-latest
     steps:

@@ -20,7 +20,7 @@ class AppCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FittedBox(
-        child: InfoCard(
+        child: _InfoCard(
       featured: app.featured,
       verified: app.verified,
       installed: app.installed,
@@ -34,9 +34,8 @@ class AppCard extends StatelessWidget {
   }
 }
 
-class InfoCard extends StatefulWidget {
-  const InfoCard({
-    super.key,
+class _InfoCard extends StatefulWidget {
+  const _InfoCard({
     required this.featured,
     required this.verified,
     required this.installed,
@@ -65,7 +64,7 @@ class InfoCard extends StatefulWidget {
   _InfoCardState createState() => _InfoCardState();
 }
 
-class _InfoCardState extends State<InfoCard>
+class _InfoCardState extends State<_InfoCard>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _slideAnimation;

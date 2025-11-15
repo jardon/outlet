@@ -143,10 +143,12 @@ class FlatpakBackend implements Backend {
         componentElement.findElements('project_license').firstOrNull?.innerText;
 
     String? description;
-    for (var descriptionElement
-        in componentElement.findAllElements('description')) {
-      if (descriptionElement.getAttribute('xml:lang') == null) {
-        description = descriptionElement.innerText;
+    for (final child in componentElement.children) {
+      if (child is XmlElement &&
+          child.name.local == 'description' &&
+          child.getAttribute('xml:lang') == null) {
+        description = child.innerText;
+        break;
       }
     }
 

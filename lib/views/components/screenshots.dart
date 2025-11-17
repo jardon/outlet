@@ -39,8 +39,10 @@ class Screenshots extends StatelessWidget {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => ScreenshotsView(
+                                SlideAndFadeAnimationPageRoute(
+                                  pageBuilder: (context, animation,
+                                          secondaryAnimation) =>
+                                      ScreenshotsView(
                                     screenshot: fullSizedScreenshots[index],
                                   ),
                                 ),
@@ -112,8 +114,10 @@ class ScreenshotsExpanded extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => ScreenshotsView(
+                            SlideAndFadeAnimationPageRoute(
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
+                                      ScreenshotsView(
                                 screenshot: fullSizedScreenshots[index],
                               ),
                             ),
@@ -148,4 +152,34 @@ class ScreenshotsExpanded extends StatelessWidget {
       ),
     );
   }
+}
+
+class SlideAndFadeAnimationPageRoute<T> extends PageRouteBuilder<T> {
+  SlideAndFadeAnimationPageRoute({required super.pageBuilder})
+      : super(
+          transitionDuration: const Duration(milliseconds: 100),
+          reverseTransitionDuration: const Duration(milliseconds: 100),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            final curve = CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeOut,
+            );
+
+            const beginSlide = Offset(1.0, 0.0);
+            const endSlide = Offset.zero;
+            final slideTween = Tween(begin: beginSlide, end: endSlide);
+
+            const beginFade = 0.0;
+            const endFade = 1.0;
+            final fadeTween = Tween(begin: beginFade, end: endFade);
+
+            return SlideTransition(
+              position: slideTween.animate(curve),
+              child: FadeTransition(
+                opacity: fadeTween.animate(curve),
+                child: child,
+              ),
+            );
+          },
+        );
 }

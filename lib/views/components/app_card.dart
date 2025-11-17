@@ -4,7 +4,7 @@ import 'badges.dart';
 import 'package:flutter/material.dart';
 import 'review.dart';
 
-class AppCard extends StatelessWidget {
+class AppCard extends StatefulWidget {
   const AppCard({
     super.key,
     required this.app,
@@ -12,60 +12,18 @@ class AppCard extends StatelessWidget {
     this.size = 300,
   });
 
+  final bool details;
+  final int size;
   final Application app;
-  final borderRadius = 45.0;
-  final bool details;
-  final double size;
-
-  @override
-  Widget build(BuildContext context) {
-    return FittedBox(
-        child: _InfoCard(
-      featured: app.featured,
-      verified: app.verified,
-      installed: app.installed,
-      details: details,
-      name: app.name ?? app.id,
-      icon: app.icon,
-      description: app.summary ?? "No summary available.",
-      categories: app.categories,
-      rating: app.rating,
-    ));
-  }
-}
-
-class _InfoCard extends StatefulWidget {
-  const _InfoCard({
-    required this.featured,
-    required this.verified,
-    required this.installed,
-    this.details = true,
-    required this.name,
-    required this.icon,
-    required this.description,
-    required this.categories,
-    this.rating,
-  });
-
-  final bool featured;
-  final bool verified;
-  final bool installed;
-  final bool details;
-  final String name;
-  final String icon;
-  final String description;
   final borderRadius = 45.0;
   final cardWidth = 300.0;
   final cardHeight = 400.0;
-  final List<String> categories;
-  final double? rating;
 
   @override
-  _InfoCardState createState() => _InfoCardState();
+  AppCardState createState() => AppCardState();
 }
 
-class _InfoCardState extends State<_InfoCard>
-    with SingleTickerProviderStateMixin {
+class AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _slideAnimation;
   late Animation<double> _fadeAnimation;
@@ -107,54 +65,51 @@ class _InfoCardState extends State<_InfoCard>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: widget.cardWidth,
-        height: widget.cardHeight,
-        margin: const EdgeInsets.all(15.0),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(widget.borderRadius),
-            boxShadow: const [
-              BoxShadow(color: Colors.black12, blurRadius: 20.0)
-            ]),
-        child: MouseRegion(
-          onEnter: (_) => _onHoverChanged(true),
-          onExit: (_) => _onHoverChanged(false),
-          child: Container(
+    return FittedBox(
+        child: Container(
+            margin: const EdgeInsets.all(15.0),
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(widget.borderRadius),
-            ),
-            child: SizedBox(
-              height: widget.cardHeight,
-              child: Stack(children: <Widget>[
-                Listing(
-                  featured: widget.featured,
-                  verified: widget.verified,
-                  installed: widget.installed,
-                  name: widget.name,
-                  icon: widget.icon,
-                  categories: widget.categories,
-                  rating: widget.rating,
+                borderRadius: BorderRadius.circular(widget.borderRadius),
+                boxShadow: const [
+                  BoxShadow(color: Colors.black12, blurRadius: 20.0)
+                ]),
+            child: MouseRegion(
+              onEnter: (_) => _onHoverChanged(true),
+              onExit: (_) => _onHoverChanged(false),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(widget.borderRadius),
                 ),
-                widget.details
-                    ? ClipRRect(
-                        borderRadius:
-                            BorderRadius.circular(widget.borderRadius),
-                        child: SlideTransition(
-                          position: _slideAnimation,
-                          child: FadeTransition(
-                            opacity: _fadeAnimation,
-                            child: Details(
-                              name: widget.name,
-                              description: widget.description,
+                child: Stack(children: <Widget>[
+                  Listing(
+                    featured: widget.app.featured,
+                    verified: widget.app.verified,
+                    installed: widget.app.installed,
+                    name: widget.app.name ?? widget.app.id,
+                    icon: widget.app.icon,
+                    categories: widget.app.categories,
+                    rating: widget.app.rating,
+                  ),
+                  widget.details
+                      ? ClipRRect(
+                          borderRadius:
+                              BorderRadius.circular(widget.borderRadius),
+                          child: SlideTransition(
+                            position: _slideAnimation,
+                            child: FadeTransition(
+                              opacity: _fadeAnimation,
+                              child: Details(
+                                name: widget.app.name ?? widget.app.id,
+                                summary: widget.app.summary ??
+                                    "No summary available.",
+                              ),
                             ),
-                          ),
-                        ))
-                    : const Center(),
-              ]),
-            ),
-          ),
-        ));
+                          ))
+                      : const Center(),
+                ]),
+              ),
+            )));
   }
 }
 
@@ -182,74 +137,65 @@ class Listing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
         width: cardWidth,
         height: cardHeight,
+        padding: const EdgeInsets.all(25),
         child: Column(
           children: <Widget>[
-            SizedBox(
-                height: cardHeight * .2,
-                width: cardWidth,
-                child: Row(children: <Widget>[
-                  Expanded(
-                      child: Container(
-                          height: cardHeight * .2,
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.all(20),
-                          child: Row(children: <Widget>[
-                            !featured
-                                ? const Center()
-                                : const FeaturedBadge(
-                                    size: 40.0,
-                                  ),
-                            !verified
-                                ? const Center()
-                                : const VerifiedBadge(size: 40.0),
-                          ]))),
-                  Container(
+            Row(children: <Widget>[
+              Expanded(
+                  child: Container(
+                      alignment: Alignment.centerLeft,
+                      child: Row(children: <Widget>[
+                        !featured
+                            ? const Center()
+                            : const FeaturedBadge(
+                                size: 40.0,
+                              ),
+                        !verified
+                            ? const Center()
+                            : const VerifiedBadge(size: 40.0),
+                      ]))),
+              Container(
+                alignment: Alignment.centerRight,
+                child: !installed
+                    ? CategoryList(size: 40.0, categories: categories)
+                    : const InstalledBadge(size: 40.0),
+              ),
+            ]),
+            const SizedBox(height: 15),
+            Expanded(
+                child: Container(width: cardWidth, child: AppIconLoader(
+              icon: icon,
+            ))),
+            const SizedBox(height: 15),
+            Row(children: <Widget>[
+              Expanded(
+                  child: Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        name,
+                        maxLines: 1,
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ))),
+              if (rating != null)
+                Container(
+                    width: 130,
+                    height: cardHeight * .2,
                     alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.all(20),
-                    child: !installed
-                        ? CategoryList(size: 40.0, categories: categories)
-                        : const InstalledBadge(size: 40.0),
-                  ),
-                ])),
-            SizedBox(
-                height: cardHeight * .6,
-                width: cardWidth,
-                child: AppIconLoader(
-                  icon: icon,
-                )),
-            SizedBox(
-                height: cardHeight * .2,
-                width: cardWidth,
-                child: Row(children: <Widget>[
-                  Expanded(
-                      child: Container(
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.only(left: 30, right: 10),
-                          child: Text(
-                            name,
-                            maxLines: 1,
-                            overflow: TextOverflow.fade,
-                            softWrap: false,
-                            style: const TextStyle(
-                              fontSize: 24,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ))),
-                  if (rating != null)
-                    Container(
-                        width: 130,
-                        height: cardHeight * .2,
-                        alignment: Alignment.centerRight,
-                        padding: const EdgeInsets.only(right: 30),
-                        child: ReviewScore(
-                          score: rating ?? 0.0,
-                          size: 20.0,
-                        ))
-                ])),
+                    padding: const EdgeInsets.only(right: 30),
+                    child: ReviewScore(
+                      score: rating ?? 0.0,
+                      size: 20.0,
+                    ))
+            ]),
           ],
         ));
   }
@@ -259,13 +205,13 @@ class Details extends StatelessWidget {
   const Details({
     super.key,
     required this.name,
-    required this.description,
+    required this.summary,
     this.cardWidth = 300.0,
     this.cardHeight = 400.0,
   });
 
   final String name;
-  final String description;
+  final String summary;
   final double cardWidth;
   final double cardHeight;
 
@@ -278,30 +224,29 @@ class Details extends StatelessWidget {
           color: Colors.black,
           borderRadius: BorderRadius.circular(45.0),
         ),
-        child: Column(children: <Widget>[
-          Container(
-              height: cardHeight * .2,
-              padding: const EdgeInsets.only(left: 40, right: 40, top: 40),
-              alignment: Alignment.topLeft,
-              child: Text(
-                name,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              )),
-          Container(
-              height: cardHeight * .8,
-              padding: const EdgeInsets.only(left: 40, right: 40, bottom: 40),
-              alignment: Alignment.topLeft,
-              child: Text(
-                description,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ))
-        ]));
+        child: Container(
+            margin: const EdgeInsets.all(40),
+            child: Column(children: <Widget>[
+              Container(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    name,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )),
+              Expanded(
+                  child: Container(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        summary,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      )))
+            ])));
   }
 }

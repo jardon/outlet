@@ -20,15 +20,11 @@ class AppList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Container(
     return LayoutBuilder(
       builder: (context, constraints) {
-        // Calculate how many columns based on the available width
         double width = constraints.maxWidth;
-        int crossAxisCount =
-            (width / 160).floor(); // Each grid item is 300px wide
+        int crossAxisCount = (width / 160).floor();
 
-        // Ensure at least 1 column
         crossAxisCount = crossAxisCount < 1 ? 1 : crossAxisCount;
 
         return GridView.builder(

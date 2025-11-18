@@ -34,7 +34,7 @@ class AppList extends StatelessWidget {
         return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: crossAxisCount,
-              childAspectRatio: 3 / 4,
+              childAspectRatio: 3 / 3.4,
               crossAxisSpacing: 0.0,
               mainAxisSpacing: 0.0,
             ),

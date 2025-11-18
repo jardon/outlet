@@ -2,7 +2,6 @@ import '../../core/application.dart';
 import 'app_icon_loader.dart';
 import 'badges.dart';
 import 'package:flutter/material.dart';
-import 'review.dart';
 
 class AppCard extends StatefulWidget {
   const AppCard({
@@ -17,7 +16,7 @@ class AppCard extends StatefulWidget {
   final Application app;
   final borderRadius = 45.0;
   final cardWidth = 300.0;
-  final cardHeight = 400.0;
+  final cardHeight = 340.0;
 
   @override
   AppCardState createState() => AppCardState();
@@ -103,6 +102,7 @@ class AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
                                 name: widget.app.name ?? widget.app.id,
                                 summary: widget.app.summary ??
                                     "No summary available.",
+                                categories: widget.app.categories,
                               ),
                             ),
                           ))
@@ -131,7 +131,7 @@ class Listing extends StatelessWidget {
   final String name;
   final String icon;
   final cardWidth = 300.0;
-  final cardHeight = 400.0;
+  final cardHeight = 340.0;
   final List<String> categories;
   final double? rating;
 
@@ -143,32 +143,13 @@ class Listing extends StatelessWidget {
         padding: const EdgeInsets.all(25),
         child: Column(
           children: <Widget>[
-            Row(children: <Widget>[
-              Expanded(
-                  child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: Row(children: <Widget>[
-                        !featured
-                            ? const Center()
-                            : const FeaturedBadge(
-                                size: 40.0,
-                              ),
-                        !verified
-                            ? const Center()
-                            : const VerifiedBadge(size: 40.0),
-                      ]))),
-              Container(
-                alignment: Alignment.centerRight,
-                child: !installed
-                    ? CategoryList(size: 40.0, categories: categories)
-                    : const InstalledBadge(size: 40.0),
-              ),
-            ]),
-            const SizedBox(height: 15),
+            const SizedBox(height: 35),
             Expanded(
-                child: Container(width: cardWidth, child: AppIconLoader(
-              icon: icon,
-            ))),
+                child: SizedBox(
+                    width: cardWidth,
+                    child: AppIconLoader(
+                      icon: icon,
+                    ))),
             const SizedBox(height: 15),
             Row(children: <Widget>[
               Expanded(
@@ -185,16 +166,7 @@ class Listing extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ))),
-              if (rating != null)
-                Container(
-                    width: 130,
-                    height: cardHeight * .2,
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.only(right: 30),
-                    child: ReviewScore(
-                      score: rating ?? 0.0,
-                      size: 20.0,
-                    ))
+              !verified ? const Center() : const VerifiedBadge(size: 40.0),
             ]),
           ],
         ));
@@ -206,12 +178,14 @@ class Details extends StatelessWidget {
     super.key,
     required this.name,
     required this.summary,
+    required this.categories,
     this.cardWidth = 300.0,
-    this.cardHeight = 400.0,
+    this.cardHeight = 340.0,
   });
 
   final String name;
   final String summary;
+  final List<String> categories;
   final double cardWidth;
   final double cardHeight;
 
@@ -225,7 +199,7 @@ class Details extends StatelessWidget {
           borderRadius: BorderRadius.circular(45.0),
         ),
         child: Container(
-            margin: const EdgeInsets.all(40),
+            padding: const EdgeInsets.all(40),
             child: Column(children: <Widget>[
               Container(
                   alignment: Alignment.topLeft,
@@ -246,7 +220,8 @@ class Details extends StatelessWidget {
                           color: Colors.white,
                           fontSize: 20,
                         ),
-                      )))
+                      ))),
+              CategoryList(size: 50, categories: categories),
             ])));
   }
 }

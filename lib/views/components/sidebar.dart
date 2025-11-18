@@ -79,10 +79,9 @@ class Sidebar extends ConsumerWidget {
       },
       "device": {
         "widget": AppList(
-            apps: installed,
-            details: false,
-            showFeaturedBadge: false,
-            showInstalledBadge: false),
+          apps: installed,
+          details: false,
+        ),
         "title": "This Device",
       },
       "search": {

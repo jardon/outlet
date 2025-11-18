@@ -59,6 +59,7 @@ class AppList extends StatelessWidget {
                 },
                 child: AppCard(
                   app: apps[index],
+                  details: details,
                 ),
               );
             });

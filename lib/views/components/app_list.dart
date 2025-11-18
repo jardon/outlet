@@ -8,7 +8,7 @@ class AppList extends StatelessWidget {
   const AppList({
     super.key,
     required this.apps,
-    this.details = false,
+    this.details = true,
     this.showFeaturedBadge = true,
     this.showInstalledBadge = true,
   });

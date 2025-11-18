@@ -9,14 +9,10 @@ class AppList extends StatelessWidget {
     super.key,
     required this.apps,
     this.details = true,
-    this.showFeaturedBadge = true,
-    this.showInstalledBadge = true,
   });
 
   final List<Application> apps;
   final bool details;
-  final bool showFeaturedBadge;
-  final bool showInstalledBadge;
 
   @override
   Widget build(BuildContext context) {

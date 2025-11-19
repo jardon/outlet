@@ -100,7 +100,7 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
     if (renderBox != null && renderBox.hasSize) {
       final double actualHeight = renderBox.size.height;
 
-      if (actualHeight > widget.maxHeight && !_showExpandButton) {
+      if (actualHeight - widget.maxHeight > 20 && !_showExpandButton) {
         setState(() {
           _showExpandButton = true;
         });

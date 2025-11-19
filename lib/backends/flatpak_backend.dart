@@ -87,7 +87,7 @@ class FlatpakBackend implements Backend {
               throw XmlParserException(
                   "Error: Could not find the main <component> tag.");
             }
-            apps.add(appFromXML(componentElement, deployDir));
+            apps.add(appFromXML(componentElement, deployDir, true));
           } on XmlParserException catch (e) {
             logger.e('Error parsing XML: $e');
           }
@@ -103,6 +103,7 @@ class FlatpakBackend implements Backend {
           final String id = namePtr.cast<pkg_ffi.Utf8>().toDartString();
           apps.add(FlatpakApplication(
             id: id,
+            installed: true,
           ));
         }
       }
@@ -115,7 +116,8 @@ class FlatpakBackend implements Backend {
     return apps;
   }
 
-  Application appFromXML(XmlElement componentElement, String deployDir) {
+  Application appFromXML(
+      XmlElement componentElement, String deployDir, bool installed) {
     final id = componentElement.findElements('id').firstOrNull?.innerText;
     if (id == null) {
       throw XmlParserException("Error: Could not find <id> tag.");
@@ -305,6 +307,7 @@ class FlatpakBackend implements Backend {
       releases: releases,
       content: content,
       verified: verified,
+      installed: installed,
     );
   }
 
@@ -362,7 +365,7 @@ class FlatpakBackend implements Backend {
                   XmlDocument.parse(appstreamXmlContent);
               for (var componentElement
                   in document.findAllElements('component')) {
-                apps.add(appFromXML(componentElement, appstreamDir));
+                apps.add(appFromXML(componentElement, appstreamDir, false));
               }
             } on XmlParserException catch (e) {
               logger.w('Error parsing XML: $e');

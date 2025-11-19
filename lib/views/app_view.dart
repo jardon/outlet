@@ -1,6 +1,7 @@
 import '../core/application.dart';
 import 'components/app_description.dart';
 import 'components/app_info.dart';
+import 'components/app_links.dart';
 import 'components/review_info.dart';
 import 'components/screenshots.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class AppView extends StatelessWidget {
                               AppInfo(app: app),
                               AppDescription(app: app),
                               const ReviewInfo(reviews: []),
+                              AppLinks(app: app),
                             ]),
                             ScreenshotsExpanded(screenshots: app.screenshots),
                           ]))
@@ -51,6 +53,7 @@ class AppView extends StatelessWidget {
                         AppDescription(app: app),
                         Screenshots(screenshots: app.screenshots),
                         const ReviewInfo(reviews: []),
+                        AppLinks(app: app),
                       ]));
             })));
   }

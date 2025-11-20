@@ -23,6 +23,10 @@ class FlatpakApplication extends Application {
     super.verified = false,
     super.installed = false,
     super.reviews = const [],
+    String? type,
+    String? runtime,
+    String? sdk,
+    super.bundle,
   }) : super(
           icon: icon ?? "lib/views/assets/flatpak-icon.svg",
         );

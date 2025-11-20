@@ -289,6 +289,18 @@ class FlatpakBackend implements Backend {
       }
     }
 
+    String? type;
+    String? runtime;
+    String? sdk;
+    String? bundle;
+    final bundleParent = componentElement.findAllElements('bundle').firstOrNull;
+    if (bundleParent != null) {
+      type = bundleParent.getAttribute('type');
+      runtime = bundleParent.getAttribute('runtime');
+      sdk = bundleParent.getAttribute('sdk');
+      bundle = bundleParent.innerText;
+    }
+
     return FlatpakApplication(
       id: id,
       name: name,
@@ -308,6 +320,10 @@ class FlatpakBackend implements Backend {
       content: content,
       verified: verified,
       installed: installed,
+      type: type,
+      runtime: runtime,
+      sdk: sdk,
+      bundle: bundle,
     );
   }
 

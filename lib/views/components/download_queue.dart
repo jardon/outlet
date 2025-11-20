@@ -8,7 +8,7 @@ class DownloadQueue extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(20),
+      margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(45.0),
           boxShadow: const [

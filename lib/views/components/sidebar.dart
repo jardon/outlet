@@ -165,7 +165,7 @@ class Sidebar extends ConsumerWidget {
                     );
                   },
                   child: const SizedBox(
-                    height: 150,
+                    height: 130,
                     // color: Colors.yellow,
                     child: DownloadQueue(),
                   )),

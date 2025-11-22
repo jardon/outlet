@@ -11,6 +11,9 @@ interface class Backend {
   List<Application> getAllRemotePackages() {
     return [];
   }
+
+  Future<bool> installApplication(String id, String remote) =>
+      Future.value(true);
 }
 
 class TestBackend implements Backend {
@@ -70,6 +73,10 @@ class TestBackend implements Backend {
   List<Application> getAllRemotePackages() {
     return apps;
   }
+
+  @override
+  Future<bool> installApplication(String id, String remote) =>
+      Future.value(true);
 
   void destroy() {}
 }

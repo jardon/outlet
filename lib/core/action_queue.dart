@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:isolate';
 import 'logger.dart';
 
 class ActionQueue {
@@ -6,7 +7,8 @@ class ActionQueue {
   Action? action;
   bool idle = true;
 
-  void add(String title, Future<void> Function() action) {
+  void add(String title, Future<void> Function() action) async {
+    logger.i("Queueing action: $title");
     queue.add(Action(title: title, action: action));
     if (idle) execute();
   }
@@ -18,14 +20,15 @@ class ActionQueue {
       action = queue.removeFirst();
       try {
         if (action != null) {
-          logger.i("Queueing action: ${action!.title}");
-          await action!.action();
+          logger.i("Executing action: ${action!.title}");
+          await Isolate.run(action!.action);
           logger.i("Action completed successfully.");
         }
       } catch (e) {
         logger.e("An error occured when processing task: $e");
       }
     }
+    action = null;
     idle = true;
   }
 }

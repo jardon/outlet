@@ -1,4 +1,5 @@
 import '../core/application.dart';
+import 'components/app_actions.dart';
 import 'components/app_description.dart';
 import 'components/app_info.dart';
 import 'components/app_links.dart';
@@ -38,6 +39,7 @@ class AppView extends StatelessWidget {
                           children: [
                             Column(spacing: 16.0, children: [
                               AppInfo(app: app),
+                              AppActions(app: app),
                               AppDescription(app: app),
                               const ReviewInfo(reviews: []),
                               AppLinks(app: app),
@@ -50,6 +52,7 @@ class AppView extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
                       child: Column(spacing: 16.0, children: [
                         AppInfo(app: app),
+                        AppActions(app: app),
                         AppDescription(app: app),
                         Screenshots(screenshots: app.screenshots),
                         const ReviewInfo(reviews: []),

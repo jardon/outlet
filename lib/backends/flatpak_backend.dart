@@ -13,13 +13,13 @@ import 'package:libflatpak/libflatpak.dart';
 import 'package:xml/xml.dart';
 
 class FlatpakBackend implements Backend {
-  late FlatpakBindings bindings;
-  late ffi.Pointer<ffi.Pointer<GError>> error;
-  late ffi.Pointer<FlatpakInstallation> installationPtr;
+  ffi.Pointer<FlatpakInstallation> getFlatpakInstallation() {
+    final FlatpakBindings bindings =
+        FlatpakBindings(ffi.DynamicLibrary.open('libflatpak.so'));
+    ffi.Pointer<ffi.Pointer<GError>> error =
+        pkg_ffi.calloc<ffi.Pointer<GError>>();
+    late ffi.Pointer<FlatpakInstallation> installationPtr;
 
-  FlatpakBackend()
-      : bindings = FlatpakBindings(ffi.DynamicLibrary.open('libflatpak.so')),
-        error = pkg_ffi.calloc<ffi.Pointer<GError>>() {
     installationPtr =
         bindings.flatpak_installation_new_system(ffi.nullptr, error);
 
@@ -32,14 +32,20 @@ class FlatpakBackend implements Backend {
             'Failed to get FlatpakInstallation, but no explicit GError was returned.');
       }
     } else {
+      error.value = ffi.nullptr;
       logger.i(
           'Successfully created FlatpakInstallation object at address: $installationPtr');
     }
-    error.value = ffi.nullptr;
+    return installationPtr;
   }
 
   @override
   List<Application> getInstalledPackages() {
+    final FlatpakBindings bindings =
+        FlatpakBindings(ffi.DynamicLibrary.open('libflatpak.so'));
+    ffi.Pointer<FlatpakInstallation> installationPtr = getFlatpakInstallation();
+    ffi.Pointer<ffi.Pointer<GError>> error =
+        pkg_ffi.calloc<ffi.Pointer<GError>>();
     List<Application> apps = [];
     final ffi.Pointer<GPtrArray> installedRefsPtr =
         bindings.flatpak_installation_list_installed_refs(
@@ -329,6 +335,11 @@ class FlatpakBackend implements Backend {
 
   @override
   List<Application> getAllRemotePackages() {
+    final FlatpakBindings bindings =
+        FlatpakBindings(ffi.DynamicLibrary.open('libflatpak.so'));
+    ffi.Pointer<FlatpakInstallation> installationPtr = getFlatpakInstallation();
+    ffi.Pointer<ffi.Pointer<GError>> error =
+        pkg_ffi.calloc<ffi.Pointer<GError>>();
     List<Application> apps = [];
     ffi.Pointer<GPtrArray> remotesPtr = bindings
         .flatpak_installation_list_remotes(installationPtr, ffi.nullptr, error);

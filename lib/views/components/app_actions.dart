@@ -1,6 +1,7 @@
 import '../../core/application.dart';
 import '../../providers/action_queue.dart';
 import '../../providers/backend_provider.dart';
+import 'dart:isolate';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -29,9 +30,16 @@ class AppActions extends ConsumerWidget {
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
         child: Row(children: [
           TextButton(
-            onPressed: () => actionQueue.add("installing ${app.id}", () async {
-              backend.installApplication(app.bundle!, "flathub");
-            }),
+            onPressed: () {
+              app.installed
+                  ? Isolate.run(() {
+                      backend
+                          .uninstallApplication("app/${app.id}/x86_64/stable");
+                    })
+                  : actionQueue.add("installing ${app.id}", () async {
+                      backend.installApplication(app.bundle!, "flathub");
+                    });
+            },
             style: const ButtonStyle(
               backgroundColor: WidgetStatePropertyAll<Color>(Colors.black),
             ),

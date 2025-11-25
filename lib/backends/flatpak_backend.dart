@@ -96,7 +96,7 @@ class FlatpakBackend implements Backend {
               throw XmlParserException(
                   "Error: Could not find the main <component> tag.");
             }
-            apps.add(appFromXML(componentElement, deployDir, true));
+            apps.add(appFromXML(componentElement, deployDir, true, null));
           } on XmlParserException catch (e) {
             logger.e('Error parsing XML: $e');
           }
@@ -125,8 +125,8 @@ class FlatpakBackend implements Backend {
     return apps;
   }
 
-  Application appFromXML(
-      XmlElement componentElement, String deployDir, bool installed) {
+  Application appFromXML(XmlElement componentElement, String deployDir,
+      bool installed, String? remote) {
     final id = componentElement.findElements('id').firstOrNull?.innerText;
     if (id == null) {
       throw XmlParserException("Error: Could not find <id> tag.");
@@ -333,6 +333,7 @@ class FlatpakBackend implements Backend {
       runtime: runtime,
       sdk: sdk,
       bundle: bundle,
+      remote: remote,
     );
   }
 
@@ -359,6 +360,10 @@ class FlatpakBackend implements Backend {
         final ffi.Pointer<ffi.Void> refVoidPtr = pdataPtr[i];
         final ffi.Pointer<FlatpakRemote> remotePtr =
             refVoidPtr.cast<FlatpakRemote>();
+        final ffi.Pointer<ffi.Char> remoteNamePtr =
+            bindings.flatpak_remote_get_name(remotePtr);
+        final String remoteName =
+            remoteNamePtr.cast<pkg_ffi.Utf8>().toDartString();
         final ffi.Pointer<GFile> appstreamDirPtr =
             bindings.flatpak_remote_get_appstream_dir(remotePtr, archPtr);
         final ffi.Pointer<ffi.Char> appstreamDirCharPtr =
@@ -396,7 +401,9 @@ class FlatpakBackend implements Backend {
                   XmlDocument.parse(appstreamXmlContent);
               for (var componentElement
                   in document.findAllElements('component')) {
-                apps.add(appFromXML(componentElement, appstreamDir, false));
+                Application app = appFromXML(
+                    componentElement, appstreamDir, false, remoteName);
+                apps.add(app);
               }
             } on XmlParserException catch (e) {
               logger.w('Error parsing XML: $e');

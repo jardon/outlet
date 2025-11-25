@@ -33,11 +33,11 @@ class AppActions extends ConsumerWidget {
             onPressed: () {
               app.installed
                   ? Isolate.run(() {
-                      backend
-                          .uninstallApplication("app/${app.id}/x86_64/stable");
+                      backend.uninstallApplication(
+                          "app/${app.id}/${backend.arch}/stable");
                     })
                   : actionQueue.add("installing ${app.id}", () async {
-                      backend.installApplication(app.bundle!, "flathub");
+                      backend.installApplication(app.bundle!, app.remote!);
                     });
             },
             style: const ButtonStyle(

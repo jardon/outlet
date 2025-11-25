@@ -23,6 +23,7 @@ abstract class Application {
     bool installed = false,
     List<dynamic> reviews = const [],
     String? bundle,
+    String? remote,
   })  : _id = id,
         _name = name,
         _summary = summary,
@@ -43,7 +44,8 @@ abstract class Application {
         _verified = verified,
         _installed = installed,
         _reviews = reviews,
-        _bundle = bundle;
+        _bundle = bundle,
+        _remote = remote;
 
   final String _id;
   final String? _name;
@@ -67,6 +69,7 @@ abstract class Application {
   final List<dynamic> _reviews;
   final String? _bundle;
   double? get rating;
+  final String? _remote;
 
   String get id => _id;
 
@@ -109,4 +112,6 @@ abstract class Application {
   List<dynamic> get reviews => _reviews;
 
   String? get bundle => _bundle;
+
+  String? get remote => _remote;
 }

@@ -4,6 +4,8 @@ import "../core/application.dart";
 import "../core/flatpak_application.dart";
 
 interface class Backend {
+  late String arch;
+
   List<Application> getInstalledPackages() {
     return [];
   }
@@ -19,6 +21,8 @@ interface class Backend {
 }
 
 class TestBackend implements Backend {
+  @override
+  String arch = "x86_64";
   List<Application> apps;
 
   TestBackend() : apps = [] {

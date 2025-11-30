@@ -43,13 +43,13 @@ class FlatpakBackend implements Backend {
   }
 
   @override
-  List<Application> getInstalledPackages() {
+  Map<String, Application> getInstalledPackages() {
     final FlatpakBindings bindings =
         FlatpakBindings(ffi.DynamicLibrary.open('libflatpak.so'));
     ffi.Pointer<FlatpakInstallation> installationPtr = getFlatpakInstallation();
     ffi.Pointer<ffi.Pointer<GError>> error =
         pkg_ffi.calloc<ffi.Pointer<GError>>();
-    List<Application> apps = [];
+    Map<String, Application> apps = {};
     final ffi.Pointer<GPtrArray> installedRefsPtr =
         bindings.flatpak_installation_list_installed_refs(
             installationPtr, ffi.nullptr, error);
@@ -96,7 +96,8 @@ class FlatpakBackend implements Backend {
               throw XmlParserException(
                   "Error: Could not find the main <component> tag.");
             }
-            apps.add(appFromXML(componentElement, deployDir, true, null));
+            final app = appFromXML(componentElement, deployDir, true, null);
+            apps[app.id] = app;
           } on XmlParserException catch (e) {
             logger.e('Error parsing XML: $e');
           }
@@ -110,10 +111,10 @@ class FlatpakBackend implements Backend {
           final ffi.Pointer<ffi.Char> namePtr =
               bindings.flatpak_ref_get_name(refPtr);
           final String id = namePtr.cast<pkg_ffi.Utf8>().toDartString();
-          apps.add(FlatpakApplication(
+          apps[id] = FlatpakApplication(
             id: id,
             installed: true,
-          ));
+          );
         }
       }
       pkg_ffi.calloc.free(pdataPtr);
@@ -363,13 +364,13 @@ class FlatpakBackend implements Backend {
   }
 
   @override
-  List<Application> getAllRemotePackages() {
+  Map<String, Application> getAllRemotePackages() {
     final FlatpakBindings bindings =
         FlatpakBindings(ffi.DynamicLibrary.open('libflatpak.so'));
     ffi.Pointer<FlatpakInstallation> installationPtr = getFlatpakInstallation();
     ffi.Pointer<ffi.Pointer<GError>> error =
         pkg_ffi.calloc<ffi.Pointer<GError>>();
-    List<Application> apps = [];
+    Map<String, Application> apps = {};
     ffi.Pointer<GPtrArray> remotesPtr = bindings
         .flatpak_installation_list_remotes(installationPtr, ffi.nullptr, error);
     if (error.value == ffi.nullptr) {
@@ -428,7 +429,7 @@ class FlatpakBackend implements Backend {
                   in document.findAllElements('component')) {
                 Application app = appFromXML(
                     componentElement, appstreamDir, false, remoteName);
-                apps.add(app);
+                apps[app.id] = app;
               }
             } on XmlParserException catch (e) {
               logger.w('Error parsing XML: $e');

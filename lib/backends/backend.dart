@@ -6,12 +6,12 @@ import "../core/flatpak_application.dart";
 interface class Backend {
   late String arch;
 
-  List<Application> getInstalledPackages() {
-    return [];
+  Map<String, Application> getInstalledPackages() {
+    return {};
   }
 
-  List<Application> getAllRemotePackages() {
-    return [];
+  Map<String, Application> getAllRemotePackages() {
+    return {};
   }
 
   Future<bool> installApplication(String id, String remote) =>
@@ -23,9 +23,9 @@ interface class Backend {
 class TestBackend implements Backend {
   @override
   String arch = "x86_64";
-  List<Application> apps;
+  Map<String, Application> apps;
 
-  TestBackend() : apps = [] {
+  TestBackend() : apps = {} {
     Random random = Random();
 
     List<String> categoriesList = [
@@ -43,7 +43,7 @@ class TestBackend implements Backend {
       List<String> pickedCategories =
           _pickRandomCategories(categoriesList, 2, random);
 
-      apps.add(FlatpakApplication(
+      apps[appId] = FlatpakApplication(
         name: "App $i",
         id: appId,
         icon: "lib/views/assets/flatpak-icon.svg",
@@ -60,7 +60,7 @@ class TestBackend implements Backend {
             "message": "This is a review message for App $i.",
           }
         ],
-      ));
+      );
     }
   }
 
@@ -71,12 +71,12 @@ class TestBackend implements Backend {
   }
 
   @override
-  List<Application> getInstalledPackages() {
+  Map<String, Application> getInstalledPackages() {
     return apps;
   }
 
   @override
-  List<Application> getAllRemotePackages() {
+  Map<String, Application> getAllRemotePackages() {
     return apps;
   }
 

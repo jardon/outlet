@@ -227,14 +227,36 @@ class FlatpakBackend implements Backend {
       }
     }
 
-    List<String> screenshots = [];
+    List<Screenshot> screenshots = [];
     var screenshotsParent =
         componentElement.findElements('screenshots').firstOrNull;
     if (screenshotsParent != null) {
       for (var screenshot in screenshotsParent.findElements('screenshot')) {
-        for (var image in screenshot.findElements('image')) {
-          screenshots.add(image.innerText);
+        String? caption;
+        String? thumb;
+        String? full;
+        int min = 1000000;
+        int max = 0;
+        if (screenshot.findElements('caption').isNotEmpty) {
+          caption = screenshot.findElements('caption').first.innerText;
         }
+        for (var image in screenshot.findElements('image')) {
+          String? heightAttr = image.getAttribute('height');
+          int height = (heightAttr != null) ? int.parse(heightAttr) : 0;
+          if (height < min) {
+            thumb = image.innerText;
+            min = height;
+          }
+          if (height > max) {
+            full = image.innerText;
+            max = height;
+          }
+        }
+        screenshots.add(Screenshot(
+          caption: caption,
+          thumb: thumb!,
+          full: full ?? thumb,
+        ));
       }
     }
 
@@ -246,7 +268,7 @@ class FlatpakBackend implements Backend {
       }
     }
 
-    Map<String, dynamic> releases = {};
+    List<Release> releases = [];
     final releasesParent =
         componentElement.findAllElements('releases').firstOrNull;
     if (releasesParent != null) {
@@ -254,13 +276,16 @@ class FlatpakBackend implements Backend {
         final version = release.getAttribute('version');
         final type = release.getAttribute('type');
         final timestamp = release.getAttribute('timestamp');
+        final description =
+            release.findAllElements('description').firstOrNull?.innerText;
 
         if (version != null && type != null && timestamp != null) {
-          final releaseDetails = {
-            'type': type,
-            'timestamp': timestamp,
-          };
-          releases[version] = releaseDetails;
+          releases.add(Release(
+            version: version,
+            type: type,
+            timestamp: timestamp,
+            description: description,
+          ));
         } else {
           logger.w('  -> WARNING: Skipping malformed release tag.');
         }

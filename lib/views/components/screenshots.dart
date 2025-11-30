@@ -1,8 +1,9 @@
+import '../../core/application.dart';
 import '../screenshots_view.dart';
 import 'package:flutter/material.dart';
 
 class Screenshots extends StatelessWidget {
-  final List<dynamic> screenshots;
+  final List<Screenshot> screenshots;
 
   const Screenshots({
     super.key,
@@ -11,8 +12,6 @@ class Screenshots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<dynamic> fullSizedScreenshots =
-        screenshots.where((image) => image.contains('orig')).toList();
     return Container(
       width: 400,
       height: 150,
@@ -24,12 +23,12 @@ class Screenshots extends StatelessWidget {
           ]),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: (fullSizedScreenshots.isEmpty)
+        child: (screenshots.isEmpty)
             ? const Center(child: Text("No screenshots available."))
             : ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
-                itemCount: fullSizedScreenshots.length,
+                itemCount: screenshots.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -43,14 +42,14 @@ class Screenshots extends StatelessWidget {
                                   pageBuilder: (context, animation,
                                           secondaryAnimation) =>
                                       ScreenshotsView(
-                                    screenshot: fullSizedScreenshots[index],
+                                    screenshot: screenshots[index].full,
                                   ),
                                 ),
                               );
                             },
                             child: Center(
                                 child: Image.network(
-                              fullSizedScreenshots[index],
+                              screenshots[index].thumb,
                               fit: BoxFit.cover,
                               loadingBuilder:
                                   (context, child, loadingProgress) {
@@ -79,7 +78,7 @@ class Screenshots extends StatelessWidget {
 }
 
 class ScreenshotsExpanded extends StatelessWidget {
-  final List<dynamic> screenshots;
+  final List<Screenshot> screenshots;
 
   const ScreenshotsExpanded({
     super.key,
@@ -88,11 +87,9 @@ class ScreenshotsExpanded extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fullSizedScreenshots =
-        screenshots.where((image) => image.contains('orig')).toList();
     return Container(
       width: 400,
-      height: (fullSizedScreenshots.isEmpty) ? 600.0 : null,
+      height: (screenshots.isEmpty) ? 600.0 : null,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(45),
@@ -101,12 +98,12 @@ class ScreenshotsExpanded extends StatelessWidget {
           ]),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: (fullSizedScreenshots.isEmpty)
+        child: (screenshots.isEmpty)
             ? const Center(child: Text("No screenshots available."))
             : ListView.builder(
                 primary: false,
                 shrinkWrap: true,
-                itemCount: fullSizedScreenshots.length,
+                itemCount: screenshots.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -118,7 +115,7 @@ class ScreenshotsExpanded extends StatelessWidget {
                               pageBuilder:
                                   (context, animation, secondaryAnimation) =>
                                       ScreenshotsView(
-                                screenshot: fullSizedScreenshots[index],
+                                screenshot: screenshots[index].full,
                               ),
                             ),
                           );
@@ -126,7 +123,7 @@ class ScreenshotsExpanded extends StatelessWidget {
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),
                             child: Image.network(
-                              fullSizedScreenshots[index],
+                              screenshots[index].full,
                               fit: BoxFit.cover,
                               loadingBuilder:
                                   (context, child, loadingProgress) {

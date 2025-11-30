@@ -12,7 +12,7 @@ class Loading extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue<List<Application>> apps = ref.watch(appListProvider);
+    AsyncValue<Map<String, Application>> apps = ref.watch(appListProvider);
 
     return apps.when(
       loading: () => const Center(
@@ -22,7 +22,8 @@ class Loading extends ConsumerWidget {
         ),
       ),
       error: (err, stack) => Center(child: Text('Error: $err')),
-      data: (apps) => Navigation(title: "Featured", child: AppList(apps: apps)),
+      data: (apps) => Navigation(
+          title: "Featured", child: AppList(apps: apps.values.toList())),
     );
   }
 }

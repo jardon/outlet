@@ -48,12 +48,12 @@ class Sidebar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<Application> installed = ref.watch(installedAppListProvider);
-    AsyncValue<List<Application>> apps = ref.watch(appListProvider);
+    Map<String, Application> installed = ref.watch(installedAppListProvider);
+    AsyncValue<Map<String, Application>> apps = ref.watch(appListProvider);
     views = {
       "outlet": {
         "widget": AppList(
-          apps: apps.value ?? [],
+          apps: apps.value?.values.toList() ?? [],
         ),
         "title": "Featured",
       },
@@ -79,7 +79,7 @@ class Sidebar extends ConsumerWidget {
       },
       "device": {
         "widget": AppList(
-          apps: installed,
+          apps: installed.values.toList(),
           details: false,
         ),
         "title": "This Device",

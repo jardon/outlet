@@ -17,7 +17,7 @@ class FlatpakApplication extends Application {
     super.categories = const [],
     super.screenshots = const [],
     super.keywords = const [],
-    super.releases = const {},
+    super.releases = const [],
     super.content = const {},
     super.featured = false,
     super.verified = false,

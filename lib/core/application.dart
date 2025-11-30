@@ -14,9 +14,9 @@ abstract class Application {
     String? translate,
     String? vcs,
     List<String> categories = const [],
-    List<String> screenshots = const [],
+    List<Screenshot> screenshots = const [],
     List<String> keywords = const [],
-    Map<String, dynamic> releases = const {},
+    List<Release> releases = const [],
     Map<String, String> content = const {},
     bool featured = false,
     bool verified = false,
@@ -59,9 +59,9 @@ abstract class Application {
   final String? _translate;
   final String? _vcs;
   final List<String> _categories;
-  final List<String> _screenshots;
+  final List<Screenshot> _screenshots;
   final List<String> _keywords;
-  final Map<String, dynamic> _releases;
+  final List<Release> _releases;
   final Map<String, String> _content;
   final bool _featured;
   final bool _verified;
@@ -95,11 +95,11 @@ abstract class Application {
 
   List<String> get categories => _categories;
 
-  List<String> get screenshots => _screenshots;
+  List<Screenshot> get screenshots => _screenshots;
 
   List<String> get keywords => _keywords;
 
-  Map<String, dynamic> get releases => _releases;
+  List<Release> get releases => _releases;
 
   Map<String, String> get content => _content;
 
@@ -114,4 +114,30 @@ abstract class Application {
   String? get bundle => _bundle;
 
   String? get remote => _remote;
+}
+
+class Screenshot {
+  final String thumb;
+  final String full;
+  final String? caption;
+
+  Screenshot({
+    required this.thumb,
+    required this.full,
+    this.caption,
+  });
+}
+
+class Release {
+  final String? version;
+  final String? timestamp;
+  final String? type;
+  final String? description;
+
+  Release({
+    this.version,
+    this.timestamp,
+    this.type,
+    this.description,
+  });
 }

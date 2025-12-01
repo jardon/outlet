@@ -63,16 +63,16 @@ class FlatpakBackend implements Backend {
       for (int i = 0; i < length; i++) {
         final ffi.Pointer<ffi.Void> refVoidPtr = pdataPtr[i];
 
-        final ffi.Pointer<FlatpakInstalledRef> refPtr =
+        final ffi.Pointer<FlatpakInstalledRef> installedRefPtr =
             refVoidPtr.cast<FlatpakInstalledRef>();
 
         final ffi.Pointer<ffi.Char> dirPtr =
-            bindings.flatpak_installed_ref_get_deploy_dir(refPtr);
+            bindings.flatpak_installed_ref_get_deploy_dir(installedRefPtr);
         final deployDir = dirPtr.cast<pkg_ffi.Utf8>().toDartString();
 
         final ffi.Pointer<GBytes> refAppPtr =
             bindings.flatpak_installed_ref_load_appdata(
-          refPtr,
+          installedRefPtr,
           ffi.nullptr,
           error,
         );
@@ -97,6 +97,18 @@ class FlatpakBackend implements Backend {
                   "Error: Could not find the main <component> tag.");
             }
             final app = appFromXML(componentElement, deployDir, true, null);
+
+            final ffi.Pointer<FlatpakRef> refPtr =
+                refVoidPtr.cast<FlatpakRef>();
+            ffi.Pointer<ffi.Char> branchPtr =
+                bindings.flatpak_ref_get_branch(refPtr);
+            final String branch = branchPtr.cast<pkg_ffi.Utf8>().toDartString();
+            app.branch = branch;
+
+            app.current = bindings
+                    .flatpak_installed_ref_get_is_current(installedRefPtr) ==
+                1;
+
             apps[app.id] = app;
           } on XmlParserException catch (e) {
             logger.e('Error parsing XML: $e');

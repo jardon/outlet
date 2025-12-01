@@ -1,36 +1,28 @@
-import 'dart:collection';
-import 'dart:isolate';
-import 'logger.dart';
+class ActionQueueStatus {
+  final bool isIdle;
+  final String? currentActionTitle;
+  final int queueLength;
 
-class ActionQueue {
-  final Queue<Action> queue = Queue();
-  Action? action;
-  bool idle = true;
+  ActionQueueStatus({
+    required this.isIdle,
+    this.currentActionTitle,
+    required this.queueLength,
+  });
 
-  void add(String title, Future<void> Function() action) async {
-    logger.i("Queueing action: $title");
-    queue.add(Action(title: title, action: action));
-    if (idle) execute();
-  }
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ActionQueueStatus &&
+          runtimeType == other.runtimeType &&
+          isIdle == other.isIdle &&
+          currentActionTitle == other.currentActionTitle &&
+          queueLength == other.queueLength;
 
-  Future<void> execute() async {
-    idle = false;
-
-    while (queue.isNotEmpty) {
-      action = queue.removeFirst();
-      try {
-        if (action != null) {
-          logger.i("Executing action: ${action!.title}");
-          await Isolate.run(action!.action);
-          logger.i("Action completed successfully.");
-        }
-      } catch (e) {
-        logger.e("An error occured when processing task: $e");
-      }
-    }
-    action = null;
-    idle = true;
-  }
+  @override
+  int get hashCode =>
+      isIdle.hashCode ^
+      (currentActionTitle?.hashCode ?? 0) ^
+      queueLength.hashCode;
 }
 
 class Action {

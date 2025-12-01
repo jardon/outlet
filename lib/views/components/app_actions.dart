@@ -16,7 +16,6 @@ class AppActions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final backend = ref.watch(backendProvider);
-    final actionQueue = ref.watch(actionQueueProvider);
     return Container(
       width: 400,
       height: 70,
@@ -35,9 +34,10 @@ class AppActions extends ConsumerWidget {
                   ? Isolate.run(() {
                       backend.uninstallApplication(app.getUninstallTarget());
                     })
-                  : actionQueue.add("installing ${app.id}", () async {
-                      backend.installApplication(
-                          app.getInstallTarget(), app.remote!);
+                  : ref
+                      .read(actionQueueProvider.notifier)
+                      .add("installing ${app.id}", () async {
+                      backend.installApplication(app.bundle!, app.remote!);
                     });
             },
             style: const ButtonStyle(

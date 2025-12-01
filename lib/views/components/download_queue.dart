@@ -1,12 +1,19 @@
+import '../../providers/action_queue.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DownloadQueue extends StatelessWidget {
+class DownloadQueue extends ConsumerWidget {
   const DownloadQueue({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final status = ref.watch(actionQueueProvider);
+
+    final title = status.currentActionTitle;
+    final isIdle = status.isIdle;
+
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
       decoration: BoxDecoration(
@@ -25,11 +32,11 @@ class DownloadQueue extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
                 alignment: Alignment.topLeft,
                 // color: Colors.pink,
-                child: const Text(
-                  "No downloads queued.",
+                child: Text(
+                  !isIdle ? title! : "No downloads queued.",
                   overflow: TextOverflow.fade,
                   softWrap: false,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

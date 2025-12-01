@@ -46,6 +46,10 @@ class AppActions extends ConsumerWidget {
             child: Text(app.installed ? 'Uninstall' : 'Install',
                 style: const TextStyle(color: Colors.white)),
           ),
+          Expanded(child: Container()),
+          Text(app.branch != null
+              ? '${app.branch![0].toUpperCase()}${app.branch!.substring(1)}'
+              : ''),
         ]),
       ),
     );

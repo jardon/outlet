@@ -4,7 +4,8 @@ import 'dart:io';
 import 'dart:core';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final appListProvider = FutureProvider<Map<String, Application>>((ref) async {
+final remoteAppListProvider =
+    FutureProvider<Map<String, Application>>((ref) async {
   final backend = ref.watch(backendProvider);
   Map<String, String> env = Platform.environment;
   Map<String, Application> apps = {};
@@ -30,4 +31,11 @@ final installedAppListProvider = Provider((ref) {
     apps.addAll(backend.getInstalledPackages());
   }
   return apps;
+});
+
+final appListProvider = Provider((ref) {
+  final remoteApps = ref.watch(remoteAppListProvider).value ?? {};
+  final installedApps = ref.watch(installedAppListProvider);
+  final allApps = {...remoteApps, ...installedApps};
+  return allApps;
 });

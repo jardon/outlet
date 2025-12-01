@@ -12,7 +12,8 @@ class Loading extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue<Map<String, Application>> apps = ref.watch(appListProvider);
+    AsyncValue<Map<String, Application>> apps =
+        ref.watch(remoteAppListProvider);
 
     return apps.when(
       loading: () => const Center(

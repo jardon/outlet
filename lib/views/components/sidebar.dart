@@ -49,11 +49,11 @@ class Sidebar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Map<String, Application> installed = ref.watch(installedAppListProvider);
-    AsyncValue<Map<String, Application>> apps = ref.watch(appListProvider);
+    Map<String, Application> apps = ref.watch(appListProvider);
     views = {
       "outlet": {
         "widget": AppList(
-          apps: apps.value?.values.toList() ?? [],
+          apps: apps.values.toList(),
         ),
         "title": "Featured",
       },

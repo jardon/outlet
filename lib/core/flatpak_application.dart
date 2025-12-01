@@ -28,6 +28,9 @@ class FlatpakApplication extends Application {
     String? sdk,
     super.bundle,
     super.remote,
+    super.version,
+    super.branch,
+    super.current = true,
   }) : super(
           icon: icon ?? "lib/views/assets/flatpak-icon.svg",
         );

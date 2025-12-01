@@ -24,6 +24,9 @@ abstract class Application {
     List<dynamic> reviews = const [],
     String? bundle,
     String? remote,
+    String? version,
+    String? branch,
+    bool? current,
   })  : _id = id,
         _name = name,
         _summary = summary,
@@ -45,7 +48,10 @@ abstract class Application {
         _installed = installed,
         _reviews = reviews,
         _bundle = bundle,
-        _remote = remote;
+        _remote = remote,
+        _version = version,
+        _branch = branch,
+        _current = current;
 
   final String _id;
   final String? _name;
@@ -70,6 +76,9 @@ abstract class Application {
   final String? _bundle;
   double? get rating;
   final String? _remote;
+  final String? _version;
+  String? _branch;
+  bool? _current;
 
   String get id => _id;
 
@@ -114,6 +123,22 @@ abstract class Application {
   String? get bundle => _bundle;
 
   String? get remote => _remote;
+
+  String? get version => _version;
+
+  // ignore: unnecessary_getters_setters
+  String? get branch => _branch;
+
+  // ignore: unnecessary_getters_setters
+  bool? get current => _current;
+
+  set branch(String? value) {
+    _branch = value;
+  }
+
+  set current(bool? value) {
+    _current = value;
+  }
 }
 
 class Screenshot {

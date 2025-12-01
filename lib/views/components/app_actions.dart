@@ -28,7 +28,7 @@ class AppActions extends ConsumerWidget {
           ]),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-        child: Row(children: [
+        child: Row(spacing: 10, children: [
           TextButton(
             onPressed: () {
               app.installed

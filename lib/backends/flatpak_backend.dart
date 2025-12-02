@@ -162,6 +162,9 @@ class FlatpakBackend implements Backend {
     }
 
     String? type = componentElement.getAttribute('type');
+    if (type != null && type != "runtime") {
+      type = "app";
+    }
 
     String? name;
     for (var nameElement in componentElement.findAllElements('name').where(

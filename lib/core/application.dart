@@ -57,6 +57,8 @@ abstract class Application {
   String? arch;
 
   String getInstallTarget() => id;
+
+  String getUninstallTarget() => id;
 }
 
 class Screenshot {

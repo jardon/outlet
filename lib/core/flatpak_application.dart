@@ -95,6 +95,17 @@ class FlatpakApplication extends Application {
       return id;
     }
   }
+
+  @override
+  String getUninstallTarget() {
+    if (bundle != null) {
+      return bundle?.value as String;
+    } else if (type != null && branch != null && arch != null) {
+      return "$type/$id/$arch/$branch";
+    } else {
+      return id;
+    }
+  }
 }
 
 class Bundle {

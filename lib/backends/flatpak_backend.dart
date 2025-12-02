@@ -161,6 +161,8 @@ class FlatpakBackend implements Backend {
       throw XmlParserException("Error: Could not find <id> tag.");
     }
 
+    String? type = componentElement.getAttribute('type');
+
     String? name;
     for (var nameElement in componentElement.findAllElements('name').where(
       (element) {
@@ -365,6 +367,15 @@ class FlatpakBackend implements Backend {
           value: bundleParent.innerText);
     }
 
+    String? arch;
+    String? branch;
+    if (bundle != null) {
+      List<String> bundleInfo = bundle.value.split('/');
+      type = bundleInfo[0];
+      arch = bundleInfo[2];
+      branch = bundleInfo[3];
+    }
+
     return FlatpakApplication(
       id: id,
       name: name,
@@ -386,6 +397,9 @@ class FlatpakBackend implements Backend {
       installed: installed,
       bundle: bundle,
       remote: remote,
+      branch: branch,
+      arch: arch,
+      type: type,
     );
   }
 

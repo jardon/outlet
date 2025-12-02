@@ -2,6 +2,7 @@ import 'application.dart';
 import 'dart:core';
 
 class FlatpakApplication extends Application {
+  final String? type;
   final Bundle? bundle;
 
   FlatpakApplication({
@@ -25,6 +26,7 @@ class FlatpakApplication extends Application {
     super.verified = false,
     super.installed = false,
     super.reviews = const [],
+    this.type,
     this.bundle,
     super.remote,
     super.version,

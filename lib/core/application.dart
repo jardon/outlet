@@ -27,6 +27,7 @@ abstract class Application {
     String? version,
     String? branch,
     bool? current,
+    String? arch,
   })  : _id = id,
         _name = name,
         _summary = summary,
@@ -51,7 +52,8 @@ abstract class Application {
         _remote = remote,
         _version = version,
         _branch = branch,
-        _current = current;
+        _current = current,
+        _arch = arch;
 
   final String _id;
   final String? _name;
@@ -79,6 +81,7 @@ abstract class Application {
   final String? _version;
   String? _branch;
   bool? _current;
+  String? _arch;
 
   String get id => _id;
 
@@ -132,12 +135,19 @@ abstract class Application {
   // ignore: unnecessary_getters_setters
   bool? get current => _current;
 
+  // ignore: unnecessary_getters_setters
+  String? get arch => _arch;
+
   set branch(String? value) {
     _branch = value;
   }
 
   set current(bool? value) {
     _current = value;
+  }
+
+  set arch(String? value) {
+    _arch = value;
   }
 }
 

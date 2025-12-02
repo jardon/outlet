@@ -37,7 +37,8 @@ class AppActions extends ConsumerWidget {
                           "app/${app.id}/${app.arch!}/stable");
                     })
                   : actionQueue.add("installing ${app.id}", () async {
-                      backend.installApplication(app.bundle!, app.remote!);
+                      backend.installApplication(
+                          app.getInstallTarget(), app.remote!);
                     });
             },
             style: const ButtonStyle(

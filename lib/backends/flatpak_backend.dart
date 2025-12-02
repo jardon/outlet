@@ -352,16 +352,17 @@ class FlatpakBackend implements Backend {
       }
     }
 
-    String? type;
-    String? runtime;
-    String? sdk;
-    String? bundle;
+    Bundle? bundle;
     final bundleParent = componentElement.findAllElements('bundle').firstOrNull;
     if (bundleParent != null) {
-      type = bundleParent.getAttribute('type');
-      runtime = bundleParent.getAttribute('runtime');
-      sdk = bundleParent.getAttribute('sdk');
-      bundle = bundleParent.innerText;
+      String? type = bundleParent.getAttribute('type');
+      String? runtime = bundleParent.getAttribute('runtime');
+      String? sdk = bundleParent.getAttribute('sdk');
+      bundle = Bundle(
+          type: type,
+          runtime: runtime,
+          sdk: sdk,
+          value: bundleParent.innerText);
     }
 
     return FlatpakApplication(
@@ -383,9 +384,6 @@ class FlatpakBackend implements Backend {
       content: content,
       verified: verified,
       installed: installed,
-      type: type,
-      runtime: runtime,
-      sdk: sdk,
       bundle: bundle,
       remote: remote,
     );

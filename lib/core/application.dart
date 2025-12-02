@@ -22,7 +22,6 @@ abstract class Application {
     this.verified = false,
     this.installed = false,
     this.reviews = const [],
-    this.bundle,
     this.remote,
     this.version,
     this.branch,
@@ -50,13 +49,14 @@ abstract class Application {
   final bool verified;
   final bool installed;
   final List<dynamic> reviews;
-  final String? bundle;
   double? get rating;
   final String? remote;
   final String? version;
   String? branch;
   bool? current;
   String? arch;
+
+  String getInstallTarget() => id;
 }
 
 class Screenshot {

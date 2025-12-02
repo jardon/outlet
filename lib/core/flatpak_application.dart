@@ -2,6 +2,8 @@ import 'application.dart';
 import 'dart:core';
 
 class FlatpakApplication extends Application {
+  final Bundle? bundle;
+
   FlatpakApplication({
     required super.id,
     super.name,
@@ -23,10 +25,7 @@ class FlatpakApplication extends Application {
     super.verified = false,
     super.installed = false,
     super.reviews = const [],
-    String? type,
-    String? runtime,
-    String? sdk,
-    super.bundle,
+    this.bundle,
     super.remote,
     super.version,
     super.branch,
@@ -85,4 +84,27 @@ class FlatpakApplication extends Application {
     }
     return categoryBadges.toList();
   }
+
+  @override
+  String getInstallTarget() {
+    if (bundle != null) {
+      return bundle?.value as String;
+    } else {
+      return id;
+    }
+  }
+}
+
+class Bundle {
+  final String? type;
+  final String? runtime;
+  final String? sdk;
+  final String value;
+
+  Bundle({
+    this.type,
+    this.runtime,
+    this.sdk,
+    required this.value,
+  });
 }

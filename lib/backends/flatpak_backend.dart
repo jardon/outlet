@@ -13,9 +13,6 @@ import 'package:libflatpak/libflatpak.dart';
 import 'package:xml/xml.dart';
 
 class FlatpakBackend implements Backend {
-  @override
-  late String arch;
-
   ffi.Pointer<FlatpakInstallation> getFlatpakInstallation() {
     final FlatpakBindings bindings =
         FlatpakBindings(ffi.DynamicLibrary.open('libflatpak.so'));
@@ -109,6 +106,11 @@ class FlatpakBackend implements Backend {
                     .flatpak_installed_ref_get_is_current(installedRefPtr) ==
                 1;
 
+            ffi.Pointer<ffi.Char> archPtr =
+                bindings.flatpak_ref_get_arch(refPtr);
+            final String arch = archPtr.cast<pkg_ffi.Utf8>().toDartString();
+            app.arch = arch;
+
             apps[app.id] = app;
           } on XmlParserException catch (e) {
             logger.e('Error parsing XML: $e');
@@ -123,9 +125,23 @@ class FlatpakBackend implements Backend {
           final ffi.Pointer<ffi.Char> namePtr =
               bindings.flatpak_ref_get_name(refPtr);
           final String id = namePtr.cast<pkg_ffi.Utf8>().toDartString();
+          ffi.Pointer<ffi.Char> branchPtr =
+              bindings.flatpak_ref_get_branch(refPtr);
+          final String branch = branchPtr.cast<pkg_ffi.Utf8>().toDartString();
+
+          final bool current =
+              bindings.flatpak_installed_ref_get_is_current(installedRefPtr) ==
+                  1;
+
+          ffi.Pointer<ffi.Char> archPtr = bindings.flatpak_ref_get_arch(refPtr);
+          final String arch = archPtr.cast<pkg_ffi.Utf8>().toDartString();
+
           apps[id] = FlatpakApplication(
             id: id,
             installed: true,
+            branch: branch,
+            current: current,
+            arch: arch,
           );
         }
       }
@@ -392,7 +408,6 @@ class FlatpakBackend implements Backend {
       logger.i('Found $length remote references (apps and runtimes).');
       final ffi.Pointer<gpointer> pdataPtr = remotesRefs.pdata;
       final ffi.Pointer<ffi.Char> archPtr = bindings.flatpak_get_default_arch();
-      arch = archPtr.cast<pkg_ffi.Utf8>().toDartString();
 
       for (int i = 0; i < length; i++) {
         final ffi.Pointer<ffi.Void> refVoidPtr = pdataPtr[i];

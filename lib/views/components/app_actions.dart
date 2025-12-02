@@ -34,7 +34,7 @@ class AppActions extends ConsumerWidget {
               app.installed
                   ? Isolate.run(() {
                       backend.uninstallApplication(
-                          "app/${app.id}/${backend.arch}/stable");
+                          "app/${app.id}/${app.arch!}/stable");
                     })
                   : actionQueue.add("installing ${app.id}", () async {
                       backend.installApplication(app.bundle!, app.remote!);

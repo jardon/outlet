@@ -31,6 +31,7 @@ class FlatpakApplication extends Application {
     super.version,
     super.branch,
     super.current = true,
+    super.arch,
   }) : super(
           icon: icon ?? "lib/views/assets/flatpak-icon.svg",
         );

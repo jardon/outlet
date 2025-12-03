@@ -44,11 +44,18 @@ class DownloadQueue extends ConsumerWidget {
                 )),
             Expanded(
                 child: Container(
-                    padding:
-                        const EdgeInsets.only(left: 30, right: 30, bottom: 40),
-                    alignment: Alignment.topLeft,
-                    // color: Colors.green,
-                    child: const Text(
+              padding: const EdgeInsets.only(left: 30, right: 30, bottom: 40),
+              alignment: Alignment.topLeft,
+              // color: Colors.green,
+              child: !isIdle
+                  ? LinearProgressIndicator(
+                      // Arbitrary/Indeterminate progress
+                      value: null,
+                      backgroundColor: Colors.white38,
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5),
+                    )
+                  : const Text(
                       "Install an application to add it to the queue.",
                       softWrap: true,
                       overflow: TextOverflow.visible,
@@ -56,7 +63,8 @@ class DownloadQueue extends ConsumerWidget {
                         color: Colors.white,
                         fontSize: 12,
                       ),
-                    )))
+                    ),
+            ))
           ])),
     );
   }

@@ -1,7 +1,8 @@
 import '../core/action_queue.dart';
 import '../core/logger.dart';
+import '../providers/application_provider.dart';
 import 'dart:collection';
-import 'dart:isolate';
+import 'dart:core';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
@@ -26,9 +27,12 @@ class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
     );
   }
 
-  void add(String title, Future<void> Function() action) {
+  Future<void> add(
+      String title,
+      Future<void> Function(Map<String, String>) action,
+      Map<String, String> data) async {
     logger.i("Queueing action: $title");
-    _queue.add(Action(title: title, action: action));
+    _queue.add(Action(title: title, action: action, data: data));
     _updateState();
 
     if (!_isExecuting) {
@@ -48,13 +52,14 @@ class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
         if (_currentAction != null) {
           logger.i("Executing action: ${_currentAction!.title}");
 
-          await Isolate.run(_currentAction!.action);
+          await _currentAction!.action(_currentAction!.data);
 
           logger.i("Action completed successfully.");
         }
       } catch (e) {
         logger.e("An error occured when processing task: $e");
       }
+      ref.read(installedAppListProvider.notifier).refresh();
     }
 
     _currentAction = null;

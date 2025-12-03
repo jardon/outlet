@@ -19,19 +19,36 @@ final remoteAppListProvider =
   return apps;
 });
 
-final installedAppListProvider = Provider((ref) {
-  final backend = ref.watch(backendProvider);
-  Map<String, String> env = Platform.environment;
-  Map<String, Application> apps = {};
-  if (env['TEST_BACKEND_ENABLED'] != null) {
-    return backend.getInstalledPackages();
+final installedAppListProvider = AutoDisposeNotifierProvider<
+    InstalledAppListNotifier,
+    Map<String, Application>>(InstalledAppListNotifier.new);
+
+class InstalledAppListNotifier
+    extends AutoDisposeNotifier<Map<String, Application>> {
+  Map<String, Application> _getInstalledPackages() {
+    final backend = ref.read(backendProvider);
+    Map<String, String> env = Platform.environment;
+    Map<String, Application> apps = {};
+
+    if (env['TEST_BACKEND_ENABLED'] != null) {
+      return backend.getInstalledPackages();
+    }
+
+    if (env['FLATPAK_ENABLED'] != null) {
+      apps.addAll(backend.getInstalledPackages());
+    }
+    return apps;
   }
 
-  if (env['FLATPAK_ENABLED'] != null) {
-    apps.addAll(backend.getInstalledPackages());
+  @override
+  Map<String, Application> build() {
+    return _getInstalledPackages();
   }
-  return apps;
-});
+
+  void refresh() {
+    state = _getInstalledPackages();
+  }
+}
 
 final appListProvider = Provider((ref) {
   final remoteApps = ref.watch(remoteAppListProvider).value ?? {};

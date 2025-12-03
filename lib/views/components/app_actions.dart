@@ -39,9 +39,8 @@ class AppActions extends ConsumerWidget {
                   "installTarget": app.getInstallTarget(),
                   "remote": app.remote!
                 };
-                ref
-                    .read(actionQueueProvider.notifier)
-                    .add("Installing ${app.id}", _installWorker, data);
+                ref.read(actionQueueProvider.notifier).add(
+                    "Installing ${app.name ?? app.id}", _installWorker, data);
               }
             },
             style: const ButtonStyle(

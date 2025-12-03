@@ -1,6 +1,7 @@
+import '../../backends/backend.dart';
 import '../../core/application.dart';
 import '../../providers/action_queue.dart';
-import '../../providers/backend_provider.dart';
+import '../../providers/application_provider.dart';
 import 'dart:isolate';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,7 +16,6 @@ class AppActions extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final backend = ref.watch(backendProvider);
     return Container(
       width: 400,
       height: 70,
@@ -30,15 +30,19 @@ class AppActions extends ConsumerWidget {
         child: Row(spacing: 10, children: [
           TextButton(
             onPressed: () {
-              app.installed
-                  ? Isolate.run(() {
-                      backend.uninstallApplication(app.getUninstallTarget());
-                    })
-                  : ref
-                      .read(actionQueueProvider.notifier)
-                      .add("installing ${app.id}", () async {
-                      backend.installApplication(app.bundle!, app.remote!);
-                    });
+              if (app.installed) {
+                final data = {"uninstallTarget": app.getUninstallTarget()};
+                _uninstallWorker(data);
+                ref.read(installedAppListProvider.notifier).refresh();
+              } else {
+                final data = {
+                  "installTarget": app.getInstallTarget(),
+                  "remote": app.remote!
+                };
+                ref
+                    .read(actionQueueProvider.notifier)
+                    .add("Installing ${app.id}", _installWorker, data);
+              }
             },
             style: const ButtonStyle(
               backgroundColor: WidgetStatePropertyAll<Color>(Colors.black),
@@ -54,4 +58,19 @@ class AppActions extends ConsumerWidget {
       ),
     );
   }
+}
+
+Future<void> _installWorker(Map<String, String> data) async {
+  Backend backend = getBackend();
+  await Isolate.run(() {
+    backend.installApplication(
+        data["installTarget"] as String, data["remote"] as String);
+  });
+}
+
+void _uninstallWorker(Map<String, String> data) {
+  Backend backend = getBackend();
+  Isolate.run(() {
+    backend.uninstallApplication(data["uninstallTarget"] as String);
+  });
 }

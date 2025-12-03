@@ -1,5 +1,7 @@
+import 'dart:io';
 import "dart:math";
 import "dart:core";
+import "../backends/flatpak_backend.dart";
 import "../core/application.dart";
 import "../core/flatpak_application.dart";
 
@@ -84,4 +86,16 @@ class TestBackend implements Backend {
   Future<bool> uninstallApplication(String id) => Future.value(true);
 
   void destroy() {}
+}
+
+Backend getBackend() {
+  Map<String, String> env = Platform.environment;
+  if (env['TEST_BACKEND_ENABLED'] != null) {
+    return TestBackend();
+  }
+
+  if (env['FLATPAK_ENABLED'] != null) {
+    return FlatpakBackend();
+  }
+  return TestBackend();
 }

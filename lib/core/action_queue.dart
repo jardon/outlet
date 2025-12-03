@@ -29,8 +29,10 @@ class Action {
   Action({
     required this.title,
     required this.action,
+    required this.data,
   });
 
   final String title;
-  final Future<void> Function() action;
+  final Future<void> Function(Map<String, String>) action;
+  final Map<String, String> data;
 }

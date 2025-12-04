@@ -29,10 +29,11 @@ class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
 
   Future<void> add(
       String title,
+      String appId,
       Future<void> Function(Map<String, String>) action,
       Map<String, String> data) async {
     logger.i("Queueing action: $title");
-    _queue.add(Action(title: title, action: action, data: data));
+    _queue.add(Action(title: title, appId: appId, action: action, data: data));
     _updateState();
 
     if (!_isExecuting) {

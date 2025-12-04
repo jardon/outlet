@@ -44,6 +44,7 @@ class AppActions extends ConsumerWidget {
                       };
                       ref.read(actionQueueProvider.notifier).add(
                           "Installing ${app.name ?? app.id}",
+                          app.id,
                           _installWorker,
                           data);
                     }

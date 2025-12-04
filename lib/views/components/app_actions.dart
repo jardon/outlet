@@ -16,6 +16,24 @@ class AppActions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final app = ref.watch(liveApplicationProvider(id));
+    final actionQueue = ref.watch(actionQueueProvider.notifier);
+    bool isQueued = false;
+
+    if (app != null) {
+      isQueued = ref.watch(isAppActionQueuedProvider(app.id));
+    }
+
+    String getInstallButtonText() {
+      if (app != null) {
+        if (app.installed) {
+          return 'Uninstall';
+        } else if (isQueued) {
+          return 'Cancel';
+        }
+      }
+      return 'Install';
+    }
+
     return (app != null)
         ? Container(
             width: 400,
@@ -37,23 +55,22 @@ class AppActions extends ConsumerWidget {
                       };
                       await _uninstallWorker(data);
                       ref.read(installedAppListProvider.notifier).refresh();
+                    } else if (isQueued) {
+                      actionQueue.removeAction(app.id);
                     } else {
                       final data = {
                         "installTarget": app.getInstallTarget(),
                         "remote": app.remote!
                       };
-                      ref.read(actionQueueProvider.notifier).add(
-                          "Installing ${app.name ?? app.id}",
-                          app.id,
-                          _installWorker,
-                          data);
+                      actionQueue.add("Installing ${app.name ?? app.id}",
+                          app.id, _installWorker, data);
                     }
                   },
                   style: const ButtonStyle(
                     backgroundColor:
                         WidgetStatePropertyAll<Color>(Colors.black),
                   ),
-                  child: Text(app.installed ? 'Uninstall' : 'Install',
+                  child: Text(getInstallButtonText(),
                       style: const TextStyle(color: Colors.white)),
                 ),
                 Expanded(child: Container()),

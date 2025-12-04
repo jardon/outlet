@@ -63,3 +63,17 @@ final liveApplicationProvider =
 
   return allApps[appId];
 });
+
+final appInCategoryList =
+    Provider.family<List<Application>, String>((ref, category) {
+  final allApps = ref.watch(remoteAppListProvider);
+
+  if (allApps.hasValue) {
+    return allApps.value!.values
+        .toList()
+        .where((app) => app.categories.contains(category))
+        .toList();
+  }
+
+  return [];
+});

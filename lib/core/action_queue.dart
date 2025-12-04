@@ -28,11 +28,13 @@ class ActionQueueStatus {
 class Action {
   Action({
     required this.title,
+    required this.appId,
     required this.action,
     required this.data,
   });
 
   final String title;
+  final String appId;
   final Future<void> Function(Map<String, String>) action;
   final Map<String, String> data;
 }

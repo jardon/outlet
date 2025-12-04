@@ -43,7 +43,7 @@ class AppView extends StatelessWidget {
                               children: [
                                 Column(spacing: 16.0, children: [
                                   AppInfo(app: app!),
-                                  AppActions(app: app!),
+                                  AppActions(id: app!.id),
                                   AppDescription(app: app!),
                                   const ReviewInfo(reviews: []),
                                   AppLinks(app: app!),
@@ -59,7 +59,7 @@ class AppView extends StatelessWidget {
                               const EdgeInsets.only(top: 20.0, bottom: 20.0),
                           child: Column(spacing: 16.0, children: [
                             AppInfo(app: app!),
-                            AppActions(app: app!),
+                            AppActions(id: app!.id),
                             AppDescription(app: app!),
                             Screenshots(screenshots: app!.screenshots),
                             const ReviewInfo(reviews: []),

@@ -67,9 +67,42 @@ class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
     _isExecuting = false;
     _updateState();
   }
+
+  bool isAppInQueue(String appId) {
+    if (_isExecuting && _currentAction?.appId == appId) {
+      return true;
+    }
+    return _queue.any((action) => action.appId == appId);
+  }
+
+  bool removeAction(String appId) {
+    if (_isExecuting && _currentAction?.appId == appId) {
+      logger.w("Cannot remove currently executing action for App ID: $appId");
+      return false;
+    }
+
+    final int initialLength = _queue.length;
+    _queue.removeWhere((action) => action.appId == appId);
+    final bool removed = _queue.length < initialLength;
+
+    if (removed) {
+      logger.i("Removed action for App ID: $appId from queue.");
+      _updateState();
+    } else {
+      logger.i("No pending action found for App ID: $appId to remove.");
+    }
+    return removed;
+  }
 }
 
 final actionQueueProvider =
     AutoDisposeNotifierProvider<ActionQueueNotifier, ActionQueueStatus>(
   ActionQueueNotifier.new,
 );
+
+final isAppActionQueuedProvider = Provider.family<bool, String>((ref, appId) {
+  ref.watch(actionQueueProvider);
+  final notifier = ref.watch(actionQueueProvider.notifier);
+
+  return notifier.isAppInQueue(appId);
+});

@@ -1,5 +1,6 @@
 import '../../core/application.dart';
 import '../../providers/application_provider.dart';
+import '../this_device.dart';
 import '../navigation.dart';
 import 'app_list.dart';
 import 'badges.dart';
@@ -48,7 +49,6 @@ class Sidebar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Map<String, Application> installed = ref.watch(installedAppListProvider);
     Map<String, Application> apps = ref.watch(appListProvider);
     views = {
       "outlet": {
@@ -78,10 +78,7 @@ class Sidebar extends ConsumerWidget {
         "title": "Relax",
       },
       "device": {
-        "widget": AppList(
-          apps: installed.values.toList(),
-          details: false,
-        ),
+        "widget": const ThisDevice(),
         "title": "This Device",
       },
       "search": {

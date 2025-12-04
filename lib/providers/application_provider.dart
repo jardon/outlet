@@ -56,3 +56,10 @@ final appListProvider = Provider((ref) {
   final allApps = {...remoteApps, ...installedApps};
   return allApps;
 });
+
+final liveApplicationProvider =
+    Provider.family<Application?, String>((ref, appId) {
+  final allApps = ref.watch(appListProvider);
+
+  return allApps[appId];
+});

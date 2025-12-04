@@ -30,12 +30,12 @@ class AppActions extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
               child: Row(spacing: 10, children: [
                 TextButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (app.installed) {
                       final data = {
                         "uninstallTarget": app.getUninstallTarget()
                       };
-                      _uninstallWorker(data);
+                      await _uninstallWorker(data);
                       ref.read(installedAppListProvider.notifier).refresh();
                     } else {
                       final data = {
@@ -74,9 +74,9 @@ Future<void> _installWorker(Map<String, String> data) async {
   });
 }
 
-void _uninstallWorker(Map<String, String> data) {
+Future<void> _uninstallWorker(Map<String, String> data) async {
   Backend backend = getBackend();
-  Isolate.run(() {
+  await Isolate.run(() {
     backend.uninstallApplication(data["uninstallTarget"] as String);
   });
 }

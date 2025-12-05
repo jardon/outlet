@@ -87,6 +87,71 @@ class ScreenshotsList extends StatelessWidget {
   }
 }
 
+class ScreenshotsGrid extends StatelessWidget {
+  final List<Screenshot> screenshots;
+
+  const ScreenshotsGrid({
+    super.key,
+    required this.screenshots,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double width = constraints.maxWidth;
+        int crossAxisCount = (width / 100).floor();
+
+        crossAxisCount = crossAxisCount < 1 ? 1 : crossAxisCount;
+
+        return GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossAxisCount,
+              crossAxisSpacing: 0.0,
+              mainAxisSpacing: 0.0,
+            ),
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            itemCount: screenshots.length,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    SlideAndFadeAnimationPageRoute(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          ScreenshotsView(
+                        screenshot: screenshots[index].full,
+                      ),
+                    ),
+                  );
+                },
+                child: Center(
+                    child: Image.network(
+                  screenshots[index].thumb,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
+                            : null,
+                      ),
+                    );
+                  },
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Text('Error loading image');
+                  },
+                )),
+              );
+            });
+      },
+    );
+  }
+}
+
 class ScreenshotsExpanded extends StatelessWidget {
   final List<Screenshot> screenshots;
 

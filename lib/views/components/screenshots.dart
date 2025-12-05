@@ -25,54 +25,64 @@ class Screenshots extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: (screenshots.isEmpty)
             ? const Center(child: Text("No screenshots available."))
-            : ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: screenshots.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                SlideAndFadeAnimationPageRoute(
-                                  pageBuilder: (context, animation,
-                                          secondaryAnimation) =>
-                                      ScreenshotsView(
-                                    screenshot: screenshots[index].full,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Center(
-                                child: Image.network(
-                              screenshots[index].thumb,
-                              fit: BoxFit.cover,
-                              loadingBuilder:
-                                  (context, child, loadingProgress) {
-                                if (loadingProgress == null) return child;
-                                return Center(
-                                  child: CircularProgressIndicator(
-                                    value: loadingProgress.expectedTotalBytes !=
-                                            null
-                                        ? loadingProgress
-                                                .cumulativeBytesLoaded /
-                                            loadingProgress.expectedTotalBytes!
-                                        : null,
-                                  ),
-                                );
-                              },
-                              errorBuilder: (context, error, stackTrace) {
-                                return const Text('Error loading image');
-                              },
-                            )))),
-                  );
-                },
-              ),
+            : ScreenshotsList(screenshots: screenshots),
       ),
+    );
+  }
+}
+
+class ScreenshotsList extends StatelessWidget {
+  final List<Screenshot> screenshots;
+
+  const ScreenshotsList({
+    super.key,
+    required this.screenshots,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      scrollDirection: Axis.horizontal,
+      itemCount: screenshots.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      SlideAndFadeAnimationPageRoute(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            ScreenshotsView(
+                          screenshot: screenshots[index].full,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Center(
+                      child: Image.network(
+                    screenshots[index].thumb,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes!
+                              : null,
+                        ),
+                      );
+                    },
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Text('Error loading image');
+                    },
+                  )))),
+        );
+      },
     );
   }
 }

@@ -10,11 +10,13 @@ class AppList extends StatelessWidget {
     required this.apps,
     this.details = true,
     this.scrollable = true,
+    this.rows,
   });
 
   final List<Application> apps;
   final bool details;
   final bool scrollable;
+  final int? rows;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class AppList extends StatelessWidget {
               mainAxisSpacing: 0.0,
             ),
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            itemCount: apps.length,
+            itemCount: rows != null ? crossAxisCount * rows! : apps.length,
             physics: scrollable
                 ? const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics())

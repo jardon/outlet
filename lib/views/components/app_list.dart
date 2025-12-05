@@ -9,10 +9,12 @@ class AppList extends StatelessWidget {
     super.key,
     required this.apps,
     this.details = true,
+    this.scrollable = true,
   });
 
   final List<Application> apps;
   final bool details;
+  final bool scrollable;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +34,10 @@ class AppList extends StatelessWidget {
             ),
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
             itemCount: apps.length,
-            physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics()),
+            physics: scrollable
+                ? const BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics())
+                : const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {

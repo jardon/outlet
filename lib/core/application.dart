@@ -45,7 +45,7 @@ abstract class Application {
   final List<String> keywords;
   final List<Release> releases;
   final Map<String, String> content;
-  final bool featured;
+  bool featured;
   final bool verified;
   final bool installed;
   final List<dynamic> reviews;

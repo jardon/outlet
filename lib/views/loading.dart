@@ -1,6 +1,6 @@
 import '../core/application.dart';
 import '../providers/application_provider.dart';
-import 'components/app_list.dart';
+import 'featured.dart';
 import 'navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +14,6 @@ class Loading extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     AsyncValue<Map<String, Application>> remoteApps =
         ref.watch(remoteAppListProvider);
-    Map<String, Application> allApps = ref.watch(appListProvider);
 
     return remoteApps.when(
       loading: () => const Center(
@@ -24,8 +23,7 @@ class Loading extends ConsumerWidget {
         ),
       ),
       error: (err, stack) => Center(child: Text('Error: $err')),
-      data: (apps) => Navigation(
-          title: "Featured", child: AppList(apps: allApps.values.toList())),
+      data: (apps) => const Navigation(title: "Featured", child: Featured()),
     );
   }
 }

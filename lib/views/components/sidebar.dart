@@ -1,8 +1,11 @@
-import '../../core/application.dart';
-import '../../providers/application_provider.dart';
+import '../build.dart';
+import '../featured.dart';
+import '../play.dart';
+import '../relax.dart';
+import '../socialize.dart';
 import '../this_device.dart';
 import '../navigation.dart';
-import 'app_list.dart';
+import '../work.dart';
 import 'badges.dart';
 import 'dart:io';
 import 'download_queue.dart';
@@ -49,32 +52,29 @@ class Sidebar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Map<String, Application> apps = ref.watch(appListProvider);
     views = {
       "outlet": {
-        "widget": AppList(
-          apps: apps.values.toList(),
-        ),
+        "widget": const Featured(),
         "title": "Featured",
       },
       "play": {
-        "widget": Container(),
+        "widget": const Play(),
         "title": "Play",
       },
       "work": {
-        "widget": Container(),
+        "widget": const Work(),
         "title": "Work",
       },
       "build": {
-        "widget": Container(),
+        "widget": const Build(),
         "title": "Build",
       },
       "socialize": {
-        "widget": Container(),
+        "widget": const Socialize(),
         "title": "Socialize",
       },
       "relax": {
-        "widget": Container(),
+        "widget": const Relax(),
         "title": "Relax",
       },
       "device": {

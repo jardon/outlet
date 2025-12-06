@@ -101,14 +101,10 @@ final liveApplicationProvider =
 
 final appInCategoryList =
     Provider.family<List<Application>, String>((ref, category) {
-  final allApps = ref.watch(remoteAppListProvider);
+  final allApps = ref.watch(appListProvider);
 
-  if (allApps.hasValue) {
-    return allApps.value!.values
-        .toList()
-        .where((app) => app.categories.contains(category))
-        .toList();
-  }
-
-  return [];
+  return allApps.values
+      .toList()
+      .where((app) => app.categories.contains(category))
+      .toList();
 });

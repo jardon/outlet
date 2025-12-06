@@ -1,7 +1,10 @@
 import '../core/application.dart';
+import '../core/logger.dart';
 import 'backend_provider.dart';
 import 'dart:io';
 import 'dart:core';
+import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final remoteAppListProvider =
@@ -50,10 +53,42 @@ class InstalledAppListNotifier
   }
 }
 
+final featuredAppList = FutureProvider<List<String>>((ref) async {
+  try {
+    final String jsonString = await rootBundle.loadString('featured.json');
+
+    final jsonMap = json.decode(jsonString) as Map<String, dynamic>;
+
+    final List<dynamic>? featuredIds = jsonMap['featured_app_ids'];
+
+    if (featuredIds == null) {
+      return <String>[];
+    }
+
+    return featuredIds.cast<String>();
+  } catch (e) {
+    logger.e('Error loading applications from JSON: $e');
+    return <String>[];
+  }
+});
+
 final appListProvider = Provider((ref) {
   final remoteApps = ref.watch(remoteAppListProvider).value ?? {};
   final installedApps = ref.watch(installedAppListProvider);
+  final featuredApps = ref.watch(featuredAppList);
   final allApps = {...remoteApps, ...installedApps};
+
+  if (featuredApps.hasValue) {
+    List<String> featured = featuredApps.value!;
+
+    for (var app in featured) {
+      try {
+        allApps[app]!.featured = true;
+      } catch (e) {
+        logger.w('Failed to find $app in featured list.');
+      }
+    }
+  }
   return allApps;
 });
 

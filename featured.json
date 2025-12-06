@@ -1,0 +1,33 @@
+{
+  "featured_app_ids": [
+    "app.drey.EarTag",
+    "app.drey.Elastic",
+    "app.xemu.xemu",
+    "cafe.avery.Delfin",
+    "ca.edestcroix.Recordbox",
+    "com.brave.Browser",
+    "com.discordapp.Discord",
+    "net.shadps4.shadPS4",
+    "org.DolphinEmu.dolphin-emu",
+    "com.spotify.Client",
+    "com.valvesoftware.Steam",
+    "org.mozilla.firefox",
+    "com.jeffser.Alpaca",
+    "com.usebottles.bottles",
+    "com.github.johnfactotum.Foliate",
+    "org.telegram.desktop",
+    "dev.zed.Zed",
+    "com.jetbrains.IntelliJ-IDEA-Community",
+    "com.visualstudio.code",
+    "com.heroicgameslauncher.hgl",
+    "org.blender.Blender",
+    "org.kde.krita",
+    "io.github.ilya_zlobintsev.LACT",
+    "de.haeckerfelix.Fragments",
+    "com.obsproject.Studio",
+    "com.github.neithern.g4music",
+    "app.bluebubbles.BlueBubbles",
+    "com.adrienplazas.Metronome",
+    "md.obsidian.Obsidian"
+  ]
+}

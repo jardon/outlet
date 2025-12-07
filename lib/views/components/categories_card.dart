@@ -206,6 +206,28 @@ class ProductivityCategoryCard extends StatelessWidget {
   }
 }
 
+class DevelopementCategoryCard extends StatelessWidget {
+  final List<Application> apps;
+
+  const DevelopementCategoryCard({
+    super.key,
+    required this.apps,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CategoryCard(
+      apps: apps,
+      colors: const <Color>[
+        Colors.green,
+        Colors.lime,
+      ],
+      icon: 'lib/views/assets/bug-icon.svg',
+      title: 'Developement',
+    );
+  }
+}
+
 class CategoryCard extends StatefulWidget {
   final List<Application> apps;
   final List<Color> colors;

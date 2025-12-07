@@ -49,7 +49,7 @@ class ScreenshotsList extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
+              borderRadius: BorderRadius.circular(5.0),
               child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -114,38 +114,41 @@ class ScreenshotsGrid extends StatelessWidget {
             itemCount: screenshots.length,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    SlideAndFadeAnimationPageRoute(
-                      pageBuilder: (context, animation, secondaryAnimation) =>
-                          ScreenshotsView(
-                        screenshot: screenshots[index].full,
-                      ),
-                    ),
-                  );
-                },
-                child: Center(
-                    child: Image.network(
-                  screenshots[index].thumb,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                            : null,
-                      ),
-                    );
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    return const Text('Error loading image');
-                  },
-                )),
-              );
+              return ClipRRect(
+                  borderRadius: BorderRadius.circular(5.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        SlideAndFadeAnimationPageRoute(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  ScreenshotsView(
+                            screenshot: screenshots[index].full,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Center(
+                        child: Image.network(
+                      screenshots[index].thumb,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                : null,
+                          ),
+                        );
+                      },
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Text('Error loading image');
+                      },
+                    )),
+                  ));
             });
       },
     );
@@ -196,7 +199,7 @@ class ScreenshotsExpanded extends StatelessWidget {
                           );
                         },
                         child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),
+                            borderRadius: BorderRadius.circular(5.0),
                             child: Image.network(
                               screenshots[index].full,
                               fit: BoxFit.cover,

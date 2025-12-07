@@ -13,6 +13,9 @@ class Work extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final gameApps = ref.watch(appInCategoryList("game"));
     final networkApps = ref.watch(appInCategoryList("network"));
+    final utilityApps = ref.watch(appInCategoryList("utility"));
+    final educationApps = ref.watch(appInCategoryList("education"));
+    final officeApps = ref.watch(appInCategoryList("productivity"));
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: GraphicsCategoryCard(
@@ -36,6 +39,50 @@ class Work extends ConsumerWidget {
           child: SizedBox(
               child: AppList(
         apps: networkApps,
+        scrollable: false,
+        rows: 2,
+        shrinkWrap: true,
+      ))),
+      const SliverToBoxAdapter(child: SizedBox(height: 10)),
+      SliverToBoxAdapter(
+          child: UtilityCategoryCard(
+        apps:
+            utilityApps.where((app) => app.featured).toList().take(5).toList(),
+      )),
+      SliverToBoxAdapter(
+          child: SizedBox(
+              child: AppList(
+        apps: utilityApps,
+        scrollable: false,
+        rows: 2,
+        shrinkWrap: true,
+      ))),
+      const SliverToBoxAdapter(child: SizedBox(height: 10)),
+      SliverToBoxAdapter(
+          child: EducationCategoryCard(
+        apps: educationApps
+            .where((app) => app.featured)
+            .toList()
+            .take(5)
+            .toList(),
+      )),
+      SliverToBoxAdapter(
+          child: SizedBox(
+              child: AppList(
+        apps: educationApps,
+        scrollable: false,
+        rows: 2,
+        shrinkWrap: true,
+      ))),
+      const SliverToBoxAdapter(child: SizedBox(height: 10)),
+      SliverToBoxAdapter(
+          child: ProductivityCategoryCard(
+        apps: officeApps.where((app) => app.featured).toList().take(5).toList(),
+      )),
+      SliverToBoxAdapter(
+          child: SizedBox(
+              child: AppList(
+        apps: officeApps,
         scrollable: false,
         rows: 2,
         shrinkWrap: true,

@@ -107,8 +107,8 @@ class ScreenshotsGrid extends StatelessWidget {
         return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: crossAxisCount,
-              crossAxisSpacing: 0.0,
-              mainAxisSpacing: 0.0,
+              crossAxisSpacing: 10.0,
+              mainAxisSpacing: 10.0,
             ),
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
             itemCount: screenshots.length,

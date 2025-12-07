@@ -118,6 +118,28 @@ class GraphicsCategoryCard extends StatelessWidget {
   }
 }
 
+class NetworkCategoryCard extends StatelessWidget {
+  final List<Application> apps;
+
+  const NetworkCategoryCard({
+    super.key,
+    required this.apps,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CategoryCard(
+      apps: apps,
+      colors: const <Color>[
+        Colors.pink,
+        Colors.red,
+      ],
+      icon: 'lib/views/assets/connected-icon.svg',
+      title: 'Networking',
+    );
+  }
+}
+
 class CategoryCard extends StatefulWidget {
   final List<Application> apps;
   final List<Color> colors;

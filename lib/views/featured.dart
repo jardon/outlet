@@ -27,7 +27,6 @@ class Featured extends ConsumerWidget {
               child: AppList(
         apps: allApps.sublist(5),
         scrollable: false,
-        rows: 5,
         shrinkWrap: true,
       ))),
     ]);

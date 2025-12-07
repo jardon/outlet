@@ -140,6 +140,72 @@ class NetworkCategoryCard extends StatelessWidget {
   }
 }
 
+class UtilityCategoryCard extends StatelessWidget {
+  final List<Application> apps;
+
+  const UtilityCategoryCard({
+    super.key,
+    required this.apps,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CategoryCard(
+      apps: apps,
+      colors: const <Color>[
+        Colors.pink,
+        Colors.purple,
+      ],
+      icon: 'lib/views/assets/cross-circle-bloat-icon.svg',
+      title: 'Utility',
+    );
+  }
+}
+
+class EducationCategoryCard extends StatelessWidget {
+  final List<Application> apps;
+
+  const EducationCategoryCard({
+    super.key,
+    required this.apps,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CategoryCard(
+      apps: apps,
+      colors: const <Color>[
+        Colors.blue,
+        Colors.purple,
+      ],
+      icon: 'lib/views/assets/circle-quarter-leaf-icon.svg',
+      title: 'Education',
+    );
+  }
+}
+
+class ProductivityCategoryCard extends StatelessWidget {
+  final List<Application> apps;
+
+  const ProductivityCategoryCard({
+    super.key,
+    required this.apps,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CategoryCard(
+      apps: apps,
+      colors: const <Color>[
+        Colors.blue,
+        Colors.yellow,
+      ],
+      icon: 'lib/views/assets/shape-circle-halves-icon.svg',
+      title: 'Productivity',
+    );
+  }
+}
+
 class CategoryCard extends StatefulWidget {
   final List<Application> apps;
   final List<Color> colors;

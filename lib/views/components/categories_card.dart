@@ -3,6 +3,7 @@ import '../app_view.dart';
 import '../navigation.dart';
 import 'app_card.dart';
 import 'badges.dart';
+import 'dart:async';
 import 'screenshots.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -250,15 +251,42 @@ class CategoryCard extends StatefulWidget {
 
 class _CategoryCardState extends State<CategoryCard> {
   int _currentIndex = 0;
+  bool interrupted = false;
+
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+      setState(() {
+        if (!interrupted) {
+          _currentIndex = (_currentIndex + 1) % widget.apps.length;
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   void _nextItem() {
     setState(() {
+      interrupted = true;
       _currentIndex = (_currentIndex + 1) % widget.apps.length;
     });
   }
 
   void _previousItem() {
     setState(() {
+      interrupted = true;
       _currentIndex =
           (_currentIndex - 1 + widget.apps.length) % widget.apps.length;
     });

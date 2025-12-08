@@ -15,7 +15,7 @@ class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
     return ActionQueueStatus(
       isIdle: true,
       currentActionTitle: null,
-      queueLength: 0,
+      queue: Queue<Action>.from(_queue),
     );
   }
 
@@ -23,7 +23,7 @@ class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
     state = ActionQueueStatus(
       isIdle: !_isExecuting,
       currentActionTitle: _currentAction?.title,
-      queueLength: _queue.length,
+      queue: Queue<Action>.from(_queue),
     );
   }
 

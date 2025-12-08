@@ -292,6 +292,16 @@ class _CategoryCardState extends State<CategoryCard> {
     });
   }
 
+  Widget _transitionBuilder(Widget child, Animation<double> animation) {
+    final fadeAnimation =
+        CurvedAnimation(parent: animation, curve: Curves.easeInOut);
+
+    return FadeTransition(
+      opacity: fadeAnimation,
+      child: child,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -362,8 +372,11 @@ class _CategoryCardState extends State<CategoryCard> {
                       : Container(),
                 ]),
                 if (widget.apps.isNotEmpty)
-                  CategorySpotlightSlideshow(
-                      apps: widget.apps, index: _currentIndex),
+                  AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 500),
+                      transitionBuilder: _transitionBuilder,
+                      child: CategorySpotlightSlideshow(
+                          apps: widget.apps, index: _currentIndex)),
               ])),
         ));
   }

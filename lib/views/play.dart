@@ -11,9 +11,9 @@ class Play extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final audioApps = ref.watch(appInCategoryList("audio"));
-    final videoApps = ref.watch(appInCategoryList("video"));
-    final gameApps = ref.watch(appInCategoryList("game"));
+    final audioApps = (ref.watch(appInCategoryList("audio"))..shuffle());
+    final videoApps = (ref.watch(appInCategoryList("video"))..shuffle());
+    final gameApps = (ref.watch(appInCategoryList("game"))..shuffle());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: VideoCategoryCard(

@@ -11,12 +11,14 @@ class Work extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final gameApps = ref.watch(appInCategoryList("game"));
-    final networkApps = ref.watch(appInCategoryList("network"));
-    final utilityApps = ref.watch(appInCategoryList("utility"));
-    final educationApps = ref.watch(appInCategoryList("education"));
-    final officeApps = ref.watch(appInCategoryList("productivity"));
-    final devApps = ref.watch(appInCategoryList("development"));
+    final gameApps = (ref.watch(appInCategoryList("game"))..shuffle());
+    final networkApps = (ref.watch(appInCategoryList("network"))..shuffle());
+    final utilityApps = (ref.watch(appInCategoryList("utility"))..shuffle());
+    final educationApps =
+        (ref.watch(appInCategoryList("education"))..shuffle());
+    final officeApps =
+        (ref.watch(appInCategoryList("productivity"))..shuffle());
+    final devApps = (ref.watch(appInCategoryList("development"))..shuffle());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: GraphicsCategoryCard(

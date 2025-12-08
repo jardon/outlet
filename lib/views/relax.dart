@@ -11,8 +11,8 @@ class Relax extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final audioApps = ref.watch(appInCategoryList("audio"));
-    final videoApps = ref.watch(appInCategoryList("video"));
+    final audioApps = (ref.watch(appInCategoryList("audio"))..shuffle());
+    final videoApps = (ref.watch(appInCategoryList("video"))..shuffle());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: VideoCategoryCard(

@@ -11,12 +11,13 @@ class Featured extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final allApps = ref
+    final allApps = (ref
         .watch(appListProvider)
         .values
         .toList()
         .where((app) => app.featured)
-        .toList();
+        .toList()
+      ..shuffle());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: FeaturedCategoryCard(

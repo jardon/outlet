@@ -11,7 +11,7 @@ class Build extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final gameApps = ref.watch(appInCategoryList("game"));
+    final gameApps = (ref.watch(appInCategoryList("game"))..shuffle());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: GraphicsCategoryCard(

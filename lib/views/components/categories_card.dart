@@ -475,7 +475,9 @@ class _CategoryCardState extends State<CategoryCard> {
                   AnimatedSwitcher(
                       duration: const Duration(milliseconds: 500),
                       transitionBuilder: _transitionBuilder,
-                      child: _categorySpotlight()),
+                      child: KeyedSubtree(
+                          key: ValueKey<int>(_currentIndex),
+                          child: _categorySpotlight())),
               ])),
         ));
   }

@@ -28,7 +28,6 @@ class AppLinks extends StatelessWidget {
       if (app.vcs != null) {"title": "Source Code", "url": app.vcs!},
     ];
     return Container(
-        width: 400,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(45),

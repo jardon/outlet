@@ -36,7 +36,6 @@ class AppActions extends ConsumerWidget {
 
     return (app != null)
         ? Container(
-            width: 400,
             height: 70,
             decoration: BoxDecoration(
                 color: Colors.white,

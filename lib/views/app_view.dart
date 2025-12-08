@@ -33,30 +33,32 @@ class AppView extends StatelessWidget {
                       ? Container(
                           constraints:
                               BoxConstraints(minHeight: viewportHeight),
-                          padding:
-                              const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                          padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
                           alignment: Alignment.topCenter,
                           child: Row(
                               spacing: 16.0,
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Column(spacing: 16.0, children: [
-                                  AppInfo(app: app!),
-                                  AppActions(id: app!.id),
-                                  AppDescription(app: app!),
-                                  const ReviewInfo(reviews: []),
-                                  AppLinks(app: app!),
-                                ]),
-                                ScreenshotsExpanded(
-                                    screenshots: app!.screenshots),
+                                Expanded(
+                                    flex: 1,
+                                    child: Column(spacing: 16.0, children: [
+                                      AppInfo(app: app!),
+                                      AppActions(id: app!.id),
+                                      AppDescription(app: app!),
+                                      const ReviewInfo(reviews: []),
+                                      AppLinks(app: app!),
+                                    ])),
+                                Expanded(
+                                    flex: 1,
+                                    child: ScreenshotsExpanded(
+                                        screenshots: app!.screenshots)),
                               ]))
                       : Container(
                           width: availableWidth,
                           constraints:
                               BoxConstraints(minHeight: viewportHeight),
-                          padding:
-                              const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                          padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
                           child: Column(spacing: 16.0, children: [
                             AppInfo(app: app!),
                             AppActions(id: app!.id),

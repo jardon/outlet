@@ -13,7 +13,6 @@ class Screenshots extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 400,
       height: 150,
       decoration: BoxDecoration(
           color: Colors.white,
@@ -166,7 +165,6 @@ class ScreenshotsExpanded extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 400,
       height: (screenshots.isEmpty) ? 600.0 : null,
       decoration: BoxDecoration(
           color: Colors.white,

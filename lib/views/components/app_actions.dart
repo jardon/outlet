@@ -39,7 +39,7 @@ class AppActions extends ConsumerWidget {
             height: 70,
             decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(45),
+                borderRadius: BorderRadius.circular(25),
                 boxShadow: const [
                   BoxShadow(color: Colors.black12, blurRadius: 20.0)
                 ]),

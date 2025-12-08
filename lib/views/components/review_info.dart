@@ -14,7 +14,7 @@ class ReviewInfo extends StatelessWidget {
       height: 150,
       decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(45),
+          borderRadius: BorderRadius.circular(25),
           boxShadow: const [
             BoxShadow(color: Colors.black12, blurRadius: 20.0)
           ]),

@@ -302,6 +302,106 @@ class _CategoryCardState extends State<CategoryCard> {
     );
   }
 
+  Widget _categorySpotlight() {
+    return LayoutBuilder(builder: (context, constraints) {
+      const double breakpoint = 600.0;
+      final bool isWide = constraints.maxWidth > breakpoint;
+      return isWide
+          ? SizedBox(
+              height: 200,
+              child: Row(spacing: 10, children: [
+                SizedBox(
+                    height: 200,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          NoAnimationPageRoute(
+                            pageBuilder: (context, animation1, animation2) =>
+                                Navigation(
+                              title: "App Info",
+                              child: AppView(app: widget.apps[_currentIndex])
+                                  as Widget,
+                            ),
+                          ),
+                        );
+                      },
+                      child: AppCard(
+                        app: widget.apps[_currentIndex],
+                        details: false,
+                      ),
+                    )),
+                Expanded(
+                    flex: 1,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                              child: Container(
+                                  padding:
+                                      const EdgeInsets.only(top: 5, bottom: 5),
+                                  child: Text(
+                                      (widget.apps[_currentIndex].description ??
+                                              "No description available.")
+                                          .trimLeft(),
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                      overflow: TextOverflow.fade,
+                                      softWrap: true))),
+                        ])),
+                Expanded(
+                    flex: 1,
+                    child: ScreenshotsGrid(
+                        screenshots: widget.apps[_currentIndex].screenshots))
+              ]))
+          : SizedBox(
+              height: 200,
+              child: Row(spacing: 10, children: [
+                SizedBox(
+                    height: 200,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          NoAnimationPageRoute(
+                            pageBuilder: (context, animation1, animation2) =>
+                                Navigation(
+                              title: "App Info",
+                              child: AppView(app: widget.apps[_currentIndex])
+                                  as Widget,
+                            ),
+                          ),
+                        );
+                      },
+                      child: AppCard(
+                        app: widget.apps[_currentIndex],
+                        details: false,
+                      ),
+                    )),
+                Expanded(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                      Expanded(
+                          child: Container(
+                              padding: const EdgeInsets.only(top: 5, bottom: 5),
+                              child: Text(
+                                  (widget.apps[_currentIndex].description ??
+                                          "No description available.")
+                                      .trimLeft(),
+                                  style: const TextStyle(color: Colors.white),
+                                  overflow: TextOverflow.fade,
+                                  softWrap: true))),
+                      SizedBox(
+                          height: 80,
+                          child: ScreenshotsList(
+                              screenshots:
+                                  widget.apps[_currentIndex].screenshots)),
+                    ])),
+              ]));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -375,134 +475,8 @@ class _CategoryCardState extends State<CategoryCard> {
                   AnimatedSwitcher(
                       duration: const Duration(milliseconds: 500),
                       transitionBuilder: _transitionBuilder,
-                      child: CategorySpotlightSlideshow(
-                          apps: widget.apps, index: _currentIndex)),
+                      child: _categorySpotlight()),
               ])),
         ));
-  }
-}
-
-class CategorySpotlightSlideshow extends StatelessWidget {
-  final List<Application> apps;
-  final int index;
-
-  const CategorySpotlightSlideshow({
-    super.key,
-    required this.apps,
-    required this.index,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return CategorySpotlight(apps: apps, index: index);
-  }
-}
-
-class CategorySpotlight extends StatelessWidget {
-  final List<Application> apps;
-  final int index;
-
-  const CategorySpotlight({
-    super.key,
-    required this.apps,
-    required this.index,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      const double breakpoint = 600.0;
-      final bool isWide = constraints.maxWidth > breakpoint;
-      return isWide
-          ? SizedBox(
-              height: 200,
-              child: Row(spacing: 10, children: [
-                SizedBox(
-                    height: 200,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          NoAnimationPageRoute(
-                            pageBuilder: (context, animation1, animation2) =>
-                                Navigation(
-                              title: "App Info",
-                              child: AppView(app: apps[index]) as Widget,
-                            ),
-                          ),
-                        );
-                      },
-                      child: AppCard(
-                        app: apps[index],
-                        details: false,
-                      ),
-                    )),
-                Expanded(
-                    flex: 1,
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                              child: Container(
-                                  padding:
-                                      const EdgeInsets.only(top: 5, bottom: 5),
-                                  child: Text(
-                                      (apps[index].description ??
-                                              "No description available.")
-                                          .trimLeft(),
-                                      style:
-                                          const TextStyle(color: Colors.white),
-                                      overflow: TextOverflow.fade,
-                                      softWrap: true))),
-                        ])),
-                Expanded(
-                    flex: 1,
-                    child:
-                        ScreenshotsGrid(screenshots: apps[index].screenshots))
-              ]))
-          : SizedBox(
-              height: 200,
-              child: Row(spacing: 10, children: [
-                SizedBox(
-                    height: 200,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          NoAnimationPageRoute(
-                            pageBuilder: (context, animation1, animation2) =>
-                                Navigation(
-                              title: "App Info",
-                              child: AppView(app: apps[index]) as Widget,
-                            ),
-                          ),
-                        );
-                      },
-                      child: AppCard(
-                        app: apps[index],
-                        details: false,
-                      ),
-                    )),
-                Expanded(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                      Expanded(
-                          child: Container(
-                              padding: const EdgeInsets.only(top: 5, bottom: 5),
-                              child: Text(
-                                  (apps[index].description ??
-                                          "No description available.")
-                                      .trimLeft(),
-                                  style: const TextStyle(color: Colors.white),
-                                  overflow: TextOverflow.fade,
-                                  softWrap: true))),
-                      SizedBox(
-                          height: 80,
-                          child: ScreenshotsList(
-                              screenshots: apps[index].screenshots)),
-                    ])),
-              ]));
-    });
   }
 }

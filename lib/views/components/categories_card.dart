@@ -254,11 +254,14 @@ class _CategoryCardState extends State<CategoryCard> {
   bool interrupted = false;
 
   Timer? _timer;
+  double _progressValue = 0.0;
+  Timer? _progressTimer;
 
   @override
   void initState() {
     super.initState();
     _startTimer();
+    _startProgressTimer();
   }
 
   void _startTimer() {
@@ -266,6 +269,24 @@ class _CategoryCardState extends State<CategoryCard> {
       setState(() {
         if (!interrupted) {
           _currentIndex = (_currentIndex + 1) % widget.apps.length;
+          _progressValue = 0.0;
+        }
+      });
+    });
+  }
+
+  void _startProgressTimer() {
+    const int milliseconds = 50;
+    const double increment = milliseconds / 5000;
+
+    _progressTimer =
+        Timer.periodic(const Duration(milliseconds: milliseconds), (timer) {
+      setState(() {
+        if (!interrupted) {
+          _progressValue += increment;
+          if (_progressValue > 1.0) {
+            _progressValue = 1.0;
+          }
         }
       });
     });
@@ -274,19 +295,25 @@ class _CategoryCardState extends State<CategoryCard> {
   @override
   void dispose() {
     _timer?.cancel();
+    _progressTimer?.cancel();
     super.dispose();
+  }
+
+  void _resetProgressAndStartInteraction() {
+    interrupted = true;
+    _progressValue = 0.0;
   }
 
   void _nextItem() {
     setState(() {
-      interrupted = true;
+      _resetProgressAndStartInteraction();
       _currentIndex = (_currentIndex + 1) % widget.apps.length;
     });
   }
 
   void _previousItem() {
     setState(() {
-      interrupted = true;
+      _resetProgressAndStartInteraction();
       _currentIndex =
           (_currentIndex - 1 + widget.apps.length) % widget.apps.length;
     });
@@ -446,6 +473,20 @@ class _CategoryCardState extends State<CategoryCard> {
                     ),
                   )),
                   Row(children: [
+                    if (widget.apps.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10.0),
+                        child: SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            value: _progressValue,
+                            color: Colors.white,
+                            backgroundColor: Colors.white30,
+                            strokeWidth: 3.0,
+                          ),
+                        ),
+                      ),
                     if (widget.apps.isNotEmpty)
                       IconButton(
                         icon: const Icon(Icons.arrow_back),

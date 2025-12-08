@@ -114,7 +114,7 @@ class GraphicsCategoryCard extends StatelessWidget {
         Colors.pink,
       ],
       icon: 'lib/views/assets/checkered-icon.svg',
-      title: 'Gaphics',
+      title: 'Graphics',
     );
   }
 }

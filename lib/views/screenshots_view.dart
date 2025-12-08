@@ -25,6 +25,7 @@ class ScreenshotsView extends StatelessWidget {
                       ? loadingProgress.cumulativeBytesLoaded /
                           loadingProgress.expectedTotalBytes!
                       : null,
+                  color: Colors.white,
                 ),
               );
             },

@@ -60,6 +60,7 @@ class AppLinks extends StatelessWidget {
                                   ),
                                 ),
                               ])),
+                          const SizedBox(width: 10),
                           TextButton(
                             onPressed: () => _launchURL(item["url"]!),
                             style: const ButtonStyle(

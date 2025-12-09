@@ -4,11 +4,13 @@ class ActionQueueStatus {
   final bool isIdle;
   final String? currentActionTitle;
   final Queue<Action> queue;
+  final List<String> completedActions;
 
   ActionQueueStatus({
     required this.isIdle,
     this.currentActionTitle,
     required this.queue,
+    required this.completedActions,
   });
 
   @override
@@ -18,7 +20,8 @@ class ActionQueueStatus {
           runtimeType == other.runtimeType &&
           isIdle == other.isIdle &&
           currentActionTitle == other.currentActionTitle &&
-          queue == other.queue;
+          queue == other.queue &&
+          completedActions == other.completedActions;
 
   @override
   int get hashCode =>

@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
   final Queue<Action> _queue = Queue();
+  final List<String> _completedActions = [];
   Action? _currentAction;
   bool _isExecuting = false;
 
@@ -16,6 +17,7 @@ class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
       isIdle: true,
       currentActionTitle: null,
       queue: Queue<Action>.from(_queue),
+      completedActions: List<String>.from(_completedActions),
     );
   }
 
@@ -24,6 +26,7 @@ class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
       isIdle: !_isExecuting,
       currentActionTitle: _currentAction?.title,
       queue: Queue<Action>.from(_queue),
+      completedActions: List<String>.from(_completedActions),
     );
   }
 
@@ -63,6 +66,7 @@ class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
       ref.read(installedAppListProvider.notifier).refresh();
     }
 
+    _completedActions.add(_currentAction!.appId);
     _currentAction = null;
     _isExecuting = false;
     _updateState();

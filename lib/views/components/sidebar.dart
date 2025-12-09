@@ -1,4 +1,5 @@
 import '../build.dart';
+import '../downloads.dart';
 import '../featured.dart';
 import '../play.dart';
 import '../relax.dart';
@@ -86,7 +87,7 @@ class Sidebar extends ConsumerWidget {
         "title": "Search",
       },
       "downloads": {
-        "widget": Container(),
+        "widget": const DownloadsView(),
         "title": "Downloads",
       },
     };

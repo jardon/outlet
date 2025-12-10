@@ -59,6 +59,7 @@ class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
           logger.i("Executing action: ${_currentAction!.title}");
 
           await _currentAction!.action(_currentAction!.data);
+          _completedActions.add(_currentAction!.appId);
 
           logger.i("Action completed successfully.");
         }
@@ -68,7 +69,6 @@ class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
       ref.read(installedAppListProvider.notifier).refresh();
     }
 
-    _completedActions.add(_currentAction!.appId);
     _currentAction = null;
     _isExecuting = false;
     _updateState();

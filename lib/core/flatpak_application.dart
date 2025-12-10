@@ -76,7 +76,7 @@ class FlatpakApplication extends Application {
               'Monitorying':
           categoryBadges.add('utility');
           break;
-        case 'Literature' || 'Astronomy' || 'Science':
+        case 'Literature' || 'Astronomy' || 'Science' || 'Education':
           categoryBadges.add('education');
           break;
         case 'Office':

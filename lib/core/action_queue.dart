@@ -3,12 +3,14 @@ import 'dart:collection';
 class ActionQueueStatus {
   final bool isIdle;
   final String? currentActionTitle;
+  final String? currentActionId;
   final Queue<Action> queue;
   final List<String> completedActions;
 
   ActionQueueStatus({
     required this.isIdle,
     this.currentActionTitle,
+    required this.currentActionId,
     required this.queue,
     required this.completedActions,
   });
@@ -20,6 +22,7 @@ class ActionQueueStatus {
           runtimeType == other.runtimeType &&
           isIdle == other.isIdle &&
           currentActionTitle == other.currentActionTitle &&
+          currentActionId == other.currentActionId &&
           queue == other.queue &&
           completedActions == other.completedActions;
 

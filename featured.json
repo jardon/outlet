@@ -1,5 +1,8 @@
 {
   "featured_app_ids": [
+    "dev.bragefuglseth.Keypunch",
+    "dev.bragefuglseth.Fretboard",
+    "dev.tchx84.Gameeky",
     "app.drey.EarTag",
     "app.drey.Elastic",
     "app.xemu.xemu",

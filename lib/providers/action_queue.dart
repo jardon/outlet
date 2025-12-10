@@ -16,6 +16,7 @@ class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
     return ActionQueueStatus(
       isIdle: true,
       currentActionTitle: null,
+      currentActionId: null,
       queue: Queue<Action>.from(_queue),
       completedActions: List<String>.from(_completedActions),
     );
@@ -25,6 +26,7 @@ class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
     state = ActionQueueStatus(
       isIdle: !_isExecuting,
       currentActionTitle: _currentAction?.title,
+      currentActionId: _currentAction?.appId,
       queue: Queue<Action>.from(_queue),
       completedActions: List<String>.from(_completedActions),
     );

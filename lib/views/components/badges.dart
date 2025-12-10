@@ -530,7 +530,7 @@ class CategoryList extends StatelessWidget {
         case 'utility':
           badges.add(UtilityBadge(size: size));
           break;
-        case 'eduction':
+        case 'education':
           badges.add(EducationBadge(size: size));
           break;
         case 'productivity':

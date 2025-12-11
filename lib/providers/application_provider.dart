@@ -92,6 +92,18 @@ final appListProvider = Provider((ref) {
   return allApps;
 });
 
+final searchKeywordsProvider = Provider((ref) {
+  final allApps = ref.watch(appListProvider);
+
+  return allApps.map((key, app) {
+    if (app.name != null) {
+      return MapEntry("${app.name!.toLowerCase()} ${app.keywords.join()}", key);
+    } else {
+      return MapEntry(key.toLowerCase(), key);
+    }
+  });
+});
+
 final liveApplicationProvider =
     Provider.family<Application?, String>((ref, appId) {
   final allApps = ref.watch(appListProvider);

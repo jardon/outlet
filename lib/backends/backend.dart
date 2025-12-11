@@ -10,7 +10,7 @@ interface class Backend {
     return {};
   }
 
-  Map<String, Application> getAllRemotePackages() {
+  Future<Map<String, Application>> getAllRemotePackages() async {
     return {};
   }
 
@@ -74,7 +74,7 @@ class TestBackend implements Backend {
   }
 
   @override
-  Map<String, Application> getAllRemotePackages() {
+  Future<Map<String, Application>> getAllRemotePackages() async {
     return apps;
   }
 

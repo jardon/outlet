@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final remoteAppListProvider =
     FutureProvider<Map<String, Application>>((ref) async {
+  await Future.microtask(() {});
   final backend = ref.watch(backendProvider);
   Map<String, String> env = Platform.environment;
   Map<String, Application> apps = {};
@@ -17,7 +18,8 @@ final remoteAppListProvider =
   }
 
   if (env['FLATPAK_ENABLED'] != null) {
-    apps.addAll(backend.getAllRemotePackages());
+    final flapaks = await backend.getAllRemotePackages();
+    apps.addAll(flapaks);
   }
   return apps;
 });

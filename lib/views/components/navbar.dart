@@ -127,7 +127,7 @@ class _SearchBarAppState extends ConsumerState<SearchBarApp> {
             final results = extractTop(
               query: query,
               choices: searchKeywords.keys.toList(),
-              limit: 5,
+              limit: 10,
               cutoff: 50,
             );
             return results.isNotEmpty

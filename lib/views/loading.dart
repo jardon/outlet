@@ -17,10 +17,14 @@ class Loading extends ConsumerWidget {
 
     return remoteApps.when(
       loading: () => const Center(
-        child: Text(
-          'LOADING',
-          style: TextStyle(fontSize: 32, color: Colors.black),
-        ),
+        child: Column(
+            spacing: 20,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(color: Colors.white),
+              Text('Loading application data...',
+                  style: TextStyle(fontSize: 24, color: Colors.white))
+            ]),
       ),
       error: (err, stack) => Center(child: Text('Error: $err')),
       data: (apps) => const Navigation(title: "Featured", child: Featured()),

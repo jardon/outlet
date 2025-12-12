@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Outlet',
       theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
-      home: const Scaffold(backgroundColor: Colors.white, body: Loading()),
+      home: const Scaffold(backgroundColor: Colors.black, body: Loading()),
     );
   }
 }

@@ -408,6 +408,7 @@ class FlatpakBackend implements Backend {
 
   @override
   Future<Map<String, Application>> getAllRemotePackages() async {
+    await Future.microtask(() {});
     final FlatpakBindings bindings =
         FlatpakBindings(ffi.DynamicLibrary.open('libflatpak.so'));
     ffi.Pointer<FlatpakInstallation> installationPtr = getFlatpakInstallation();

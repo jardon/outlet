@@ -8,16 +8,15 @@ class DownloadsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(children: [
-          SizedBox(height: 10),
-          SizedBox(height: 150, child: CurrentDownload()),
-          PendingDownloads(),
-          CompletedDownloads(),
-          SizedBox(height: 20),
-          DownloadsFooterMessage(),
-          SizedBox(height: 50),
-        ]));
+    return const CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
+      SliverToBoxAdapter(child: SizedBox(height: 10)),
+      SliverToBoxAdapter(
+          child: SizedBox(height: 150, child: CurrentDownload())),
+      SliverToBoxAdapter(child: PendingDownloads()),
+      SliverToBoxAdapter(child: CompletedDownloads()),
+      SliverToBoxAdapter(child: SizedBox(height: 20)),
+      SliverToBoxAdapter(child: DownloadsFooterMessage()),
+      SliverToBoxAdapter(child: SizedBox(height: 50)),
+    ]);
   }
 }

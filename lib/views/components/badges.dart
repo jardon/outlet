@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'theme.dart';
 
 class FeaturedBadge extends StatelessWidget {
   const FeaturedBadge({
@@ -16,13 +17,10 @@ class FeaturedBadge extends StatelessWidget {
         width: size,
         margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topLeft,
-            end: Alignment(0.8, 1),
-            colors: <Color>[
-              Colors.yellow,
-              Colors.orange,
-            ],
+            end: const Alignment(0.8, 1),
+            colors: featuredColors,
             tileMode: TileMode.mirror,
           ),
           borderRadius: BorderRadius.circular(45.0),
@@ -111,13 +109,10 @@ class VideoBadge extends StatelessWidget {
         width: size,
         margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topLeft,
-            end: Alignment(0.8, 1),
-            colors: <Color>[
-              Colors.green,
-              Colors.blue,
-            ],
+            end: const Alignment(0.8, 1),
+            colors: videoColors,
             tileMode: TileMode.mirror,
           ),
           borderRadius: BorderRadius.circular(45.0),
@@ -150,13 +145,10 @@ class AudioBadge extends StatelessWidget {
         width: size,
         margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topLeft,
-            end: Alignment(0.8, 1),
-            colors: <Color>[
-              Colors.red,
-              Colors.orange,
-            ],
+            end: const Alignment(0.8, 1),
+            colors: audioColors,
             tileMode: TileMode.mirror,
           ),
           borderRadius: BorderRadius.circular(45.0),
@@ -189,13 +181,10 @@ class DevelopmentBadge extends StatelessWidget {
         width: size,
         margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topLeft,
-            end: Alignment(0.8, 1),
-            colors: <Color>[
-              Colors.green,
-              Colors.lime,
-            ],
+            end: const Alignment(0.8, 1),
+            colors: devColors,
             tileMode: TileMode.mirror,
           ),
           borderRadius: BorderRadius.circular(45.0),
@@ -230,13 +219,10 @@ class GameBadge extends StatelessWidget {
         width: size,
         margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topLeft,
-            end: Alignment(0.8, 1),
-            colors: <Color>[
-              Colors.green,
-              Colors.yellow,
-            ],
+            end: const Alignment(0.8, 1),
+            colors: gameColors,
             tileMode: TileMode.mirror,
           ),
           borderRadius: BorderRadius.circular(45.0),
@@ -269,13 +255,10 @@ class GraphicsBadge extends StatelessWidget {
         width: size,
         margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topLeft,
-            end: Alignment(0.8, 1),
-            colors: <Color>[
-              Colors.purple,
-              Colors.pink,
-            ],
+            end: const Alignment(0.8, 1),
+            colors: graphicsColors,
             tileMode: TileMode.mirror,
           ),
           borderRadius: BorderRadius.circular(45.0),
@@ -308,13 +291,10 @@ class NetworkBadge extends StatelessWidget {
         width: size,
         margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topLeft,
-            end: Alignment(0.8, 1),
-            colors: <Color>[
-              Colors.pink,
-              Colors.red,
-            ],
+            end: const Alignment(0.8, 1),
+            colors: networkColors,
             tileMode: TileMode.mirror,
           ),
           borderRadius: BorderRadius.circular(45.0),
@@ -347,13 +327,10 @@ class UtilityBadge extends StatelessWidget {
         width: size,
         margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topLeft,
-            end: Alignment(0.8, 1),
-            colors: <Color>[
-              Colors.pink,
-              Colors.purple,
-            ],
+            end: const Alignment(0.8, 1),
+            colors: utilityColors,
             tileMode: TileMode.mirror,
           ),
           borderRadius: BorderRadius.circular(45.0),
@@ -386,13 +363,10 @@ class EducationBadge extends StatelessWidget {
         width: size,
         margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topLeft,
-            end: Alignment(0.8, 1),
-            colors: <Color>[
-              Colors.blue,
-              Colors.purple,
-            ],
+            end: const Alignment(0.8, 1),
+            colors: educationColors,
             tileMode: TileMode.mirror,
           ),
           borderRadius: BorderRadius.circular(45.0),
@@ -425,13 +399,10 @@ class OfficeBadge extends StatelessWidget {
         width: size,
         margin: const EdgeInsets.symmetric(horizontal: 2.5),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topLeft,
-            end: Alignment(0.8, 1),
-            colors: <Color>[
-              Colors.blue,
-              Colors.yellow,
-            ],
+            end: const Alignment(0.8, 1),
+            colors: productivityColors,
             tileMode: TileMode.mirror,
           ),
           borderRadius: BorderRadius.circular(45.0),

@@ -284,7 +284,12 @@ class CompletedDownloads extends ConsumerWidget {
                 ),
               ),
             ),
-            AppList(apps: apps, shrinkWrap: true, details: false)
+            AppList(
+              apps: apps,
+              shrinkWrap: true,
+              details: false,
+              scrollable: false,
+            )
           ])
         : Container();
   }

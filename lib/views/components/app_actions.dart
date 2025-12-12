@@ -1,6 +1,7 @@
 import '../../backends/backend.dart';
 import '../../providers/action_queue.dart';
 import '../../providers/application_provider.dart';
+import 'theme.dart';
 import 'dart:isolate';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,11 +35,13 @@ class AppActions extends ConsumerWidget {
       return 'Install';
     }
 
+    final Color color = fgColor(context);
+
     return (app != null)
         ? Container(
             height: 70,
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: color,
                 borderRadius: BorderRadius.circular(25),
                 boxShadow: const [
                   BoxShadow(color: Colors.black12, blurRadius: 20.0)

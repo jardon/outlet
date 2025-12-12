@@ -8,6 +8,7 @@ import 'app_icon_loader.dart';
 import 'app_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'theme.dart';
 
 class DownloadQueue extends ConsumerWidget {
   const DownloadQueue({
@@ -95,6 +96,8 @@ class CurrentDownload extends ConsumerWidget {
       app = ref.watch(liveApplicationProvider(appId));
     }
 
+    final Color color = fgColor(context);
+
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
       decoration: BoxDecoration(
@@ -104,7 +107,7 @@ class CurrentDownload extends ConsumerWidget {
           ]),
       child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: color,
             borderRadius: BorderRadius.circular(25.0),
           ),
           padding: const EdgeInsets.all(20),
@@ -121,7 +124,6 @@ class CurrentDownload extends ConsumerWidget {
                     overflow: TextOverflow.fade,
                     softWrap: false,
                     style: const TextStyle(
-                      color: Colors.black,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
@@ -132,8 +134,6 @@ class CurrentDownload extends ConsumerWidget {
                 child: !isIdle
                     ? LinearProgressIndicator(
                         value: null,
-                        backgroundColor: Colors.black38,
-                        color: Colors.black,
                         borderRadius: BorderRadius.circular(5),
                       )
                     : const Text(
@@ -141,7 +141,6 @@ class CurrentDownload extends ConsumerWidget {
                         softWrap: true,
                         overflow: TextOverflow.visible,
                         style: TextStyle(
-                          color: Colors.black,
                           fontSize: 12,
                         ),
                       ),
@@ -170,9 +169,9 @@ class PendingDownloads extends ConsumerWidget {
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: const Text('Up next',
                 style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black))),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ))),
       ListView.builder(
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
@@ -216,6 +215,8 @@ class PendingDownloadsItem extends ConsumerWidget {
     final actionQueue = ref.watch(actionQueueProvider.notifier);
     final app = ref.watch(liveApplicationProvider(appId));
 
+    final Color color = fgColor(context);
+
     return app != null
         ? Padding(
             padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
@@ -223,7 +224,7 @@ class PendingDownloadsItem extends ConsumerWidget {
               height: 100.0,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: color,
                 borderRadius: BorderRadius.circular(25.0),
                 boxShadow: const [
                   BoxShadow(color: Colors.black12, blurRadius: 20.0)
@@ -237,13 +238,11 @@ class PendingDownloadsItem extends ConsumerWidget {
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
                   ),
                 )),
                 IconButton(
                   icon: const Icon(Icons.close),
                   iconSize: 20.0,
-                  color: Colors.black,
                   tooltip: 'Remove item',
                   onPressed: () {
                     actionQueue.removeAction(app.id);
@@ -280,9 +279,9 @@ class CompletedDownloads extends ConsumerWidget {
               child: const Text(
                 'Completed Downloads',
                 style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             AppList(apps: apps, shrinkWrap: true, details: false)

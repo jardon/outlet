@@ -1,4 +1,5 @@
 import '../../core/application.dart';
+import 'theme.dart';
 import 'app_icon_loader.dart';
 import 'badges.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +78,7 @@ class AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
               onExit: (_) => _onHoverChanged(false),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: fgColor(context),
                   borderRadius: BorderRadius.circular(widget.borderRadius),
                 ),
                 child: Stack(children: <Widget>[
@@ -162,7 +163,6 @@ class Listing extends StatelessWidget {
                         softWrap: false,
                         style: const TextStyle(
                           fontSize: 24,
-                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                       ))),

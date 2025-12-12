@@ -1,5 +1,6 @@
 import '../../core/application.dart';
 import '../screenshots_view.dart';
+import 'theme.dart';
 import 'package:flutter/material.dart';
 
 class Screenshots extends StatelessWidget {
@@ -12,10 +13,11 @@ class Screenshots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color color = fgColor(context);
     return Container(
       height: 150,
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: color,
           borderRadius: BorderRadius.circular(25),
           boxShadow: const [
             BoxShadow(color: Colors.black12, blurRadius: 20.0)
@@ -167,10 +169,11 @@ class ScreenshotsExpanded extends StatelessWidget {
     final List<Screenshot> fullSize = screenshots.take(2).toList();
     final List<Screenshot> thumbSize =
         screenshots.length > 2 ? screenshots.sublist(2) : [];
+    final Color color = fgColor(context);
     return Container(
       height: (screenshots.isEmpty) ? 600.0 : null,
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: color,
           borderRadius: BorderRadius.circular(25),
           boxShadow: const [
             BoxShadow(color: Colors.black12, blurRadius: 20.0)

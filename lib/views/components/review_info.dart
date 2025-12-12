@@ -1,3 +1,4 @@
+import 'theme.dart';
 import 'package:flutter/material.dart';
 
 class ReviewInfo extends StatelessWidget {
@@ -10,10 +11,11 @@ class ReviewInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color color = fgColor(context);
     return Container(
       height: 150,
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: color,
           borderRadius: BorderRadius.circular(25),
           boxShadow: const [
             BoxShadow(color: Colors.black12, blurRadius: 20.0)

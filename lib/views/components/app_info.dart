@@ -1,4 +1,5 @@
 import '../../core/application.dart';
+import 'theme.dart';
 import 'app_icon_loader.dart';
 import 'badges.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +14,12 @@ class AppInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color color = fgColor(context);
+
     return Container(
       height: 150,
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: color,
           borderRadius: BorderRadius.circular(25),
           boxShadow: const [
             BoxShadow(color: Colors.black12, blurRadius: 20.0)

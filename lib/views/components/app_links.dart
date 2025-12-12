@@ -1,4 +1,5 @@
 import '../../core/application.dart';
+import 'theme.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -27,9 +28,12 @@ class AppLinks extends StatelessWidget {
         {"title": "Translation", "url": app.translate!},
       if (app.vcs != null) {"title": "Source Code", "url": app.vcs!},
     ];
+
+    final Color color = fgColor(context);
+
     return Container(
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: color,
             borderRadius: BorderRadius.circular(25),
             boxShadow: const [
               BoxShadow(color: Colors.black12, blurRadius: 20.0)
@@ -54,9 +58,8 @@ class AppLinks extends StatelessWidget {
                                   maxLines: 1,
                                   softWrap: false,
                                   overflow: TextOverflow.fade,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 12,
-                                    color: Colors.grey.shade700,
                                   ),
                                 ),
                               ])),

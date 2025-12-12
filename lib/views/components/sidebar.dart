@@ -6,6 +6,7 @@ import '../relax.dart';
 import '../socialize.dart';
 import '../this_device.dart';
 import '../navigation.dart';
+import 'theme.dart';
 import '../work.dart';
 import 'badges.dart';
 import 'dart:io';
@@ -91,15 +92,18 @@ class Sidebar extends ConsumerWidget {
         "title": "Downloads",
       },
     };
+
     return Container(
         width: 300.0,
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+            color: fgColor(context),
+            borderRadius: const BorderRadius.only(
               topRight: Radius.circular(45.0),
               bottomRight: Radius.circular(45.0),
             ),
-            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 20.0)]),
+            boxShadow: const [
+              BoxShadow(color: Colors.black12, blurRadius: 20.0)
+            ]),
         child: ClipRRect(
             borderRadius: const BorderRadius.only(
               topRight: Radius.circular(45.0),
@@ -112,7 +116,7 @@ class Sidebar extends ConsumerWidget {
                   itemCount: entries.length,
                   itemBuilder: (context, index) {
                     return Material(
-                        color: Colors.white,
+                        color: fgColor(context),
                         child: ListTile(
                           title: Row(
                             children: [

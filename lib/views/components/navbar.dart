@@ -1,6 +1,7 @@
 import '../../providers/application_provider.dart';
 import '../app_view.dart';
 import '../navigation.dart';
+import 'theme.dart';
 import 'app_icon_loader.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
@@ -32,11 +33,8 @@ class Navbar extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center,
                     child: IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back,
-                        color: Navigator.canPop(context)
-                            ? Colors.black
-                            : Colors.black12,
                       ),
                       onPressed: () {
                         if (Navigator.canPop(context)) {
@@ -52,7 +50,6 @@ class Navbar extends StatelessWidget {
                     child: Text(
                       title,
                       style: const TextStyle(
-                        color: Colors.black,
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
@@ -90,24 +87,24 @@ class SearchBarApp extends ConsumerStatefulWidget {
 class _SearchBarAppState extends ConsumerState<SearchBarApp> {
   @override
   Widget build(BuildContext context) {
+    final Color color = fgColor(context);
     return Container(
         width: 280,
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: color,
             borderRadius: BorderRadius.circular(25),
             boxShadow: const [
               BoxShadow(color: Colors.black12, blurRadius: 20.0)
             ]),
         child: SearchAnchor(
-          viewBackgroundColor: Colors.white,
+          viewBackgroundColor: color,
           builder: (BuildContext context, SearchController controller) {
             return SearchBar(
               controller: controller,
               padding: const WidgetStatePropertyAll<EdgeInsets>(
                 EdgeInsets.symmetric(horizontal: 16.0),
               ),
-              backgroundColor:
-                  const WidgetStatePropertyAll<Color>(Colors.white),
+              backgroundColor: WidgetStatePropertyAll<Color>(color),
               elevation: const WidgetStatePropertyAll<double>(0.0),
               hintText: 'Search apps',
               onTap: () {

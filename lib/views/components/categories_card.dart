@@ -7,6 +7,7 @@ import 'dart:async';
 import 'screenshots.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'theme.dart';
 
 class FeaturedCategoryCard extends StatelessWidget {
   final List<Application> apps;
@@ -20,10 +21,7 @@ class FeaturedCategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CategoryCard(
       apps: apps,
-      colors: <Color>[
-        Colors.yellow.shade700,
-        Colors.orange,
-      ],
+      colors: featuredColorsAlt,
       icon: 'lib/views/assets/star-icon.svg',
       title: 'Featured',
       showFeaturedBadge: false,
@@ -43,10 +41,7 @@ class VideoCategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CategoryCard(
       apps: apps,
-      colors: const <Color>[
-        Colors.green,
-        Colors.blue,
-      ],
+      colors: videoColors,
       icon: 'lib/views/assets/beads-icon.svg',
       title: 'Video',
     );
@@ -65,10 +60,7 @@ class AudioCategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CategoryCard(
       apps: apps,
-      colors: const <Color>[
-        Colors.red,
-        Colors.orange,
-      ],
+      colors: audioColors,
       icon: 'lib/views/assets/layered-circles-icon.svg',
       title: 'Audio',
     );
@@ -87,10 +79,7 @@ class GameCategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CategoryCard(
       apps: apps,
-      colors: const <Color>[
-        Colors.green,
-        Colors.lime,
-      ],
+      colors: gameColorsAlt,
       icon: 'lib/views/assets/dpad-icon.svg',
       title: 'Gaming',
     );
@@ -109,10 +98,7 @@ class GraphicsCategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CategoryCard(
       apps: apps,
-      colors: const <Color>[
-        Colors.purple,
-        Colors.pink,
-      ],
+      colors: graphicsColors,
       icon: 'lib/views/assets/checkered-icon.svg',
       title: 'Graphics',
     );
@@ -131,10 +117,7 @@ class NetworkCategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CategoryCard(
       apps: apps,
-      colors: const <Color>[
-        Colors.pink,
-        Colors.red,
-      ],
+      colors: networkColors,
       icon: 'lib/views/assets/connected-icon.svg',
       title: 'Networking',
     );
@@ -153,10 +136,7 @@ class UtilityCategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CategoryCard(
       apps: apps,
-      colors: const <Color>[
-        Colors.pink,
-        Colors.purple,
-      ],
+      colors: utilityColors,
       icon: 'lib/views/assets/cross-circle-bloat-icon.svg',
       title: 'Utility',
     );
@@ -175,10 +155,7 @@ class EducationCategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CategoryCard(
       apps: apps,
-      colors: const <Color>[
-        Colors.blue,
-        Colors.purple,
-      ],
+      colors: educationColors,
       icon: 'lib/views/assets/circle-quarter-leaf-icon.svg',
       title: 'Education',
     );
@@ -197,10 +174,7 @@ class ProductivityCategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CategoryCard(
       apps: apps,
-      colors: const <Color>[
-        Colors.blue,
-        Colors.yellow,
-      ],
+      colors: productivityColors,
       icon: 'lib/views/assets/shape-circle-halves-icon.svg',
       title: 'Productivity',
     );
@@ -219,10 +193,7 @@ class DevelopementCategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CategoryCard(
       apps: apps,
-      colors: const <Color>[
-        Colors.green,
-        Colors.lime,
-      ],
+      colors: devColors,
       icon: 'lib/views/assets/bug-icon.svg',
       title: 'Developement',
     );

@@ -4,6 +4,7 @@ import 'backend_provider.dart';
 import 'dart:io';
 import 'dart:core';
 import 'dart:convert';
+import 'dart:isolate';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,7 +19,7 @@ final remoteAppListProvider =
   }
 
   if (env['FLATPAK_ENABLED'] != null) {
-    final flapaks = await backend.getAllRemotePackages();
+    final flapaks = await Isolate.run(() => backend.getAllRemotePackages());
     apps.addAll(flapaks);
   }
   return apps;

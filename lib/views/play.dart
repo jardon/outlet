@@ -1,6 +1,6 @@
 import '../providers/application_provider.dart';
 import 'components/app_list.dart';
-import 'components/categories_card.dart';
+import 'components/category_cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -28,7 +28,7 @@ class FeaturedBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/star-icon.svg',
+            'lib/views/assets/featured-icon.svg',
             semanticsLabel: 'Featured Application',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 2,
@@ -120,7 +120,7 @@ class VideoBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/beads-icon.svg',
+            'lib/views/assets/video-icon.svg',
             semanticsLabel: 'Video',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
@@ -156,7 +156,7 @@ class AudioBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/layered-circles-icon.svg',
+            'lib/views/assets/audio-icon.svg',
             semanticsLabel: 'Audio',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
@@ -192,7 +192,7 @@ class DevelopmentBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/bug-icon.svg',
+            'lib/views/assets/development-icon.svg',
             semanticsLabel: 'Audio/Video',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.6,
@@ -230,7 +230,7 @@ class GameBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/dpad-icon.svg',
+            'lib/views/assets/gaming-icon.svg',
             semanticsLabel: 'Audio/Video',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
@@ -266,7 +266,7 @@ class GraphicsBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/checkered-icon.svg',
+            'lib/views/assets/graphics-icon.svg',
             semanticsLabel: 'Audio/Video',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 2,
@@ -302,7 +302,7 @@ class NetworkBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/connected-icon.svg',
+            'lib/views/assets/network-icon.svg',
             semanticsLabel: 'Audio/Video',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
@@ -338,7 +338,7 @@ class UtilityBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/cross-circle-bloat-icon.svg',
+            'lib/views/assets/utility-icon.svg',
             semanticsLabel: 'Utility',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
@@ -374,7 +374,7 @@ class EducationBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/circle-quarter-leaf-icon.svg',
+            'lib/views/assets/education-icon.svg',
             semanticsLabel: 'Education',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
@@ -410,7 +410,7 @@ class OfficeBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/shape-circle-halves-icon.svg',
+            'lib/views/assets/productivity-icon.svg',
             semanticsLabel: 'Productivity',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,

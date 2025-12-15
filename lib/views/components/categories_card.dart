@@ -22,7 +22,7 @@ class FeaturedCategoryCard extends StatelessWidget {
     return CategoryCard(
       apps: apps,
       colors: featuredColorsAlt,
-      icon: 'lib/views/assets/star-icon.svg',
+      icon: 'lib/views/assets/featured-icon.svg',
       title: 'Featured',
       showFeaturedBadge: false,
     );
@@ -42,7 +42,7 @@ class VideoCategoryCard extends StatelessWidget {
     return CategoryCard(
       apps: apps,
       colors: videoColors,
-      icon: 'lib/views/assets/beads-icon.svg',
+      icon: 'lib/views/assets/video-icon.svg',
       title: 'Video',
     );
   }
@@ -61,7 +61,7 @@ class AudioCategoryCard extends StatelessWidget {
     return CategoryCard(
       apps: apps,
       colors: audioColors,
-      icon: 'lib/views/assets/layered-circles-icon.svg',
+      icon: 'lib/views/assets/audio-icon.svg',
       title: 'Audio',
     );
   }
@@ -80,7 +80,7 @@ class GameCategoryCard extends StatelessWidget {
     return CategoryCard(
       apps: apps,
       colors: gameColorsAlt,
-      icon: 'lib/views/assets/dpad-icon.svg',
+      icon: 'lib/views/assets/gaming-icon.svg',
       title: 'Gaming',
     );
   }
@@ -99,7 +99,7 @@ class GraphicsCategoryCard extends StatelessWidget {
     return CategoryCard(
       apps: apps,
       colors: graphicsColors,
-      icon: 'lib/views/assets/checkered-icon.svg',
+      icon: 'lib/views/assets/graphics-icon.svg',
       title: 'Graphics',
     );
   }
@@ -118,7 +118,7 @@ class NetworkCategoryCard extends StatelessWidget {
     return CategoryCard(
       apps: apps,
       colors: networkColors,
-      icon: 'lib/views/assets/connected-icon.svg',
+      icon: 'lib/views/assets/network-icon.svg',
       title: 'Networking',
     );
   }
@@ -137,7 +137,7 @@ class UtilityCategoryCard extends StatelessWidget {
     return CategoryCard(
       apps: apps,
       colors: utilityColors,
-      icon: 'lib/views/assets/cross-circle-bloat-icon.svg',
+      icon: 'lib/views/assets/utility-icon.svg',
       title: 'Utility',
     );
   }
@@ -156,7 +156,7 @@ class EducationCategoryCard extends StatelessWidget {
     return CategoryCard(
       apps: apps,
       colors: educationColors,
-      icon: 'lib/views/assets/circle-quarter-leaf-icon.svg',
+      icon: 'lib/views/assets/education-icon.svg',
       title: 'Education',
     );
   }
@@ -175,7 +175,7 @@ class ProductivityCategoryCard extends StatelessWidget {
     return CategoryCard(
       apps: apps,
       colors: productivityColors,
-      icon: 'lib/views/assets/shape-circle-halves-icon.svg',
+      icon: 'lib/views/assets/productivity-icon.svg',
       title: 'Productivity',
     );
   }
@@ -194,7 +194,7 @@ class DevelopementCategoryCard extends StatelessWidget {
     return CategoryCard(
       apps: apps,
       colors: devColors,
-      icon: 'lib/views/assets/bug-icon.svg',
+      icon: 'lib/views/assets/development-icon.svg',
       title: 'Developement',
     );
   }

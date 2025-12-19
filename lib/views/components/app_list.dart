@@ -2,7 +2,9 @@ import '../../../core/application.dart';
 import '../app_view.dart';
 import '../navigation.dart';
 import 'app_card.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'theme.dart';
 
 class AppList extends StatelessWidget {
   const AppList({
@@ -67,4 +69,169 @@ class AppList extends StatelessWidget {
       },
     );
   }
+}
+
+class FilteredAppList extends StatefulWidget {
+  final List<Application> apps;
+  final CategoryLabel? initialCategory;
+
+  const FilteredAppList({
+    super.key,
+    required this.apps,
+    this.initialCategory,
+  });
+
+  @override
+  State<FilteredAppList> createState() => _FilteredAppListState();
+}
+
+class _FilteredAppListState extends State<FilteredAppList> {
+  final TextEditingController categoryController = TextEditingController();
+  final TextEditingController verifiedController = TextEditingController();
+  final TextEditingController featuredController = TextEditingController();
+
+  CategoryLabel? selectedCategory;
+  bool? isVerifiedFilter;
+  bool? isFeaturedFilter;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialCategory != null) {
+      selectedCategory = widget.initialCategory;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final List<Application> filteredApps = widget.apps.where((app) {
+      final bool matchesCategory = selectedCategory == null ||
+          app.categories.contains(selectedCategory!.category);
+
+      final bool matchesVerified =
+          isVerifiedFilter == null || app.verified == isVerifiedFilter;
+
+      final bool matchesFeatured =
+          isFeaturedFilter == null || app.featured == isFeaturedFilter;
+
+      return matchesCategory && matchesVerified && matchesFeatured;
+    }).toList();
+
+    final Color color = fgColor(context);
+
+    final inputTheme = InputDecorationTheme(
+      filled: true,
+      fillColor: Colors.transparent,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+        borderSide: BorderSide.none,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+        borderSide: BorderSide.none,
+      ),
+    );
+
+    final inputBoxDec = BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 20.0)]);
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              const SizedBox(
+                width: 10,
+              ),
+              Container(
+                  width: 160,
+                  decoration: inputBoxDec,
+                  child: DropdownMenu<CategoryLabel>(
+                    controller: categoryController,
+                    label: const Text('Category'),
+                    inputDecorationTheme: inputTheme,
+                    onSelected: (CategoryLabel? category) {
+                      setState(() => selectedCategory = category);
+                    },
+                    dropdownMenuEntries: CategoryLabel.entries,
+                  )),
+              const SizedBox(
+                width: 10,
+              ),
+              Container(
+                  width: 160,
+                  decoration: inputBoxDec,
+                  child: DropdownMenu<bool?>(
+                    controller: verifiedController,
+                    label: const Text('Verified'),
+                    inputDecorationTheme: inputTheme,
+                    onSelected: (bool? value) {
+                      setState(() => isVerifiedFilter = value);
+                    },
+                    dropdownMenuEntries: const [
+                      DropdownMenuEntry(value: null, label: 'All Apps'),
+                      DropdownMenuEntry(value: true, label: 'Verified Only'),
+                    ],
+                  )),
+              const SizedBox(
+                width: 10,
+              ),
+              Container(
+                  width: 160,
+                  decoration: inputBoxDec,
+                  child: DropdownMenu<bool?>(
+                    controller: featuredController,
+                    label: const Text('Featured'),
+                    inputDecorationTheme: inputTheme,
+                    onSelected: (bool? value) {
+                      setState(() => isFeaturedFilter = value);
+                    },
+                    dropdownMenuEntries: const [
+                      DropdownMenuEntry(value: null, label: 'All Apps'),
+                      DropdownMenuEntry(value: true, label: 'Featured Only'),
+                    ],
+                  )),
+            ],
+          ),
+        ),
+        Expanded(
+          child: AppList(apps: filteredApps),
+        ),
+      ],
+    );
+  }
+}
+
+typedef CategoryEntry = DropdownMenuEntry<CategoryLabel>;
+
+enum CategoryLabel {
+  audio('Audio', 'audio'),
+  video('Video', 'video'),
+  game('Gaming', 'game'),
+  development('Development', 'development'),
+  network('Networking', 'network'),
+  utility('Utility', 'utility'),
+  education('Education', 'education'),
+  productivity('Productivity', 'productivity');
+
+  const CategoryLabel(this.label, this.category);
+  final String label;
+  final String category;
+
+  static final List<CategoryEntry> entries =
+      UnmodifiableListView<CategoryEntry>(
+    values.map<CategoryEntry>(
+      (CategoryLabel category) => CategoryEntry(
+        value: category,
+        label: category.label,
+      ),
+    ),
+  );
 }

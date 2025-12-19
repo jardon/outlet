@@ -1,3 +1,4 @@
+import '../../core/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'theme.dart';
@@ -120,7 +121,7 @@ class VideoBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/video-icon.svg',
+            Category.video.icon,
             semanticsLabel: 'Video',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
@@ -156,7 +157,7 @@ class AudioBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/audio-icon.svg',
+            Category.audio.icon,
             semanticsLabel: 'Audio',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
@@ -192,7 +193,7 @@ class DevelopmentBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/development-icon.svg',
+            Category.development.icon,
             semanticsLabel: 'Audio/Video',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.6,
@@ -230,7 +231,7 @@ class GameBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/gaming-icon.svg',
+            Category.game.icon,
             semanticsLabel: 'Audio/Video',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
@@ -302,7 +303,7 @@ class NetworkBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/network-icon.svg',
+            Category.network.icon,
             semanticsLabel: 'Audio/Video',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
@@ -338,7 +339,7 @@ class UtilityBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/utility-icon.svg',
+            Category.utility.icon,
             semanticsLabel: 'Utility',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
@@ -374,7 +375,7 @@ class EducationBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/education-icon.svg',
+            Category.education.icon,
             semanticsLabel: 'Education',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
@@ -410,7 +411,7 @@ class OfficeBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/productivity-icon.svg',
+            Category.productivity.icon,
             semanticsLabel: 'Productivity',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,

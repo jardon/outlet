@@ -155,6 +155,7 @@ class _FilteredAppListState extends State<FilteredAppList> {
                   decoration: inputBoxDec,
                   child: DropdownMenu<CategoryLabel>(
                     controller: categoryController,
+                    initialSelection: selectedCategory,
                     label: const Text('Category'),
                     inputDecorationTheme: inputTheme,
                     onSelected: (CategoryLabel? category) {

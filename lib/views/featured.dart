@@ -1,6 +1,7 @@
 import '../providers/application_provider.dart';
 import 'components/app_list.dart';
 import 'components/category_cards.dart';
+import 'components/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,8 +21,12 @@ class Featured extends ConsumerWidget {
       ..shuffle());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
-          child: FeaturedCategoryCard(
+          child: CategoryCard(
         apps: allApps.take(5).toList(),
+        colors: featuredColorsAlt,
+        icon: 'lib/views/assets/featured-icon.svg',
+        title: 'Featured',
+        showFeaturedBadge: false,
       )),
       SliverToBoxAdapter(
           child: SizedBox(

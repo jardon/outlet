@@ -1,6 +1,8 @@
+import '../core/category.dart';
 import '../providers/application_provider.dart';
 import 'components/app_list.dart';
 import 'components/category_cards.dart';
+import 'components/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,8 +16,11 @@ class Socialize extends ConsumerWidget {
     final gameApps = (ref.watch(appInCategoryList("game"))..shuffle());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
-          child: GameCategoryCard(
+          child: CategoryCard(
         apps: gameApps.where((app) => app.featured).toList().take(5).toList(),
+        colors: gameColorsAlt,
+        icon: Category.game.icon,
+        title: Category.game.label,
       )),
       SliverToBoxAdapter(
           child: SizedBox(

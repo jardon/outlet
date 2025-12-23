@@ -196,8 +196,8 @@ class DevelopmentBadge extends StatelessWidget {
             Category.development.icon,
             semanticsLabel: 'Development',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-            height: size / 1.6,
-            width: size / 1.6,
+            height: size / 1.3,
+            width: size / 1.3,
           ),
         ));
   }

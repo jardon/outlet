@@ -194,7 +194,7 @@ class DevelopmentBadge extends StatelessWidget {
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
             Category.development.icon,
-            semanticsLabel: 'Audio/Video',
+            semanticsLabel: 'Development',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.6,
             width: size / 1.6,
@@ -232,7 +232,7 @@ class GameBadge extends StatelessWidget {
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
             Category.game.icon,
-            semanticsLabel: 'Audio/Video',
+            semanticsLabel: 'Games',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
             width: size / 1.333,
@@ -268,7 +268,7 @@ class GraphicsBadge extends StatelessWidget {
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
             'lib/views/assets/graphics-icon.svg',
-            semanticsLabel: 'Audio/Video',
+            semanticsLabel: 'Graphics',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 2,
             width: size / 2,

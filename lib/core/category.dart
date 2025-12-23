@@ -9,7 +9,7 @@ enum Category {
       'Development', 'development', 'lib/views/assets/development-icon.svg'),
   network('Networking', 'network', 'lib/views/assets/network-icon.svg'),
   utility('Utility', 'utility', 'lib/views/assets/utility-icon.svg'),
-  education('Education', 'education', 'lib/views/assets/utility-icon.svg'),
+  education('Education', 'education', 'lib/views/assets/education-icon.svg'),
   productivity(
       'Productivity', 'productivity', 'lib/views/assets/productivity-icon.svg');
 

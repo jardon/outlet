@@ -1,6 +1,8 @@
+import '../core/category.dart';
 import '../providers/application_provider.dart';
 import 'components/app_list.dart';
 import 'components/category_cards.dart';
+import 'components/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,8 +18,11 @@ class Play extends ConsumerWidget {
     final gameApps = (ref.watch(appInCategoryList("game"))..shuffle());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
-          child: VideoCategoryCard(
+          child: CategoryCard(
         apps: videoApps.where((app) => app.featured).toList().take(5).toList(),
+        colors: videoColors,
+        icon: Category.video.icon,
+        title: Category.video.label,
       )),
       SliverToBoxAdapter(
           child: SizedBox(
@@ -29,8 +34,11 @@ class Play extends ConsumerWidget {
       ))),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
-          child: AudioCategoryCard(
+          child: CategoryCard(
         apps: audioApps.where((app) => app.featured).toList().take(5).toList(),
+        colors: audioColors,
+        icon: Category.audio.icon,
+        title: Category.audio.label,
       )),
       SliverToBoxAdapter(
           child: SizedBox(
@@ -42,8 +50,11 @@ class Play extends ConsumerWidget {
       ))),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
-          child: GameCategoryCard(
+          child: CategoryCard(
         apps: gameApps.where((app) => app.featured).toList().take(5).toList(),
+        colors: gameColorsAlt,
+        icon: Category.game.icon,
+        title: Category.game.label,
       )),
       SliverToBoxAdapter(
           child: SizedBox(

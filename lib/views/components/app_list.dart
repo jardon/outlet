@@ -220,7 +220,7 @@ enum CategoryLabel {
   network('Networking', 'network'),
   utility('Utility', 'utility'),
   education('Education', 'education'),
-  productivity('Productivity', 'productivity');
+  office('Office', 'office');
 
   const CategoryLabel(this.label, this.category);
   final String label;

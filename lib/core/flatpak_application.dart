@@ -80,7 +80,7 @@ class FlatpakApplication extends Application {
           categoryBadges.add('education');
           break;
         case 'Office':
-          categoryBadges.add('productivity');
+          categoryBadges.add('office');
           break;
       }
     }

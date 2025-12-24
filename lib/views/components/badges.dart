@@ -302,7 +302,7 @@ class NetworkBadge extends StatelessWidget {
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
             Category.network.icon,
-            semanticsLabel: 'Audio/Video',
+            semanticsLabel: 'Network',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
             width: size / 1.333,

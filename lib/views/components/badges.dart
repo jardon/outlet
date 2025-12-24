@@ -203,8 +203,6 @@ class DevelopmentBadge extends StatelessWidget {
   }
 }
 
-// Education	Educational software
-
 class GameBadge extends StatelessWidget {
   const GameBadge({
     super.key,
@@ -421,11 +419,113 @@ class OfficeBadge extends StatelessWidget {
   }
 }
 
-// Office	An office type application
-// Science	Scientific software
-// Settings	Settings applications	Entries may appear in a separate menu or as part of a "Control Center"
-// System	System application, "System Tools" such as say a log viewer or network monitor
-// Utility	Small utility application, "Accessories"
+class ScienceBadge extends StatelessWidget {
+  const ScienceBadge({
+    super.key,
+    required this.size,
+  });
+
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: size,
+        width: size,
+        margin: const EdgeInsets.symmetric(horizontal: 2.5),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: const Alignment(0.8, 1),
+            colors: scienceColors,
+            tileMode: TileMode.mirror,
+          ),
+          borderRadius: BorderRadius.circular(45.0),
+        ),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: SvgPicture.asset(
+            Category.science.icon,
+            semanticsLabel: 'Science',
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            height: size / 1.333,
+            width: size / 1.333,
+          ),
+        ));
+  }
+}
+
+class SettingsBadge extends StatelessWidget {
+  const SettingsBadge({
+    super.key,
+    required this.size,
+  });
+
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: size,
+        width: size,
+        margin: const EdgeInsets.symmetric(horizontal: 2.5),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: const Alignment(0.8, 1),
+            colors: settingsColors,
+            tileMode: TileMode.mirror,
+          ),
+          borderRadius: BorderRadius.circular(45.0),
+        ),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: SvgPicture.asset(
+            Category.settings.icon,
+            semanticsLabel: 'Settings',
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            height: size / 1.333,
+            width: size / 1.333,
+          ),
+        ));
+  }
+}
+
+class SystemBadge extends StatelessWidget {
+  const SystemBadge({
+    super.key,
+    required this.size,
+  });
+
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: size,
+        width: size,
+        margin: const EdgeInsets.symmetric(horizontal: 2.5),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: const Alignment(0.8, 1),
+            colors: systemColors,
+            tileMode: TileMode.mirror,
+          ),
+          borderRadius: BorderRadius.circular(45.0),
+        ),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: SvgPicture.asset(
+            Category.system.icon,
+            semanticsLabel: 'System',
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            height: size / 1.333,
+            width: size / 1.333,
+          ),
+        ));
+  }
+}
 
 class FlatpakBadge extends StatelessWidget {
   const FlatpakBadge({
@@ -513,6 +613,15 @@ class CategoryList extends StatelessWidget {
           break;
         case 'flatpak':
           badges.add(FlatpakBadge(size: size));
+          break;
+        case 'science':
+          badges.add(ScienceBadge(size: size));
+          break;
+        case 'settings':
+          badges.add(SettingsBadge(size: size));
+          break;
+        case 'system':
+          badges.add(SystemBadge(size: size));
           break;
       }
     }

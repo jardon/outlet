@@ -76,3 +76,18 @@ final List<Color> officeColors = <Color>[
   Colors.blue,
   Colors.yellow,
 ];
+
+final List<Color> scienceColors = <Color>[
+  Colors.lime,
+  Colors.blue,
+];
+
+final List<Color> settingsColors = <Color>[
+  Colors.pink,
+  Colors.blue,
+];
+
+final List<Color> systemColors = <Color>[
+  Colors.yellow,
+  Colors.orange,
+];

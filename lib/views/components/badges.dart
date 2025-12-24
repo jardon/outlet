@@ -265,7 +265,7 @@ class GraphicsBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            'lib/views/assets/graphics-icon.svg',
+            Category.graphics.icon,
             semanticsLabel: 'Graphics',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 2,

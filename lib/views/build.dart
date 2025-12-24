@@ -1,3 +1,4 @@
+import '../core/category.dart';
 import '../providers/application_provider.dart';
 import 'components/app_list.dart';
 import 'components/category_card.dart';
@@ -18,8 +19,8 @@ class Build extends ConsumerWidget {
           child: CategoryCard(
         apps: gameApps.where((app) => app.featured).toList().take(5).toList(),
         colors: graphicsColors,
-        icon: 'lib/views/assets/graphics-icon.svg',
-        title: 'Graphics',
+        icon: Category.graphics.icon,
+        title: Category.graphics.label,
       )),
       SliverToBoxAdapter(
           child: SizedBox(

@@ -50,7 +50,7 @@ class FlatpakApplication extends Application {
         case 'Network':
           categoryBadges.add('network');
           break;
-        case 'Developement':
+        case 'Development':
           categoryBadges.add('development');
           break;
         case 'Game':

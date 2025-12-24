@@ -18,8 +18,7 @@ class Work extends ConsumerWidget {
     final utilityApps = (ref.watch(appInCategoryList("utility"))..shuffle());
     final educationApps =
         (ref.watch(appInCategoryList("education"))..shuffle());
-    final officeApps =
-        (ref.watch(appInCategoryList("productivity"))..shuffle());
+    final officeApps = (ref.watch(appInCategoryList("office"))..shuffle());
     final devApps = (ref.watch(appInCategoryList("development"))..shuffle());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
@@ -95,9 +94,9 @@ class Work extends ConsumerWidget {
       SliverToBoxAdapter(
           child: CategoryCard(
         apps: officeApps.where((app) => app.featured).toList().take(5).toList(),
-        colors: productivityColors,
-        icon: Category.productivity.icon,
-        title: Category.productivity.label,
+        colors: officeColors,
+        icon: Category.office.icon,
+        title: Category.office.label,
       )),
       SliverToBoxAdapter(
           child: SizedBox(

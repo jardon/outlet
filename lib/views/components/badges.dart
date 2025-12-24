@@ -403,7 +403,7 @@ class OfficeBadge extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: const Alignment(0.8, 1),
-            colors: productivityColors,
+            colors: officeColors,
             tileMode: TileMode.mirror,
           ),
           borderRadius: BorderRadius.circular(45.0),
@@ -411,8 +411,8 @@ class OfficeBadge extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: SvgPicture.asset(
-            Category.productivity.icon,
-            semanticsLabel: 'Productivity',
+            Category.office.icon,
+            semanticsLabel: 'Office',
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             height: size / 1.333,
             width: size / 1.333,
@@ -505,7 +505,7 @@ class CategoryList extends StatelessWidget {
         case 'education':
           badges.add(EducationBadge(size: size));
           break;
-        case 'productivity':
+        case 'office':
           badges.add(OfficeBadge(size: size));
           break;
         case 'featured':

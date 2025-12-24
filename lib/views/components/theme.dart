@@ -72,7 +72,7 @@ final List<Color> educationColors = <Color>[
   Colors.purple,
 ];
 
-final List<Color> productivityColors = <Color>[
+final List<Color> officeColors = <Color>[
   Colors.blue,
   Colors.yellow,
 ];

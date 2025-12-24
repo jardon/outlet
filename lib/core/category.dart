@@ -10,8 +10,7 @@ enum Category {
   network('Networking', 'network', 'lib/views/assets/network-icon.svg'),
   utility('Utility', 'utility', 'lib/views/assets/utility-icon.svg'),
   education('Education', 'education', 'lib/views/assets/education-icon.svg'),
-  productivity(
-      'Productivity', 'productivity', 'lib/views/assets/productivity-icon.svg');
+  office('Office', 'office', 'lib/views/assets/office-icon.svg');
 
   const Category(this.label, this.category, this.icon);
 
@@ -35,8 +34,8 @@ enum Category {
         return utilityColors;
       case Category.education:
         return educationColors;
-      case Category.productivity:
-        return productivityColors;
+      case Category.office:
+        return officeColors;
     }
   }
 }

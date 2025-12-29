@@ -6,27 +6,29 @@ import 'components/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Relax extends ConsumerWidget {
-  const Relax({
+class Learn extends ConsumerWidget {
+  const Learn({
     super.key,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final audioApps = (ref.watch(appInCategoryList("audio"))..shuffle());
-    final videoApps = (ref.watch(appInCategoryList("video"))..shuffle());
+    final scienceApps = (ref.watch(appInCategoryList("science"))..shuffle());
+    final educationApps =
+        (ref.watch(appInCategoryList("education"))..shuffle());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: CategoryCard(
-        apps: videoApps.where((app) => app.featured).toList().take(5).toList(),
-        colors: videoColors,
-        icon: Category.video.icon,
-        title: Category.video.label,
+        apps:
+            scienceApps.where((app) => app.featured).toList().take(5).toList(),
+        colors: scienceColors,
+        icon: Category.science.icon,
+        title: Category.science.label,
       )),
       SliverToBoxAdapter(
           child: SizedBox(
               child: AppList(
-        apps: videoApps,
+        apps: scienceApps,
         scrollable: false,
         rows: 2,
         shrinkWrap: true,
@@ -34,15 +36,19 @@ class Relax extends ConsumerWidget {
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
-        apps: audioApps.where((app) => app.featured).toList().take(5).toList(),
-        colors: audioColors,
-        icon: Category.audio.icon,
-        title: Category.audio.label,
+        apps: educationApps
+            .where((app) => app.featured)
+            .toList()
+            .take(5)
+            .toList(),
+        colors: educationColors,
+        icon: Category.education.icon,
+        title: Category.education.label,
       )),
       SliverToBoxAdapter(
           child: SizedBox(
               child: AppList(
-        apps: audioApps,
+        apps: educationApps,
         scrollable: false,
         rows: 2,
         shrinkWrap: true,

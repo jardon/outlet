@@ -1,13 +1,12 @@
 import '../build.dart';
 import '../downloads.dart';
 import '../featured.dart';
+import '../learn.dart';
+import '../manage.dart';
 import '../play.dart';
-import '../relax.dart';
-import '../socialize.dart';
 import '../this_device.dart';
 import '../navigation.dart';
 import 'theme.dart';
-import '../work.dart';
 import 'badges.dart';
 import 'dart:io';
 import 'download_queue.dart';
@@ -36,20 +35,18 @@ class Sidebar extends ConsumerWidget {
     'device',
     'outlet',
     'play',
-    'work',
     'build',
-    'socialize',
-    'relax',
+    'learn',
+    'manage',
   ];
 
   final Map<String, List<String>> categories = {
     'device': appSupport,
     'outlet': const ['featured'],
     'play': const ['audio', 'video', 'game'],
-    'work': const ['development', 'network', 'graphics'],
-    'build': const ['development', 'graphics'],
-    'socialize': const ['game'],
-    'relax': const ['audio', 'video'],
+    'build': const ['development', 'graphics', 'network', 'office'],
+    'learn': const ['science', 'education'],
+    'manage': const ['utility', 'settings', 'system'],
   };
 
   @override
@@ -63,21 +60,17 @@ class Sidebar extends ConsumerWidget {
         "widget": const Play(),
         "title": "Play",
       },
-      "work": {
-        "widget": const Work(),
-        "title": "Work",
-      },
       "build": {
         "widget": const Build(),
         "title": "Build",
       },
-      "socialize": {
-        "widget": const Socialize(),
-        "title": "Socialize",
+      "learn": {
+        "widget": const Learn(),
+        "title": "Learn",
       },
-      "relax": {
-        "widget": const Relax(),
-        "title": "Relax",
+      "manage": {
+        "widget": const Manage(),
+        "title": "Manage",
       },
       "device": {
         "widget": const ThisDevice(),

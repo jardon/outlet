@@ -6,28 +6,29 @@ import 'components/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Play extends ConsumerWidget {
-  const Play({
+class Manage extends ConsumerWidget {
+  const Manage({
     super.key,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final audioApps = (ref.watch(appInCategoryList("audio"))..shuffle());
-    final videoApps = (ref.watch(appInCategoryList("video"))..shuffle());
-    final gameApps = (ref.watch(appInCategoryList("game"))..shuffle());
+    final systemApps = (ref.watch(appInCategoryList("system"))..shuffle());
+    final utilityApps = (ref.watch(appInCategoryList("utility"))..shuffle());
+    final settingsApps = (ref.watch(appInCategoryList("settings"))..shuffle());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: CategoryCard(
-        apps: audioApps.where((app) => app.featured).toList().take(5).toList(),
-        colors: audioColors,
-        icon: Category.audio.icon,
-        title: Category.audio.label,
+        apps:
+            utilityApps.where((app) => app.featured).toList().take(5).toList(),
+        colors: utilityColors,
+        icon: Category.utility.icon,
+        title: Category.utility.label,
       )),
       SliverToBoxAdapter(
           child: SizedBox(
               child: AppList(
-        apps: audioApps,
+        apps: utilityApps,
         scrollable: false,
         rows: 2,
         shrinkWrap: true,
@@ -35,15 +36,16 @@ class Play extends ConsumerWidget {
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
-        apps: videoApps.where((app) => app.featured).toList().take(5).toList(),
-        colors: videoColors,
-        icon: Category.video.icon,
-        title: Category.video.label,
+        apps:
+            settingsApps.where((app) => app.featured).toList().take(5).toList(),
+        colors: settingsColors,
+        icon: Category.settings.icon,
+        title: Category.settings.label,
       )),
       SliverToBoxAdapter(
           child: SizedBox(
               child: AppList(
-        apps: videoApps,
+        apps: settingsApps,
         scrollable: false,
         rows: 2,
         shrinkWrap: true,
@@ -51,15 +53,15 @@ class Play extends ConsumerWidget {
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
-        apps: gameApps.where((app) => app.featured).toList().take(5).toList(),
-        colors: gameColorsAlt,
-        icon: Category.game.icon,
-        title: Category.game.label,
+        apps: systemApps.where((app) => app.featured).toList().take(5).toList(),
+        colors: systemColors,
+        icon: Category.system.icon,
+        title: Category.system.label,
       )),
       SliverToBoxAdapter(
           child: SizedBox(
               child: AppList(
-        apps: gameApps,
+        apps: systemApps,
         scrollable: false,
         rows: 2,
         shrinkWrap: true,

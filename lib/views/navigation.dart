@@ -34,7 +34,7 @@ class Navigation extends StatelessWidget {
               ? Row(
                   children: [
                     SizedBox(
-                      width: 250,
+                      width: 265,
                       child: Container(
                         margin: const EdgeInsets.only(bottom: 20.0),
                         child: Column(

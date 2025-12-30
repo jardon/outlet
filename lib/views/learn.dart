@@ -14,9 +14,10 @@ class Learn extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final scienceApps = (ref.watch(appInCategoryList("science"))..shuffle());
+    final scienceApps =
+        (ref.watch(appInCategoryList(Category.science.value))..shuffle());
     final educationApps =
-        (ref.watch(appInCategoryList("education"))..shuffle());
+        (ref.watch(appInCategoryList(Category.education.value))..shuffle());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -34,9 +35,9 @@ class Learn extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
-      const SliverToBoxAdapter(
-          child:
-              CategoryLink(category: CategoryLabel.science, title: 'Science')),
+      SliverToBoxAdapter(
+          child: CategoryLink(
+              category: Category.science, title: Category.science.label)),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -57,9 +58,9 @@ class Learn extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
-      const SliverToBoxAdapter(
+      SliverToBoxAdapter(
           child: CategoryLink(
-              category: CategoryLabel.education, title: 'Education')),
+              category: Category.education, title: Category.education.label)),
     ]);
   }
 }

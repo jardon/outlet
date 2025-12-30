@@ -1,3 +1,4 @@
+import '../../core/category.dart';
 import '../build.dart';
 import '../downloads.dart';
 import '../featured.dart';
@@ -43,10 +44,19 @@ class Sidebar extends ConsumerWidget {
   final Map<String, List<String>> categories = {
     'device': appSupport,
     'outlet': const ['featured'],
-    'play': const ['audio', 'video', 'game'],
-    'build': const ['development', 'graphics', 'network', 'office'],
-    'learn': const ['science', 'education'],
-    'manage': const ['utility', 'settings', 'system'],
+    'play': [Category.audio.value, Category.video.value, Category.game.value],
+    'build': [
+      Category.development.value,
+      Category.graphics.value,
+      Category.network.value,
+      Category.office.value
+    ],
+    'learn': [Category.science.value, Category.education.value],
+    'manage': [
+      Category.utility.value,
+      Category.settings.value,
+      Category.system.value
+    ],
   };
 
   @override

@@ -14,9 +14,12 @@ class Play extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final audioApps = (ref.watch(appInCategoryList("audio"))..shuffle());
-    final videoApps = (ref.watch(appInCategoryList("video"))..shuffle());
-    final gameApps = (ref.watch(appInCategoryList("game"))..shuffle());
+    final audioApps =
+        (ref.watch(appInCategoryList(Category.audio.value))..shuffle());
+    final videoApps =
+        (ref.watch(appInCategoryList(Category.video.value))..shuffle());
+    final gameApps =
+        (ref.watch(appInCategoryList(Category.game.value))..shuffle());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -33,8 +36,9 @@ class Play extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
-      const SliverToBoxAdapter(
-          child: CategoryLink(category: CategoryLabel.audio, title: 'Audio')),
+      SliverToBoxAdapter(
+          child: CategoryLink(
+              category: Category.audio, title: Category.audio.label)),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -51,8 +55,9 @@ class Play extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
-      const SliverToBoxAdapter(
-          child: CategoryLink(category: CategoryLabel.video, title: 'Video')),
+      SliverToBoxAdapter(
+          child: CategoryLink(
+              category: Category.video, title: Category.video.label)),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -69,8 +74,9 @@ class Play extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
-      const SliverToBoxAdapter(
-          child: CategoryLink(category: CategoryLabel.game, title: 'Gaming')),
+      SliverToBoxAdapter(
+          child: CategoryLink(
+              category: Category.game, title: Category.game.label)),
     ]);
   }
 }

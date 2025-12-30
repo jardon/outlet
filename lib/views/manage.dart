@@ -14,9 +14,12 @@ class Manage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final systemApps = (ref.watch(appInCategoryList("system"))..shuffle());
-    final utilityApps = (ref.watch(appInCategoryList("utility"))..shuffle());
-    final settingsApps = (ref.watch(appInCategoryList("settings"))..shuffle());
+    final systemApps =
+        (ref.watch(appInCategoryList(Category.system.value))..shuffle());
+    final utilityApps =
+        (ref.watch(appInCategoryList(Category.utility.value))..shuffle());
+    final settingsApps =
+        (ref.watch(appInCategoryList(Category.settings.value))..shuffle());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -34,9 +37,9 @@ class Manage extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
-      const SliverToBoxAdapter(
+      SliverToBoxAdapter(
           child: CategoryLink(
-              category: CategoryLabel.utility, title: 'Utilities')),
+              category: Category.utility, title: Category.utility.label)),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -54,9 +57,9 @@ class Manage extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
-      const SliverToBoxAdapter(
+      SliverToBoxAdapter(
           child: CategoryLink(
-              category: CategoryLabel.settings, title: 'Settings')),
+              category: Category.settings, title: Category.settings.label)),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -73,8 +76,9 @@ class Manage extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
-      const SliverToBoxAdapter(
-          child: CategoryLink(category: CategoryLabel.system, title: 'System')),
+      SliverToBoxAdapter(
+          child: CategoryLink(
+              category: Category.system, title: Category.system.label)),
     ]);
   }
 }

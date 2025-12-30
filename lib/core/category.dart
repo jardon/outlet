@@ -18,10 +18,10 @@ enum Category {
   system('System', 'system', 'lib/views/assets/system-icon.svg'),
   office('Office', 'office', 'lib/views/assets/office-icon.svg');
 
-  const Category(this.label, this.category, this.icon);
+  const Category(this.label, this.value, this.icon);
 
   final String label;
-  final String category;
+  final String value;
   final String icon;
 
   List<Color> get colors {

@@ -2,6 +2,7 @@ import '../core/category.dart';
 import '../providers/application_provider.dart';
 import 'components/app_list.dart';
 import 'components/category_card.dart';
+import 'components/category_link.dart';
 import 'components/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,6 +39,9 @@ class Build extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
+      const SliverToBoxAdapter(
+          child: CategoryLink(
+              category: CategoryLabel.development, title: 'Development')),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -55,6 +59,9 @@ class Build extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
+      const SliverToBoxAdapter(
+          child: CategoryLink(
+              category: CategoryLabel.graphics, title: 'Graphics')),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -72,6 +79,9 @@ class Build extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
+      const SliverToBoxAdapter(
+          child: CategoryLink(
+              category: CategoryLabel.network, title: 'Networking')),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -88,6 +98,8 @@ class Build extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
+      const SliverToBoxAdapter(
+          child: CategoryLink(category: CategoryLabel.office, title: 'Office')),
     ]);
   }
 }

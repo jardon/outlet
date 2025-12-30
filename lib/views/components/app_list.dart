@@ -1,9 +1,11 @@
 import '../../../core/application.dart';
+import '../../../providers/application_provider.dart';
 import '../app_view.dart';
 import '../navigation.dart';
 import 'app_card.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'theme.dart';
 
 class AppList extends StatelessWidget {
@@ -71,21 +73,19 @@ class AppList extends StatelessWidget {
   }
 }
 
-class FilteredAppList extends StatefulWidget {
-  final List<Application> apps;
+class FilteredAppList extends ConsumerStatefulWidget {
   final CategoryLabel? initialCategory;
 
   const FilteredAppList({
     super.key,
-    required this.apps,
     this.initialCategory,
   });
 
   @override
-  State<FilteredAppList> createState() => _FilteredAppListState();
+  ConsumerState<FilteredAppList> createState() => _FilteredAppListState();
 }
 
-class _FilteredAppListState extends State<FilteredAppList> {
+class _FilteredAppListState extends ConsumerState<FilteredAppList> {
   final TextEditingController categoryController = TextEditingController();
   final TextEditingController verifiedController = TextEditingController();
   final TextEditingController featuredController = TextEditingController();
@@ -104,7 +104,8 @@ class _FilteredAppListState extends State<FilteredAppList> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Application> filteredApps = widget.apps.where((app) {
+    final apps = ref.watch(appListProvider).values.toList();
+    final List<Application> filteredApps = apps.where((app) {
       final bool matchesCategory = selectedCategory == null ||
           app.categories.contains(selectedCategory!.category);
 

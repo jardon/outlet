@@ -2,6 +2,7 @@ import '../core/category.dart';
 import '../providers/application_provider.dart';
 import 'components/app_list.dart';
 import 'components/category_card.dart';
+import 'components/category_link.dart';
 import 'components/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,6 +33,8 @@ class Play extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
+      const SliverToBoxAdapter(
+          child: CategoryLink(category: CategoryLabel.audio, title: 'Audio')),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -48,6 +51,8 @@ class Play extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
+      const SliverToBoxAdapter(
+          child: CategoryLink(category: CategoryLabel.video, title: 'Video')),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -64,6 +69,8 @@ class Play extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
+      const SliverToBoxAdapter(
+          child: CategoryLink(category: CategoryLabel.game, title: 'Gaming')),
     ]);
   }
 }

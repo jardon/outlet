@@ -2,6 +2,7 @@ import '../core/category.dart';
 import '../providers/application_provider.dart';
 import 'components/app_list.dart';
 import 'components/category_card.dart';
+import 'components/category_link.dart';
 import 'components/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,6 +34,9 @@ class Manage extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
+      const SliverToBoxAdapter(
+          child: CategoryLink(
+              category: CategoryLabel.utility, title: 'Utilities')),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -50,6 +54,9 @@ class Manage extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
+      const SliverToBoxAdapter(
+          child: CategoryLink(
+              category: CategoryLabel.settings, title: 'Settings')),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -66,6 +73,8 @@ class Manage extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
+      const SliverToBoxAdapter(
+          child: CategoryLink(category: CategoryLabel.system, title: 'System')),
     ]);
   }
 }

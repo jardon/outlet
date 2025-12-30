@@ -1,10 +1,11 @@
+import '../../../core/category.dart';
 import '../navigation.dart';
 import 'app_list.dart';
 import 'package:flutter/material.dart';
 
 class CategoryLink extends StatelessWidget {
   final String title;
-  final CategoryLabel category;
+  final Category category;
 
   const CategoryLink({
     super.key,

@@ -15,10 +15,13 @@ class Build extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final developmentApps =
-        (ref.watch(appInCategoryList("development"))..shuffle());
-    final networkApps = (ref.watch(appInCategoryList("network"))..shuffle());
-    final graphicsApps = (ref.watch(appInCategoryList("graphics"))..shuffle());
-    final officeApps = (ref.watch(appInCategoryList("office"))..shuffle());
+        (ref.watch(appInCategoryList(Category.development.value))..shuffle());
+    final networkApps =
+        (ref.watch(appInCategoryList(Category.network.value))..shuffle());
+    final graphicsApps =
+        (ref.watch(appInCategoryList(Category.graphics.value))..shuffle());
+    final officeApps =
+        (ref.watch(appInCategoryList(Category.office.value))..shuffle());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -39,9 +42,10 @@ class Build extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
-      const SliverToBoxAdapter(
+      SliverToBoxAdapter(
           child: CategoryLink(
-              category: CategoryLabel.development, title: 'Development')),
+              category: Category.development,
+              title: Category.development.label)),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -59,9 +63,9 @@ class Build extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
-      const SliverToBoxAdapter(
+      SliverToBoxAdapter(
           child: CategoryLink(
-              category: CategoryLabel.graphics, title: 'Graphics')),
+              category: Category.graphics, title: Category.graphics.label)),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -79,9 +83,9 @@ class Build extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
-      const SliverToBoxAdapter(
+      SliverToBoxAdapter(
           child: CategoryLink(
-              category: CategoryLabel.network, title: 'Networking')),
+              category: Category.network, title: Category.network.label)),
       const SliverToBoxAdapter(child: SizedBox(height: 10)),
       SliverToBoxAdapter(
           child: CategoryCard(
@@ -98,8 +102,9 @@ class Build extends ConsumerWidget {
         rows: 2,
         shrinkWrap: true,
       ))),
-      const SliverToBoxAdapter(
-          child: CategoryLink(category: CategoryLabel.office, title: 'Office')),
+      SliverToBoxAdapter(
+          child: CategoryLink(
+              category: Category.office, title: Category.office.label)),
     ]);
   }
 }

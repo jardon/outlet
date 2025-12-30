@@ -1,4 +1,5 @@
 import '../../../core/application.dart';
+import '../../../core/category.dart';
 import '../../../providers/application_provider.dart';
 import '../app_view.dart';
 import '../navigation.dart';
@@ -74,7 +75,7 @@ class AppList extends StatelessWidget {
 }
 
 class FilteredAppList extends ConsumerStatefulWidget {
-  final CategoryLabel? initialCategory;
+  final Category? initialCategory;
 
   const FilteredAppList({
     super.key,
@@ -90,7 +91,7 @@ class _FilteredAppListState extends ConsumerState<FilteredAppList> {
   final TextEditingController verifiedController = TextEditingController();
   final TextEditingController featuredController = TextEditingController();
 
-  CategoryLabel? selectedCategory;
+  Category? selectedCategory;
   bool? isVerifiedFilter;
   bool? isFeaturedFilter;
 
@@ -107,7 +108,7 @@ class _FilteredAppListState extends ConsumerState<FilteredAppList> {
     final apps = ref.watch(appListProvider).values.toList();
     final List<Application> filteredApps = apps.where((app) {
       final bool matchesCategory = selectedCategory == null ||
-          app.categories.contains(selectedCategory!.category);
+          app.categories.contains(selectedCategory!.value);
 
       final bool matchesVerified =
           isVerifiedFilter == null || app.verified == isVerifiedFilter;
@@ -154,15 +155,15 @@ class _FilteredAppListState extends ConsumerState<FilteredAppList> {
               Container(
                   width: 160,
                   decoration: inputBoxDec,
-                  child: DropdownMenu<CategoryLabel>(
+                  child: DropdownMenu<Category>(
                     controller: categoryController,
                     initialSelection: selectedCategory,
                     label: const Text('Category'),
                     inputDecorationTheme: inputTheme,
-                    onSelected: (CategoryLabel? category) {
+                    onSelected: (Category? category) {
                       setState(() => selectedCategory = category);
                     },
-                    dropdownMenuEntries: CategoryLabel.entries,
+                    dropdownMenuEntries: entries,
                   )),
               const SizedBox(
                 width: 10,
@@ -211,33 +212,13 @@ class _FilteredAppListState extends ConsumerState<FilteredAppList> {
   }
 }
 
-typedef CategoryEntry = DropdownMenuEntry<CategoryLabel>;
+typedef CategoryEntry = DropdownMenuEntry<Category>;
 
-enum CategoryLabel {
-  audio('Audio', 'audio'),
-  video('Video', 'video'),
-  game('Gaming', 'game'),
-  development('Development', 'development'),
-  network('Networking', 'network'),
-  utility('Utility', 'utility'),
-  education('Education', 'education'),
-  science('Science', 'science'),
-  settings('Settings', 'settings'),
-  system('System', 'system'),
-  graphics('Graphics', 'graphics'),
-  office('Office', 'office');
-
-  const CategoryLabel(this.label, this.category);
-  final String label;
-  final String category;
-
-  static final List<CategoryEntry> entries =
-      UnmodifiableListView<CategoryEntry>(
-    values.map<CategoryEntry>(
-      (CategoryLabel category) => CategoryEntry(
-        value: category,
-        label: category.label,
-      ),
+final List<CategoryEntry> entries = UnmodifiableListView<CategoryEntry>(
+  Category.values.map<CategoryEntry>(
+    (Category category) => CategoryEntry(
+      value: category,
+      label: category.label,
     ),
-  );
-}
+  ),
+);

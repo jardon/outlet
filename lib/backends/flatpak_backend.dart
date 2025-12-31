@@ -1,7 +1,3 @@
-import '../core/application.dart';
-import '../core/flatpak_application.dart';
-import '../core/logger.dart';
-import 'backend.dart';
 import 'dart:convert';
 import 'dart:core';
 import 'dart:ffi' as ffi;
@@ -10,6 +6,10 @@ import 'dart:typed_data';
 import 'package:collection/collection.dart';
 import 'package:ffi/ffi.dart' as pkg_ffi;
 import 'package:libflatpak/libflatpak.dart';
+import 'package:outlet/backends/backend.dart';
+import 'package:outlet/core/application.dart';
+import 'package:outlet/core/flatpak_application.dart';
+import 'package:outlet/core/logger.dart';
 import 'package:xml/xml.dart';
 
 class FlatpakBackend implements Backend {

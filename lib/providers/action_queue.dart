@@ -1,9 +1,9 @@
-import '../core/action_queue.dart';
-import '../core/logger.dart';
-import '../providers/application_provider.dart';
 import 'dart:collection';
 import 'dart:core';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:outlet/core/action_queue.dart';
+import 'package:outlet/core/logger.dart';
+import 'package:outlet/providers/application_provider.dart';
 
 class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
   final Queue<Action> _queue = Queue();

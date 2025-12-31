@@ -1,14 +1,14 @@
-import '../../core/application.dart';
-import '../../providers/action_queue.dart';
-import '../../providers/application_provider.dart';
-import '../app_view.dart';
-import '../navigation.dart';
-import '../this_device.dart';
-import 'app_icon_loader.dart';
-import 'app_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'theme.dart';
+import 'package:outlet/core/application.dart';
+import 'package:outlet/providers/action_queue.dart';
+import 'package:outlet/providers/application_provider.dart';
+import 'package:outlet/views/app_view.dart';
+import 'package:outlet/views/components/app_icon_loader.dart';
+import 'package:outlet/views/components/app_list.dart';
+import 'package:outlet/views/components/theme.dart';
+import 'package:outlet/views/navigation.dart';
+import 'package:outlet/views/this_device.dart';
 
 class DownloadQueue extends ConsumerWidget {
   const DownloadQueue({

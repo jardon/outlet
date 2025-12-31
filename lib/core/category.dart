@@ -1,5 +1,5 @@
-import '../views/components/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:outlet/views/components/theme.dart';
 
 // reference: https://specifications.freedesktop.org/menu/latest/category-registry.html
 

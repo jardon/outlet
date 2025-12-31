@@ -1,9 +1,9 @@
 import 'dart:io';
-import "dart:math";
-import "dart:core";
-import "../backends/flatpak_backend.dart";
-import "../core/application.dart";
-import "../core/flatpak_application.dart";
+import 'dart:math';
+import 'dart:core';
+import 'package:outlet/backends/flatpak_backend.dart';
+import 'package:outlet/core/application.dart';
+import 'package:outlet/core/flatpak_application.dart';
 
 interface class Backend {
   Map<String, Application> getInstalledPackages() {

@@ -1,12 +1,12 @@
-import '../../providers/application_provider.dart';
-import '../app_view.dart';
-import '../navigation.dart';
-import 'theme.dart';
-import 'app_icon_loader.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fuzzywuzzy/fuzzywuzzy.dart';
+import 'package:outlet/providers/application_provider.dart';
+import 'package:outlet/views/app_view.dart';
+import 'package:outlet/views/navigation.dart';
+import 'package:outlet/views/components/theme.dart';
+import 'package:outlet/views/components/app_icon_loader.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar({

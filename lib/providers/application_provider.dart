@@ -1,12 +1,12 @@
-import '../core/application.dart';
-import '../core/logger.dart';
-import 'backend_provider.dart';
 import 'dart:io';
 import 'dart:core';
 import 'dart:convert';
 import 'dart:isolate';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:outlet/core/application.dart';
+import 'package:outlet/core/logger.dart';
+import 'package:outlet/providers/backend_provider.dart';
 
 final remoteAppListProvider =
     FutureProvider<Map<String, Application>>((ref) async {

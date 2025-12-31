@@ -1,7 +1,7 @@
-import '../providers/application_provider.dart';
-import 'components/app_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:outlet/providers/application_provider.dart';
+import 'package:outlet/views/components/app_list.dart';
 
 class ThisDevice extends ConsumerWidget {
   const ThisDevice({

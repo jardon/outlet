@@ -1,8 +1,8 @@
-import '../../core/application.dart';
-import 'theme.dart';
-import 'app_icon_loader.dart';
-import 'badges.dart';
 import 'package:flutter/material.dart';
+import 'package:outlet/core/application.dart';
+import 'package:outlet/views/components/app_icon_loader.dart';
+import 'package:outlet/views/components/badges.dart';
+import 'package:outlet/views/components/theme.dart';
 
 class AppCard extends StatefulWidget {
   const AppCard({

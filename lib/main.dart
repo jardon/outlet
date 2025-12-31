@@ -1,8 +1,8 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'views/loading.dart';
-import 'views/components/theme.dart';
+import 'package:outlet/views/components/theme.dart';
+import 'package:outlet/views/loading.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));

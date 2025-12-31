@@ -1,13 +1,13 @@
-import '../../../core/application.dart';
-import '../../../core/category.dart';
-import '../../../providers/application_provider.dart';
-import '../app_view.dart';
-import '../navigation.dart';
-import 'app_card.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'theme.dart';
+import 'package:outlet/core/application.dart';
+import 'package:outlet/core/category.dart';
+import 'package:outlet/providers/application_provider.dart';
+import 'package:outlet/views/app_view.dart';
+import 'package:outlet/views/components/app_card.dart';
+import 'package:outlet/views/components/theme.dart';
+import 'package:outlet/views/navigation.dart';
 
 class AppList extends StatelessWidget {
   const AppList({

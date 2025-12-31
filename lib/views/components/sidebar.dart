@@ -86,10 +86,6 @@ class Sidebar extends ConsumerWidget {
         "widget": const ThisDevice(),
         "title": "This Device",
       },
-      "search": {
-        "widget": Container(),
-        "title": "Search",
-      },
       "downloads": {
         "widget": const DownloadsView(),
         "title": "Downloads",

@@ -15,13 +15,11 @@ class Build extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final developmentApps =
-        (ref.watch(appInCategoryList(Category.development.value))..shuffle());
-    final networkApps =
-        (ref.watch(appInCategoryList(Category.network.value))..shuffle());
+        (ref.watch(appInCategoryList(Category.development.value)));
+    final networkApps = (ref.watch(appInCategoryList(Category.network.value)));
     final graphicsApps =
-        (ref.watch(appInCategoryList(Category.graphics.value))..shuffle());
-    final officeApps =
-        (ref.watch(appInCategoryList(Category.office.value))..shuffle());
+        (ref.watch(appInCategoryList(Category.graphics.value)));
+    final officeApps = (ref.watch(appInCategoryList(Category.office.value)));
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: CategoryCard(

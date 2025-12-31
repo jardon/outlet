@@ -17,8 +17,7 @@ class Featured extends ConsumerWidget {
         .values
         .toList()
         .where((app) => app.featured)
-        .toList()
-      ..shuffle());
+        .toList());
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: CategoryCard(

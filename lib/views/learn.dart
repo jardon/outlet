@@ -14,10 +14,9 @@ class Learn extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final scienceApps =
-        (ref.watch(appInCategoryList(Category.science.value))..shuffle());
+    final scienceApps = (ref.watch(appInCategoryList(Category.science.value)));
     final educationApps =
-        (ref.watch(appInCategoryList(Category.education.value))..shuffle());
+        (ref.watch(appInCategoryList(Category.education.value)));
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: CategoryCard(

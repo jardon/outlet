@@ -14,12 +14,10 @@ class Manage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final systemApps =
-        (ref.watch(appInCategoryList(Category.system.value))..shuffle());
-    final utilityApps =
-        (ref.watch(appInCategoryList(Category.utility.value))..shuffle());
+    final systemApps = (ref.watch(appInCategoryList(Category.system.value)));
+    final utilityApps = (ref.watch(appInCategoryList(Category.utility.value)));
     final settingsApps =
-        (ref.watch(appInCategoryList(Category.settings.value))..shuffle());
+        (ref.watch(appInCategoryList(Category.settings.value)));
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverToBoxAdapter(
           child: CategoryCard(

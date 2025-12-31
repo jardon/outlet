@@ -469,7 +469,8 @@ class FlatpakBackend implements Backend {
               final XmlDocument document =
                   XmlDocument.parse(appstreamXmlContent);
               for (var componentElement
-                  in document.findAllElements('component')) {
+                  in List.from(document.findAllElements('component'))
+                    ..shuffle()) {
                 Application app = appFromXML(
                     componentElement, appstreamDir, false, remoteName);
                 apps[app.id] = app;

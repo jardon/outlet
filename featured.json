@@ -1,5 +1,11 @@
 {
   "featured_app_ids": [
+    "org.gnome.World.Citations",
+    "com.oyajun.ColorCode",
+    "com.gitlab.bitseater.meteo",
+    "io.github.justinrdonnelly.bouncer",
+    "me.iepure.Ticketbooth",
+    "org.pipewire.Helvum",
     "dev.bragefuglseth.Keypunch",
     "dev.bragefuglseth.Fretboard",
     "dev.tchx84.Gameeky",

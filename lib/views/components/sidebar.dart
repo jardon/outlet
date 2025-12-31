@@ -1,19 +1,19 @@
-import '../../core/category.dart';
-import '../build.dart';
-import '../downloads.dart';
-import '../featured.dart';
-import '../learn.dart';
-import '../manage.dart';
-import '../play.dart';
-import '../this_device.dart';
-import '../navigation.dart';
-import 'theme.dart';
-import 'badges.dart';
 import 'dart:io';
-import 'download_queue.dart';
-import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:outlet/core/category.dart';
+import 'package:outlet/views/build.dart';
+import 'package:outlet/views/components/theme.dart';
+import 'package:outlet/views/components/badges.dart';
+import 'package:outlet/views/components/download_queue.dart';
+import 'package:outlet/views/downloads.dart';
+import 'package:outlet/views/featured.dart';
+import 'package:outlet/views/learn.dart';
+import 'package:outlet/views/manage.dart';
+import 'package:outlet/views/navigation.dart';
+import 'package:outlet/views/play.dart';
+import 'package:outlet/views/this_device.dart';
 
 Map<String, String> env = Platform.environment;
 

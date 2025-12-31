@@ -1,12 +1,12 @@
-import '../../core/application.dart';
-import '../app_view.dart';
-import '../navigation.dart';
-import 'app_card.dart';
-import 'badges.dart';
 import 'dart:async';
-import 'screenshots.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:outlet/core/application.dart';
+import 'package:outlet/views/app_view.dart';
+import 'package:outlet/views/navigation.dart';
+import 'package:outlet/views/components/app_card.dart';
+import 'package:outlet/views/components/badges.dart';
+import 'package:outlet/views/components/screenshots.dart';
 
 class CategoryCard extends StatefulWidget {
   final List<Application> apps;

@@ -1,10 +1,10 @@
-import '../../backends/backend.dart';
-import '../../providers/action_queue.dart';
-import '../../providers/application_provider.dart';
-import 'theme.dart';
 import 'dart:isolate';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:outlet/backends/backend.dart';
+import 'package:outlet/providers/action_queue.dart';
+import 'package:outlet/providers/application_provider.dart';
+import 'package:outlet/views/components/theme.dart';
 
 class AppActions extends ConsumerWidget {
   final String id;

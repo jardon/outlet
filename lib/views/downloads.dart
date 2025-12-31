@@ -1,5 +1,5 @@
-import 'components/download_queue.dart';
 import 'package:flutter/material.dart';
+import 'package:outlet/views/components/download_queue.dart';
 
 class DownloadsView extends StatelessWidget {
   const DownloadsView({

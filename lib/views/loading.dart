@@ -1,9 +1,9 @@
-import '../core/application.dart';
-import '../providers/application_provider.dart';
-import 'featured.dart';
-import 'navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:outlet/core/application.dart';
+import 'package:outlet/providers/application_provider.dart';
+import 'package:outlet/views/featured.dart';
+import 'package:outlet/views/navigation.dart';
 
 class Loading extends ConsumerWidget {
   const Loading({

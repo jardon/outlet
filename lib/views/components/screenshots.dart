@@ -1,7 +1,7 @@
-import '../../core/application.dart';
-import '../screenshots_view.dart';
-import 'theme.dart';
 import 'package:flutter/material.dart';
+import 'package:outlet/core/application.dart';
+import 'package:outlet/views/screenshots_view.dart';
+import 'package:outlet/views/components/theme.dart';
 
 class Screenshots extends StatelessWidget {
   final List<Screenshot> screenshots;

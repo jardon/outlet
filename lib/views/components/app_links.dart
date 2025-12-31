@@ -1,6 +1,6 @@
-import '../../core/application.dart';
-import 'theme.dart';
 import 'package:flutter/material.dart';
+import 'package:outlet/core/application.dart';
+import 'package:outlet/views/components/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> _launchURL(String url) async {

@@ -1,11 +1,11 @@
-import '../core/category.dart';
-import '../providers/application_provider.dart';
-import 'components/app_list.dart';
-import 'components/category_card.dart';
-import 'components/category_link.dart';
-import 'components/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:outlet/core/category.dart';
+import 'package:outlet/providers/application_provider.dart';
+import 'package:outlet/views/components/app_list.dart';
+import 'package:outlet/views/components/category_card.dart';
+import 'package:outlet/views/components/category_link.dart';
+import 'package:outlet/views/components/theme.dart';
 
 class Play extends ConsumerWidget {
   const Play({

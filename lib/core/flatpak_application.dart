@@ -1,5 +1,5 @@
-import 'application.dart';
 import 'dart:core';
+import 'package:outlet/core/application.dart';
 
 class FlatpakApplication extends Application {
   final String? type;

@@ -1,7 +1,7 @@
-import '../../../core/category.dart';
-import '../navigation.dart';
-import 'app_list.dart';
 import 'package:flutter/material.dart';
+import 'package:outlet/core/category.dart';
+import 'package:outlet/views/components/app_list.dart';
+import 'package:outlet/views/navigation.dart';
 
 class CategoryLink extends StatelessWidget {
   final String title;

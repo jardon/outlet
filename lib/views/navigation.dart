@@ -1,8 +1,8 @@
-import 'components/sidebar.dart';
-import 'components/navbar.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:outlet/views/components/navbar.dart';
+import 'package:outlet/views/components/sidebar.dart';
 
 class Navigation extends StatelessWidget {
   const Navigation({

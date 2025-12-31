@@ -1,8 +1,8 @@
-import '../../core/application.dart';
-import 'theme.dart';
-import 'badges.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter/material.dart';
+import 'package:outlet/core/application.dart';
+import 'package:outlet/views/components/theme.dart';
+import 'package:outlet/views/components/badges.dart';
 
 class AppDescription extends StatelessWidget {
   final Application app;

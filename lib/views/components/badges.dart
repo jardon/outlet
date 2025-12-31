@@ -1,7 +1,7 @@
-import '../../core/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'theme.dart';
+import 'package:outlet/core/category.dart';
+import 'package:outlet/views/components/theme.dart';
 
 class FeaturedBadge extends StatelessWidget {
   const FeaturedBadge({

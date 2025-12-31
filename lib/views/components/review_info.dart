@@ -1,5 +1,5 @@
-import 'theme.dart';
 import 'package:flutter/material.dart';
+import 'package:outlet/views/components/theme.dart';
 
 class ReviewInfo extends StatelessWidget {
   final List<dynamic> reviews;

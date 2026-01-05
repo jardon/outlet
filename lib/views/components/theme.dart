@@ -38,8 +38,8 @@ final List<Color> audioColors = <Color>[
 ];
 
 final List<Color> devColors = <Color>[
-  Colors.green,
-  Colors.lime,
+  Colors.blue,
+  Colors.purple.shade400,
 ];
 
 final List<Color> gameColors = <Color>[
@@ -64,30 +64,30 @@ final List<Color> networkColors = <Color>[
 
 final List<Color> utilityColors = <Color>[
   Colors.pink,
-  Colors.purple,
+  Colors.pink.shade400,
 ];
 
 final List<Color> educationColors = <Color>[
-  Colors.blue,
-  Colors.purple,
+  Colors.orange,
+  Colors.pink,
 ];
 
 final List<Color> officeColors = <Color>[
   Colors.blue,
-  Colors.yellow,
+  Colors.cyan.shade600,
 ];
 
 final List<Color> scienceColors = <Color>[
-  Colors.lime,
-  Colors.blue,
+  Colors.indigo,
+  Colors.purple.shade600,
 ];
 
 final List<Color> settingsColors = <Color>[
-  Colors.pink,
-  Colors.blue,
+  Colors.cyan,
+  Colors.teal.shade400,
 ];
 
 final List<Color> systemColors = <Color>[
-  Colors.yellow,
-  Colors.orange,
+  Colors.teal,
+  Colors.green.shade600,
 ];

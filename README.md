@@ -1,6 +1,31 @@
-# Outlet
+<h1 align="center">
+  <img src="dist/com.github.jardon.Outlet.svg" alt="Outlet" width="192" height="192"/>
+  <br>
+  Outlet
+</h1>
 
-Linux application GUI storefront.
+
+Outlet is a frontend for finding and managing your systems applications.  Built with Flutter, Outlet aims to provide a unique user experience than your typical Linux GUI application.  Outlet can be used on many linux distributions as long as they provide `libflatpak`.  
+
+## Features
+
+There are several features that enable robust user experiences and empower users to discover new applications while taking advantage of powerful UI tools provided by Flutter.
+
+### Theme Support
+
+Outlet will read the system theme automatically and adjust to match.
+
+![theme support](dist/images/themes.png "Theme Support")
+
+### Dynamic Layout
+The sidebar will collapse under certain widths to allow for a more compact experience.  The sidebar can be expanded by clicking the floating action button in the bottom right corner of the application.
+
+![dynamic layout](dist/images/dynamic-layout.png "Dynamic Layout")
+
+### Fuzzy Search
+Searching for applications is easy! Thanks to fuzzy search, typos won't prevent you from finding your favorite apps.
+
+![fuzzy search](dist/images/fuzzy-search.png "Fuzzy Search")
 
 ## Build Outlet
 

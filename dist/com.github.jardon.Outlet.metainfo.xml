@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id translate="no">com.github.jardon.Outlet</id>
+  <name translate="no">Outlet</name>
+  <developer id="net.shadps4.shadPS4">
+    <name>Jarred Wilson</name>
+    <url translate="no">https://github.com/jardon/outlet/graphs/contributors</url>
+  </developer>
+  <summary>App management client</summary>
+  <metadata_license translate="no">CC0-1.0</metadata_license>
+  <project_license translate="no">GPL-3.0</project_license>
+  <launchable type="desktop-id" translate="no">com.github.jardon.Outlet.desktop</launchable>
+  <url type="homepage" translate="no">https://github.com/jardon/outlet</url>
+  <description>
+    <p>Outlet is an application that helps you find and manage applications.</p>
+  </description>
+  <screenshots>
+  </screenshots>
+  <categories>
+    <category translate="no">Utility</category>
+  </categories>
+  <releases>
+  </releases>
+  <content_rating type="oars-1.1"/>
+  <supports>
+    <control translate="no">pointing</control>
+    <control translate="no">keyboard</control>
+    <control translate="no">touch</control>
+  </supports>
+  <recommends>
+    <control translate="no">pointing</control>
+    <control translate="no">keyboard</control>
+  </recommends>
+  <requires>
+    <internet translate="no">always</internet>
+  </requires>
+  <provides>
+    <binary translate="no">outlet</binary>
+  </provides>
+  <keywords>
+  </keywords>
+</component>

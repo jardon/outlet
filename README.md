@@ -37,11 +37,11 @@ Searching for applications is easy! Thanks to fuzzy search, typos won't prevent 
 ```bash
 sudo apt-get update -y && sudo apt-get upgrade -y;
 sudo apt-get install -y curl git unzip xz-utils zip libglu1-mesa \
-      clang cmake git \
+      clang cmake git libglycin-2-dev \
       ninja-build pkg-config \
       libgtk-3-dev liblzma-dev \
-      libstdc++-12-dev libsysprof-6-dev \
-      libcloudproviders-dev
+      libstdc++-15-dev libsysprof-6-dev \
+      libcloudproviders-dev libflatpak-dev
 ```
 ### Setup Flutter
 Install flutter in your environment.  This may vary per distribution.  Generic instructions are described in their [docs](https://docs.flutter.dev/get-started/install/linux/desktop).

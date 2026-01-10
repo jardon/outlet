@@ -38,4 +38,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact_name }}
-          path: build/linux/*/release/bundle/outlet
+          path: build/linux/*/release/bundle

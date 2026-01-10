@@ -4,9 +4,17 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  workflow_call:
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            artifact_name: outlet-linux-amd64
+          - runner: ubuntu-22.04-arm64
+            artifact_name: outlet-linux-arm64
     steps:
       - uses: actions/checkout@v4
       - name: Install flutter dependencies
@@ -26,4 +34,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
       - name: Build project
-        run: flutter build linux
+        run: flutter build linux --build-name=${{ github.ref_name }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: build/linux/*/release/bundle/outlet

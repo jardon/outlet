@@ -24,14 +24,16 @@ jobs:
           merge-multiple: true
       - name: Create amd64 tarball
         run: |
-          mv outlet-linux-binaries/outlet-linux-amd64 outlet-linux-amd64/
+          mv outlet-linux-binaries/outlet-linux-amd64/outlet outlet-linux-amd64/
+          install -D outlet-linux-binaries/outlet-linux-amd64/lib outlet-linux-amd64/usr/
           install -D dist/com.github.jardon.Outlet.svg outlet-linux-amd64/usr/share/icons/hicolor/128x128/apps
           install -D dist/com.github.jardon.Outlet.desktop outlet-linux-amd64/usr/share/applications
           install -D dist/com.github.jardon.Outlet.metainfo.xml outlet-linux-amd64/usr/share/metainfo
           tar -czvf outlet-linux-amd64.tar.gz outlet-linux-amd64
       - name: Create arm64 tarball
         run: |
-          mv outlet-linux-binaries/outlet-linux-arm64 outlet-linux-arm64/
+          mv outlet-linux-binaries/outlet-linux-arm64/outlet outlet-linux-arm64/
+          install -D outlet-linux-binaries/outlet-linux-arm64/lib outlet-linux-arm64/usr/
           install -D dist/com.github.jardon.Outlet.svg outlet-linux-arm64/usr/share/icons/hicolor/128x128/apps
           install -D dist/com.github.jardon.Outlet.desktop outlet-linux-arm64/usr/share/applications
           install -D dist/com.github.jardon.Outlet.metainfo.xml outlet-linux-arm64/usr/share/metainfo

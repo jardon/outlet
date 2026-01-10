@@ -61,9 +61,7 @@ flutter build linux
 ```bash
 export FLATPAK_ENABLED=1
 ./build/linux/x64/release/bundle/outlet
-
 # or
-
 FLATPAK_ENABLED=1 ./build/linux/x64/release/bundle/outlet
 ```
 

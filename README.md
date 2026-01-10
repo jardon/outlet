@@ -29,6 +29,10 @@ Searching for applications is easy! Thanks to fuzzy search, typos won't prevent 
 
 ## Build Outlet
 
+### Configure Flatpak
+
+Outlet currently only supports flatpak applications.  To set this up, you will need to [install flatpak](https://docs.flathub.org/docs/for-users/installation) on you distribution and then add a flatpak remote.  The most common remote is [Flathub](https://flathub.org), and they provide setup [instructions](https://flathub.org/en/setup) for a variety of distributions.
+
 ### Install Dependencies
 
 #### Debian-based distros

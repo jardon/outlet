@@ -56,7 +56,7 @@ flutter build linux
 ```
 
 > [!IMPORTANT]
-> `FLATPAK_ENABLED` must be set to `1` for Flatpak support
+> `FLATPAK_ENABLED=1` must be set to enable Flatpak support
 ### Run Executable
 ```bash
 export FLATPAK_ENABLED=1

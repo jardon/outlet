@@ -1,0 +1,48 @@
+name: Build Release
+on:
+  push:
+    tags:
+      - '[0-9]*.[0-9]*.[0-9]*'
+jobs:
+  build-artifacts:
+    uses: ./.github/workflows/linux-build.yaml
+
+  release:
+    needs: build-artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create amd64 release directory
+        run: mkdir outlet-linux-amd64
+      - name: Create arm64 release directory
+        run: mkdir outlet-linux-arm64
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v5
+        with:
+          path: outlet-linux-binaries
+          pattern: outlet-linux-*
+          merge-multiple: true
+      - name: Create amd64 tarball
+        run: |
+          mv outlet-linux-binaries/outlet-linux-amd64 outlet-linux-amd64/
+          install -D dist/com.github.jardon.Outlet.svg outlet-linux-amd64/usr/share/icons/hicolor/128x128/apps
+          install -D dist/com.github.jardon.Outlet.desktop outlet-linux-amd64/usr/share/applications
+          install -D dist/com.github.jardon.Outlet.metainfo.xml outlet-linux-amd64/usr/share/metainfo
+          tar -czvf outlet-linux-amd64.tar.gz outlet-linux-amd64
+      - name: Create arm64 tarball
+        run: |
+          mv outlet-linux-binaries/outlet-linux-arm64 outlet-linux-arm64/
+          install -D dist/com.github.jardon.Outlet.svg outlet-linux-arm64/usr/share/icons/hicolor/128x128/apps
+          install -D dist/com.github.jardon.Outlet.desktop outlet-linux-arm64/usr/share/applications
+          install -D dist/com.github.jardon.Outlet.metainfo.xml outlet-linux-arm64/usr/share/metainfo
+          tar -czvf outlet-linux-arm64.tar.gz outlet-linux-arm64
+      - name: Create GitHub Release and upload assets
+        uses: softprops/action-gh-release@v2
+        with:
+          prerelease: true
+          tag_name: ${{ github.ref_name }}
+          files: |
+            outlet-linux-amd64.tar.gz
+            outlet-linux-arm64.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

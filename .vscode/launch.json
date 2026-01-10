@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "outlet (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "env": {
+                "FLATPAK_ENABLED": "1"
+            }
+        },
+        {
+            "name": "outlet (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "env": {
+                "FLATPAK_ENABLED": "1"
+            }
+        },
+        {
+            "name": "outlet (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "env": {
+                "FLATPAK_ENABLED": "1"
+            }
+        },
+    ]
+}

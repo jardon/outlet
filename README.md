@@ -55,6 +55,19 @@ Install flutter in your environment.  This may vary per distribution.  Generic i
 flutter build linux
 ```
 
+### Run
+```bash
+# FLATPAK_ENABLED must be set to 1 for Flatpak support
+export FLATPAK_ENABLED=1
+
+# Run Relesae
+./build/linux/x64/release/bundle/outlet 
+
+# Run Debug
+./build/linux/x64/debug/bundle/outlet 
+```
+
+
 ## Flutter Resources
 
 A few resources to get you started if this is your first Flutter project:

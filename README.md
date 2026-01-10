@@ -55,16 +55,16 @@ Install flutter in your environment.  This may vary per distribution.  Generic i
 flutter build linux
 ```
 
-### Run
+> [!IMPORTANT]
+> `FLATPAK_ENABLED` must be set to `1` for Flatpak support
+### Run Executable
 ```bash
-# FLATPAK_ENABLED must be set to 1 for Flatpak support
 export FLATPAK_ENABLED=1
+./build/linux/x64/release/bundle/outlet
 
-# Run Relesae
-./build/linux/x64/release/bundle/outlet 
+# or
 
-# Run Debug
-./build/linux/x64/debug/bundle/outlet 
+FLATPAK_ENABLED=1 ./build/linux/x64/release/bundle/outlet
 ```
 
 

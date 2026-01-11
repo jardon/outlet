@@ -18,7 +18,7 @@ set(CMAKE_INSTALL_RPATH "$ORIGIN/lib")
 
 # Find the Flatpak library
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(FLATPAK REQUIRED flatpak)
+pkg_check_modules(FLATPAK REQUIRED libflatpak)
 
 # Root filesystem for cross-building.
 if(FLUTTER_TARGET_PLATFORM_SYSROOT)

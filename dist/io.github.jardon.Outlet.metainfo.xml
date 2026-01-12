@@ -15,6 +15,22 @@
     <p>Outlet is an application that helps you find and manage applications.</p>
   </description>
   <screenshots>
+    <screenshot type="default">
+      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/heads/main/dist/images/themes.png</image>
+      <caption>Theme support</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/heads/main/dist/images/dynamic-layout.png</image>
+      <caption>Dynamic layout</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/heads/main/dist/images/fuzzy-search.png</image>
+      <caption>Fuzzy search</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/heads/main/dist/images/app-view.png</image>
+      <caption>App view</caption>
+    </screenshot>
   </screenshots>
   <categories>
     <category translate="no">Utility</category>

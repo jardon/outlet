@@ -2,7 +2,7 @@
 <component type="desktop-application">
   <id translate="no">io.github.jardon.Outlet</id>
   <name translate="no">Outlet</name>
-  <developer id="net.shadps4.shadPS4">
+  <developer id="io.github.jardon">
     <name>Jarred Wilson</name>
     <url translate="no">https://github.com/jardon/outlet/graphs/contributors</url>
   </developer>

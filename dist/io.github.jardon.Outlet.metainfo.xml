@@ -42,6 +42,9 @@
     <category translate="no">Utility</category>
   </categories>
   <releases>
+    <release version="1.0.0" date="2026-01-12">
+      <url type="details">https://github.com/jardon/outlet/releases/tag/1.0.0</url>
+    </release>
   </releases>
   <content_rating type="oars-1.1"/>
   <supports>

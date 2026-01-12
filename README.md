@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="dist/com.github.jardon.Outlet.svg" alt="Outlet" width="192" height="192"/>
+  <img src="dist/io.github.jardon.Outlet.svg" alt="Outlet" width="192" height="192"/>
   <br>
   Outlet
 </h1>

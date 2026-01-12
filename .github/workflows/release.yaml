@@ -28,18 +28,18 @@ jobs:
         run: |
           mv outlet-linux-binaries/x64/release/bundle/outlet outlet-linux-amd64/
           install -D -d outlet-linux-binaries/x64/release/bundle/lib outlet-linux-amd64/usr/
-          install -D dist/com.github.jardon.Outlet.svg outlet-linux-amd64/usr/share/icons/hicolor/scalable/apps/com.github.jardon.Outlet.svg
-          install -D dist/com.github.jardon.Outlet.desktop outlet-linux-amd64/usr/share/applications/com.github.jardon.Outlet.desktop
-          install -D dist/com.github.jardon.Outlet.metainfo.xml outlet-linux-amd64/usr/share/metainfo/com.github.jardon.Outlet.metainfo.xml
+          install -D dist/io.github.jardon.Outlet.svg outlet-linux-amd64/usr/share/icons/hicolor/scalable/apps/io.github.jardon.Outlet.svg
+          install -D dist/io.github.jardon.Outlet.desktop outlet-linux-amd64/usr/share/applications/io.github.jardon.Outlet.desktop
+          install -D dist/io.github.jardon.Outlet.metainfo.xml outlet-linux-amd64/usr/share/metainfo/io.github.jardon.Outlet.metainfo.xml
           chmod 744 outlet-linux-amd64/outlet
           tar -czvf outlet-linux-amd64-${{ github.ref_name }}.tar.gz outlet-linux-amd64
       - name: Create arm64 tarball
         run: |
           mv outlet-linux-binaries/arm64/release/bundle/outlet outlet-linux-arm64/
           install -D -d outlet-linux-binaries/arm64/release/bundle/lib outlet-linux-arm64/usr/
-          install -D dist/com.github.jardon.Outlet.svg outlet-linux-arm64/usr/share/icons/hicolor/scalable/apps/com.github.jardon.Outlet.svg
-          install -D dist/com.github.jardon.Outlet.desktop outlet-linux-arm64/usr/share/applications/com.github.jardon.Outlet.desktop
-          install -D dist/com.github.jardon.Outlet.metainfo.xml outlet-linux-arm64/usr/share/metainfo/com.github.jardon.Outlet.metainfo.xml
+          install -D dist/io.github.jardon.Outlet.svg outlet-linux-arm64/usr/share/icons/hicolor/scalable/apps/io.github.jardon.Outlet.svg
+          install -D dist/io.github.jardon.Outlet.desktop outlet-linux-arm64/usr/share/applications/io.github.jardon.Outlet.desktop
+          install -D dist/io.github.jardon.Outlet.metainfo.xml outlet-linux-arm64/usr/share/metainfo/io.github.jardon.Outlet.metainfo.xml
           chmod 744 outlet-linux-arm64/outlet
           tar -czvf outlet-linux-arm64-${{ github.ref_name }}.tar.gz outlet-linux-arm64
       - name: Create GitHub Release and upload assets

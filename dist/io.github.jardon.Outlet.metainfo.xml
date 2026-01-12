@@ -6,6 +6,12 @@
     <name>Jarred Wilson</name>
     <url translate="no">https://github.com/jardon/outlet/graphs/contributors</url>
   </developer>
+  <url type="homepage">https://github.com/jardon/outlet</url>
+  <url type="vcs-browser">https://github.com/jardon/outlet</url>
+  <url type="bugtracker">https://github.com/jardon/outlet/issues</url>
+  <url type="help">https://github.com/jardon/outlet/discussions</url>
+  <url type="contact">https://github.com/jardon</url>
+  <url type="contribute">https://github.com/jardon/outlet</url>
   <summary>App management client</summary>
   <metadata_license translate="no">CC0-1.0</metadata_license>
   <project_license translate="no">GPL-3.0</project_license>

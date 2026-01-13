@@ -4,6 +4,6 @@ Version=1.0
 Name=Outlet
 Comment=App management client
 Exec=outlet
-Icon=io.github.jardon.Outlet.svg
+Icon=io.github.jardon.Outlet
 Terminal=false
 Categories=Utility;

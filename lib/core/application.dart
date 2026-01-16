@@ -60,9 +60,7 @@ abstract class Application {
 
   String getUninstallTarget() => id;
 
-  String launchCommand() {
-    return id;
-  }
+  String launchCommand() => id;
 }
 
 class Screenshot {

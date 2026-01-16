@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:isolate';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -75,6 +76,23 @@ class AppActions extends ConsumerWidget {
                   child: Text(getInstallButtonText(),
                       style: const TextStyle(color: Colors.white)),
                 ),
+                if (app.installed)
+                  TextButton(
+                    onPressed: () async {
+                      var launch = app.launchCommand();
+                      await Process.start(
+                        launch.split(' ').first,
+                        launch.split(' ').sublist(1),
+                        mode: ProcessStartMode.detached,
+                      );
+                    },
+                    style: const ButtonStyle(
+                      backgroundColor:
+                          WidgetStatePropertyAll<Color>(Colors.black),
+                    ),
+                    child: const Text("Open",
+                        style: TextStyle(color: Colors.white)),
+                  ),
                 Expanded(child: Container()),
                 Text(app.branch != null
                     ? '${app.branch![0].toUpperCase()}${app.branch!.substring(1)}'

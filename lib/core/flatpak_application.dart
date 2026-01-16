@@ -107,6 +107,11 @@ class FlatpakApplication extends Application {
       return id;
     }
   }
+
+  @override
+  String launchCommand() {
+    return "flatpak run $id";
+  }
 }
 
 class Bundle {

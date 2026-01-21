@@ -7,6 +7,8 @@
 
 Outlet is a frontend for finding and managing your systems applications.  Built with Flutter, Outlet aims to provide a unique user experience than your typical Linux GUI application.  Outlet can be used on many linux distributions as long as they provide `libflatpak`.  
 
+**Why does this exist?**  Read about it on my [blog](https://jardon.dev/posts/learning-in-the-ai-world/).
+
 <a href='https://flathub.org/apps/io.github.jardon.Outlet'>
   <img width='240' alt='Get it on Flathub' src='https://flathub.org/api/badge?locale=en'/>
 </a>

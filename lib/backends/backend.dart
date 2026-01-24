@@ -18,6 +18,8 @@ interface class Backend {
       Future.value(true);
 
   Future<bool> uninstallApplication(String id) => Future.value(true);
+
+  Future<bool> updateApplication(String id) => Future.value(true);
 }
 
 class TestBackend implements Backend {
@@ -84,6 +86,9 @@ class TestBackend implements Backend {
 
   @override
   Future<bool> uninstallApplication(String id) => Future.value(true);
+
+  @override
+  Future<bool> updateApplication(String id) => Future.value(true);
 
   void destroy() {}
 }

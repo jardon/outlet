@@ -570,4 +570,42 @@ class FlatpakBackend implements Backend {
     }
     return false;
   }
+
+  @override
+  Future<bool> updateApplication(String id) async {
+    final FlatpakBindings bindings =
+        FlatpakBindings(ffi.DynamicLibrary.open('libflatpak.so'));
+    ffi.Pointer<FlatpakInstallation> installationPtr = getFlatpakInstallation();
+    ffi.Pointer<ffi.Pointer<GError>> error =
+        pkg_ffi.calloc<ffi.Pointer<GError>>();
+
+    ffi.Pointer<FlatpakTransaction> transactionPtr =
+        bindings.flatpak_transaction_new_for_installation(
+            installationPtr, ffi.nullptr, error);
+    if (error.value == ffi.nullptr) {
+      ffi.Pointer<pkg_ffi.Utf8> refUtf8Ptr = id.toNativeUtf8();
+      ffi.Pointer<ffi.Char> refPtr = refUtf8Ptr.cast<ffi.Char>();
+      bindings.flatpak_transaction_add_update(
+          transactionPtr, refPtr, ffi.nullptr, ffi.nullptr, error);
+
+      if (error.value == ffi.nullptr) {
+        bindings.flatpak_transaction_run(transactionPtr, ffi.nullptr, error);
+
+        return true;
+      } else {
+        final ffi.Pointer<GError> errorPtr = error.value;
+        final GError errorStruct = errorPtr.ref;
+        final ffi.Pointer<ffi.Char> messagePtr = errorStruct.message;
+        final String message = messagePtr.cast<pkg_ffi.Utf8>().toDartString();
+        logger.e(
+            'Failed to add update to FlatpakTransaction. GError pointer received: $message');
+        error.value = ffi.nullptr;
+      }
+    } else {
+      logger.e(
+          'Failed to create FlatpakTransaction. GError pointer received: ${error.value}');
+      error.value = ffi.nullptr;
+    }
+    return false;
+  }
 }

@@ -1,0 +1,3 @@
+[submodule "lib/appstream.dart"]
+	path = lib/appstream.dart
+	url = git@github.com:jardon/appstream.dart.git

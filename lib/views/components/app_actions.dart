@@ -93,6 +93,20 @@ class AppActions extends ConsumerWidget {
                     child: const Text("Open",
                         style: TextStyle(color: Colors.white)),
                   ),
+                if (app.installed && app.current != true)
+                  TextButton(
+                    onPressed: () async {
+                      final data = {"updateTarget": app.getUpdateTarget()};
+                      actionQueue.add("Updating ${app.name ?? app.id}", app.id,
+                          _updateWorker, data);
+                    },
+                    style: const ButtonStyle(
+                      backgroundColor:
+                          WidgetStatePropertyAll<Color>(Colors.black),
+                    ),
+                    child: const Text("Update",
+                        style: TextStyle(color: Colors.white)),
+                  ),
                 Expanded(child: Container()),
                 Text(app.branch != null
                     ? '${app.branch![0].toUpperCase()}${app.branch!.substring(1)}'
@@ -116,5 +130,12 @@ Future<void> _uninstallWorker(Map<String, String> data) async {
   Backend backend = getBackend();
   await Isolate.run(() {
     backend.uninstallApplication(data["uninstallTarget"] as String);
+  });
+}
+
+Future<void> _updateWorker(Map<String, String> data) async {
+  Backend backend = getBackend();
+  await Isolate.run(() {
+    backend.updateApplication(data["updateTarget"] as String);
   });
 }

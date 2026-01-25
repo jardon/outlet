@@ -109,6 +109,9 @@ class FlatpakApplication extends Application {
   }
 
   @override
+  getUpdateTarget() => id;
+
+  @override
   String launchCommand() {
     return "flatpak run $id";
   }

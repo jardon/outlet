@@ -60,6 +60,8 @@ abstract class Application {
 
   String getUninstallTarget() => id;
 
+  String getUpdateTarget() => id;
+
   String launchCommand() => id;
 }
 

@@ -17,6 +17,8 @@ jobs:
             artifact_name: outlet-linux-arm64
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: Install flutter dependencies
         run: |
           sudo apt-get update -y;

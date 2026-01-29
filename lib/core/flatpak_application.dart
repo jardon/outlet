@@ -45,6 +45,10 @@ class FlatpakApplication extends Application {
   @override
   List<String> get categories {
     Set<String> categoryBadges = {};
+    var audioVideo = false;
+    var audio = false;
+    var video = false;
+
     for (var category in super.categories) {
       switch (category) {
         case 'Network':
@@ -58,9 +62,11 @@ class FlatpakApplication extends Application {
           break;
         case 'Audio':
           categoryBadges.add('audio');
+          audio = true;
           break;
         case 'Video':
           categoryBadges.add('video');
+          video = true;
           break;
         case 'Utility':
           categoryBadges.add('utility');
@@ -83,6 +89,13 @@ class FlatpakApplication extends Application {
         case 'System':
           categoryBadges.add('system');
           break;
+        case 'AudioVideo':
+          audioVideo = true;
+          break;
+      }
+
+      if (audioVideo && !audio && !video) {
+        categoryBadges.addAll(['audio', 'video']);
       }
     }
     return categoryBadges.toList();

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:outlet/core/application.dart';
@@ -112,6 +113,23 @@ class _CategoryCardState extends State<CategoryCard> {
     return LayoutBuilder(builder: (context, constraints) {
       const double breakpoint = 600.0;
       final bool isWide = constraints.maxWidth > breakpoint;
+      Widget description = Html(
+          data: (widget.apps[_currentIndex].description["C"] ??
+                  "No description available.")
+              .trimLeft(),
+          style: {
+            "p": Style(
+              margin: Margins.zero,
+              padding: HtmlPaddings.zero,
+              lineHeight: const LineHeight(1.5),
+              color: Colors.white,
+            ),
+            "ul": Style(
+              padding: HtmlPaddings.only(left: 20),
+              margin: Margins.only(top: 8, bottom: 8),
+              color: Colors.white,
+            ),
+          });
       return isWide
           ? SizedBox(
               height: 200,
@@ -146,15 +164,7 @@ class _CategoryCardState extends State<CategoryCard> {
                               child: Container(
                                   padding:
                                       const EdgeInsets.only(top: 5, bottom: 5),
-                                  child: Text(
-                                      (widget.apps[_currentIndex]
-                                                  .description["C"] ??
-                                              "No description available.")
-                                          .trimLeft(),
-                                      style:
-                                          const TextStyle(color: Colors.white),
-                                      overflow: TextOverflow.fade,
-                                      softWrap: true))),
+                                  child: description)),
                         ])),
                 Expanded(
                     flex: 1,
@@ -192,14 +202,7 @@ class _CategoryCardState extends State<CategoryCard> {
                       Expanded(
                           child: Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 5),
-                              child: Text(
-                                  (widget.apps[_currentIndex]
-                                              .description["C"] ??
-                                          "No description available.")
-                                      .trimLeft(),
-                                  style: const TextStyle(color: Colors.white),
-                                  overflow: TextOverflow.fade,
-                                  softWrap: true))),
+                              child: description)),
                       SizedBox(
                           height: 80,
                           child: ScreenshotsList(

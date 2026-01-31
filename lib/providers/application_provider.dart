@@ -108,7 +108,8 @@ final searchKeywordsProvider = Provider((ref) {
   return allApps.map((key, app) {
     if (app.name["C"] != null) {
       return MapEntry(
-          "${app.name["C"]!.toLowerCase()} ${app.keywords["C"]!.join()}", key);
+          "${app.name["C"]!.toLowerCase()} ${(app.keywords['C'] ?? []).join(' ')}",
+          key);
     } else {
       return MapEntry(key.toLowerCase(), key);
     }

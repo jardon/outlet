@@ -14,6 +14,7 @@ class Loading extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     AsyncValue<Map<String, Application>> remoteApps =
         ref.watch(remoteAppListProvider);
+    ref.watch(featuredAppList);
 
     return remoteApps.when(
       loading: () => const Center(

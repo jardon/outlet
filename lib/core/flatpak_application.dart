@@ -1,46 +1,44 @@
 import 'dart:core';
+import 'dart:io';
+import 'package:collection/collection.dart';
+import 'package:outlet/appstream.dart/lib/appstream.dart';
 import 'package:outlet/core/application.dart';
 
 class FlatpakApplication extends Application {
-  final String? type;
-  final Bundle? bundle;
+  final String? deployDir;
 
   FlatpakApplication({
     required super.id,
+    super.type = AppstreamComponentType.unknown,
+    super.package,
     super.name,
-    super.summary,
-    super.license,
-    super.description,
-    super.developer,
-    String? icon,
-    super.homepage,
-    super.help,
-    super.translate,
-    super.vcs,
+    super.summary = const {"C": "No summary available"},
+    super.description = const {},
+    super.developerName = const {},
+    super.projectLicense,
+    super.projectGroup,
+    super.icons = const [
+      AppstreamLocalIcon("lib/views/assets/flatpak-icon.svg")
+    ],
+    super.urls = const [],
     super.categories = const [],
+    super.keywords = const {},
     super.screenshots = const [],
-    super.keywords = const [],
+    super.compulsoryForDesktops = const [],
     super.releases = const [],
-    super.content = const {},
+    super.provides = const [],
+    super.launchables = const [],
+    super.languages = const [],
+    super.contentRatings = const {},
     super.featured = false,
-    super.verified = false,
     super.installed = false,
-    super.reviews = const [],
-    this.type,
-    this.bundle,
     super.remote,
     super.version,
-    super.branch,
-    super.current = true,
-    super.arch,
-  }) : super(
-          icon: icon ?? "lib/views/assets/flatpak-icon.svg",
-        );
-
-  @override
-  double? get rating {
-    return null;
-  }
+    super.current,
+    super.bundles,
+    super.custom,
+    this.deployDir,
+  });
 
   @override
   List<String> get categories {
@@ -102,9 +100,49 @@ class FlatpakApplication extends Application {
   }
 
   @override
+  String get icon {
+    final localIcons = icons.whereType<AppstreamLocalIcon>();
+    final cachedIcons = icons.whereType<AppstreamCachedIcon>();
+    final remoteIcons = icons.whereType<AppstreamRemoteIcon>();
+
+    if (localIcons.isNotEmpty) return localIcons.first.filename;
+
+    if (cachedIcons.isNotEmpty && deployDir != null) {
+      var iconList = cachedIcons.toList();
+      iconList.sort((a, b) => (b.height ?? 0).compareTo(a.height ?? 0));
+      var icon = iconList.firstOrNull;
+      if (icon != null) {
+        String cachedIcon = (deployDir!
+                .startsWith("/var/lib/flatpak/appstream"))
+            ? "$deployDir/icons/${icon.height}x${icon.width}/${icon.name}"
+            : "$deployDir/files/share/app-info/icons/flatpak/${icon.height}x${icon.width}/${icon.name}";
+        var file = File(cachedIcon);
+        if (file.existsSync()) return cachedIcon;
+      }
+    }
+
+    if (remoteIcons.isEmpty) return "lib/views/assets/flatpak-icon.svg";
+
+    return remoteIcons
+        .reduce((a, b) => (a.height ?? 0) > (b.height ?? 0) ? a : b)
+        .url;
+  }
+
+  @override
+  bool get verified {
+    for (var item in custom) {
+      var verifiedCustomValue = item['flathub::verification::verified'];
+      if (verifiedCustomValue != null) {
+        return bool.parse(verifiedCustomValue);
+      }
+    }
+    return false;
+  }
+
+  @override
   String getInstallTarget() {
-    if (bundle != null) {
-      return bundle?.value as String;
+    if (bundles.isNotEmpty) {
+      return bundles.first.id;
     } else {
       return id;
     }
@@ -112,10 +150,8 @@ class FlatpakApplication extends Application {
 
   @override
   String getUninstallTarget() {
-    if (bundle != null) {
-      return bundle?.value as String;
-    } else if (type != null && branch != null && arch != null) {
-      return "$type/$id/$arch/$branch";
+    if (bundles.isNotEmpty) {
+      return bundles.first.id;
     } else {
       return id;
     }
@@ -128,18 +164,4 @@ class FlatpakApplication extends Application {
   String launchCommand() {
     return "flatpak run $id";
   }
-}
-
-class Bundle {
-  final String? type;
-  final String? runtime;
-  final String? sdk;
-  final String value;
-
-  Bundle({
-    this.type,
-    this.runtime,
-    this.sdk,
-    required this.value,
-  });
 }

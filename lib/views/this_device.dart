@@ -10,8 +10,10 @@ class ThisDevice extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final apps = ref.watch(installedAppListProvider);
+    final apps = ref.watch(appListProvider);
 
-    return AppList(apps: apps.values.toList(), details: false);
+    return AppList(
+        apps: apps.values.where((app) => app.installed).toList(),
+        details: false);
   }
 }

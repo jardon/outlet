@@ -4,10 +4,11 @@ import 'dart:core';
 import 'package:outlet/backends/flatpak_backend.dart';
 import 'package:outlet/core/application.dart';
 import 'package:outlet/core/flatpak_application.dart';
+import 'package:outlet/appstream.dart/lib/appstream.dart';
 
 interface class Backend {
-  Map<String, Application> getInstalledPackages() {
-    return {};
+  List<String> getInstalledPackages() {
+    return [];
   }
 
   Future<Map<String, Application>> getAllRemotePackages() async {
@@ -44,22 +45,19 @@ class TestBackend implements Backend {
           _pickRandomCategories(categoriesList, 2, random);
 
       apps[appId] = FlatpakApplication(
-        name: "App $i",
+        name: {"C": "App $i"},
         id: appId,
-        icon: "lib/views/assets/flatpak-icon.svg",
-        description: "Description for App $i",
+        icons: const [AppstreamLocalIcon("lib/views/assets/flatpak-icon.svg")],
+        description: {"C": "Description for App $i"},
+        package: null,
+        summary: {"C": "Summary text for App $i"},
+        type: AppstreamComponentType.generic,
         categories: pickedCategories, // Randomly picked categories
         installed: random.nextBool(),
-        verified: random.nextBool(),
-        featured: random.nextBool(),
-        reviews: [
-          {
-            "title": "Review for App $i",
-            "rating": random.nextInt(5) +
-                1, // Random rating between 1 and 5 for review
-            "message": "This is a review message for App $i.",
-          }
+        custom: [
+          {'flathub::verification::verified': "${random.nextBool()}"}
         ],
+        featured: random.nextBool(),
       );
     }
   }
@@ -71,8 +69,8 @@ class TestBackend implements Backend {
   }
 
   @override
-  Map<String, Application> getInstalledPackages() {
-    return apps;
+  List<String> getInstalledPackages() {
+    return ['app-3', 'app-7'];
   }
 
   @override

@@ -86,10 +86,9 @@ class AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
                     featured: widget.app.featured,
                     verified: widget.app.verified,
                     installed: widget.app.installed,
-                    name: widget.app.name ?? widget.app.id,
+                    name: widget.app.name["C"] ?? widget.app.id,
                     icon: widget.app.icon,
                     categories: widget.app.categories,
-                    rating: widget.app.rating,
                   ),
                   widget.details
                       ? ClipRRect(
@@ -100,8 +99,8 @@ class AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
                             child: FadeTransition(
                               opacity: _fadeAnimation,
                               child: Details(
-                                name: widget.app.name ?? widget.app.id,
-                                summary: widget.app.summary ??
+                                name: widget.app.name["C"] ?? widget.app.id,
+                                summary: widget.app.summary["C"] ??
                                     "No summary available.",
                                 categories: widget.app.categories,
                               ),
@@ -123,7 +122,6 @@ class Listing extends StatelessWidget {
     required this.name,
     required this.icon,
     required this.categories,
-    this.rating,
   });
 
   final bool featured;
@@ -134,7 +132,6 @@ class Listing extends StatelessWidget {
   final cardWidth = 300.0;
   final cardHeight = 340.0;
   final List<String> categories;
-  final double? rating;
 
   @override
   Widget build(BuildContext context) {

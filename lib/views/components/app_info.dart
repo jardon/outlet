@@ -41,7 +41,7 @@ class AppInfo extends StatelessWidget {
                 Row(spacing: 10, children: [
                   Flexible(
                       child: Text(
-                    app.name ?? app.id,
+                    app.name["C"] ?? app.id,
                     softWrap: false,
                     overflow: TextOverflow.fade,
                     style: const TextStyle(
@@ -52,14 +52,16 @@ class AppInfo extends StatelessWidget {
                 ]),
                 Expanded(
                     child: Text(
-                  app.summary ?? "No summary available.",
+                  app.summary["C"] ?? "No summary available.",
                   style: const TextStyle(fontSize: 16),
                   softWrap: true,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 )),
                 Row(spacing: 5, children: [
-                  Text((app.developer != null ? "by ${app.developer}" : "")),
+                  Text((app.developerName["C"] != null
+                      ? "by ${app.developerName["C"]}"
+                      : "")),
                   app.verified ? const VerifiedBadge(size: 20) : Container(),
                 ]),
               ],

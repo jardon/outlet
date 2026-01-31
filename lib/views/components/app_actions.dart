@@ -65,8 +65,8 @@ class AppActions extends ConsumerWidget {
                         "installTarget": app.getInstallTarget(),
                         "remote": app.remote!
                       };
-                      actionQueue.add("Installing ${app.name ?? app.id}",
-                          app.id, _installWorker, data);
+                      actionQueue.add("Installing ${app.name}", app.id,
+                          _installWorker, data);
                     }
                   },
                   style: const ButtonStyle(
@@ -97,8 +97,8 @@ class AppActions extends ConsumerWidget {
                   TextButton(
                     onPressed: () async {
                       final data = {"updateTarget": app.getUpdateTarget()};
-                      actionQueue.add("Updating ${app.name ?? app.id}", app.id,
-                          _updateWorker, data);
+                      actionQueue.add(
+                          "Updating ${app.name}", app.id, _updateWorker, data);
                     },
                     style: const ButtonStyle(
                       backgroundColor:
@@ -108,9 +108,6 @@ class AppActions extends ConsumerWidget {
                         style: TextStyle(color: Colors.white)),
                   ),
                 Expanded(child: Container()),
-                Text(app.branch != null
-                    ? '${app.branch![0].toUpperCase()}${app.branch!.substring(1)}'
-                    : ''),
               ]),
             ),
           )

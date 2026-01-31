@@ -45,7 +45,7 @@ class AppDescription extends StatelessWidget {
             ExpandableContainer(
                 maxHeight: 150,
                 child: Html(
-                    data: app.description ?? "No description available.",
+                    data: app.description["C"] ?? "No description available.",
                     style: {
                       "h1": Style(
                         fontSize: FontSize.xxLarge,

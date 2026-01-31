@@ -3,9 +3,9 @@ import 'dart:core';
 import 'dart:ffi' as ffi;
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:collection/collection.dart';
 import 'package:ffi/ffi.dart' as pkg_ffi;
 import 'package:libflatpak/libflatpak.dart';
+import 'package:outlet/appstream.dart/lib/appstream.dart';
 import 'package:outlet/backends/backend.dart';
 import 'package:outlet/core/application.dart';
 import 'package:outlet/core/flatpak_application.dart';
@@ -40,13 +40,13 @@ class FlatpakBackend implements Backend {
   }
 
   @override
-  Map<String, Application> getInstalledPackages() {
+  List<String> getInstalledPackages() {
     final FlatpakBindings bindings =
         FlatpakBindings(ffi.DynamicLibrary.open('libflatpak.so'));
     ffi.Pointer<FlatpakInstallation> installationPtr = getFlatpakInstallation();
     ffi.Pointer<ffi.Pointer<GError>> error =
         pkg_ffi.calloc<ffi.Pointer<GError>>();
-    Map<String, Application> apps = {};
+    List<String> apps = [];
     final ffi.Pointer<GPtrArray> installedRefsPtr =
         bindings.flatpak_installation_list_installed_refs(
             installationPtr, ffi.nullptr, error);
@@ -62,10 +62,6 @@ class FlatpakBackend implements Backend {
 
         final ffi.Pointer<FlatpakInstalledRef> installedRefPtr =
             refVoidPtr.cast<FlatpakInstalledRef>();
-
-        final ffi.Pointer<ffi.Char> dirPtr =
-            bindings.flatpak_installed_ref_get_deploy_dir(installedRefPtr);
-        final deployDir = dirPtr.cast<pkg_ffi.Utf8>().toDartString();
 
         final ffi.Pointer<GBytes> refAppPtr =
             bindings.flatpak_installed_ref_load_appdata(
@@ -90,28 +86,17 @@ class FlatpakBackend implements Backend {
             final XmlElement? componentElement =
                 document.findAllElements('component').firstOrNull;
             if (componentElement == null) {
-              throw XmlParserException(
-                  "Error: Could not find the main <component> tag.");
+              logger.i("Error: Could not find the main <component> tag.");
+              continue;
             }
-            final app = appFromXML(componentElement, deployDir, true, null);
+            final id =
+                componentElement.findElements('id').firstOrNull?.innerText;
+            if (id == null) {
+              logger.i("Could not read component id of InstalledRef.");
+              continue;
+            }
 
-            final ffi.Pointer<FlatpakRef> refPtr =
-                refVoidPtr.cast<FlatpakRef>();
-            ffi.Pointer<ffi.Char> branchPtr =
-                bindings.flatpak_ref_get_branch(refPtr);
-            final String branch = branchPtr.cast<pkg_ffi.Utf8>().toDartString();
-            app.branch = branch;
-
-            app.current = bindings
-                    .flatpak_installed_ref_get_is_current(installedRefPtr) ==
-                1;
-
-            ffi.Pointer<ffi.Char> archPtr =
-                bindings.flatpak_ref_get_arch(refPtr);
-            final String arch = archPtr.cast<pkg_ffi.Utf8>().toDartString();
-            app.arch = arch;
-
-            apps[app.id] = app;
+            apps.add(id);
           } on XmlParserException catch (e) {
             logger.e('Error parsing XML: $e');
           }
@@ -120,29 +105,6 @@ class FlatpakBackend implements Backend {
           logger.w(
               'Failed to load appdata. GError pointer received: ${error.value}');
           error.value = ffi.nullptr;
-          final ffi.Pointer<ffi.Void> refVoidPtr = pdataPtr[i];
-          final ffi.Pointer<FlatpakRef> refPtr = refVoidPtr.cast<FlatpakRef>();
-          final ffi.Pointer<ffi.Char> namePtr =
-              bindings.flatpak_ref_get_name(refPtr);
-          final String id = namePtr.cast<pkg_ffi.Utf8>().toDartString();
-          ffi.Pointer<ffi.Char> branchPtr =
-              bindings.flatpak_ref_get_branch(refPtr);
-          final String branch = branchPtr.cast<pkg_ffi.Utf8>().toDartString();
-
-          final bool current =
-              bindings.flatpak_installed_ref_get_is_current(installedRefPtr) ==
-                  1;
-
-          ffi.Pointer<ffi.Char> archPtr = bindings.flatpak_ref_get_arch(refPtr);
-          final String arch = archPtr.cast<pkg_ffi.Utf8>().toDartString();
-
-          apps[id] = FlatpakApplication(
-            id: id,
-            installed: true,
-            branch: branch,
-            current: current,
-            arch: arch,
-          );
         }
       }
       pkg_ffi.calloc.free(pdataPtr);
@@ -152,258 +114,6 @@ class FlatpakBackend implements Backend {
       pkg_ffi.calloc.free(error);
     }
     return apps;
-  }
-
-  Application appFromXML(XmlElement componentElement, String deployDir,
-      bool installed, String? remote) {
-    final id = componentElement.findElements('id').firstOrNull?.innerText;
-    if (id == null) {
-      throw XmlParserException("Error: Could not find <id> tag.");
-    }
-
-    String? type = componentElement.getAttribute('type');
-    if (type != null && type != "runtime") {
-      type = "app";
-    }
-
-    String? name;
-    for (var nameElement in componentElement.findAllElements('name').where(
-      (element) {
-        return element.parentElement?.name.local != 'developer';
-      },
-    )) {
-      if (nameElement.getAttribute('xml:lang') == null) {
-        name = nameElement.innerText;
-      }
-    }
-
-    String? summary;
-    for (var summaryElement in componentElement.findAllElements('summary')) {
-      if (summaryElement.getAttribute('xml:lang') == null) {
-        summary = summaryElement.innerText;
-      }
-    }
-
-    final license =
-        componentElement.findElements('project_license').firstOrNull?.innerText;
-
-    String? description;
-    for (final child in componentElement.children) {
-      if (child is XmlElement &&
-          child.name.local == 'description' &&
-          child.getAttribute('xml:lang') == null) {
-        description = child.innerText;
-        break;
-      }
-    }
-
-    String? developer;
-    for (var devElement in componentElement.findAllElements('name').where(
-      (element) {
-        return element.parentElement?.name.local == 'developer';
-      },
-    )) {
-      if (devElement.getAttribute('xml:lang') == null) {
-        developer = devElement.innerText;
-      }
-    }
-
-    String? icon;
-    String? remoteIcon;
-    int iconHeight = 0;
-    int remoteIconHeight = 0;
-    for (var iconXML in componentElement.findAllElements('icon')) {
-      String? heightAttr = iconXML.getAttribute('height');
-      int height = (heightAttr != null) ? int.parse(heightAttr) : 0;
-      if (iconXML.getAttribute('type') == 'cached' && height > iconHeight) {
-        icon = (deployDir.startsWith("/var/lib/flatpak/appstream"))
-            ? "$deployDir/icons/${height}x$height/${iconXML.innerText}"
-            : "$deployDir/files/share/app-info/icons/flatpak/${height}x$height/${iconXML.innerText}";
-        iconHeight = height;
-      } else if (iconXML.getAttribute('type') == 'remote' &&
-          height > remoteIconHeight) {
-        remoteIcon = iconXML.innerText;
-        remoteIconHeight = height;
-      }
-    }
-    if (icon != null) {
-      File file = File(icon);
-      if (!file.existsSync()) {
-        icon = null;
-      }
-    }
-
-    String? homepage;
-    String? help;
-    String? translate;
-    String? vcs;
-    for (var url in componentElement.findAllElements('url')) {
-      final type = url.getAttribute('type');
-      final text = url.innerText;
-      switch (type) {
-        case 'homepage':
-          homepage = text;
-        case 'help':
-          help = text;
-        case 'translate':
-          translate = text;
-        case 'vcs-browser':
-          vcs = text;
-      }
-    }
-
-    List<String> categories = [];
-    var categoriesParent =
-        componentElement.findElements('categories').firstOrNull;
-    if (categoriesParent != null) {
-      for (var category in categoriesParent.findElements('category')) {
-        categories.add(category.innerText);
-      }
-    }
-
-    List<Screenshot> screenshots = [];
-    var screenshotsParent =
-        componentElement.findElements('screenshots').firstOrNull;
-    if (screenshotsParent != null) {
-      for (var screenshot in screenshotsParent.findElements('screenshot')) {
-        String? caption;
-        String? thumb;
-        String? full;
-        int min = 1000000;
-        int max = 0;
-        if (screenshot.findElements('caption').isNotEmpty) {
-          caption = screenshot.findElements('caption').first.innerText;
-        }
-        for (var image in screenshot.findElements('image')) {
-          String? heightAttr = image.getAttribute('height');
-          int height = (heightAttr != null) ? int.parse(heightAttr) : 0;
-          if (height < min) {
-            thumb = image.innerText;
-            min = height;
-          }
-          if (height > max) {
-            full = image.innerText;
-            max = height;
-          }
-        }
-        screenshots.add(Screenshot(
-          caption: caption,
-          thumb: thumb!,
-          full: full ?? thumb,
-        ));
-      }
-    }
-
-    List<String> keywords = [];
-    var keywordsParent = componentElement.findElements('keywords').firstOrNull;
-    if (keywordsParent != null) {
-      for (var keyword in keywordsParent.findElements('keyword')) {
-        keywords.add(keyword.innerText);
-      }
-    }
-
-    List<Release> releases = [];
-    final releasesParent =
-        componentElement.findAllElements('releases').firstOrNull;
-    if (releasesParent != null) {
-      for (final release in releasesParent.findElements('release')) {
-        final version = release.getAttribute('version');
-        final type = release.getAttribute('type');
-        final timestamp = release.getAttribute('timestamp');
-        final description =
-            release.findAllElements('description').firstOrNull?.innerText;
-
-        if (version != null && type != null && timestamp != null) {
-          releases.add(Release(
-            version: version,
-            type: type,
-            timestamp: timestamp,
-            description: description,
-          ));
-        } else {
-          logger.w('  -> WARNING: Skipping malformed release tag.');
-        }
-      }
-    }
-
-    final Map<String, String> content = {};
-    final contentRatingElement =
-        componentElement.findAllElements('content_rating').firstOrNull;
-
-    if (contentRatingElement != null) {
-      final attributeElements =
-          contentRatingElement.findAllElements('content_attribute');
-
-      for (final attribute in attributeElements) {
-        final id = attribute.getAttribute('id');
-        final value = attribute.innerText;
-
-        if (id != null) {
-          content[id] = value;
-        } else {
-          logger.w(
-              '  -> WARNING: Skipping content_attribute tag with missing id.');
-        }
-      }
-    }
-
-    bool verified = false;
-    final customParent = componentElement.findAllElements('custom').firstOrNull;
-    if (customParent != null) {
-      for (var value in customParent.findElements('value')) {
-        if (value.getAttribute('key') == 'flathub::verification::verified') {
-          verified = bool.parse(value.innerText);
-        }
-      }
-    }
-
-    Bundle? bundle;
-    final bundleParent = componentElement.findAllElements('bundle').firstOrNull;
-    if (bundleParent != null) {
-      String? type = bundleParent.getAttribute('type');
-      String? runtime = bundleParent.getAttribute('runtime');
-      String? sdk = bundleParent.getAttribute('sdk');
-      bundle = Bundle(
-          type: type,
-          runtime: runtime,
-          sdk: sdk,
-          value: bundleParent.innerText);
-    }
-
-    String? arch;
-    String? branch;
-    if (bundle != null) {
-      List<String> bundleInfo = bundle.value.split('/');
-      type = bundleInfo[0];
-      arch = bundleInfo[2];
-      branch = bundleInfo[3];
-    }
-
-    return FlatpakApplication(
-      id: id,
-      name: name,
-      summary: summary,
-      license: license,
-      description: description,
-      developer: developer,
-      icon: icon ?? remoteIcon,
-      homepage: homepage,
-      help: help,
-      translate: translate,
-      vcs: vcs,
-      categories: categories,
-      screenshots: screenshots,
-      keywords: keywords,
-      releases: releases,
-      content: content,
-      verified: verified,
-      installed: installed,
-      bundle: bundle,
-      remote: remote,
-      branch: branch,
-      arch: arch,
-      type: type,
-    );
   }
 
   @override
@@ -465,18 +175,34 @@ class FlatpakBackend implements Backend {
             appstreamXmlContent =
                 utf8.decode(metaDataBytes, allowMalformed: true);
 
-            try {
-              final XmlDocument document =
-                  XmlDocument.parse(appstreamXmlContent);
-              for (var componentElement
-                  in List.from(document.findAllElements('component'))
-                    ..shuffle()) {
-                Application app = appFromXML(
-                    componentElement, appstreamDir, false, remoteName);
-                apps[app.id] = app;
-              }
-            } on XmlParserException catch (e) {
-              logger.w('Error parsing XML: $e');
+            var collection = AppstreamCollection.fromXml(appstreamXmlContent);
+
+            for (var component in collection.components) {
+              apps[component.id] = FlatpakApplication(
+                id: component.id,
+                package: component.package,
+                name: component.name,
+                summary: component.summary,
+                description: component.description,
+                developerName: component.developerName,
+                projectLicense: component.projectLicense,
+                projectGroup: component.projectGroup,
+                icons: component.icons,
+                urls: component.urls,
+                categories: component.categories,
+                screenshots: component.screenshots,
+                keywords: component.keywords,
+                compulsoryForDesktops: component.compulsoryForDesktops,
+                releases: component.releases,
+                provides: component.provides,
+                contentRatings: component.contentRatings,
+                custom: component.custom,
+                installed: false,
+                bundles: component.bundles,
+                remote: remoteName,
+                type: component.type,
+                deployDir: appstreamDir,
+              );
             }
           }
         } else {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:outlet/core/application.dart';
+import 'package:outlet/appstream.dart/lib/appstream.dart';
 import 'package:outlet/views/screenshots_view.dart';
 import 'package:outlet/views/components/theme.dart';
 
 class Screenshots extends StatelessWidget {
-  final List<Screenshot> screenshots;
+  final List<AppstreamScreenshot> screenshots;
 
   const Screenshots({
     super.key,
@@ -33,7 +33,7 @@ class Screenshots extends StatelessWidget {
 }
 
 class ScreenshotsList extends StatelessWidget {
-  final List<Screenshot> screenshots;
+  final List<AppstreamScreenshot> screenshots;
 
   const ScreenshotsList({
     super.key,
@@ -58,14 +58,22 @@ class ScreenshotsList extends StatelessWidget {
                       SlideAndFadeAnimationPageRoute(
                         pageBuilder: (context, animation, secondaryAnimation) =>
                             ScreenshotsView(
-                          screenshot: screenshots[index].full,
+                          screenshot: screenshots[index]
+                              .images
+                              .firstWhere((image) =>
+                                  image.type == AppstreamImageType.source)
+                              .url,
                         ),
                       ),
                     );
                   },
                   child: Center(
                       child: Image.network(
-                    screenshots[index].thumb,
+                    screenshots[index]
+                        .images
+                        .firstWhere((image) =>
+                            image.type == AppstreamImageType.thumbnail)
+                        .url,
                     fit: BoxFit.cover,
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) return child;
@@ -89,7 +97,7 @@ class ScreenshotsList extends StatelessWidget {
 }
 
 class ScreenshotsGrid extends StatelessWidget {
-  final List<Screenshot> screenshots;
+  final List<AppstreamScreenshot> screenshots;
 
   const ScreenshotsGrid({
     super.key,
@@ -125,14 +133,22 @@ class ScreenshotsGrid extends StatelessWidget {
                           pageBuilder:
                               (context, animation, secondaryAnimation) =>
                                   ScreenshotsView(
-                            screenshot: screenshots[index].full,
+                            screenshot: screenshots[index]
+                                .images
+                                .firstWhere((image) =>
+                                    image.type == AppstreamImageType.source)
+                                .url,
                           ),
                         ),
                       );
                     },
                     child: Center(
                         child: Image.network(
-                      screenshots[index].thumb,
+                      screenshots[index]
+                          .images
+                          .firstWhere((image) =>
+                              image.type == AppstreamImageType.thumbnail)
+                          .url,
                       fit: BoxFit.cover,
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
@@ -157,7 +173,7 @@ class ScreenshotsGrid extends StatelessWidget {
 }
 
 class ScreenshotsExpanded extends StatelessWidget {
-  final List<Screenshot> screenshots;
+  final List<AppstreamScreenshot> screenshots;
 
   const ScreenshotsExpanded({
     super.key,
@@ -176,7 +192,10 @@ class ScreenshotsExpanded extends StatelessWidget {
                 SlideAndFadeAnimationPageRoute(
                   pageBuilder: (context, animation, secondaryAnimation) =>
                       ScreenshotsView(
-                    screenshot: screenshot.full,
+                    screenshot: screenshot.images
+                        .firstWhere(
+                            (image) => image.type == AppstreamImageType.source)
+                        .url,
                   ),
                 ),
               );
@@ -184,7 +203,10 @@ class ScreenshotsExpanded extends StatelessWidget {
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(5.0),
                 child: Image.network(
-                  screenshot.full,
+                  screenshot.images
+                      .firstWhere(
+                          (image) => image.type == AppstreamImageType.source)
+                      .url,
                   fit: BoxFit.cover,
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
@@ -204,7 +226,7 @@ class ScreenshotsExpanded extends StatelessWidget {
       );
     }).toList();
 
-    final List<Screenshot> thumbSize =
+    final List<AppstreamScreenshot> thumbSize =
         screenshots.length > 2 ? screenshots.sublist(2) : [];
     final Color color = fgColor(context);
 

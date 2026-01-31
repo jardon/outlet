@@ -15,7 +15,7 @@ final remoteAppListProvider =
   Map<String, String> env = Platform.environment;
   Map<String, Application> apps = {};
   if (env['TEST_BACKEND_ENABLED'] != null) {
-    return backend.getInstalledPackages();
+    return backend.getAllRemotePackages();
   }
 
   if (env['FLATPAK_ENABLED'] != null) {
@@ -25,16 +25,15 @@ final remoteAppListProvider =
   return apps;
 });
 
-final installedAppListProvider = AutoDisposeNotifierProvider<
-    InstalledAppListNotifier,
-    Map<String, Application>>(InstalledAppListNotifier.new);
+final installedAppListProvider =
+    AutoDisposeNotifierProvider<InstalledAppListNotifier, List<String>>(
+        InstalledAppListNotifier.new);
 
-class InstalledAppListNotifier
-    extends AutoDisposeNotifier<Map<String, Application>> {
-  Map<String, Application> _getInstalledPackages() {
+class InstalledAppListNotifier extends AutoDisposeNotifier<List<String>> {
+  List<String> _getInstalledPackages() {
     final backend = ref.read(backendProvider);
     Map<String, String> env = Platform.environment;
-    Map<String, Application> apps = {};
+    List<String> apps = [];
 
     if (env['TEST_BACKEND_ENABLED'] != null) {
       return backend.getInstalledPackages();
@@ -47,7 +46,7 @@ class InstalledAppListNotifier
   }
 
   @override
-  Map<String, Application> build() {
+  List<String> build() {
     return _getInstalledPackages();
   }
 
@@ -79,28 +78,37 @@ final appListProvider = Provider((ref) {
   final remoteApps = ref.watch(remoteAppListProvider).value ?? {};
   final installedApps = ref.watch(installedAppListProvider);
   final featuredApps = ref.watch(featuredAppList);
-  final allApps = {...remoteApps, ...installedApps};
+
+  // if (installedApps.hasValue)
+  for (var app in installedApps) {
+    try {
+      remoteApps[app]!.installed = true;
+    } catch (e) {
+      logger.w('Failed to find $app in installed list.');
+    }
+  }
 
   if (featuredApps.hasValue) {
     List<String> featured = featuredApps.value!;
 
     for (var app in featured) {
       try {
-        allApps[app]!.featured = true;
+        remoteApps[app]!.featured = true;
       } catch (e) {
         logger.w('Failed to find $app in featured list.');
       }
     }
   }
-  return allApps;
+  return remoteApps;
 });
 
 final searchKeywordsProvider = Provider((ref) {
   final allApps = ref.watch(appListProvider);
 
   return allApps.map((key, app) {
-    if (app.name != null) {
-      return MapEntry("${app.name!.toLowerCase()} ${app.keywords.join()}", key);
+    if (app.name["C"] != null) {
+      return MapEntry(
+          "${app.name["C"]!.toLowerCase()} ${app.keywords["C"]!.join()}", key);
     } else {
       return MapEntry(key.toLowerCase(), key);
     }

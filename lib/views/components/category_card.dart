@@ -147,7 +147,8 @@ class _CategoryCardState extends State<CategoryCard> {
                                   padding:
                                       const EdgeInsets.only(top: 5, bottom: 5),
                                   child: Text(
-                                      (widget.apps[_currentIndex].description ??
+                                      (widget.apps[_currentIndex]
+                                                  .description["C"] ??
                                               "No description available.")
                                           .trimLeft(),
                                       style:
@@ -192,7 +193,8 @@ class _CategoryCardState extends State<CategoryCard> {
                           child: Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 5),
                               child: Text(
-                                  (widget.apps[_currentIndex].description ??
+                                  (widget.apps[_currentIndex]
+                                              .description["C"] ??
                                           "No description available.")
                                       .trimLeft(),
                                   style: const TextStyle(color: Colors.white),

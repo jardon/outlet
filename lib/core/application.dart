@@ -30,14 +30,14 @@ class Application extends AppstreamComponent {
     this.installed = false,
     this.remote,
     this.version,
-    this.current,
+    this.current = true,
   }) : super(name: name ?? {"C": id});
 
   bool featured;
   bool installed;
   final String? remote;
   final String? version;
-  bool? current;
+  bool current;
 
   String getLocalizedName() {
     final key = bestLanguageKey(name);

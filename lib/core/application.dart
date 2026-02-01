@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'dart:ui';
 import 'package:outlet/appstream.dart/lib/appstream.dart';
 
 class Application extends AppstreamComponent {
@@ -38,6 +39,50 @@ class Application extends AppstreamComponent {
   final String? version;
   bool? current;
 
+  String getLocalizedName() {
+    final key = bestLanguageKey(name);
+    return name.getOrDefault(key, '');
+  }
+
+  String getLocalizedDeveloperName() {
+    final key = bestLanguageKey(name);
+    return developerName.getOrDefault(key, '');
+  }
+
+  List<String> getLocalizedKeywords() {
+    final key = bestLanguageKey(keywords);
+    return keywords.getOrDefault(key, []);
+  }
+
+  String getLocalizedSummary() {
+    final key = bestLanguageKey(summary);
+    return summary.getOrDefault(key, '');
+  }
+
+  String getLocalizedDescription() {
+    final key = bestLanguageKey(description);
+    return description.getOrDefault(key, '');
+  }
+
+  String? bestLanguageKey<T>(Map<String, T> keyedByLanguage) {
+    final locale = PlatformDispatcher.instance.locale;
+
+    if (locale.toLanguageTag() == 'und') return null;
+
+    final countryCode = locale.countryCode;
+    final languageCode = locale.languageCode;
+    final fullLocale = '${languageCode}_$countryCode';
+    const fallback = 'C';
+    final candidates = [fullLocale, languageCode, fallback];
+    final keys = keyedByLanguage.keys;
+
+    for (final candidate in candidates) {
+      if (keys.contains(candidate)) return candidate;
+    }
+
+    return null;
+  }
+
   String get icon {
     final localIcons = icons.whereType<AppstreamLocalIcon>();
     final remoteIcons = icons.whereType<AppstreamRemoteIcon>();
@@ -60,4 +105,14 @@ class Application extends AppstreamComponent {
   String getUpdateTarget() => id;
 
   String launchCommand() => id;
+}
+
+extension _GetOrDefault<K, V> on Map<K, V> {
+  V getOrDefault(K? key, V fallback) {
+    if (key == null) {
+      return fallback;
+    }
+
+    return this[key] ?? fallback;
+  }
 }

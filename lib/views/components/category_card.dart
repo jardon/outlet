@@ -114,9 +114,8 @@ class _CategoryCardState extends State<CategoryCard> {
       const double breakpoint = 600.0;
       final bool isWide = constraints.maxWidth > breakpoint;
       Widget description = Html(
-          data: (widget.apps[_currentIndex].description["C"] ??
-                  "No description available.")
-              .trimLeft(),
+          data:
+              (widget.apps[_currentIndex].getLocalizedDescription()).trimLeft(),
           style: {
             "p": Style(
               margin: Margins.zero,

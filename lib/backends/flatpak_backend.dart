@@ -40,13 +40,13 @@ class FlatpakBackend implements Backend {
   }
 
   @override
-  List<String> getInstalledPackages() {
+  Map<String, bool> getInstalledPackages() {
     final FlatpakBindings bindings =
         FlatpakBindings(ffi.DynamicLibrary.open('libflatpak.so'));
     ffi.Pointer<FlatpakInstallation> installationPtr = getFlatpakInstallation();
     ffi.Pointer<ffi.Pointer<GError>> error =
         pkg_ffi.calloc<ffi.Pointer<GError>>();
-    List<String> apps = [];
+    Map<String, bool> apps = {};
     final ffi.Pointer<GPtrArray> installedRefsPtr =
         bindings.flatpak_installation_list_installed_refs(
             installationPtr, ffi.nullptr, error);
@@ -70,6 +70,9 @@ class FlatpakBackend implements Backend {
           error,
         );
         if (error.value == ffi.nullptr) {
+          final current =
+              bindings.flatpak_installed_ref_get_is_current(installedRefPtr) ==
+                  1;
           final int refAppSize = bindings.g_bytes_get_size(refAppPtr);
           final sizeP = pkg_ffi.malloc<gsize>();
           sizeP.value = refAppSize;
@@ -96,7 +99,7 @@ class FlatpakBackend implements Backend {
               continue;
             }
 
-            apps.add(id);
+            apps[id] = current;
           } on XmlParserException catch (e) {
             logger.e('Error parsing XML: $e');
           }

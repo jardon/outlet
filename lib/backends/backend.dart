@@ -7,8 +7,8 @@ import 'package:outlet/core/flatpak_application.dart';
 import 'package:outlet/appstream.dart/lib/appstream.dart';
 
 interface class Backend {
-  List<String> getInstalledPackages() {
-    return [];
+  Map<String, bool> getInstalledPackages() {
+    return {};
   }
 
   Future<Map<String, Application>> getAllRemotePackages() async {
@@ -69,8 +69,8 @@ class TestBackend implements Backend {
   }
 
   @override
-  List<String> getInstalledPackages() {
-    return ['app-3', 'app-7'];
+  Map<String, bool> getInstalledPackages() {
+    return {'app-3': true, 'app-7': false};
   }
 
   @override

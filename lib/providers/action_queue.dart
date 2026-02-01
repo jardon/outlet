@@ -7,7 +7,7 @@ import 'package:outlet/providers/application_provider.dart';
 
 class ActionQueueNotifier extends AutoDisposeNotifier<ActionQueueStatus> {
   final Queue<Action> _queue = Queue();
-  final List<String> _completedActions = [];
+  final Set<String> _completedActions = {};
   Action? _currentAction;
   bool _isExecuting = false;
 

@@ -158,7 +158,7 @@ class FlatpakApplication extends Application {
   }
 
   @override
-  getUpdateTarget() => id;
+  getUpdateTarget() => bundles.firstOrNull?.id ?? id;
 
   @override
   String launchCommand() {

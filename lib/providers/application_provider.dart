@@ -26,14 +26,14 @@ final remoteAppListProvider =
 });
 
 final installedAppListProvider =
-    AutoDisposeNotifierProvider<InstalledAppListNotifier, List<String>>(
+    AutoDisposeNotifierProvider<InstalledAppListNotifier, Map<String, bool>>(
         InstalledAppListNotifier.new);
 
-class InstalledAppListNotifier extends AutoDisposeNotifier<List<String>> {
-  List<String> _getInstalledPackages() {
+class InstalledAppListNotifier extends AutoDisposeNotifier<Map<String, bool>> {
+  Map<String, bool> _getInstalledPackages() {
     final backend = ref.read(backendProvider);
     Map<String, String> env = Platform.environment;
-    List<String> apps = [];
+    Map<String, bool> apps = {};
 
     if (env['TEST_BACKEND_ENABLED'] != null) {
       return backend.getInstalledPackages();
@@ -46,7 +46,7 @@ class InstalledAppListNotifier extends AutoDisposeNotifier<List<String>> {
   }
 
   @override
-  List<String> build() {
+  Map<String, bool> build() {
     return _getInstalledPackages();
   }
 
@@ -79,10 +79,10 @@ final appListProvider = Provider((ref) {
   final installedApps = ref.watch(installedAppListProvider);
   final featuredApps = ref.watch(featuredAppList);
 
-  // if (installedApps.hasValue)
-  for (var app in installedApps) {
+  for (var app in installedApps.entries) {
     try {
-      remoteApps[app]!.installed = true;
+      remoteApps[app.key]!.installed = true;
+      remoteApps[app.key]!.current = app.value;
     } catch (e) {
       logger.w('Failed to find $app in installed list.');
     }

@@ -132,7 +132,7 @@ class _SearchBarAppState extends ConsumerState<SearchBarApp> {
                     final appId = searchKeywords[result.choice]!;
                     final app = ref.read(liveApplicationProvider(appId));
                     return ListTile(
-                      title: Text(app!.name["C"] ?? app.id),
+                      title: Text(app!.getLocalizedName()),
                       leading: SizedBox(
                           width: 45, child: AppIconLoader(icon: app.icon)),
                       contentPadding: const EdgeInsets.symmetric(

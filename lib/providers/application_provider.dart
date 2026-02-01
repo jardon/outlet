@@ -106,13 +106,9 @@ final searchKeywordsProvider = Provider((ref) {
   final allApps = ref.watch(appListProvider);
 
   return allApps.map((key, app) {
-    if (app.name["C"] != null) {
-      return MapEntry(
-          "${app.name["C"]!.toLowerCase()} ${(app.keywords['C'] ?? []).join(' ')}",
-          key);
-    } else {
-      return MapEntry(key.toLowerCase(), key);
-    }
+    return MapEntry(
+        "${app.getLocalizedName().toLowerCase()} ${(app.getLocalizedKeywords()).join(' ')}",
+        key);
   });
 });
 

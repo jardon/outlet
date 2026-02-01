@@ -44,23 +44,21 @@ class AppDescription extends StatelessWidget {
             const SizedBox(height: 8),
             ExpandableContainer(
                 maxHeight: 150,
-                child: Html(
-                    data: app.description["C"] ?? "No description available.",
-                    style: {
-                      "h1": Style(
-                        fontSize: FontSize.xxLarge,
-                        textAlign: TextAlign.center,
-                      ),
-                      "p": Style(
-                        margin: Margins.zero,
-                        padding: HtmlPaddings.zero,
-                        lineHeight: const LineHeight(1.5),
-                      ),
-                      "ul": Style(
-                        padding: HtmlPaddings.only(left: 20),
-                        margin: Margins.only(top: 8, bottom: 8),
-                      ),
-                    })),
+                child: Html(data: app.getLocalizedDescription(), style: {
+                  "h1": Style(
+                    fontSize: FontSize.xxLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                  "p": Style(
+                    margin: Margins.zero,
+                    padding: HtmlPaddings.zero,
+                    lineHeight: const LineHeight(1.5),
+                  ),
+                  "ul": Style(
+                    padding: HtmlPaddings.only(left: 20),
+                    margin: Margins.only(top: 8, bottom: 8),
+                  ),
+                })),
           ],
         ),
       ),

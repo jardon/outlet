@@ -234,7 +234,7 @@ class PendingDownloadsItem extends ConsumerWidget {
                 AppIconLoader(icon: app.icon),
                 Expanded(
                     child: Text(
-                  app.name["C"] ?? app.id,
+                  app.getLocalizedName(),
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

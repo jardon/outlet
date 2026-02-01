@@ -86,7 +86,7 @@ class AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
                     featured: widget.app.featured,
                     verified: widget.app.verified,
                     installed: widget.app.installed,
-                    name: widget.app.name["C"] ?? widget.app.id,
+                    name: widget.app.getLocalizedName(),
                     icon: widget.app.icon,
                     categories: widget.app.categories,
                   ),
@@ -99,9 +99,8 @@ class AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
                             child: FadeTransition(
                               opacity: _fadeAnimation,
                               child: Details(
-                                name: widget.app.name["C"] ?? widget.app.id,
-                                summary: widget.app.summary["C"] ??
-                                    "No summary available.",
+                                name: widget.app.getLocalizedName(),
+                                summary: widget.app.getLocalizedSummary(),
                                 categories: widget.app.categories,
                               ),
                             ),

@@ -32,9 +32,9 @@ class AppDescription extends StatelessWidget {
             const SizedBox(height: 8),
             Row(
               children: [
-                const Expanded(
-                    child: Text('Description',
-                        style: TextStyle(
+                Expanded(
+                    child: Text(app.getLocalizedSummary(),
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ))),

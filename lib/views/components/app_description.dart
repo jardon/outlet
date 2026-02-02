@@ -38,6 +38,7 @@ class AppDescription extends StatelessWidget {
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ))),
+                const SizedBox(width: 10),
                 CategoryList(categories: app.categories, size: 30),
               ],
             ),

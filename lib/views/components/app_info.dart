@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:outlet/core/application.dart';
 import 'package:outlet/views/components/theme.dart';
@@ -50,20 +51,30 @@ class AppInfo extends StatelessWidget {
                     ),
                   )),
                 ]),
-                Expanded(
-                    child: Text(
-                  app.getLocalizedSummary(),
-                  style: const TextStyle(fontSize: 16),
-                  softWrap: true,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                )),
                 Row(spacing: 5, children: [
                   Text((app.getLocalizedDeveloperName() != ""
                       ? "by ${app.getLocalizedDeveloperName()}"
                       : "")),
                   app.verified ? const VerifiedBadge(size: 20) : Container(),
                 ]),
+                Expanded(child: Container()),
+                if (app.installed)
+                  TextButton(
+                    onPressed: () async {
+                      var launch = app.launchCommand();
+                      await Process.start(
+                        launch.split(' ').first,
+                        launch.split(' ').sublist(1),
+                        mode: ProcessStartMode.detached,
+                      );
+                    },
+                    style: const ButtonStyle(
+                      backgroundColor:
+                          WidgetStatePropertyAll<Color>(Colors.black),
+                    ),
+                    child: const Text("Open",
+                        style: TextStyle(color: Colors.white)),
+                  ),
               ],
             )),
           ],

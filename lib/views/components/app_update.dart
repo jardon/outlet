@@ -8,10 +8,10 @@ import 'package:outlet/providers/application_provider.dart';
 import 'package:outlet/views/components/expandable_container.dart';
 import 'package:outlet/views/components/theme.dart';
 
-class AppActions extends ConsumerWidget {
+class AppUpdate extends ConsumerWidget {
   final String id;
 
-  const AppActions({
+  const AppUpdate({
     super.key,
     required this.id,
   });

@@ -43,7 +43,7 @@ class AppView extends StatelessWidget {
                                     flex: 1,
                                     child: Column(spacing: 16.0, children: [
                                       AppInfo(id: app!.id),
-                                      AppUpdate(id: app!.id),
+                                      if (!app!.current) AppUpdate(id: app!.id),
                                       AppDescription(app: app!),
                                       AppLinks(app: app!),
                                     ])),
@@ -59,7 +59,7 @@ class AppView extends StatelessWidget {
                           padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
                           child: Column(spacing: 16.0, children: [
                             AppInfo(id: app!.id),
-                            AppUpdate(id: app!.id),
+                            if (!app!.current) AppUpdate(id: app!.id),
                             AppDescription(app: app!),
                             Screenshots(screenshots: app!.screenshots),
                             AppLinks(app: app!),

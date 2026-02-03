@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:outlet/core/application.dart';
-import 'package:outlet/views/components/app_actions.dart';
 import 'package:outlet/views/components/app_description.dart';
 import 'package:outlet/views/components/app_info.dart';
 import 'package:outlet/views/components/app_links.dart';
+import 'package:outlet/views/components/app_update.dart';
 import 'package:outlet/views/components/screenshots.dart';
 
 class AppView extends StatelessWidget {
@@ -43,7 +43,7 @@ class AppView extends StatelessWidget {
                                     flex: 1,
                                     child: Column(spacing: 16.0, children: [
                                       AppInfo(id: app!.id),
-                                      AppActions(id: app!.id),
+                                      AppUpdate(id: app!.id),
                                       AppDescription(app: app!),
                                       AppLinks(app: app!),
                                     ])),
@@ -59,7 +59,7 @@ class AppView extends StatelessWidget {
                           padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
                           child: Column(spacing: 16.0, children: [
                             AppInfo(id: app!.id),
-                            AppActions(id: app!.id),
+                            AppUpdate(id: app!.id),
                             AppDescription(app: app!),
                             Screenshots(screenshots: app!.screenshots),
                             AppLinks(app: app!),

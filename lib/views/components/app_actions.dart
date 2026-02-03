@@ -20,22 +20,6 @@ class AppActions extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final app = ref.watch(liveApplicationProvider(id));
     final actionQueue = ref.watch(actionQueueProvider.notifier);
-    bool isQueued = false;
-
-    if (app != null) {
-      isQueued = ref.watch(isAppActionQueuedProvider(app.id));
-    }
-
-    String getInstallButtonText() {
-      if (app != null) {
-        if (app.installed) {
-          return 'Uninstall';
-        } else if (isQueued) {
-          return 'Cancel';
-        }
-      }
-      return 'Install';
-    }
 
     final Color color = fgColor(context);
 
@@ -52,32 +36,6 @@ class AppActions extends ConsumerWidget {
               child: Column(children: [
                 Row(spacing: 10, children: [
                   Text("Version ${app.releases.first.version ?? 'unknown'}"),
-                  TextButton(
-                    onPressed: () async {
-                      if (app.installed) {
-                        final data = {
-                          "uninstallTarget": app.getUninstallTarget()
-                        };
-                        await _uninstallWorker(data);
-                        ref.read(installedAppListProvider.notifier).refresh();
-                      } else if (isQueued) {
-                        actionQueue.removeAction(app.id);
-                      } else {
-                        final data = {
-                          "installTarget": app.getInstallTarget(),
-                          "remote": app.remote!
-                        };
-                        actionQueue.add("Installing ${app.getLocalizedName()}",
-                            app.id, _installWorker, data);
-                      }
-                    },
-                    style: const ButtonStyle(
-                      backgroundColor:
-                          WidgetStatePropertyAll<Color>(Colors.black),
-                    ),
-                    child: Text(getInstallButtonText(),
-                        style: const TextStyle(color: Colors.white)),
-                  ),
                   if (app.installed && app.current != true)
                     TextButton(
                       onPressed: () async {
@@ -119,21 +77,6 @@ class AppActions extends ConsumerWidget {
           )
         : Container();
   }
-}
-
-Future<void> _installWorker(Map<String, String> data) async {
-  Backend backend = getBackend();
-  await Isolate.run(() {
-    backend.installApplication(
-        data["installTarget"] as String, data["remote"] as String);
-  });
-}
-
-Future<void> _uninstallWorker(Map<String, String> data) async {
-  Backend backend = getBackend();
-  await Isolate.run(() {
-    backend.uninstallApplication(data["uninstallTarget"] as String);
-  });
 }
 
 Future<void> _updateWorker(Map<String, String> data) async {

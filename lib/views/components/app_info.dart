@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'dart:isolate';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:outlet/backends/backend.dart';
 import 'package:outlet/providers/action_queue.dart';
 import 'package:outlet/providers/application_provider.dart';
 import 'package:outlet/views/components/theme.dart';
@@ -18,10 +20,24 @@ class AppInfo extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final app = ref.watch(liveApplicationProvider(id));
+    final actionQueue = ref.watch(actionQueueProvider.notifier);
+
     final Color color = fgColor(context);
+    bool isQueued = false;
 
     if (app != null) {
-      ref.watch(isAppActionQueuedProvider(app.id));
+      isQueued = ref.watch(isAppActionQueuedProvider(app.id));
+    }
+
+    String getInstallButtonText() {
+      if (app != null) {
+        if (app.installed) {
+          return 'Uninstall';
+        } else if (isQueued) {
+          return 'Cancel';
+        }
+      }
+      return 'Install';
     }
 
     return (app != null)
@@ -68,23 +84,56 @@ class AppInfo extends ConsumerWidget {
                             : Container(),
                       ]),
                       Expanded(child: Container()),
-                      if (app.installed)
+                      Row(spacing: 10, children: [
+                        if (app.installed)
+                          TextButton(
+                            onPressed: () async {
+                              var launch = app.launchCommand();
+                              await Process.start(
+                                launch.split(' ').first,
+                                launch.split(' ').sublist(1),
+                                mode: ProcessStartMode.detached,
+                              );
+                            },
+                            style: const ButtonStyle(
+                              backgroundColor:
+                                  WidgetStatePropertyAll<Color>(Colors.black),
+                            ),
+                            child: const Text("Open",
+                                style: TextStyle(color: Colors.white)),
+                          ),
                         TextButton(
                           onPressed: () async {
-                            var launch = app.launchCommand();
-                            await Process.start(
-                              launch.split(' ').first,
-                              launch.split(' ').sublist(1),
-                              mode: ProcessStartMode.detached,
-                            );
+                            if (app.installed) {
+                              final data = {
+                                "uninstallTarget": app.getUninstallTarget()
+                              };
+                              await _uninstallWorker(data);
+                              ref
+                                  .read(installedAppListProvider.notifier)
+                                  .refresh();
+                            } else if (isQueued) {
+                              actionQueue.removeAction(app.id);
+                            } else {
+                              final data = {
+                                "installTarget": app.getInstallTarget(),
+                                "remote": app.remote!
+                              };
+                              actionQueue.add(
+                                  "Installing ${app.getLocalizedName()}",
+                                  app.id,
+                                  _installWorker,
+                                  data);
+                            }
                           },
                           style: const ButtonStyle(
                             backgroundColor:
                                 WidgetStatePropertyAll<Color>(Colors.black),
                           ),
-                          child: const Text("Open",
-                              style: TextStyle(color: Colors.white)),
-                        ),
+                          child: Text(getInstallButtonText(),
+                              style: const TextStyle(color: Colors.white)),
+                        )
+                      ]),
                     ],
                   )),
                 ],
@@ -93,4 +142,19 @@ class AppInfo extends ConsumerWidget {
           )
         : Container();
   }
+}
+
+Future<void> _installWorker(Map<String, String> data) async {
+  Backend backend = getBackend();
+  await Isolate.run(() {
+    backend.installApplication(
+        data["installTarget"] as String, data["remote"] as String);
+  });
+}
+
+Future<void> _uninstallWorker(Map<String, String> data) async {
+  Backend backend = getBackend();
+  await Isolate.run(() {
+    backend.uninstallApplication(data["uninstallTarget"] as String);
+  });
 }

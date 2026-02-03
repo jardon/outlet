@@ -1,9 +1,11 @@
 import 'dart:isolate';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:outlet/backends/backend.dart';
 import 'package:outlet/providers/action_queue.dart';
 import 'package:outlet/providers/application_provider.dart';
+import 'package:outlet/views/components/expandable_container.dart';
 import 'package:outlet/views/components/theme.dart';
 
 class AppActions extends ConsumerWidget {
@@ -39,7 +41,6 @@ class AppActions extends ConsumerWidget {
 
     return (app != null)
         ? Container(
-            height: 70,
             decoration: BoxDecoration(
                 color: color,
                 borderRadius: BorderRadius.circular(25),
@@ -47,49 +48,72 @@ class AppActions extends ConsumerWidget {
                   BoxShadow(color: Colors.black12, blurRadius: 20.0)
                 ]),
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              child: Row(spacing: 10, children: [
-                TextButton(
-                  onPressed: () async {
-                    if (app.installed) {
-                      final data = {
-                        "uninstallTarget": app.getUninstallTarget()
-                      };
-                      await _uninstallWorker(data);
-                      ref.read(installedAppListProvider.notifier).refresh();
-                    } else if (isQueued) {
-                      actionQueue.removeAction(app.id);
-                    } else {
-                      final data = {
-                        "installTarget": app.getInstallTarget(),
-                        "remote": app.remote!
-                      };
-                      actionQueue.add("Installing ${app.getLocalizedName()}",
-                          app.id, _installWorker, data);
-                    }
-                  },
-                  style: const ButtonStyle(
-                    backgroundColor:
-                        WidgetStatePropertyAll<Color>(Colors.black),
-                  ),
-                  child: Text(getInstallButtonText(),
-                      style: const TextStyle(color: Colors.white)),
-                ),
-                if (app.installed && app.current != true)
+              padding: const EdgeInsets.all(20),
+              child: Column(children: [
+                Row(spacing: 10, children: [
+                  Text("Version ${app.releases.first.version ?? 'unknown'}"),
                   TextButton(
                     onPressed: () async {
-                      final data = {"updateTarget": app.getUpdateTarget()};
-                      actionQueue.add("Updating ${app.getLocalizedName()}",
-                          app.id, _updateWorker, data);
+                      if (app.installed) {
+                        final data = {
+                          "uninstallTarget": app.getUninstallTarget()
+                        };
+                        await _uninstallWorker(data);
+                        ref.read(installedAppListProvider.notifier).refresh();
+                      } else if (isQueued) {
+                        actionQueue.removeAction(app.id);
+                      } else {
+                        final data = {
+                          "installTarget": app.getInstallTarget(),
+                          "remote": app.remote!
+                        };
+                        actionQueue.add("Installing ${app.getLocalizedName()}",
+                            app.id, _installWorker, data);
+                      }
                     },
                     style: const ButtonStyle(
                       backgroundColor:
                           WidgetStatePropertyAll<Color>(Colors.black),
                     ),
-                    child: const Text("Update",
-                        style: TextStyle(color: Colors.white)),
+                    child: Text(getInstallButtonText(),
+                        style: const TextStyle(color: Colors.white)),
                   ),
-                Expanded(child: Container()),
+                  if (app.installed && app.current != true)
+                    TextButton(
+                      onPressed: () async {
+                        final data = {"updateTarget": app.getUpdateTarget()};
+                        actionQueue.add("Updating ${app.getLocalizedName()}",
+                            app.id, _updateWorker, data);
+                      },
+                      style: const ButtonStyle(
+                        backgroundColor:
+                            WidgetStatePropertyAll<Color>(Colors.black),
+                      ),
+                      child: const Text("Update",
+                          style: TextStyle(color: Colors.white)),
+                    ),
+                  Expanded(child: Container()),
+                ]),
+                ExpandableContainer(
+                    maxHeight: 100,
+                    child: Html(
+                        data: app.releases.first.description['C'] ??
+                            'No release notes available.',
+                        style: {
+                          "h1": Style(
+                            fontSize: FontSize.xxLarge,
+                            textAlign: TextAlign.center,
+                          ),
+                          "p": Style(
+                            margin: Margins.zero,
+                            padding: HtmlPaddings.zero,
+                            lineHeight: const LineHeight(1.5),
+                          ),
+                          "ul": Style(
+                            padding: HtmlPaddings.only(left: 20),
+                            margin: Margins.only(top: 8, bottom: 8),
+                          ),
+                        })),
               ]),
             ),
           )

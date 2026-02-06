@@ -217,7 +217,7 @@ class Details extends StatelessWidget {
                           fontSize: 20,
                         ),
                       ))),
-              CategoryList(size: 50, categories: categories),
+              CategoryList(size: 50, categories: categories.take(4).toList()),
             ])));
   }
 }

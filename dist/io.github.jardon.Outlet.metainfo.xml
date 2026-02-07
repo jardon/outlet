@@ -42,6 +42,9 @@
   </categories>
   <releases>
     <release version="1.0.0" date="2026-01-12">
+      <description>
+        <p>Initial release of Outlet!</p>
+      </description>
       <url type="details">https://github.com/jardon/outlet/releases/tag/1.0.0</url>
     </release>
   </releases>

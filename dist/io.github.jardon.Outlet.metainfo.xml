@@ -21,19 +21,19 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/heads/main/dist/images/themes.png</image>
+      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/tags/1.1.0/dist/images/themes.png</image>
       <caption>Theme support</caption>
     </screenshot>
     <screenshot>
-      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/heads/main/dist/images/dynamic-layout.png</image>
+      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/tags/1.1.0/dist/images/dynamic-layout.png</image>
       <caption>Dynamic layout</caption>
     </screenshot>
     <screenshot>
-      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/heads/main/dist/images/fuzzy-search.png</image>
+      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/tags/1.1.0/dist/images/fuzzy-search.png</image>
       <caption>Fuzzy search</caption>
     </screenshot>
     <screenshot>
-      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/heads/main/dist/images/app-view.png</image>
+      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/tags/1.1.0/dist/images/app-view.png</image>
       <caption>App view</caption>
     </screenshot>
   </screenshots>
@@ -41,6 +41,36 @@
     <category translate="no">Utility</category>
   </categories>
   <releases>
+    <release version="1.1.0" date="2026-02-07">
+      <description>
+        <p>New feature release.  This includes various features and fixes, but focuses on changes to the app view and localization support.  Here's a list of relevant changes:</p>
+        <ul>chore(flutter): set version to 3.38.9</ul>
+        <ul>fix(appcard):[#132] take 4 categories on details</ul>
+        <ul>ui: conditionally load AppUpdate</ul>
+        <ul>ui: rename AppActions to AppUpdate</ul>
+        <ul>ui: move install/uninstall button to AppInfo</ul>
+        <ul>ui(actions): add release information</ul>
+        <ul>ui: move open button to AppInfo</ul>
+        <ul>fix(appdescription): add 10px Sizedbox between summary and categories</ul>
+        <ul>ui(appdescription): replace description text with summary</ul>
+        <ul>fix(update): read installedRef for update</ul>
+        <ul>fix(application): default current to true</ul>
+        <ul>fix(flatpak): set update target to bundle id</ul>
+        <ul>fix(downloads): convert completed list to set</ul>
+        <ul>fix(actionsqueue): use localized name</ul>
+        <ul>feat: display translated text from the appstream</ul>
+        <ul>fix(categorycard): parse html string</ul>
+        <ul>fix(search): default to empty list for keywords</ul>
+        <ul>refactor: utilize appstream.dart lib</ul>
+        <ul>feat: add libappstream lib</ul>
+        <ul>fix(categories): add default behavior for AudioVideo</ul>
+        <ul>feat(actions): add update button</ul>
+        <ul>feat(application): add update target</ul>
+        <ul>feat(backend): add updateApplication func</ul>
+        <ul>feat: launch app from app view</ul>
+      </description>
+      <url type="details">https://github.com/jardon/outlet/releases/tag/1.1.0</url>
+    </release>
     <release version="1.0.0" date="2026-01-12">
       <description>
         <p>Initial release of Outlet!</p>

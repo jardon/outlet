@@ -1,0 +1,4 @@
+#!/bin/bash
+
+dart format lib test
+dart analyze

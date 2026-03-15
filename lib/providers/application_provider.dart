@@ -79,10 +79,15 @@ final appListProvider = Provider((ref) {
   final installedApps = ref.watch(installedAppListProvider);
   final featuredApps = ref.watch(featuredAppList);
 
+  final applist = Map.of(remoteApps);
+  applist.forEach((_, app) {
+    app.installed = false;
+  });
+
   for (var app in installedApps.entries) {
     try {
-      remoteApps[app.key]!.installed = true;
-      remoteApps[app.key]!.current = app.value;
+      applist[app.key]!.installed = true;
+      applist[app.key]!.current = app.value;
     } catch (e) {
       logger.w('Failed to find $app in installed list.');
     }
@@ -93,13 +98,13 @@ final appListProvider = Provider((ref) {
 
     for (var app in featured) {
       try {
-        remoteApps[app]!.featured = true;
+        applist[app]!.featured = true;
       } catch (e) {
         logger.w('Failed to find $app in featured list.');
       }
     }
   }
-  return remoteApps;
+  return applist;
 });
 
 final searchKeywordsProvider = Provider((ref) {
@@ -115,6 +120,8 @@ final searchKeywordsProvider = Provider((ref) {
 final liveApplicationProvider =
     Provider.family<Application?, String>((ref, appId) {
   final allApps = ref.watch(appListProvider);
+
+  logger.i('Refreshed provider for $appId');
 
   return allApps[appId];
 });

@@ -84,7 +84,6 @@ final appListProvider = Provider((ref) {
       id,
       app.copyWith(
         installed: installedApps.containsKey(id),
-        current: installedApps[id] ?? false,
         featured: featuredApps.contains(id),
       ),
     );

@@ -164,4 +164,36 @@ class FlatpakApplication extends Application {
   String launchCommand() {
     return "flatpak run $id";
   }
+
+  @override
+  FlatpakApplication copyWith(
+      {bool? installed, bool? current, bool? featured}) {
+    return FlatpakApplication(
+      id: id,
+      package: package,
+      name: name,
+      summary: summary,
+      description: description,
+      developerName: developerName,
+      projectLicense: projectLicense,
+      projectGroup: projectGroup,
+      icons: icons,
+      urls: urls,
+      categories: categories,
+      screenshots: screenshots,
+      keywords: keywords,
+      compulsoryForDesktops: compulsoryForDesktops,
+      releases: releases,
+      provides: provides,
+      contentRatings: contentRatings,
+      custom: custom,
+      installed: installed ?? this.installed,
+      bundles: bundles,
+      remote: remote,
+      type: type,
+      deployDir: deployDir,
+      current: current ?? this.current,
+      featured: featured ?? this.featured,
+    );
+  }
 }

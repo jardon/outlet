@@ -105,6 +105,35 @@ class Application extends AppstreamComponent {
   String getUpdateTarget() => id;
 
   String launchCommand() => id;
+
+  Application copyWith({bool? installed, bool? current, bool? featured}) {
+    return Application(
+      id: id,
+      package: package,
+      name: name,
+      summary: summary,
+      description: description,
+      developerName: developerName,
+      projectLicense: projectLicense,
+      projectGroup: projectGroup,
+      icons: icons,
+      urls: urls,
+      categories: categories,
+      screenshots: screenshots,
+      keywords: keywords,
+      compulsoryForDesktops: compulsoryForDesktops,
+      releases: releases,
+      provides: provides,
+      contentRatings: contentRatings,
+      custom: custom,
+      installed: installed ?? this.installed,
+      bundles: bundles,
+      remote: remote,
+      type: type,
+      current: current ?? this.current,
+      featured: featured ?? this.featured,
+    );
+  }
 }
 
 extension _GetOrDefault<K, V> on Map<K, V> {

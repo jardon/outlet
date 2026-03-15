@@ -121,6 +121,8 @@ final liveApplicationProvider =
     Provider.family<Application?, String>((ref, appId) {
   final allApps = ref.watch(appListProvider);
 
+  logger.i('Refreshed provider for $appId');
+
   return allApps[appId];
 });
 

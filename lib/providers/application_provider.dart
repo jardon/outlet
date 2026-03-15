@@ -77,29 +77,18 @@ final featuredAppList = FutureProvider<List<String>>((ref) async {
 final appListProvider = Provider((ref) {
   final remoteApps = ref.watch(remoteAppListProvider).value ?? {};
   final installedApps = ref.watch(installedAppListProvider);
-  final featuredApps = ref.watch(featuredAppList);
+  final featuredApps = ref.watch(featuredAppList).value ?? [];
 
-  for (var app in installedApps.entries) {
-    try {
-      remoteApps[app.key]!.installed = true;
-      remoteApps[app.key]!.current = app.value;
-    } catch (e) {
-      logger.w('Failed to find $app in installed list.');
-    }
-  }
-
-  if (featuredApps.hasValue) {
-    List<String> featured = featuredApps.value!;
-
-    for (var app in featured) {
-      try {
-        remoteApps[app]!.featured = true;
-      } catch (e) {
-        logger.w('Failed to find $app in featured list.');
-      }
-    }
-  }
-  return remoteApps;
+  return remoteApps.map((id, app) {
+    return MapEntry(
+      id,
+      app.copyWith(
+        installed: installedApps.containsKey(id),
+        current: installedApps[id] ?? false,
+        featured: featuredApps.contains(id),
+      ),
+    );
+  });
 });
 
 final searchKeywordsProvider = Provider((ref) {

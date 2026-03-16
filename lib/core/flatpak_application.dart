@@ -179,7 +179,7 @@ class FlatpakApplication extends Application {
       projectGroup: projectGroup,
       icons: icons,
       urls: urls,
-      categories: categories,
+      categories: super.categories,
       screenshots: screenshots,
       keywords: keywords,
       compulsoryForDesktops: compulsoryForDesktops,

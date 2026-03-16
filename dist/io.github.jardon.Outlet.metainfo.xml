@@ -21,19 +21,19 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/tags/1.1.0/dist/images/themes.png</image>
+      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/tags/1.1.1/dist/images/themes.png</image>
       <caption>Theme support</caption>
     </screenshot>
     <screenshot>
-      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/tags/1.1.0/dist/images/dynamic-layout.png</image>
+      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/tags/1.1.1/dist/images/dynamic-layout.png</image>
       <caption>Dynamic layout</caption>
     </screenshot>
     <screenshot>
-      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/tags/1.1.0/dist/images/fuzzy-search.png</image>
+      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/tags/1.1.1/dist/images/fuzzy-search.png</image>
       <caption>Fuzzy search</caption>
     </screenshot>
     <screenshot>
-      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/tags/1.1.0/dist/images/app-view.png</image>
+      <image type="source" translate="no" >https://raw.githubusercontent.com/jardon/outlet/refs/tags/1.1.1/dist/images/app-view.png</image>
       <caption>App view</caption>
     </screenshot>
   </screenshots>
@@ -41,6 +41,20 @@
     <category translate="no">Utility</category>
   </categories>
   <releases>
+    <release version="1.1.1" date="2026-03-16">
+      <description>
+        <p>Bugfix release. Here's whats new:</p>
+        <ul>fix(application): copyWith use super.categories</ul>
+        <ul>fix(applistprovider): remove current override</ul>
+        <ul>fix(applistprovider):[#161] create new mem instance</ul>
+        <ul>refactor(application): add copyWith func</ul>
+        <ul>logging(liveapppovider): add info log on refresh</ul>
+        <ul>fix(ci): remove apt upgrade from workflows</ul>
+        <ul>chore(flutter): set version to 3.41.0</ul>
+        <ul>ci: add pre-commit hook</ul>
+      </description>
+      <url type="details">https://github.com/jardon/outlet/releases/tag/1.1.1</url>
+    </release>
     <release version="1.1.0" date="2026-02-07">
       <description>
         <p>New feature release.  This includes various features and fixes, but focuses on changes to the app view and localization support.  Here's a list of relevant changes:</p>
